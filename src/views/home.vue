@@ -3,7 +3,7 @@
       <x-header :left-options="{showBack: false}">主页</x-header>
       <swiper :list="demo03_list" auto height="180px" dots-class="custom-bottom" dots-position="center"></swiper>
       <div flex="dir:right main:center cross:center" style="justify-content: space-around" class="MenuCell">
-        <div class="iconItemBg" flex="main:center cross:center">
+        <div class="iconItemBg" flex="main:center cross:center" >
           1
         </div>
         <div class="iconItemBg" flex="main:center cross:center">
@@ -17,7 +17,7 @@
         <div class="theatreTop" flex="dir:left">
             <label>剧坊</label>
             <label>介绍</label>
-           <label>更多</label>
+           <label  @click="$router.push({path:'/Test'})">更多</label>
         </div>
       </div>
     </div>
