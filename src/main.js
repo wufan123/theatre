@@ -2,25 +2,15 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import FastClick from 'fastclick'
-import VueRouter from 'vue-router'
 import App from './App'
-import Home from './components/HelloFromVux'
-
-Vue.use(VueRouter)
-
-const routes = [{
-  path: '/',
-  component: Home
-}]
-
-const router = new VueRouter({
-  routes
-})
+import router from './router'
+import { XHeader} from 'vux'
 
 FastClick.attach(document.body)
 
-Vue.config.productionTip = false
 
+Vue.config.productionTip = false
+Vue.component('x-header',XHeader);
 /* eslint-disable no-new */
 new Vue({
   router,
