@@ -50,7 +50,7 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "vux-loader": "^1.0.56",
-    "vue-loader": "^13.3.0",
+    "vue-loader": "^12.2.2",
     "webpack-dev-middleware": "^1.10.0",
     "webpack-hot-middleware": "^2.16.1",
     "vue-style-loader": "^3.0.1",
