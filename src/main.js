@@ -5,6 +5,7 @@ import FastClick from 'fastclick'
 import App from './App'
 import router from './router'
 import { XHeader} from 'vux'
+import 'flex.css'
 
 FastClick.attach(document.body)
 
