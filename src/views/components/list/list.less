@@ -1,0 +1,143 @@
+
+.am-list{
+  padding: 10px 0;
+  display: block;
+  .am-list-header{
+    font-size: 12px;
+    padding: 15px 15px 9px;
+    display: inline-block;
+    width: 100%;
+    -webkit-box-sizing: border-box
+  }
+  .is-link.am-list-item{
+    &.hover,&:active{
+      background-color:#eee;
+      -webkit-background-size: 0 0, 0 0, 100% 1px, 100% 1px
+    }
+  }
+  .am-list-item{
+    color: #000;
+    font-size: 12px;
+    line-height: 21px;
+    padding: 12px 15px 11px;
+    vertical-align: middle;
+    text-align: left;
+    overflow: inherit;
+    display: -webkit-box;
+    display: -webkit-flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    background: -webkit-linear-gradient(-90deg, #fff, #fff) top left no-repeat, -webkit-linear-gradient(90deg, #fff, #fff) bottom left no-repeat, -webkit-linear-gradient(-90deg, #ddd, #ddd 63%, transparent 63%) top left no-repeat, -webkit-linear-gradient(90deg, #ddd, #ddd 63%, transparent 63%) bottom left no-repeat, #fff;
+    background: linear-gradient(180deg, #fff, #fff) top left no-repeat, linear-gradient(0deg, #fff, #fff) bottom left no-repeat, linear-gradient(180deg, #ddd, #ddd 63%, transparent 63%) top left no-repeat, linear-gradient(0deg, #ddd, #ddd 63%, transparent 63%) bottom left no-repeat, #fff;
+    -webkit-background-size: 15px 1px, 15px 1px, 100% 0, 100% 1px;
+    background-size: 15px 1px, 15px 1px, 100% 0, 100% 1px;
+    &:first-child {
+      -webkit-background-size: 0 0, 15px 1px, 100% 1px, 100% 1px;
+      background-size: 0 0, 15px 1px, 100% 1px, 100% 1px
+    }
+    &:last-child {
+      -webkit-background-size: 15px 1px, 0 0, 100% 0, 100% 1px;
+      background-size: 15px 1px, 0 0, 100% 0, 100% 1px
+    }
+    &:first-child:last-child {
+      -webkit-background-size: 0 0, 0 0, 100% 1px, 100% 1px;
+      background-size: 0 0, 0 0, 100% 1px, 100% 1px
+    }
+    .am-list-content {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      min-width: 60px;
+      width: auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap
+    }
+    .am-list-title {
+      font-size: 15px;
+      color: #000;
+      line-height: 30px;
+      width: auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap
+    }
+    .am-list-brief {
+      color:#888;
+      font-size: 15px;
+      line-height: 18px;
+      width: auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap
+    }
+    .am-list-extra {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      color: #000;
+      //min-width: .96rem;
+      font-size: 16px;
+      text-align: right;
+      width: auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap
+    }
+    .am-list-arrow {
+      margin-left: 8px;
+      margin-right: -2px;
+      width: 12px
+    }
+    .am-list-thumb {
+      position: relative;
+      margin-right: 15px;
+      line-height: 20px;
+      img {
+        width: 21px;
+        height: 21px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+    .am-icon.arrow{
+      display: block;
+      width: 12px;
+      height: 12px;
+      overflow: hidden;
+      &:before{
+        content: "";
+        display: block;
+        width: 6px;
+        height: 6px;
+        margin-left: 0;
+        border: 2px solid #ccc;
+        border-top: 0 none;
+        border-left: 0 none
+      }
+      &.horizontal:before{
+        margin-top: 2px;
+        -webkit-transform: rotate(315deg)
+      }
+      &.vertical{
+        &:before{
+          margin-left: 2px;
+          -webkit-transform: rotate(45deg)
+        }
+        &.up:before {
+          margin: 2px 0 0 2px;
+          -webkit-transform: rotate(225deg)
+        }
+        &.down:before {
+          margin-left: 2px;
+          -webkit-transform: rotate(45deg)
+        }
+      }
+    }
+    &.twoline{
+      .am-list-thumb img{
+        display: block;
+        width: 45px;
+        height: 45px
+      }
+    }
+  }
+}

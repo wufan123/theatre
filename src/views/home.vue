@@ -18,7 +18,7 @@
         <label class="menuItem">剧坊</label>
         <label class="menuItem">介绍</label>
         <div flex="dir:right cross:center" flex-box="1">
-          <label class="menuItem">更多</label>
+          <label class="menuItem" @click="$router.push({path:'/Test'})">更多</label>
         </div>
       </div>
       <scroll-view >
