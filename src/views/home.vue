@@ -1,6 +1,12 @@
 <template>
   <div>
-    <x-header :left-options="{showBack: false}">主页</x-header>
+    <div class="index-header" flex="main:justify cross:center">
+      <img src="../assets/images/logo.png" class="logo">
+      <div class="header-r" flex="cross:center">
+        <img src="../assets/images/me.png" class="header-r-icon" @click="$router.push('Me')">
+        <img src="../assets/images/all.png" class="header-r-icon">
+      </div>
+    </div>
     <swiper :list="demo03_list" auto height="180px" dots-class="custom-bottom" dots-position="center"></swiper>
     <div flex="dir:right main:center cross:center" style="justify-content: space-around" class="MenuCell">
       <div class="iconItemBg" flex="main:center cross:center">
@@ -54,6 +60,13 @@
   }
 </script>
 <style lang="less">
+  .index-header{
+    background: #ffffff;
+    padding: 5px 10px;
+    .logo{width: 100px;height: 60px; }
+    .header-r-icon{width: 30px;margin-left: 10px;}
+  }
+  
   .scroll{
     display: -webkit-box;
     overflow-x: scroll;
