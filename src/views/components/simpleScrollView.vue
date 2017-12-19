@@ -1,6 +1,6 @@
 <template>
   <div class="scroll">
-    <slot name="content"></slot>
+    <slot ></slot>
   </div>
 </template>
 <script>
