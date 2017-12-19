@@ -13,7 +13,6 @@
             </div>
           </div>
         </div>
-
         </page-scroller>
 
     </div>
@@ -23,6 +22,7 @@
 import PageScroller from '../../components/PageScroller.vue'
 import API from '../../../apis/member'
   import {List,ListItem} from '@/views/components/list'
+
 export default {
   components:{PageScroller,List,ListItem},
   data(){
