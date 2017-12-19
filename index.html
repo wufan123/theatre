@@ -8,5 +8,9 @@
   <body>
     <div id="app-box"></div>
     <!-- built files will be auto injected -->
+    <script type="text/javascript">
+      var phoneScale = parseInt(window.screen.width) / 375;
+      document.write('<meta name="viewport" content="width=375, minimum-scale = ' + phoneScale +', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi">');
+  </script>
   </body>
 </html>

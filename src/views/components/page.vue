@@ -2,11 +2,13 @@
   <div class="page">
     <div class="header">
       <div v-if="headerTitle">
-          <x-header class="white" :left-options="{backText: ''}" >{{headerTitle}}</x-header>
+          <x-header class="white" :left-options="{backText: ''}" >{{headerTitle}} 
+            <a slot="right" v-if="headerRText"  @click="onClickR"  >{{headerRText}}</a>
+          </x-header>
       </div>
       <slot name="header"></slot>
     </div>
-    <div class="contain">
+    <div class="contain" :class="{white:white}">
         <slot name="contain"></slot>
     </div>
     <div class="footer" v-if="footerText">
@@ -15,22 +17,27 @@
   </div>
 </template>
 <script>
-  import {XButton} from 'vux'
   
 export default {
   props:{
     headerTitle:String,
     footerText:String,
+    white: Boolean,
+    headerRText:String,
+    headerRLink:{
+      type: [String, Object]
+    },
     footerLink:{
         type: [String, Object]
     },
     contain:String
   },
-  components: {XButton},
   methods: {
     onClick () {
-      console.log('onClick')
       go(this.footerLink, this.$router)
+    },
+    onClickR () {
+      go(this.headerRLink, this.$router)
     }
   }
 }
@@ -49,6 +56,7 @@ function go (url, $router) {
 .page{display: flex;flex-direction: column;}
   .header{flex: 0}
   .contain{overflow: auto;flex: 1;}
+  .white{background: #ffffff;}
   .footer{flex: 0}
 </style>
 
