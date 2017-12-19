@@ -3,45 +3,12 @@
     <x-header :left-options="{showBack: false}">主页</x-header>
     <swiper :list="demo03_list" auto height="180px" dots-class="custom-bottom" dots-position="center"></swiper>
     <div flex="dir:right main:center cross:center" style="justify-content: space-around" class="MenuCell">
-      <div class="iconItemBg" flex="main:center cross:center">
+      <div v-for="i in 3" class="iconItemBg" flex="main:center cross:center">
         1
       </div>
-      <div class="iconItemBg" flex="main:center cross:center">
-        2
-      </div>
-      <div class="iconItemBg" flex="main:center cross:center">
-        3
-      </div>
     </div>
-    <!--<div class="theatreCell" flex="dir:top">
-      <div class="theatreTop" flex="dir:left">
-        <label class="menuItem">剧坊</label>
-        <label class="menuItem">介绍</label>
-        <div flex="dir:right cross:center" flex-box="1">
-          <label class="menuItem" @click="$router.push({path:'/Test'})">更多</label>
-        </div>
-      </div>
-      <scroll-view >
-          <div slot="content" v-for="i in 7" class="scroll-item">
-          </div>
-      </scroll-view>
-    </div>-->
-    <list-cell title="剧坊" subtitle="介绍" style="margin-top: 10px">
+    <list-cell v-for="i in 3" title="剧坊" subtitle="介绍" style="margin-top: 10px">
       <label slot="rightTop" class="menuItem" @click="$router.push({path:'/Test'})">更多</label>
-      <scroll-view slot="main">
-        <div slot="content" v-for="i in 11" class="scrollItem">
-          {{i}}
-        </div>
-      </scroll-view>
-    </list-cell>
-    <list-cell title="票务" subtitle="场次票" style="margin-top: 10px">
-      <scroll-view slot="main">
-        <div slot="content" v-for="i in 11" class="scrollItem">
-          {{i}}
-        </div>
-      </scroll-view>
-    </list-cell>
-    <list-cell title="票务" subtitle="通兑券">
       <scroll-view slot="main">
         <div slot="content" v-for="i in 11" class="scrollItem">
           {{i}}
@@ -50,11 +17,10 @@
     </list-cell>
     <list-cell title="票务" subtitle="通兑券" style="margin-top: 10px">
       <div slot="main" style="display: flex;flex-wrap: wrap" >
-        <div class="findItem" v-for="i in 7" ><div slot="content" class="findItemContent"> 
+        <div class="findItem" v-for="i in 7" ><div slot="content" class="findItemContent">
         </div></div>
       </div>
     </list-cell>
-
   </div>
 </template>
 <script>
