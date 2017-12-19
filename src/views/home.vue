@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <div class="index-header" flex="main:justify cross:center">
       <img src="../assets/images/logo.png" class="logo">
       <div class="header-r" flex="cross:center">
@@ -7,7 +7,7 @@
         <img src="../assets/images/all.png" class="header-r-icon">
       </div>
     </div>
-    <div style="overflow: scroll;height: 100%">
+    <div style="overflow-y:scroll;flex-grow: 1">
       <swiper :list="demo03_list" auto height="180px" dots-class="custom-bottom" dots-position="center"></swiper>
       <div flex="dir:right main:center cross:center" style="justify-content: space-around" class="MenuCell">
         <div v-for="i in 3" class="iconItemBg" flex="main:center cross:center">

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/views/home.vue'
 import Me from '@/views/me/index.vue'
 import MemberCard from '@/views/me/member/memberCard.vue'
+import AddCard from '@/views/me/member/addCard.vue'
 import Test from '@/views/test.vue'
 // import Test from '@/views/components/page.vue'
 
@@ -13,6 +14,7 @@ export default new Router({
     { path: '/', name: 'Home', component: Home},
     { path: '/Me', name: 'Me', component: Me},
     { path: '/Test', name: 'Test', component: Test},
-    { path: '/MemberCard', name: 'MemberCard', component: MemberCard}
+    { path: '/MemberCard', name: 'MemberCard', component: MemberCard},
+    { path: '/AddCard', name: 'AddCard', component: AddCard}
   ]
 })
