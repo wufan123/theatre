@@ -1,38 +1,36 @@
 <template>
-  <div class="me-index" flex="dir:top">
-    <div flex-box="1">
-      <x-header class="white" :left-options="{backText: ''}" >我的</x-header>
-      <div class="me-top">
-        <span class="bold">138****800</span>
-        <p>余额：￥0.00  丨  积分：88</p>
-        <i class="member f12">剧坊会员</i>
+  <page :footerText="`退出登录`" :footerLink="`/`" :headerTitle="`我的`">
+      <div slot="contain">
+          <div class="me-top">
+            <span class="bold">138****800</span>
+            <p>余额：￥0.00  丨  积分：88</p>
+            <i class="member f12">剧坊会员</i>
+          </div>
+          <div class="me-order">
+            <div class="title">我的订单</div>
+            <ul flex="box:mean">
+              <li><i class="c-gray ticket"></i><a href="#">场次票</a> </li>
+              <li><i class="c-gray ticket"></i><a href="#">场次票</a> </li>
+              <li><i class="c-gray ticket"></i><a href="#">场次票</a> </li>
+              <li><i class="c-gray ticket"></i><a href="#">场次票</a> </li>
+            </ul>
+          </div>
+          <list twoLine >
+            <list-item :img="`https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513599973802&di=e0ed1059c34a8eb1d89a8e8bd1c7da11&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F4b90f603738da97726166db6ba51f8198618e376.jpg`"
+              :contentTitle="`剧场会员卡`"   extra="" isLink  :link="`memberCard`"  >
+            </list-item>
+            <list-item :img="`https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513599973802&di=e0ed1059c34a8eb1d89a8e8bd1c7da11&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F4b90f603738da97726166db6ba51f8198618e376.jpg`"
+              :contentTitle="`剧场会员卡`"   extra="" isLink  :link="`/`"  >
+            </list-item>
+            <list-item :img="`https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513599973802&di=e0ed1059c34a8eb1d89a8e8bd1c7da11&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F4b90f603738da97726166db6ba51f8198618e376.jpg`"
+              :contentTitle="`剧场会员卡`"   extra="" isLink  :link="`/`"  >
+            </list-item>
+            <list-item :img="`https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513599973802&di=e0ed1059c34a8eb1d89a8e8bd1c7da11&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F4b90f603738da97726166db6ba51f8198618e376.jpg`"
+              :contentTitle="`剧场会员卡`"   extra="" isLink  :link="`/`"  >
+            </list-item>
+          </list>
       </div>
-      <div class="me-order">
-        <div class="title">我的订单</div>
-        <ul flex="box:mean">
-          <li><i class="c-gray ticket"></i><a href="#">场次票</a> </li>
-          <li><i class="c-gray ticket"></i><a href="#">场次票</a> </li>
-          <li><i class="c-gray ticket"></i><a href="#">场次票</a> </li>
-          <li><i class="c-gray ticket"></i><a href="#">场次票</a> </li>
-        </ul>
-      </div>
-      <list twoLine >
-        <list-item :img="`https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513599973802&di=e0ed1059c34a8eb1d89a8e8bd1c7da11&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F4b90f603738da97726166db6ba51f8198618e376.jpg`"
-          :contentTitle="`剧场会员卡`"   extra="" isLink  :link="`memberCard`"  >
-        </list-item>
-        <list-item :img="`https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513599973802&di=e0ed1059c34a8eb1d89a8e8bd1c7da11&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F4b90f603738da97726166db6ba51f8198618e376.jpg`"
-          :contentTitle="`剧场会员卡`"   extra="" isLink  :link="`/`"  >
-        </list-item>
-        <list-item :img="`https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513599973802&di=e0ed1059c34a8eb1d89a8e8bd1c7da11&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F4b90f603738da97726166db6ba51f8198618e376.jpg`"
-          :contentTitle="`剧场会员卡`"   extra="" isLink  :link="`/`"  >
-        </list-item>
-        <list-item :img="`https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513599973802&di=e0ed1059c34a8eb1d89a8e8bd1c7da11&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F4b90f603738da97726166db6ba51f8198618e376.jpg`"
-          :contentTitle="`剧场会员卡`"   extra="" isLink  :link="`/`"  >
-        </list-item>
-      </list>
-      </div>
-    <x-button flex-box="0" type="warn no-radius" action-type="button">退出登录</x-button>
-  </div>
+  </page>
 </template>
 <script>
   import {List,ListItem} from '@/views/components/list'

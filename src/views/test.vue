@@ -1,5 +1,5 @@
 <template>
-<Page :footerText="`我是footer`" :footerLink="`/`" :header-title="`剧坊会员卡`">
+<page :footerText="`我是footer`" :footerLink="`/`" :header-title="`剧坊会员卡`">
     <div slot="contain">
        <list  :title="`我是标题`"  >
           <list-item   is-link :content="`我是标题`" >
@@ -35,18 +35,17 @@
             </list-item>
         </list>
     </div>
-  </Page>
+  </page>
 </template>
 <script>
   import {List,ListItem} from '@/views/components/list'
-  import Page from '@/views/components/page.vue'
 export default {
   data(){
     return {
 
     }
   },
-  components: {List,ListItem,Page},
+  components: {List,ListItem},
 }
 </script>
 
