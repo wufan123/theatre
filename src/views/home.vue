@@ -13,7 +13,7 @@
         3
       </div>
     </div>
-    <div class="theatreCell" flex="dir:top">
+    <!--<div class="theatreCell" flex="dir:top">
       <div class="theatreTop" flex="dir:left">
         <label class="menuItem">剧坊</label>
         <label class="menuItem">介绍</label>
@@ -25,12 +25,40 @@
           <div slot="content" v-for="i in 7" class="scroll-item">
           </div>
       </scroll-view>
-    </div>
+    </div>-->
+    <list-cell title="剧坊" subtitle="介绍" style="margin-top: 10px">
+      <label slot="rightTop" class="menuItem" @click="$router.push({path:'/Test'})">更多</label>
+      <scroll-view slot="main">
+        <div slot="content" v-for="i in 11" class="scrollItem">
+          {{i}}
+        </div>
+      </scroll-view>
+    </list-cell>
+    <list-cell title="票务" subtitle="场次票" style="margin-top: 10px">
+      <scroll-view slot="main">
+        <div slot="content" v-for="i in 11" class="scrollItem">
+          {{i}}
+        </div>
+      </scroll-view>
+    </list-cell>
+    <list-cell title="票务" subtitle="通兑券">
+      <scroll-view slot="main">
+        <div slot="content" v-for="i in 11" class="scrollItem">
+          {{i}}
+        </div>
+      </scroll-view>
+    </list-cell>
+    <list-cell title="票务" subtitle="通兑券" style="margin-top: 10px">
+      <div slot="main" style="display: flex;flex-wrap: wrap" >
+        <div class="findItem" v-for="i in 7" ><div slot="content" class="findItemContent"> 
+        </div></div>
+      </div>
+    </list-cell>
 
   </div>
 </template>
 <script>
-  import {Swiper, GroupTitle, SwiperItem, XButton, Divider,Scroller} from 'vux'
+  import {Swiper, GroupTitle, SwiperItem, XButton, Divider, Scroller} from 'vux'
   import ScrollView from './components/scrollView.vue'
   const imgList = [
     'http://placeholder.qiniudn.com/800x300/FF3B3B/ffffff',
@@ -40,10 +68,24 @@
   const demoList = imgList.map((one, index) => ({
     url: 'javascript:',
     img: one
-  }))
+  }));
+  let listCell = {
+    name: 'list-cell',
+    template: `<div class="listCell" flex="dir:top">
+      <div class="listTop" flex="dir:left">
+        <label class="menuItem">{{title}}</label>
+        <label class="menuItem">{{subtitle}}</label>
+        <div flex="dir:right cross:center" flex-box="1">
+          <slot name="rightTop"></slot>
+        </div>
+      </div>
+          <slot name="main"></slot>
+    </div>`,
+    props: ['title', 'subtitle']
+  }
   export default {
     components: {
-      Swiper,ScrollView
+      Swiper, ScrollView, listCell
     },
     data(){
       return {
@@ -54,31 +96,39 @@
   }
 </script>
 <style lang="less">
-  .scroll{
+  .findItemContent{
+    flex: 1;height:100px;background-color: gray;margin: 10px
+  }
+  .findItem{
+    width: 50%;display: flex;justify-content:center;height: fit-content;max-width: 50%;
+  }
+  .scroll {
     display: -webkit-box;
     overflow-x: scroll;
     height: fit-content;
     padding: 0 10px;
-    -webkit-overflow-scrolling:touch;
+    -webkit-overflow-scrolling: touch;
   }
-  .scroll-item{
-    width: 200px;
-    height: 150px;
+
+  .scrollItem {
+    width: 150px;
+    height: 130px;
     background-color: gray;
     margin-right: 30px;
     border-radius: 5%;
   }
-  .theatreTop {
+
+  .listTop {
     margin: 10px 0;
-    .menuItem{
+    .menuItem {
       margin: 0 10px;
     }
   }
-  .theatreCell {
+
+  .listCell {
     min-height: 200px;
     height: fit-content;
     background-color: white;
-    margin-top: 10px;
   }
 
   .MenuCell {
