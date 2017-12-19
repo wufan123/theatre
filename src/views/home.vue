@@ -73,12 +73,12 @@
   }
 </script>
 <style lang="less">
-  .index-header {
+  .index-header {    min-height: 50px;
     background: #ffffff;
     padding: 5px 10px;
     .logo {
-      width: 100px;
-      height: 60px;
+      width: 80px;
+      height: 40px;
     }
     .header-r-icon {
       width: 30px;

@@ -1,6 +1,8 @@
 <template>
 <page :footerText="`我是footer`" :footerLink="`/`" :header-title="`剧坊会员卡`">
     <div slot="contain">
+      <page-scroller :api='getDataList' ref='scroller' noRecordText='没有数据' noRecordImage  usePulldown height='-46' >
+          
        <list  :title="`我是标题`"  >
           <list-item   is-link :content="`我是标题`" >
               <div slot="subContent">我是副标题</div>
@@ -34,18 +36,29 @@
           :contentTitle="`我是contentTitle`"   extra="" isLink  :link="`/`" :contentBrief="`我是contentBasdfasdfasdfasdfasdfasrief`"  >
             </list-item>
         </list>
+
+        </page-scroller>
     </div>
   </page>
 </template>
 <script>
   import {List,ListItem} from '@/views/components/list'
+  import PageScroller from './components/PageScroller.vue'
 export default {
   data(){
     return {
 
     }
   },
-  components: {List,ListItem},
+  components: {List,ListItem,PageScroller},
+  methods:{
+    getDataList(){
+
+    }
+  },
+    fetchData(){
+      return this.$refs.scroller.reset()
+    }
 }
 </script>
 
