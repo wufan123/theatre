@@ -13,6 +13,7 @@ import FlashSale from 'views/home/flashSale.vue'
 import Hermes from 'views/home/hermes.vue'
 import IntroduceList from 'views/business/introduce/list.vue'
 import IntroduceDetail from 'views/business/introduce/detail.vue'
+import HermesDetail from 'views/home/hermesDetail.vue'
 
 Vue.use(Router)
 
@@ -21,6 +22,7 @@ export default new Router({
     { path: '/', name: 'Home', component: Home},
     { path: '/FlashSale', name: 'FlashSale', component: FlashSale},
     { path: '/Hermes', name: 'Hermes', component: Hermes},
+    { path: '/HermesDetail', name: 'HermesDetail', component: HermesDetail},
     { path: '/IntroduceList', name: 'IntroduceList', component: IntroduceList},
     { path: '/IntroduceDetail', name: 'IntroduceDetail', component: IntroduceDetail},
     { path: '/Login', name: 'Login', component: Login},
@@ -28,7 +30,6 @@ export default new Router({
     { path: '/Me', name: 'Me', component: Me},
     { path: '/MemberCard', name: 'MemberCard', component: MemberCard},
     { path: '/AddCard', name: 'AddCard', component: AddCard},
-    { path: '/CouponList', name: 'CouponList', component: CouponList},
     { path: '/CouponList', name: 'CouponList', component: CouponList},
     { path: '/TicketList', name: 'TicketList', component: TicketList},
     { path: '/TicketDetail', name: 'TicketDetail', component: TicketDetail},
