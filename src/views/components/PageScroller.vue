@@ -129,17 +129,19 @@ export default {
             return this.getDataByPage(0)
         },
         getDataByPage(page) {
-            page = page != undefined ? page : this.page.number
-            return this.api(page, this.page.size).then(res => {
+            page = (page >=0 ? page : this.page.number);
+            let api =this.api(page, this.page.size);
+            return api?api.then(res => {
+                console.log('res',res.page)
                 this.renderPage(res.page)
-            })
+            }):null;
         }
     },
     mounted() {
         this.resize()
     },
     created() {
-        this.page.size = this.pageSize
+        this.page.size = this.pageSize;
         this.initQuery && this.getDataByPage(this.page.number)
     }
 }
