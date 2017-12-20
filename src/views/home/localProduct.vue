@@ -11,7 +11,7 @@
               <label>永和鱼丸提货券</label>
               <div>
                 <label>¥150</label>
-                <label class="primeCost" >¥20</label>
+                <label class="primeCost" v-if="isHermes">¥20</label>
               </div>
             </div>
           </div>
@@ -28,8 +28,10 @@
   import {XButton} from 'vux'
   import API from 'apis/member'
   export default {
+      props:['isHermes'],
     components:{PageScroller,XButton},
     data(){
+        console.log(this.isHermes)
       return {
         value:'11111',
         dataList:[]

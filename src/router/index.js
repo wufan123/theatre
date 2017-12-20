@@ -10,8 +10,8 @@ import CouponList from '@/views/me/coupon/list.vue'
 import TicketList from '@/views/me/ticket/list.vue'
 import TicketDetail from '@/views/me/ticket/ticketDetail.vue'
 import FlashSale from 'views/home/flashSale.vue'
-import Hermes from 'views/home/hermes.vue'
-import HermesDetail from 'views/home/hermesDetail.vue'
+import LocalProduct from 'views/home/localProduct.vue'
+import ProductDetail from 'views/home/productDetail.vue'
 
 Vue.use(Router)
 
@@ -24,9 +24,9 @@ export default new Router({
     { path: '/AddCard', name: 'AddCard', component: AddCard},
     { path: '/CouponList', name: 'CouponList', component: CouponList},
     { path: '/FlashSale', name: 'FlashSale', component: FlashSale},
-    { path: '/Hermes', name: 'Hermes', component: Hermes},
+    { path: '/LocalProduct', name: 'LocalProduct', component: LocalProduct,props: true},
+    { path: '/ProductDetail', name: 'ProductDetail', component: ProductDetail,props: true},
     { path: '/Login', name: 'Login', component: Login},
-    { path: '/HermesDetail', name: 'HermesDetail', component: HermesDetail},
     { path: '/CouponList', name: 'CouponList', component: CouponList},
     { path: '/TicketList', name: 'TicketList', component: TicketList},
     { path: '/TicketDetail', name: 'TicketDetail', component: TicketDetail}
