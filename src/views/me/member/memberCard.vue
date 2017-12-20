@@ -2,10 +2,9 @@
   <page white :headerTitle="`剧坊会员卡`" :headerRText="`添加会员卡`" :headerRLink="`AddCard`">
     <div slot="contain">
       <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage  usePulldown height='-46' >
-
         <div v-for="(item,index) in dataList" class="card-list">
           <div class="card-item">
-            <p class="center f12 mb20">金牌导游：888888</p>
+            <p class="center f12 mb20">{{index+1}}金牌导游：888888</p>
             <p class="mb20">余额：￥20.00</p>
             <div flex="main:justify">
               <label>有效期：2018-10-11</label>
@@ -14,7 +13,6 @@
           </div>
         </div>
         </page-scroller>
-
     </div>
   </page>
 </template>

@@ -20,7 +20,6 @@
              <label>¥20</label>
           </div>
         </div>
-
         </page-scroller>
       </div>
     </page>

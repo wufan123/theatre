@@ -89,7 +89,6 @@ export default {
     watch: {
         page: {
             handler: function (val, oldVal) {
-                console.log('showNoRecord',val,val.totalElements <= 0)
                 this.showNoRecord = val.totalElements <= 0
                 if (val.number >= val.totalPages - 1) {
                     this.usePullup && (this.status.pullupStatus = 'disabled')
@@ -114,7 +113,6 @@ export default {
             this.page = page
         },
         reset() {
-            console.log('this.$refs.scroller',this.$refs.scroller)
             this.page.number = 0
             this.page.totalPages = 0
             this.page.totalElements = -1
