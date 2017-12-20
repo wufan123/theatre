@@ -11,7 +11,7 @@
           </div>
         </div>
         <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-88' >
-        <div v-for="(item,index) in dataList" flex="dir:left cross:center" class="couponItem">
+        <div v-for="(item,index) in dataList" :key="index" flex="dir:left cross:center" class="couponItem">
           <div flex="dir:top" flex-box="1">
             <label>{{item.cinemaName}}立减券</label>
             <label>有效期:2017-12-11</label>
@@ -38,7 +38,7 @@
         },
         methods: {
           getDataList(page){
-            return API.getCinemaList(page,5).then(res =>{
+            return API.getCinemaList(page,10).then(res =>{
 //              res = {
 //                data:[],
 //                page:{
