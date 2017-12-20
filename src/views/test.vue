@@ -47,7 +47,8 @@ export default {
         //     number:0,size:10,totalElements:0,totalPages:0
         //   }
         // }
-        this.dataList = this.dataList.concat(res.data)
+        page == 0 ? this.dataList= res.data : this.dataList= this.dataList.concat(res.data)
+        // this.dataList = this.dataList.concat(res.data)
         return res
       })
     }

@@ -31,13 +31,14 @@ export default {
   methods:{
     getDataList(page){
       return API.getCinemaList(page,5).then(res =>{
-         res = {
-           data:[{name:'1111',id:'1111'},{name:'2222',id:'2222'},{name:'222',id:'2222'}],
-           page:{
-             number:0,size:10,totalElements:3,totalPages:0
-           }
-         }
-        page === 0 ? this.dataList= res.data: this.dataList= this.dataList.concat(res.data);
+        res = {
+          data:[{name:'1111',id:'111111'},{name:'2222',id:'22222'},{name:'3333',id:'3333'}],
+          page:{
+            number:0,size:10,totalElements:3,totalPages:0
+          }
+        }
+        page == 0 ? this.dataList= res.data : this.dataList= this.dataList.concat(res.data)
+        //this.dataList = this.dataList.concat(res.data)
         return res
       })
     },

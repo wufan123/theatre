@@ -4,6 +4,7 @@ import Home from 'views/home/index.vue'
 import Me from '@/views/me/index.vue'
 import MemberCard from '@/views/me/member/memberCard.vue'
 import AddCard from '@/views/me/member/addCard.vue'
+import Login from '@/views/login/index.vue'
 import Test from '@/views/test.vue'
 import CouponList from '@/views/me/coupon/list.vue'
 import FlashSale from 'views/home/flashSale.vue'
@@ -22,5 +23,7 @@ export default new Router({
     { path: '/CouponList', name: 'CouponList', component: CouponList},
     { path: '/FlashSale', name: 'FlashSale', component: FlashSale},
     { path: '/Hermes', name: 'Hermes', component: Hermes},
+    { path: '/Login', name: 'Login', component: Login},
+    { path: '/couponList', name: 'couponList', component: CouponList}
   ]
 })
