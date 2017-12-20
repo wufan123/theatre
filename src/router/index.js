@@ -9,7 +9,7 @@ import Test from '@/views/test.vue'
 import CouponList from '@/views/me/coupon/list.vue'
 import FlashSale from 'views/home/flashSale.vue'
 import Hermes from 'views/home/hermes.vue'
-// import Test from '@/views/components/page.vue'
+import HermesDetail from 'views/home/hermesDetail.vue'
 
 Vue.use(Router)
 
@@ -24,6 +24,7 @@ export default new Router({
     { path: '/FlashSale', name: 'FlashSale', component: FlashSale},
     { path: '/Hermes', name: 'Hermes', component: Hermes},
     { path: '/Login', name: 'Login', component: Login},
-    { path: '/couponList', name: 'couponList', component: CouponList}
+    { path: '/couponList', name: 'couponList', component: CouponList},
+    { path: '/HermesDetail', name: 'HermesDetail', component: HermesDetail},
   ]
 })

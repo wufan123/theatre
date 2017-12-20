@@ -2,7 +2,7 @@
   <page headerTitle="超级联合日" flex-box="1" :white="true">
     <div slot="contain" style="background-color: white">
       <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-48' >
-        <div v-for="(item,index) in dataList" :key="index" flex="dir:left cross:center" class="couponItem" @click="$router.push('')">
+        <div v-for="(item,index) in dataList" :key="index" flex="dir:left cross:center" class="couponItem" @click="$router.push('HermesDetail')">
           <div flex="dir:left" flex-box="1">
             <div flex="dir:left cross:center">
                 <img :src="require('assets/images/all.png')" class="icon">
