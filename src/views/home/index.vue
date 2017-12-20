@@ -94,7 +94,7 @@
     }
   }
 </script>
-<style lang="less">
+<style lang="less" scoped>
   .index-header {    min-height: 50px;
     background: #ffffff;
     padding: 5px 10px;
