@@ -15,6 +15,7 @@
   @import "style/base-variables";
   @import "style/reset";
   @import "style/common";
+  @import "style/style";
   #app {
     height: 100%;
     > div {

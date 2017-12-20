@@ -1,5 +1,5 @@
 <template>
-  <page :footerText="`退出登录`" :footerLink="`/`" :headerTitle="`我的`">
+  <page :footerText="`退出登录`" :footerLink="`Login`" :headerTitle="`我的`">
       <div slot="contain">
           <div class="me-top">
             <span class="bold">138****800</span>

@@ -1,7 +1,7 @@
 <template>
   <page white :headerTitle="`添加会员卡`">
     <div slot="contain">
-        <div class="add" >
+        <div class="form" >
            <div class="form-item">
               <p>会员卡号</p>
               <input type="text" style="display:none" >
@@ -20,9 +20,6 @@
 export default {};
 </script>
 <style lang="less" scoped>
-.add {margin:  60px;
-  .form-item{margin-bottom: 20px;
-    &:last-of-type{margin-bottom: 60px;}}
-}
+
 </style>
 
