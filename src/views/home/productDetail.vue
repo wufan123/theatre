@@ -9,7 +9,7 @@
           永和鱼丸提货券</label>
         <label>
           ￥5.00</label>
-        <label class="primeCost">
+        <label class="primeCost" v-if="isHermes">
           ￥20.00</label>
         <label class="title">
           商品介绍
@@ -33,6 +33,7 @@
   import {XButton} from 'vux'
   import API from 'apis/member'
   export default {
+      props:['isHermes'],
     components:{PageScroller,XButton},
     data(){
       return {
