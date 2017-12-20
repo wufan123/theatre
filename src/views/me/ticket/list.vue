@@ -22,9 +22,9 @@
   </page>
 </template>
 <script>
-import PageScroller from '../../components/PageScroller.vue'
-import API from '../../../apis/member'
-  import {List,ListItem} from '@/views/components/list'
+import PageScroller from 'views/components/PageScroller.vue'
+import API from 'apis/member'
+  import {List,ListItem} from 'views/components/list'
 
 export default {
   components:{PageScroller,List,ListItem},

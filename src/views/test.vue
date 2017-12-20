@@ -48,7 +48,6 @@ export default {
         //   }
         // }
         page == 0 ? this.dataList= res.data : this.dataList= this.dataList.concat(res.data)
-        // this.dataList = this.dataList.concat(res.data)
         return res
       })
     }
