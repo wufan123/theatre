@@ -60,7 +60,7 @@
           <div class="numItem">
             <x-number title="数量" v-model="value"></x-number>
           </div>
-        <x-button type="primary" class="no-radius">
+        <x-button type="primary" class="no-radius" @click.native="$router.push({name:'ConfirmOrder'})">  
           确认
         </x-button>
       </div>
@@ -72,8 +72,7 @@
 <script>
   import PageScroller from 'views/components/PageScroller.vue'
   import {Popup, Checker, CheckerItem,XNumber} from 'vux'
-  import API from 'apis/member'
-  import XButton from "../../../node_modules/vux/src/components/x-button/index";
+  import {XButton} from 'vux'
   export default {
     props: ['isHermes'],
     components: {

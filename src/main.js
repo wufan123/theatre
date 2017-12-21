@@ -4,7 +4,8 @@ import App from './App'
 import router from './router'
 import { XHeader,XButton } from 'vux'
 import Page from '@/views/components/page.vue'
-import baseMixin from "./utils/baseMixin";
+import store from './store'
+import baseMixin from "./util/baseMixin";
 import 'flex.css'
 import  { ToastPlugin } from 'vux'
 
@@ -20,5 +21,6 @@ Vue.use(ToastPlugin);
 /* eslint-disable no-new */
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app-box')

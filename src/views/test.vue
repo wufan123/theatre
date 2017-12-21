@@ -30,7 +30,7 @@
 <script>
   import {List,ListItem} from '@/views/components/list'
   import PageScroller from './components/PageScroller.vue'
-  import API from '../apis/member'
+  import orderApi from 'api/orderApi'
 export default {
   data(){
     return {
@@ -40,13 +40,14 @@ export default {
   components: {List,ListItem,PageScroller},
   methods:{
     getDataList(page){
-      return API.getCinemaList(page,5).then(res =>{
+      return orderApi.getCinemaOrders(3,0).then(res =>{
         // res = {
         //   data:[],
         //   page:{
         //     number:0,size:10,totalElements:0,totalPages:0
         //   }
         // }
+        console.log('res-------------------------',res)
         page == 0 ? this.dataList= res.data : this.dataList= this.dataList.concat(res.data)
         return res
       })

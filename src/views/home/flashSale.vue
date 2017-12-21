@@ -18,7 +18,6 @@
 </template>
 <script>
   import PageScroller from 'views/components/PageScroller.vue'
-  import API from 'apis/member'
     export default {
       components:{PageScroller},
       data(){
@@ -29,16 +28,10 @@
       },
       methods: {
         getDataList(page){
-          return API.getCinemaList(page,10).then(res =>{
-//              res = {
-//                data:[],
-//                page:{
-//                  number:0,size:10,totalElements:0,totalPages:0
-//                }
-//              }
+         /* return API.getCinemaList(page,10).then(res =>{
             page === 0 ? this.dataList= res.data: this.dataList= this.dataList.concat(res.data);
             return res
-          })
+          })*/
         },
         fetchData(){
           return this.$refs.scroller.reset()

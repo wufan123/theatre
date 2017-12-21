@@ -26,7 +26,7 @@
 <script>
   import PageScroller from 'views/components/PageScroller.vue'
   import {XButton} from 'vux'
-  import API from 'apis/member'
+  import API from 'api/member'
   export default {
       props:['isHermes'],
     components:{PageScroller,XButton},

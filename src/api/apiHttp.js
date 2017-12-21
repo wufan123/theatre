@@ -35,7 +35,6 @@ async function getToken(config) {
             config.url = config.url.replace(API_BASE_URL, '')//二次请求url重复
             res = await instance.request(config)
         }
-
     }
     return res
 }
@@ -96,6 +95,7 @@ instance.interceptors.request.use(config => {
 });
 
 instance.interceptors.response.use(response => {
+    console.log('resp-----------------------onse',response)
     let data = response.data
     console.info(`URL【${response.config.url}】请求:`, data)
     if (data.status == 0) {
