@@ -2,7 +2,7 @@
   <page headerTitle="超级联合日" flex-box="1" :white="true">
     <div slot="contain" style="background-color: white">
       <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-48' >
-        <div v-for="(item,index) in dataList" :key="index" flex="dir:left cross:center" class="couponItem" @click="$router.push('HermesDetail')">
+        <div v-for="(item,index) in dataList" :key="index" flex="dir:left cross:center" class="couponItem" @click="$router.push({name:'ProductDetail',params:{isHermes:isHermes}})">
           <div flex="dir:left" flex-box="1">
             <div flex="dir:left cross:center">
                 <img :src="require('assets/images/all.png')" class="icon">
@@ -11,7 +11,7 @@
               <label>永和鱼丸提货券</label>
               <div>
                 <label>¥150</label>
-                <label class="primeCost" >¥20</label>
+                <label class="primeCost" v-if="isHermes">¥20</label>
               </div>
             </div>
           </div>
@@ -28,6 +28,7 @@
   import {XButton} from 'vux'
   import API from 'apis/member'
   export default {
+      props:['isHermes'],
     components:{PageScroller,XButton},
     data(){
       return {

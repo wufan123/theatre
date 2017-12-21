@@ -11,7 +11,7 @@
       <div  style="overflow-y: scroll">
         <swiper :list="demo03_list" auto height="180px" dots-class="custom-bottom" dots-position="center"></swiper>
         <div flex="dir:left main:center cross:center" style="justify-content: space-around" class="MenuCell">
-          <div flex="dir:top main:center cross:center" v-for="(item,index) in [{name:'限时抢票',pathName:'FlashSale'},{name:'超级联合日',pathName:'Hermes'},{name:'福州特产馆',pathName:''}]" @click="$router.push(item.pathName)">
+          <div flex="dir:top main:center cross:center" v-for="(item,index) in [{name:'限时抢票',pathName:'FlashSale'},{name:'超级联合日',pathName:'LocalProduct',params:{isHermes:true}},{name:'福州特产馆',pathName:'LocalProduct'}]" @click="$router.push({ name:item.pathName, params:item.params})">
             <div  class="iconItemBg" flex="main:center cross:center">
               icon
             </div>
@@ -102,7 +102,7 @@
     }
   }
 </script>
-<style lang="less">
+<style lang="less" scoped>
   .index-header {    min-height: 50px;
     background: #ffffff;
     padding: 5px 10px;
