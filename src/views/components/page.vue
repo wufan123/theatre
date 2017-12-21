@@ -39,9 +39,6 @@ export default {
     onClickR () {
       go(this.headerRLink, this.$router)
     }
-  },
-  mounted(){
-    console.log("1111111",this.$refs)
   }
 }
 function go (url, $router) {
