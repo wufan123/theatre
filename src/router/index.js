@@ -14,7 +14,6 @@ import LocalProduct from 'views/home/localProduct.vue'
 import ProductDetail from 'views/home/productDetail.vue'
 import IntroduceList from 'views/business/introduce/list.vue'
 import IntroduceDetail from 'views/business/introduce/detail.vue'
-import HermesDetail from 'views/home/hermesDetail.vue'
 import FindList from 'views/business/find/list.vue'
 import ConfirmOrder from 'views/common/confirmOrder.vue'
 
