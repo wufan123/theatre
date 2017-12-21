@@ -12,8 +12,8 @@ module.exports = {
         baseUrl:'/api',
         proxyTable: {
             '/api': {
-                // target: "https://premapi.zmaxfilm.com/Api_35",//设置你调用的接口域名和端口号 别忘了加http
-                target: "http://newzr10.zmaxfilm.net:8181/Api_35/",//设置你调用的接口域名和端口号 别忘了加http
+                target: "https://premapi.zmaxfilm.com/Api_35/",//设置你调用的接口域名和端口号 别忘了加http
+                //target: "http://newzr10.zmaxfilm.net:8181/Api_35/",//设置你调用的接口域名和端口号 别忘了加http
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api': ''//这里理解成用‘/api'代替target里面的地址，后面组件中我们掉接口时直接用api代替

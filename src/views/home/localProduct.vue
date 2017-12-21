@@ -26,7 +26,7 @@
 <script>
   import PageScroller from 'views/components/PageScroller.vue'
   import {XButton} from 'vux'
-  import API from 'api/member'
+  import storeApi from 'api/storeApi'
   export default {
       props:['isHermes'],
     components:{PageScroller,XButton},
@@ -38,15 +38,18 @@
     },
     methods: {
       getDataList(page){
-        return API.getCinemaList(page,10).then(res =>{
-//              res = {
-//                data:[],
-//                page:{
-//                  number:0,size:10,totalElements:0,totalPages:0
-//                }
-//              }
-          page === 0 ? this.dataList= res.data: this.dataList= this.dataList.concat(res.data);
+        return storeApi.getGoodsList('JC170001').then(success => {
+          console.log(success)
+          this.dataList= success.data
+          let res = {
+            data:success.data,
+            page:{
+              number:0,size:success.data.length,totalElements:success.data.length,totalPages:1
+            }
+          }
           return res
+        }, error => {
+          console.log(error)
         })
       },
       fetchData(){

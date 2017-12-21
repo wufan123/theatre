@@ -1,7 +1,7 @@
 import axios from 'axios'
 import signUtil from '../util/signUtil'
 
-let API_BASE_URL = _BASE_URL ? _BASE_URL : '';
+let API_BASE_URL = _BASE_URL ? _BASE_URL : ''; 
 let APP_ACCOUNT = 'zmaxfilm';
 let APP_PASSWORD = 'adflkjlsda';
 let API_VERSION = '1.0.0';
