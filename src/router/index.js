@@ -14,6 +14,8 @@ import Hermes from 'views/home/hermes.vue'
 import IntroduceList from 'views/business/introduce/list.vue'
 import IntroduceDetail from 'views/business/introduce/detail.vue'
 import HermesDetail from 'views/home/hermesDetail.vue'
+import FindList from 'views/business/find/list.vue'
+import ConfirmOrder from 'views/common/confirmOrder.vue'
 
 Vue.use(Router)
 
@@ -25,6 +27,8 @@ export default new Router({
     { path: '/HermesDetail', name: 'HermesDetail', component: HermesDetail},
     { path: '/IntroduceList', name: 'IntroduceList', component: IntroduceList},
     { path: '/IntroduceDetail', name: 'IntroduceDetail', component: IntroduceDetail},
+    { path: '/FindList', name: 'FindList', component: FindList},
+    { path: '/ConfirmOrder', name: 'ConfirmOrder', component: ConfirmOrder},
     { path: '/Login', name: 'Login', component: Login},
 
     { path: '/Me', name: 'Me', component: Me},

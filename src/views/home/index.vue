@@ -4,7 +4,7 @@
       <img :src="require('assets/images/logo.png')" class="logo">
       <div class="header-r" flex="cross:center">
         <img :src="require('assets/images/me.png')" class="header-r-icon" @click="$router.push('Me')">
-        <img :src="require('assets/images/all.png')" class="header-r-icon">
+        <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('ConfirmOrder')">
       </div>
     </div>
     <!--<scroller height="-40" lock-x scrollbar-y :pulldown-config='pullDownConfig' :usePulldown='true' @on-pulldown-loading='refresh' ref="scroller">-->
@@ -18,8 +18,16 @@
             <label>{{item.name}}</label>
           </div>
         </div>
-        <list-cell v-for="i in 3" v-bind:key="i" title="剧坊" subtitle="介绍" style="margin-top: 10px" >
+        <list-cell  title="剧坊" subtitle="介绍" style="margin-top: 10px" >
           <label slot="rightTop" class="menuItem" @click="$router.push('IntroduceList')">更多</label>
+          <scroll-view slot="main">
+            <div v-for="i in 11" class="scrollItem" @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})">
+              {{i}}
+            </div>
+          </scroll-view>
+        </list-cell>
+        <list-cell  title="剧坊" subtitle="发现" style="margin-top: 10px" >
+          <label slot="rightTop" class="menuItem" @click="$router.push('FindList')">更多</label>
           <scroll-view slot="main">
             <div v-for="i in 11" class="scrollItem" @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})">
               {{i}}
