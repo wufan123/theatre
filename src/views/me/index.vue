@@ -1,6 +1,6 @@
 <template>
   <page :footerText="`退出登录`" :footerLink="`Login`" :headerTitle="`我的`">
-      <div slot="contain">
+      <div slot="contain" class="me">
           <div class="me-top">
             <span class="bold">138****800</span>
             <p>余额：￥0.00  丨  积分：88</p>
@@ -57,8 +57,8 @@ export default {
 
 </style>
 <style lang="less">
-  .me-index{
-    .am-list .am-list-item.twoline .am-list-thumb img{width:30px;height:30px;}
+  .me{
+    .am-list .am-list-item.twoline .am-list-thumb img{width:24px;height:24px;}
   }
 </style>
 
