@@ -25,28 +25,29 @@ Vue.use(Router)
 export default new Router({
   routes: [
     //home
-    { path: '/Home', name: 'Home', component: Home},
-    { path: '/FlashSale', name: 'FlashSale', component: FlashSale},
-    { path: '/LocalProduct', name: 'LocalProduct', component: LocalProduct,props: true},
-    { path: '/ProductDetail', name: 'ProductDetail', component: ProductDetail,props: true},
-   //business
-    { path: '/IntroduceList', name: 'IntroduceList', component: IntroduceList},
-    { path: '/IntroduceDetail', name: 'IntroduceDetail', component: IntroduceDetail},
-    { path: '/FindList', name: 'FindList', component: FindList},
+    {path: '*', redirect: '/Home'},
+    {path: '/Home', name: 'Home', component: Home},
+    {path: '/FlashSale', name: 'FlashSale', component: FlashSale},
+    {path: '/LocalProduct', name: 'LocalProduct', component: LocalProduct, props: true},
+    {path: '/ProductDetail', name: 'ProductDetail', component: ProductDetail, props: true},
+    //business
+    {path: '/IntroduceList', name: 'IntroduceList', component: IntroduceList},
+    {path: '/IntroduceDetail', name: 'IntroduceDetail', component: IntroduceDetail},
+    {path: '/FindList', name: 'FindList', component: FindList},
     //common
-    { path: '/ConfirmOrder', name: 'ConfirmOrder', component: ConfirmOrder},
-    { path: '/PayOrder', name: 'PayOrder', component: PayOrder},
-    { path: '/PaySuccess', name: 'PaySuccess', component: PaySuccess},
+    {path: '/ConfirmOrder', name: 'ConfirmOrder', component: ConfirmOrder},
+    {path: '/PayOrder', name: 'PayOrder', component: PayOrder},
+    {path: '/PaySuccess', name: 'PaySuccess', component: PaySuccess},
     //me
-    { path: '/Me', name: 'Me', component: Me},
-    { path: '/MemberCard', name: 'MemberCard', component: MemberCard},
-    { path: '/AddCard', name: 'AddCard', component: AddCard},
-    { path: '/CouponList', name: 'CouponList', component: CouponList},
-    { path: '/TicketList', name: 'TicketList', component: TicketList},
-    { path: '/TicketDetail', name: 'TicketDetail', component: TicketDetail},
-    { path: '/Test', name: 'Test', component: Test},
-    { path: '/SessionDetail', name: 'SessionDetail', component: SessionDetail},
-    { path: '/Login', name: 'Login', component: Login},
-    { path: '/Test', name: 'Test', component: Test}
+    {path: '/Me', name: 'Me', component: Me},
+    {path: '/MemberCard', name: 'MemberCard', component: MemberCard},
+    {path: '/AddCard', name: 'AddCard', component: AddCard},
+    {path: '/CouponList', name: 'CouponList', component: CouponList},
+    {path: '/TicketList', name: 'TicketList', component: TicketList},
+    {path: '/TicketDetail', name: 'TicketDetail', component: TicketDetail},
+    {path: '/Test', name: 'Test', component: Test},
+    {path: '/SessionDetail', name: 'SessionDetail', component: SessionDetail},
+    {path: '/Login', name: 'Login', component: Login},
+    {path: '/Test', name: 'Test', component: Test}
   ]
 })
