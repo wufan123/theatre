@@ -72,11 +72,9 @@
 <script>
   import PageScroller from 'views/components/PageScroller.vue'
   import {Popup, Checker, CheckerItem,XNumber} from 'vux'
-  import {XButton} from 'vux'
   export default {
     props: ['isHermes'],
     components: {
-      XButton,
       PageScroller, Popup, Checker, CheckerItem,XNumber},
     data(){
       return {
