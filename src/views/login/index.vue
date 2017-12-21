@@ -7,25 +7,44 @@
           </group>
           <group title="验证码" class="form-item">
             <x-input class="weui-vcode" placeholder="请输入验证码" v-model="form.pw">
-              <x-button slot="right" type="primary" mini>获取</x-button>
+              <x-button slot="right" type="primary" mini @click.native="getAuthCode">获取</x-button>
             </x-input>
           </group>
-           <x-button type="primary">确定</x-button>
+           <x-button type="primary" @click.native="login">确定</x-button>
         </div>
     </div>
   </page>
 </template>
 <script>
+  import Auth from 'api/authApi'
   import { XInput, Group } from "vux";
   export default {
     data(){
       return{
         form:{
-          phone:'13046521325',
+          phone:'18046053906',
           pw:'123456'
         }
       }
     },
-    components: { XInput, Group }
+    components: { XInput, Group },
+    methods:{
+        getAuthCode(){
+            Auth.getValidateCode("firstLogin",this.form.phone).then((success)=>{
+              this.$vux.toast.text(success.text, 'bottom');
+            },(error)=>{
+              this.$vux.toast.text(error.text, 'bottom');
+            })
+        },
+      login(){
+            Auth.smsLogin(this.form.phone,this.form.pw,'JC170001').then((success)=>{
+              this.$vux.toast.text("登录成功", 'bottom');
+              this.$router.push('Home')
+            },(error)=>{
+              this.$vux.toast.text(error.text, 'bottom');
+            });
+      }
+
+    }
   };
 </script>

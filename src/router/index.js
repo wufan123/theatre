@@ -25,7 +25,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     //home
-    { path: '/', name: 'Home', component: Home},
+    { path: '/Home', name: 'Home', component: Home},
     { path: '/FlashSale', name: 'FlashSale', component: FlashSale},
     { path: '/LocalProduct', name: 'LocalProduct', component: LocalProduct,props: true},
     { path: '/ProductDetail', name: 'ProductDetail', component: ProductDetail,props: true},

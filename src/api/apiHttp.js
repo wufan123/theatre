@@ -1,12 +1,12 @@
 import axios from 'axios'
 import signUtil from '../util/signUtil'
 
-let API_BASE_URL = _BASE_URL ? _BASE_URL : ''
+let API_BASE_URL = _BASE_URL ? _BASE_URL : '';
 let APP_ACCOUNT = 'zmaxfilm'
 let APP_PASSWORD = 'adflkjlsda'
 let API_VERSION = '1.0.0'
 let DEVICE_TYPE = 'web'
-let token = '0552a7361f6fdfb829f5fc442d92d736a'
+let token = '0552a7361f6fdfb829f5fc442d92d736a';
 const instance = axios.create({
     baseURL: API_BASE_URL,
     timeout: 10000,
@@ -29,7 +29,7 @@ async function getToken(config) {
     if (res && res.data && res.data.tokenId) {
         token = res.data.tokenId
         if (config) {
-            config.params.sign = getSign(config.params, config.dataObj)
+            config.params.sign = getSign(config.params, config.dataObj);
             config.tryAgain = true
             config.data = urlToObject(config.data)//data重置
             config.url = config.url.replace(API_BASE_URL, '')//二次请求url重复
@@ -82,15 +82,15 @@ var urlToObject = function(urlParams) {
 };
 
 instance.interceptors.request.use(config => {
-    console.log("===============request params", config)
+    console.log("===============request params", config);
     if (!config.params) {
         config.params = {}
     }
-    let sign = getSign(config.params, config.data)
+    let sign = getSign(config.params, config.data);
     //添加sign
     config.params.sign = sign
     console.log("sign=" + sign)
-    console.log(" config.params", config.params)
+    console.log(" config.params", config.params);
     return config;
 });
 
