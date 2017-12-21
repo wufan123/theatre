@@ -16,6 +16,8 @@ import IntroduceList from 'views/business/introduce/list.vue'
 import IntroduceDetail from 'views/business/introduce/detail.vue'
 import FindList from 'views/business/find/list.vue'
 import ConfirmOrder from 'views/common/confirmOrder.vue'
+import PayOrder from 'views/common/payOrder.vue'
+import PaySuccess from 'views/common/paySuccess.vue'
 
 Vue.use(Router)
 
@@ -25,18 +27,21 @@ export default new Router({
     { path: '/FlashSale', name: 'FlashSale', component: FlashSale},
     { path: '/LocalProduct', name: 'LocalProduct', component: LocalProduct,props: true},
     { path: '/ProductDetail', name: 'ProductDetail', component: ProductDetail,props: true},
-    { path: '/Login', name: 'Login', component: Login},
+
     { path: '/IntroduceList', name: 'IntroduceList', component: IntroduceList},
     { path: '/IntroduceDetail', name: 'IntroduceDetail', component: IntroduceDetail},
     { path: '/FindList', name: 'FindList', component: FindList},
     { path: '/ConfirmOrder', name: 'ConfirmOrder', component: ConfirmOrder},
-    { path: '/Login', name: 'Login', component: Login},
+    { path: '/PayOrder', name: 'PayOrder', component: PayOrder},
+    { path: '/PaySuccess', name: 'PaySuccess', component: PaySuccess},
+
     { path: '/Me', name: 'Me', component: Me},
     { path: '/MemberCard', name: 'MemberCard', component: MemberCard},
     { path: '/AddCard', name: 'AddCard', component: AddCard},
     { path: '/CouponList', name: 'CouponList', component: CouponList},
     { path: '/TicketList', name: 'TicketList', component: TicketList},
     { path: '/TicketDetail', name: 'TicketDetail', component: TicketDetail},
+    { path: '/Login', name: 'Login', component: Login},
     { path: '/Test', name: 'Test', component: Test}
   ]
 })

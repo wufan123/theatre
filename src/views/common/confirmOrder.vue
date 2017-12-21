@@ -1,5 +1,5 @@
 <template>
-<page :headerTitle="`确认订单`" :footerText="`支付`" :footerLink="`/`" >
+<page :headerTitle="`确认订单`" :footerText="`支付`" :footerLink="`PayOrder`" >
   <div slot="contain">
     <div class="c-order">
       <div class="c-goods">
@@ -11,10 +11,10 @@
           </list>
         </div>
          <list>
-            <list-item :content="`优惠券`"  extra="4张可用" isLink></list-item>
+            <list-item :content="`优惠券`"  extra="4张可用" isLink  :link="`CouponList`" ></list-item>
          </list>
          <list>
-            <list-item :content="`会员卡`"  extra="未选择" isLink></list-item>
+            <list-item :content="`会员卡`"  extra="未选择" isLink :link="`MemberCard`"></list-item>
          </list>
          <div class="price">
             <div class="flexb"><label>总价</label><label>￥233.00</label> </div>
@@ -37,7 +37,7 @@
 export default {
   data(){
     return{
-      telphone:13800138000
+      telphone:'13800138000'
     }
   },
   components:{List,ListItem, XInput, Group}
