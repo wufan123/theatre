@@ -18,8 +18,8 @@
 </template>
 <script>
 import PageScroller from 'views/components/PageScroller.vue'
-import API from 'api/member'
-  import {List,ListItem} from 'views/components/list'
+import CardApi from 'api/cardApi'
+import {List,ListItem} from 'views/components/list'
 
 export default {
   components:{PageScroller,List,ListItem},
@@ -30,7 +30,7 @@ export default {
   },
   methods:{
     getDataList(page){
-      return API.getCinemaList(page,5).then(res =>{
+      return CardApi.getCardInfo().then(res =>{
         res = {
           data:[{name:'1111',id:'111111'},{name:'2222',id:'22222'},{name:'3333',id:'3333'}],
           page:{
