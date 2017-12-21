@@ -13,10 +13,7 @@
        </div>
        
      </div>
-    <div class="info">
-      <p>温馨提示：</p>
-      <p>订单一旦完成购买，不退不换</p>
-    </div>
+    <div class="info"> <p>温馨提示：</p><p>订单一旦完成购买，不退不换</p></div>
   </div>
 </page>
 </template>
@@ -61,7 +58,6 @@ export default {
 .c-pay{padding: 15px ;background: #ffffff;
   .am-list{padding: 0}
   .c-goods{
-    
     .am-list .am-list-item{background: none;}
   }
   .am-list-item{padding: 15px  0;margin-top: -1px;}

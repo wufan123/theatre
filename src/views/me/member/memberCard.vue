@@ -18,7 +18,7 @@
 </template>
 <script>
 import PageScroller from 'views/components/PageScroller.vue'
-import API from 'apis/member'
+import API from 'api/member'
   import {List,ListItem} from 'views/components/list'
 
 export default {
