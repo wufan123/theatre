@@ -15,6 +15,8 @@ import ProductDetail from 'views/home/productDetail.vue'
 import IntroduceList from 'views/business/introduce/list.vue'
 import IntroduceDetail from 'views/business/introduce/detail.vue'
 import SessionDetail from 'views/session/detail.vue'
+import FindList from 'views/business/find/list.vue'
+import ConfirmOrder from 'views/common/confirmOrder.vue'
 
 Vue.use(Router)
 
@@ -27,6 +29,8 @@ export default new Router({
     { path: '/Login', name: 'Login', component: Login},
     { path: '/IntroduceList', name: 'IntroduceList', component: IntroduceList},
     { path: '/IntroduceDetail', name: 'IntroduceDetail', component: IntroduceDetail},
+    { path: '/FindList', name: 'FindList', component: FindList},
+    { path: '/ConfirmOrder', name: 'ConfirmOrder', component: ConfirmOrder},
     { path: '/Login', name: 'Login', component: Login},
     { path: '/Me', name: 'Me', component: Me},
     { path: '/MemberCard', name: 'MemberCard', component: MemberCard},

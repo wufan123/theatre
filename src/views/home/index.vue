@@ -4,7 +4,7 @@
       <img :src="require('assets/images/logo.png')" class="logo">
       <div class="header-r" flex="cross:center">
         <img :src="require('assets/images/me.png')" class="header-r-icon" @click="$router.push('Me')">
-        <img :src="require('assets/images/all.png')" class="header-r-icon">
+        <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('ConfirmOrder')">
       </div>
     </div>
     <!--<scroller height="-40" lock-x scrollbar-y :pulldown-config='pullDownConfig' :usePulldown='true' @on-pulldown-loading='refresh' ref="scroller">-->
@@ -18,7 +18,7 @@
             <label>{{item.name}}</label>
           </div>
         </div>
-        <list-cell title="剧坊" subtitle="介绍" style="margin-top: 10px" >
+        <list-cell title="剧坊" subtitle="介绍" style="margin-top: 10px;" >
           <label slot="rightTop" class="menuItem" @click="$router.push('IntroduceList')">更多</label>
           <scroll-view slot="main">
             <div v-for="i in 11" class="scrollItem" @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})">
@@ -26,7 +26,6 @@
             </div>
           </scroll-view>
         </list-cell>
-
         <list-cell title="票务·" subtitle="场次票" style="margin-top: 10px" >
           <scroll-view slot="main">
             <div v-for="i in 11" class="scrollItem" @click="$router.push({name:'SessionDetail'})">
@@ -49,6 +48,7 @@
 <script>
   import {Swiper, GroupTitle, SwiperItem, XButton, Divider, Scroller} from 'vux'
   import ScrollView from 'views/components/simpleScrollView.vue'
+  import ListCell from 'views/components/home/listCell.vue'
   const imgList = [
     'http://placeholder.qiniudn.com/800x300/FF3B3B/ffffff',
     'http://placeholder.qiniudn.com/800x300/FFEF7D/ffffff',
@@ -58,24 +58,10 @@
     url: 'javascript:',
     img: one
   }));
-  let listCell = {
-    name: 'list-cell',
-    template: `<div class="listCell" flex="dir:top">
-      <div class="listTop" flex="dir:left">
-        <label class="menuItem">{{title}}</label>
-        <label class="menuItem">{{subtitle}}</label>
-        <div flex="dir:right cross:center" flex-box="1">
-          <slot name="rightTop"></slot>
-        </div>
-      </div>
-          <slot name="main"></slot>
-    </div>`,
-    props: ['title', 'subtitle']
-  }
   export default {
     components: {
       Scroller,
-      Swiper, ScrollView, listCell
+      Swiper, ScrollView, ListCell
     },
     data(){
       return {
@@ -102,7 +88,7 @@
     }
   }
 </script>
-<style lang="less" scoped>
+<style lang="less">
   .index-header {    min-height: 50px;
     background: #ffffff;
     padding: 5px 10px;
@@ -115,14 +101,12 @@
       margin-left: 10px;
     }
   }
-
   .findItemContent {
     flex: 1;
     height: 100px;
     background-color: gray;
     margin: 10px
   }
-
   .findItem {
     width: 50%;
     display: flex;
@@ -130,15 +114,6 @@
     height: fit-content;
     max-width: 50%;
   }
-
-  .scroll {
-    display: -webkit-box;
-    overflow-x: scroll;
-    height: fit-content;
-    padding: 0 10px;
-    -webkit-overflow-scrolling: touch;
-  }
-
   .scrollItem {
     width: 150px;
     height: 130px;
@@ -146,25 +121,10 @@
     margin-right: 30px;
     border-radius: 5%;
   }
-
-  .listTop {
-    margin: 10px 0;
-    .menuItem {
-      margin: 0 10px;
-    }
-  }
-
-  .listCell {
-    min-height: 200px;
-    height: fit-content;
-    background-color: white;
-  }
-
   .MenuCell {
     height: 100px;
     background-color: white;
   }
-
   .iconItemBg {
     height: 49px;
     width: 49px;

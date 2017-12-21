@@ -1,19 +1,25 @@
 <template>
-  <page headerTitle="场次票" flex-box="1" >
-    <div slot="contain" >
+  <page headerTitle="场次票" flex-box="1">
+    <div slot="contain">
       <div class="goodPhoto">
-        <img src="" />
+        <img src=""/>
       </div>
       <div class="mainBody" flex="dir:top cross:center">
-        <div>
-          <label>
-            永和鱼丸提货券</label>
-          <label>
-            ￥5.00</label>
-          <label class="primeCost">
-            ￥20.00</label>
+        <div flex="dir:left cross:center"  class="titleBar">
+          <div flex="dir:top">
+            <label>
+              坊巷影音文化秀</label>
+            <label>
+              坊巷文化影音秀场次票</label>
+          </div>
+          <div flex="dir:top">
+            <label class="price">
+              ￥5.00</label>
+            <label class="primeCost">
+              ￥20.00</label>
+          </div>
         </div>
-        <label class="title">
+        <label class="titleTag">
           商品介绍
         </label>
         <div>
@@ -26,7 +32,7 @@
           抡起刀背猛砸砧板上的鲜鱼，
         </div>
       </div>
-      <x-button class="no-radius bottomBtn" type="primary" >马上购买</x-button>
+      <x-button class="no-radius bottomBtn" type="primary">马上购买</x-button>
     </div>
   </page>
 </template>
@@ -35,40 +41,43 @@
   import {XButton} from 'vux'
   import API from 'apis/member'
   export default {
-    props:['isHermes'],
-    components:{PageScroller,XButton},
+    props: ['isHermes'],
+    components: {PageScroller, XButton},
     data(){
       return {
-        dataList:[]
+        dataList: []
       }
     },
-    methods: {
-    }
+    methods: {}
   }
 </script>
 <style lang="less" scoped>
   @import "~style/base-variables";
-  .bottomBtn{
+  .bottomBtn {
     position: fixed;
     bottom: 0;
   }
-  .title{
+  .goodPhoto {
+    height: 200px;
+    background-color: gray;
+  }
+  .titleTag{
     background-color:gray;
     color: white;
     padding: 5px 15px;
     margin-top: 10px;
   }
-  .primeCost{
-    text-decoration: line-through;
-  }
-  .goodPhoto{
-    height: 200px;
-    background-color: gray;
-  }
-  .mainBody{
+  .mainBody {
     background-color: white;
     margin: -20px 20px 80px;
     padding: 20px;
     border-radius: 5px;
+    .titleBar {
+      justify-content: space-around;
+      width: 100%;
+      .price{
+        font-size: 22px;
+      }
+    }
   }
 </style>
