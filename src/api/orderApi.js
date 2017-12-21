@@ -174,8 +174,6 @@ function cancelOrder(orderid) {
     })
 }
 
-
-
 export default {
     getOrderStatus: getOrderStatus,
     getCinemaOrders: getCinemaOrders,

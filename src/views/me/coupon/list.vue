@@ -27,7 +27,7 @@
 <script>
   import PageScroller from '../../components/PageScroller.vue'
    import {XInput,XButton} from 'vux'
-  import API from '../../../api/member'
+  import CouponApi from 'api/couponApi'
     export default {
       components:{XInput,XButton,PageScroller},
       data(){
@@ -38,7 +38,7 @@
         },
         methods: {
           getDataList(page){
-            return API.getCinemaList(page,10).then(res =>{
+            return CouponApi.userVoucherList(page,0).then(res =>{
 //              res = {
 //                data:[],
 //                page:{
