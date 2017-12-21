@@ -60,7 +60,7 @@
           <div class="numItem">
             <x-number title="数量" v-model="value"></x-number>
           </div>
-        <x-button type="primary" class="no-radius" @click.native="$router.push({name:'ConfirmOrder'})">  
+        <x-button type="primary" class="no-radius" @click.native="$router.push({name:'ConfirmOrder'})">
           确认
         </x-button>
       </div>

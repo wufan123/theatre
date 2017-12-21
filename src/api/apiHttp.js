@@ -1,7 +1,7 @@
 import axios from 'axios'
 import signUtil from '../util/signUtil'
 
-let API_BASE_URL = "/api/ruihua"
+let API_BASE_URL = _BASE_URL ? _BASE_URL : ''
 let APP_ACCOUNT = 'zmaxfilm'
 let APP_PASSWORD = 'adflkjlsda'
 let API_VERSION = '1.0.0'
@@ -12,7 +12,7 @@ const instance = axios.create({
     timeout: 10000,
     headers: {
     },
-    transformRequest: [function (data, headers) {
+    transformRequest: [function(data, headers) {
         return changeData(data);
     }],
 })
@@ -60,14 +60,14 @@ function changeData(data) {
     let keys = Object.keys(data)
     if (!keys || keys.length == 0)
         return data
-    keys.forEach(function (element) {
+    keys.forEach(function(element) {
         str += '&' + element + "=" + data[element]
     }, this);
     return str.substring(1, str.length)
 }
 
 
-var urlToObject = function (urlParams) {
+var urlToObject = function(urlParams) {
     var urlObject = {};
     if (urlParams) {
         var urlString = urlParams
@@ -95,7 +95,7 @@ instance.interceptors.request.use(config => {
 });
 
 instance.interceptors.response.use(response => {
-    console.log('resp-----------------------onse',response)
+    console.log('resp-----------------------onse', response)
     let data = response.data
     console.info(`URL【${response.config.url}】请求:`, data)
     if (data.status == 0) {
