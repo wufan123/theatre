@@ -6,11 +6,11 @@ import apiHttp from './apiHttp'
  * @param {function} success_cb 
  * @param {function} fail_cb 
  */
-function getCinemaOrders(status, page, success_cb, fail_cb) {
+function getCinemaOrders(status, page) {
     return apiHttp.get('/user/getCinemaOrders', {
         "status": status,
         "page": page,
-    }, success_cb, fail_cb)
+    })
 }
 
 /**
@@ -22,7 +22,7 @@ function getUnwatchCinemaOrders(success_cb, fail_cb) {
     return apiHttp.get('/user/getCinemaOrders', {
         "status": 1,
         "type": 2
-    }, success_cb, fail_cb)
+    })
 }
 
 
@@ -32,10 +32,10 @@ function getUnwatchCinemaOrders(success_cb, fail_cb) {
  * @param {*} success_cb 
  * @param {*} fail_cb 
  */
-function getCinemaOrderStatus(orderID, success_cb, fail_cb) {
+function getCinemaOrderStatus(orderID) {
     return apiHttp.get('/user/getOrderStatus', {
         "orderId": orderID
-    }, success_cb, fail_cb)
+    })
 }
 
 /**
@@ -44,10 +44,10 @@ function getCinemaOrderStatus(orderID, success_cb, fail_cb) {
  * @param {*} success_cb 
  * @param {*} fail_cb 
  */
-function getCinemaOrderInfo(orderID, success_cb, fail_cb) {
+function getCinemaOrderInfo(orderID) {
     return apiHttp.get('/user/getOrderInfo', {
         "orderId": orderID
-    }, success_cb, fail_cb)
+    })
 }
 
 /**
@@ -56,19 +56,19 @@ function getCinemaOrderInfo(orderID, success_cb, fail_cb) {
  * @param {*} success_cb 
  * @param {*} fail_cb 
  */
-function getFilmOrderInfo(orderID, success_cb, fail_cb) {
+function getFilmOrderInfo(orderID) {
     return apiHttp.get('/user/getOrderFilmDetail', {
         "orderNo": orderID
-    }, success_cb, fail_cb)
+    })
 }
 
 /**
  * 修改订单手机
  */
-function updateOrderMobile(mobile, success_cb, fail_cb) {
+function updateOrderMobile(mobile) {
     return apiHttp.post('/user/updateOrderFilmMobile', {
         mobile: mobile
-    }, success_cb, fail_cb)
+    })
 }
 
 
@@ -77,11 +77,11 @@ function updateOrderMobile(mobile, success_cb, fail_cb) {
  * @param {*} success_cb 
  * @param {*} fail_cb 
  */
-function getGoodsOrders(page, success_cb, fail_cb) {
+function getGoodsOrders(page) {
     return apiHttp.get('/sale/getMyGoods', {
         "page": page,
         "buyFlag": 1
-    }, success_cb, fail_cb)
+    })
 }
 
 /**
@@ -90,10 +90,10 @@ function getGoodsOrders(page, success_cb, fail_cb) {
  * @param {*} success_cb 
  * @param {*} fail_cb 
  */
-function getGoodsOrderStatus(orderId, success_cb, fail_cb) {
+function getGoodsOrderStatus(orderId) {
     return apiHttp.get('/sale/getGoodsStatus', {
         "orderId": orderId
-    }, success_cb, fail_cb)
+    })
 }
 
 /**
@@ -103,11 +103,11 @@ function getGoodsOrderStatus(orderId, success_cb, fail_cb) {
  * @param {*} success_cb 
  * @param {*} fail_cb 
  */
-function getOrderPayInfo(orderId, orderType, success_cb, fail_cb) {
+function getOrderPayInfo(orderId, orderType) {
     return apiHttp.get("/user/getOrderPayInfo", {
         "orderId": orderId,
         "orderType": ["goodsAndFilm", "film", "goods", "package"][orderType]
-    }, success_cb, fail_cb)
+    })
 }
 
 /**
@@ -116,10 +116,10 @@ function getOrderPayInfo(orderId, orderType, success_cb, fail_cb) {
  * @param {*} success_cb 
  * @param {*} fail_cb 
  */
-function deleteFilmOrderById(orderId, success_cb, fail_cb) {
+function deleteFilmOrderById(orderId) {
     return apiHttp.get("/user/delOrderFilm", {
         "orderid": orderId
-    }, success_cb, fail_cb)
+    })
 }
 
 /**
@@ -128,10 +128,10 @@ function deleteFilmOrderById(orderId, success_cb, fail_cb) {
  * @param {*} success_cb 
  * @param {*} fail_cb 
  */
-function delOrderGoods(orderId, success_cb, fail_cb) {
+function delOrderGoods(orderId) {
     return apiHttp.get("/user/delOrderGoods", {
         "orderId": orderId
-    }, success_cb, fail_cb)
+    })
 }
 
 /**
@@ -140,11 +140,11 @@ function delOrderGoods(orderId, success_cb, fail_cb) {
  * @param {*} success_cb 
  * @param {*} fail_cb 
  */
-function delComboOrder(orderId, type, success_cb, fail_cb) {
+function delComboOrder(orderId, type) {
     return apiHttp.get("/package/delOrder", {
         "orderId": orderId,
         "type": type
-    }, success_cb, fail_cb)
+    })
 }
 
 
@@ -156,22 +156,22 @@ function delComboOrder(orderId, type, success_cb, fail_cb) {
 function getPackageOrders(success_cb, fail_cb) {
     return apiHttp.get("/package/getMyOrders", {
         status: 1
-    }, success_cb, fail_cb)
+    })
 }
 
-function getOrderStatus(orderid, success_cb, fail_cb) {
+function getOrderStatus(orderid) {
     return apiHttp.get("/user/getOrderStatus", {
         orderid: orderid
-    }, success_cb, fail_cb)
+    })
 }
 
 /**
  * 取消订单
  */
-function cancelOrder(orderid, success_cb, fail_cb) {
+function cancelOrder(orderid) {
     return apiHttp.get("/user/cancelOrder", {
         orderid: orderid
-    }, success_cb, fail_cb)
+    })
 }
 
 

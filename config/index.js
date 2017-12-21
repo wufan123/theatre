@@ -10,6 +10,7 @@ module.exports = {
         // Paths
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
+        baseUrl:'/api/ruihua',
         proxyTable: {
             '/api/ruihua': {
                 // target: "https://premapi.zmaxfilm.com/Api_35",//设置你调用的接口域名和端口号 别忘了加http
