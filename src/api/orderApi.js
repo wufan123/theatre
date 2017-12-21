@@ -18,7 +18,7 @@ function getCinemaOrders(status, page) {
  * @param {*} success_cb 
  * @param {*} fail_cb 
  */
-function getUnwatchCinemaOrders(success_cb, fail_cb) {
+function getUnwatchCinemaOrders() {
     return apiHttp.get('/user/getCinemaOrders', {
         "status": 1,
         "type": 2
@@ -153,7 +153,7 @@ function delComboOrder(orderId, type) {
  * @param {*} success_cb 
  * @param {*} fail_cb 
  */
-function getPackageOrders(success_cb, fail_cb) {
+function getPackageOrders() {
     return apiHttp.get("/package/getMyOrders", {
         status: 1
     })
