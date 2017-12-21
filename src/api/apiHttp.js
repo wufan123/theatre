@@ -2,8 +2,8 @@ import axios from 'axios'
 import signUtil from '../util/signUtil'
 
 let API_BASE_URL = _BASE_URL ? _BASE_URL : ''; 
-let APP_ACCOUNT = 'zmaxfilm';
-let APP_PASSWORD = 'adflkjlsda';
+let APP_ACCOUNT = 'zhongruijufang';
+let APP_PASSWORD = 'zrjf1123';
 let API_VERSION = '1.0.0';
 let DEVICE_TYPE = 'web';
 let token = localStorage.getItem("token")?localStorage.getItem("token"):'0552a7361f6fdfb829f5fc442d92d736a';

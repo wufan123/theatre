@@ -33,10 +33,20 @@
   </page>
 </template>
 <script>
+  import AuthApi from 'api/authApi'
   import {List,ListItem} from '@/views/components/list'
   import {XButton} from 'vux'
 export default {
   components: {List,ListItem,XButton},
+  methods:{
+    fetchData(){
+      AuthApi.getUserInfo().then(success => {
+        console.log(res)
+      }, error => {
+        
+      })
+    }
+  }
 }
 </script>
 <style lang="less" scoped>
