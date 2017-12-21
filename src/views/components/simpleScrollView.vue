@@ -14,7 +14,7 @@
     }
   }
 </script>
-<style lang="less">
+<style lang="less" scoped>
   .scroll {
     display: -webkit-box;
     overflow-x: scroll;

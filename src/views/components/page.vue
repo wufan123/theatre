@@ -2,11 +2,11 @@
   <div class="page">
     <div class="header">
       <div v-if="headerTitle">
-          <x-header class="white" :left-options="{backText: ''}" >{{headerTitle}} 
+          <x-header class="white" :left-options="{backText: ''}" >{{headerTitle}}
             <a slot="right" v-if="headerRText"  @click="onClickR"  >{{headerRText}}</a>
+            <slot slot="right" name="rightTop"></slot>
           </x-header>
       </div>
-      <slot name="header"></slot>
     </div>
     <div class="contain" :class="{white:white}">
         <slot name="contain"></slot>
@@ -17,7 +17,7 @@
   </div>
 </template>
 <script>
-  
+
 export default {
   props:{
     headerTitle:String,

@@ -37,6 +37,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   },
   plugins: [
     new webpack.DefinePlugin({
+      _BASE_URL: JSON.stringify('api/'),
       'process.env': require('../config/dev.env')
     }),
     new webpack.HotModuleReplacementPlugin(),
