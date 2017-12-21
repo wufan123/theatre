@@ -3,7 +3,7 @@
     <div class="index-header" flex="main:justify cross:center">
       <img :src="require('assets/images/logo.png')" class="logo">
       <div class="header-r" flex="cross:center">
-        <img :src="require('assets/images/me.png')" class="header-r-icon" @click="$router.push('Test')">
+        <img :src="require('assets/images/me.png')" class="header-r-icon" @click="$router.push('Me')">
         <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('ConfirmOrder')">
       </div>
     </div>
