@@ -28,7 +28,7 @@ let webpackConfig = {
       '@': resolve('src'),
       'style': path.resolve('src', 'style'),
       'assets': path.resolve('src', 'assets'), //资源目录 "~assets"
-      'apis': path.resolve('src', 'apis'), //api请求目录 "api"
+      'apis': path.resolve('src', 'api'), //api请求目录 "api"
       'views': path.resolve('src', 'views'), //视图目录 "views"
     }
   },

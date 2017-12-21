@@ -18,10 +18,18 @@
             <label>{{item.name}}</label>
           </div>
         </div>
-        <list-cell v-for="i in 3" v-bind:key="i" title="剧坊" subtitle="介绍" style="margin-top: 10px" >
+        <list-cell title="剧坊" subtitle="介绍" style="margin-top: 10px" >
           <label slot="rightTop" class="menuItem" @click="$router.push('IntroduceList')">更多</label>
           <scroll-view slot="main">
             <div v-for="i in 11" class="scrollItem" @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})">
+              {{i}}
+            </div>
+          </scroll-view>
+        </list-cell>
+
+        <list-cell title="票务·" subtitle="场次票" style="margin-top: 10px" >
+          <scroll-view slot="main">
+            <div v-for="i in 11" class="scrollItem" @click="$router.push({name:'SessionDetail'})">
               {{i}}
             </div>
           </scroll-view>

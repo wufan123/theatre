@@ -8,7 +8,7 @@
           </x-header>
       </div>
     </div>
-    <div class="contain" :class="{white:white}">
+    <div class="contain" :class="{white:white}" ref="contain">
         <slot name="contain"></slot>
     </div>
     <div class="footer" v-if="footerText">
@@ -39,6 +39,9 @@ export default {
     onClickR () {
       go(this.headerRLink, this.$router)
     }
+  },
+  mounted(){
+    console.log("1111111",this.$refs)
   }
 }
 function go (url, $router) {

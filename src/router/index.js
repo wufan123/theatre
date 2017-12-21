@@ -14,6 +14,7 @@ import LocalProduct from 'views/home/localProduct.vue'
 import ProductDetail from 'views/home/productDetail.vue'
 import IntroduceList from 'views/business/introduce/list.vue'
 import IntroduceDetail from 'views/business/introduce/detail.vue'
+import SessionDetail from 'views/session/detail.vue'
 
 Vue.use(Router)
 
@@ -33,6 +34,7 @@ export default new Router({
     { path: '/CouponList', name: 'CouponList', component: CouponList},
     { path: '/TicketList', name: 'TicketList', component: TicketList},
     { path: '/TicketDetail', name: 'TicketDetail', component: TicketDetail},
-    { path: '/Test', name: 'Test', component: Test}
+    { path: '/Test', name: 'Test', component: Test},
+    { path: '/SessionDetail', name: 'SessionDetail', component: SessionDetail},
   ]
 })

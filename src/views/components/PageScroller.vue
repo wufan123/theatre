@@ -132,7 +132,6 @@ export default {
             page = (page >=0 ? page : this.page.number);
             let api =this.api(page, this.page.size);
             return api?api.then(res => {
-                console.log('res',res.page)
                 this.renderPage(res.page)
             }):null;
         }
