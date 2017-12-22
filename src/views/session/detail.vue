@@ -40,16 +40,12 @@
     <popup v-model="show" position="bottom">
       <div class="popBottom" flex="dir:top">
         <label>时间</label>
-        <checker v-model="timeCheck" default-item-class="check-item" selected-item-class="check-item-selected" class="checker">
-          <checker-item value="1">今天12.24</checker-item>
-          <checker-item value="2">今天12.24</checker-item>
-          <checker-item value="3">今天12.24</checker-item>
+        <checker v-model="timeCheck" default-item-class="check-item" selected-item-class="check-item-selected" class="checker" radio-required>
+          <checker-item :value="filmTime" v-for="(filmTime, index) in filmTimeList" :key="index" @on-item-click="changeTime">{{filmTime.dtime}}</checker-item>
         </checker>
         <label>场次</label>
-        <checker v-model="sessionTime" default-item-class="check-item" selected-item-class="check-item-selected" class="checker">
-          <checker-item value="1">12:24</checker-item>
-          <checker-item value="2">12:24</checker-item>
-          <checker-item value="3">12:24</checker-item>
+        <checker v-model="planCheck" default-item-class="check-item" selected-item-class="check-item-selected" class="checker" radio-required>
+          <checker-item :value="filmPlan" v-for="(filmPlan, index) in filmPlanList" :key="index">{{filmPlan.startTime}}</checker-item>
         </checker>
           <div class="numItem">
             <x-number title="数量" v-model="value"></x-number>
@@ -73,8 +69,8 @@
     data(){
       return {
         show: false,
-        timeCheck: '',
-        sessionTime: '',
+        timeCheck: null,
+        planCheck: null,
         value:1,
         filmDetail: null,
         filmPrice: '-',
@@ -85,6 +81,11 @@
     methods: {
       async fetchData() {
         this.loadFilmDetail()
+      },
+      changeTime: function(itemValue, itemDisabled) {
+        if (itemValue.time != this.timeCheck.time) {
+          this.loadFilmPlan(itemValue.time)
+        }
       },
       // 加载影片详情
       loadFilmDetail: function() {
@@ -120,6 +121,7 @@
         PlanApi.getTimes(params).then(success => {
           this.filmTimeList = success.data;
           if (this.filmTimeList.length > 0) {
+              this.timeCheck = this.filmTimeList[0]
               this.loadFilmPlan(this.filmTimeList[0].time);
           }
         }, error => {
@@ -135,6 +137,7 @@
           if (success.data.planInfo) {
             this.filmPlanList = success.data.planInfo;
             this.filmPrice = this.filmPlanList[0].standardPrice // 取价格
+            this.planCheck = this.filmPlanList[0]
           }
         }, error => {
           console.log(error)
