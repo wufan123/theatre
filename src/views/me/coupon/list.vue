@@ -38,14 +38,15 @@
         },
         methods: {
           getDataList(page){
-            return CouponApi.userVoucherList(page,0).then(res =>{
-//              res = {
-//                data:[],
-//                page:{
-//                  number:0,size:10,totalElements:0,totalPages:0
-//                }
-//              }
-              page === 0 ? this.dataList= res.data: this.dataList= this.dataList.concat(res.data);
+            return CouponApi.userVoucherList(page,0).then(success =>{
+              console.log(success)
+              this.dataList= success.data.voucherList
+              let res = {
+                data:success.data,
+                page:{
+                  number:0,size:this.dataList.length,totalElements:this.dataList.length,totalPages:1
+                }
+              }
               return res
             })
           },

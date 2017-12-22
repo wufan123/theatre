@@ -201,6 +201,17 @@ function getGoodsList(cinemaCode) {
     return apiHttp.get('/user/updateOrderFilmMobile', params)
   }
   
+  /**
+   * 获取抢购卖品列表
+   * @param {*} cinemaCode 
+   */
+  function getBuyingGoods(cinemaCode) {
+    var params = {
+      cinemaCode: cinemaCode
+    }
+    return apiHttp.get('/Buying/getBuyingGoods', params)
+  }
+  
   
   export default {
     getGoodsList: getGoodsList,
@@ -216,5 +227,6 @@ function getGoodsList(cinemaCode) {
     getGoodsStatus: getGoodsStatus,
     createGoodsFilmOrder: createGoodsFilmOrder,
     getGoodsDetail: getGoodsDetail,
-    updateGoodsOrder: updateGoodsOrder
+    updateGoodsOrder: updateGoodsOrder,
+    getBuyingGoods: getBuyingGoods
   }

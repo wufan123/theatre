@@ -18,6 +18,7 @@
 </template>
 <script>
   import PageScroller from 'views/components/PageScroller.vue'
+  import StoreApi from 'api/storeApi'
     export default {
       components:{PageScroller},
       data(){
@@ -28,10 +29,19 @@
       },
       methods: {
         getDataList(page){
-         /* return API.getCinemaList(page,10).then(res =>{
-            page === 0 ? this.dataList= res.data: this.dataList= this.dataList.concat(res.data);
-            return res
-          })*/
+         return StoreApi.getBuyingGoods('JC170001').then(success => {
+          console.log(success)
+          this.dataList= success.data
+          let res = {
+            data:success.data,
+            page:{
+              number:0,size:success.data.length,totalElements:success.data.length,totalPages:1
+            }
+          }
+          return res
+        }, error => {
+          console.log(error)
+        })
         },
         fetchData(){
           return this.$refs.scroller.reset()
