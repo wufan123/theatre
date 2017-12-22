@@ -16,13 +16,13 @@
           <div flex="dir:left cross:center" class="titleBar">
             <div flex="dir:top">
               <label>
-                坊巷影音文化秀</label>
+                {{filmDetail==null?'坊巷文化影音秀':filmDetail.filmName}}</label>
               <label>
-                坊巷文化影音秀场次票</label>
+                {{filmDetail==null?'坊巷文化影音秀':filmDetail.filmName}}场次票</label>
             </div>
             <div flex="dir:top">
               <label class="price">
-                ￥5.00</label>
+                ￥{{filmPrice}}</label>
               <label class="primeCost">
                 ￥20.00</label>
             </div>
@@ -31,13 +31,7 @@
             商品介绍
           </label>
           <div>
-            永和鱼丸是福建一带的地方风味名菜，属于闽菜系。永和鱼丸店创建于1934年，是福建福州市现存最老的鱼丸品牌，2001年获得“中华老字号”称号。
-
-            鱼丸最早出现于秦朝江浙一带。秦始皇云游江南到了福州，喜爱鱼米之乡的鲜鱼，但鱼肉剌多，吃起来极为不便，便下一道谕旨，要求随行厨子送上的鱼必须将鱼剌剔净，否则斩首。厨子前思后想不得要领，气急之下，抡起刀背猛砸砧板上的鲜鱼，没想到歪打正着，鱼肉与鱼骨竟截然离析。得来全不费功夫，这种剔骨法让厨子惊喜不已。他灵机一动，索性将鱼肉剁
-
-            抡起刀背猛砸砧板上的鲜鱼，没想到歪打正着，鱼肉与鱼骨竟截然离析。得来全不费功夫，这种剔骨法让厨子惊喜不已。他灵机一动，索性将鱼肉剁
-
-            抡起刀背猛砸砧板上的鲜鱼，
+            {{filmDetail?filmDetail.introduction:''}}
           </div>
         </div>
         <x-button class="no-radius bottomBtn" type="primary" @click.native="show=true">马上购买</x-button>
@@ -71,22 +65,81 @@
   import PageScroller from 'views/components/PageScroller.vue'
   import {Popup, Checker, CheckerItem,XNumber} from 'vux'
   import FilmApi from "api/filmApi"
+  import PlanApi from "api/planApi"
   export default {
     props: ['isHermes'],
     components: {
       PageScroller, Popup, Checker, CheckerItem,XNumber},
     data(){
       return {
-        show: true,
+        show: false,
         timeCheck: '',
         sessionTime: '',
-        value:1
+        value:1,
+        filmDetail: null,
+        filmPrice: '-',
+        filmTimeList: [],
+        filmPlanList: []
       }
     },
     methods: {
-         async fetchData() {
-           let res = await FilmApi.getMove(1);
-         }
+      async fetchData() {
+        this.loadFilmDetail()
+      },
+      // 加载影片详情
+      loadFilmDetail: function() {
+        FilmApi.getMove(1).then(success => {
+          let filmList = success.data;
+          if (filmList.length > 0) {
+            FilmApi.getFilmDetail(filmList[0].id).then(success => {
+              let filmDetail = success.data
+              filmDetail.introduction = filmDetail.introduction.replace('&lt;html&gt;&lt;body&gt;', '')
+                                                      .replace('&lt;/body&gt;&lt;/html&gt;', '')
+                                                      .replace(/&lt;/g, "<")
+                                                      .replace(/&gt;/g, ">")
+                                                      .replace(/&amp;/g, "&")
+                                                      .replace(/&quot;/g, '"')
+                                                      .replace(/&apos;/g, "'")
+                                                      .replace(/\<br\s*\/\>/g, "\r\n")
+              this.filmDetail = filmDetail
+              this.loadFilmTime()
+            }, error => {
+
+            })
+          } else {
+            console.log(success)
+          }
+        }, error => {
+          console.log(error)
+        })
+      },
+      loadFilmTime: function() {
+        let params = {
+            filmNo: this.filmDetail.filmNo
+        }
+        PlanApi.getTimes(params).then(success => {
+          this.filmTimeList = success.data;
+          if (this.filmTimeList.length > 0) {
+              this.loadFilmPlan(this.filmTimeList[0].time);
+          }
+        }, error => {
+          console.log(error)
+        })
+      },
+      loadFilmPlan: function(time) {
+        let params = {
+            filmNo: this.filmDetail.filmNo,
+            time: time
+        }
+        PlanApi.getPlans(params).then(success => {
+          if (success.data.planInfo) {
+            this.filmPlanList = success.data.planInfo;
+            this.filmPrice = this.filmPlanList[0].standardPrice // 取价格
+          }
+        }, error => {
+          console.log(error)
+        })
+      }
     }
   }
 </script>
