@@ -10,7 +10,7 @@ function getTimes(param) {
     if (param.filmNo) {
         vQuery.filmNo = param.filmNo;
     }
-    vQuery.cinemaCode = param.cinemaCode;
+    vQuery.cinemaCode = apiHttp.CINEMA_CODE;
     return apiHttp.get('/home/getTimes', vQuery);
 }
 
@@ -24,22 +24,22 @@ function getPlans(param) {
     if (param.filmNo) {
         vQuery.filmNo = param.filmNo;
     }
-    vQuery.cinemaCode = param.cinemaCode;
+    vQuery.cinemaCode = apiHttp.CINEMA_CODE;
     vQuery.time = param.time;
     return apiHttp.get('/home/getPlans', vQuery);
 }
 //排期日期
-function planDay(filmNo, cinemaCode) {
+function planDay(filmNo) {
     return apiHttp.get('/home/getTimes', {
         filmNo: filmNo,
-        cinemaCode: cinemaCode
+        cinemaCode: apiHttp.CINEMA_CODE
     });
 }
 
-function getPlansSeatInfo(featureAppNoList, cinemaCode) {
+function getPlansSeatInfo(featureAppNoList) {
     return apiHttp.get('/home/getPlansSeatInfo', {
         featureAppNoList: featureAppNoList,
-        cinemaCode: cinemaCode
+        cinemaCode: apiHttp.CINEMA_CODE
     });
 }
 export default {

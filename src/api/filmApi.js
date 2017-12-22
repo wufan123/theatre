@@ -4,14 +4,13 @@ import apiHttp from './apiHttp'
  * 广告栏信息
  *
  * @param {*} type 0: banner， 1：广告， 2：购票成功弹窗
- * @param {*} cinemaCode 影院编码
  * @param {*} success_cb
  * @param {*} fail_cb
  */
-function getBanner(type, cinemaCode) {
+function getBanner(type) {
     return apiHttp.get('/home/getBanner', {
         type: type,
-        cinemaCode: cinemaCode
+        cinemaCode: apiHttp.CINEMA_CODE
     });
 }
 
@@ -19,11 +18,10 @@ function getBanner(type, cinemaCode) {
  * 影片列表
  *
  * @param {*} type 类型，1：热映电影，2：待映电影
- * @param {*} cinemaCode 影院编码
  * @param {*} success_cb
  * @param {*} fail_cb
  */
-function getMove(type, cinemaCode) {
+function getMove(type) {
     return apiHttp.get('/home/getMove', {
         type: type,
         cinemaCode: apiHttp.CINEMA_CODE

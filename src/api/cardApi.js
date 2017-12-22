@@ -6,11 +6,11 @@ function getCardInfo() {
     })
 }
 //绑定会员卡
-function setUserBind(cinemaCode, cardCode, cardPwd) {
+function setUserBind(cardCode, cardPwd) {
     return apiHttp.get("/user/setUserBind", {
         cardNumber: cardCode,
         cardPassword: cardPwd,
-        cinemaCode: cinemaCode
+        cinemaCode: apiHttp.CINEMA_CODE
     })
 }
 // 解绑会员卡  type 	1 实体卡 2爱莱卡
@@ -21,11 +21,11 @@ function setUserUnbind(id, type) {
     })
 }
 // 充值
-function recharge(amount, cinemaCode,cardId,payType,openId) {
+function recharge(amount, cardId,payType,openId) {
     return apiHttp.get("/user/recharge", {
         rechargeAmount: amount,
         payType:payType,
-        cinemaCode: cinemaCode,
+        cinemaCode: apiHttp.CINEMA_CODE,
         cardId:cardId,
         openId:openId
     })

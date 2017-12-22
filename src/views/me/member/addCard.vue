@@ -32,7 +32,7 @@ export default {
   components: { XInput, Group },
   methods: {
     confirm: function() {
-      CardApi.setUserBind('JC170001', this.form.cardNo, this.form.cardPw).then(success => {
+      CardApi.setUserBind(this.form.cardNo, this.form.cardPw).then(success => {
         this.$vux.toast.text("添加成功", 'bottom');
         this.$router.push('MemberCard')
       }, error => {

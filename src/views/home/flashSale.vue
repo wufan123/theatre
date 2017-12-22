@@ -29,7 +29,7 @@
       },
       methods: {
         getDataList(page){
-         return StoreApi.getBuyingGoods('JC170001').then(success => {
+         return StoreApi.getBuyingGoods().then(success => {
           console.log(success)
           this.dataList= success.data
           let res = {

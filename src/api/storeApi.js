@@ -2,11 +2,10 @@ import apiHttp from './apiHttp'
 
 /**
  * 获取卖品列表
- * @param {*} cinemaCode 影院编码
  */
-function getGoodsList(cinemaCode) {
+function getGoodsList() {
     return apiHttp.get('/home/getCinemaGoods', {
-      cinemaCode: cinemaCode,
+      cinemaCode: apiHttp.CINEMA_CODE,
     })
   }
   
@@ -20,15 +19,14 @@ function getGoodsList(cinemaCode) {
   }
   /**
    * 生成卖品订单
-   * @param {*} cinemaCode 
    * @param {*} phoneNum 
    * @param {*} goods 
    * @param {*} success_cb 
    * @param {*} fail_cb 
    */
-  function createGoodsOrder(cinemaCode, phoneNum, goods) {
+  function createGoodsOrder(phoneNum, goods) {
     return apiHttp.get('/sale/setCinemaOrder', {
-      cinemaCode: cinemaCode,
+      cinemaCode: apiHttp.CINEMA_CODE,
       mobile: phoneNum,
       goods: goods
     })
@@ -36,15 +34,14 @@ function getGoodsList(cinemaCode) {
   
   /**
    * 生成卖品&影票订单
-   * @param {*} cinemaCode 
    * @param {*} phoneNum 
    * @param {*} goods 
    * @param {*} success_cb 
    * @param {*} fail_cb 
    */
-  function createGoodsFilmOrder(cinemaCode, phoneNum, goods, orderId) {
+  function createGoodsFilmOrder(phoneNum, goods, orderId) {
     return apiHttp.get('/sale/setCinemaOrder', {
-      cinemaCode: cinemaCode,
+      cinemaCode: apiHttp.CINEMA_CODE,
       mobile: phoneNum,
       goods: goods,
       orderId: orderId
@@ -59,9 +56,9 @@ function getGoodsList(cinemaCode) {
    * @param {*} success_cb 
    * @param {*} fail_cb 
    */
-  function createComboOrder(cinemaCode, phoneNum, packages) {
+  function createComboOrder(phoneNum, packages) {
     return apiHttp.get('/package/createOrder', {
-      cinemaCode: cinemaCode,
+      cinemaCode: apiHttp.CINEMA_CODE,
       mobile: phoneNum,
       packages: packages
     })
@@ -69,15 +66,14 @@ function getGoodsList(cinemaCode) {
   
   /**
    * 获取当前订单可使用的优惠券，卡券等信息
-   * @param {*} cinemaCode 
    * @param {*} orderId 
    * @param {*} orderType 
    * @param {*} success_cb 
    * @param {*} fail_cb 
    */
-  function getOrderPayWay(cinemaCode, orderId, orderType) {
+  function getOrderPayWay(orderId, orderType) {
     return apiHttp.get('/user/getOrderPayWay', {
-      cinemaCode: cinemaCode,
+      cinemaCode: apiHttp.CINEMA_CODE,
       orderId: orderId,
       orderType: orderType
     })
@@ -85,15 +81,14 @@ function getGoodsList(cinemaCode) {
   
   /**
    * 提交第一步确认支付 包含一起使用电影优惠券跟卖品券 会员卡
-   * @param {*} cinemaCode 
    * @param {*} orderId 
    * @param {*} orderType 
    * @param {*} success_cb 
    * @param {*} fail_cb 
    */
-  function getOrderPayLock(cinemaCode, orderId, orderType, cardId) {
+  function getOrderPayLock(orderId, orderType, cardId) {
     var param = {
-      cinemaCode: cinemaCode,
+      cinemaCode: apiHttp.CINEMA_CODE,
       orderId: orderId,
       orderType: orderType,
     }
@@ -107,7 +102,6 @@ function getGoodsList(cinemaCode) {
   
   /**
    * 提交第一步确认支付 包含一起使用电影优惠券跟卖品券 会员卡
-   * @param {*} cinemaCode 
    * @param {*} orderId 
    * @param {*} orderType 
    * @param {*} success_cb 
@@ -168,9 +162,9 @@ function getGoodsList(cinemaCode) {
     return apiHttp.get('/user/goodsAndFilmComfirmNewPay', params)
   }
   
-  function getPackagesList(cinemaCode) {
+  function getPackagesList() {
     var params = {
-      cinemaCode: cinemaCode
+      cinemaCode: apiHttp.CINEMA_CODE
     }
     return apiHttp.get('/package/getPackagesList', params)
   }
@@ -203,11 +197,10 @@ function getGoodsList(cinemaCode) {
   
   /**
    * 获取抢购卖品列表
-   * @param {*} cinemaCode 
    */
-  function getBuyingGoods(cinemaCode) {
+  function getBuyingGoods() {
     var params = {
-      cinemaCode: cinemaCode
+      cinemaCode: apiHttp.CINEMA_CODE
     }
     return apiHttp.get('/Buying/getBuyingGoods', params)
   }
