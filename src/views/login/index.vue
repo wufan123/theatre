@@ -37,7 +37,7 @@
             })
         },
       login(){
-            Auth.smsLogin(this.form.phone,this.form.pw,'JC170001').then((success)=>{
+            Auth.smsLogin(this.form.phone,this.form.pw).then((success)=>{
               this.$vux.toast.text("登录成功", 'bottom');
               this.$router.push('Home')
             },(error)=>{

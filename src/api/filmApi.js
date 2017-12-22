@@ -26,7 +26,7 @@ function getBanner(type, cinemaCode) {
 function getMove(type, cinemaCode) {
     return apiHttp.get('/home/getMove', {
         type: type,
-        cinemaCode: cinemaCode
+        cinemaCode: apiHttp.CINEMA_CODE
     });
 }
 

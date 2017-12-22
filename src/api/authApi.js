@@ -95,7 +95,7 @@ function smsLogin(userMobile, validateCode, cinemaCode) {
     return apiHttp.post('/user/smsLogin', {
         userMobile: userMobile,
         validateCode: validateCode,
-        cinemaCode: cinemaCode
+        cinemaCode: apiHttp.CINEMA_CODE
     })
 }
 

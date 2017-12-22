@@ -1,12 +1,13 @@
 import axios from 'axios'
 import signUtil from '../util/signUtil'
 
-let API_BASE_URL = _BASE_URL ? _BASE_URL : ''; 
+let API_BASE_URL = _BASE_URL ? _BASE_URL : '';
 let APP_ACCOUNT = 'zhongruijufang';
 let APP_PASSWORD = 'zrjf1123';
 let API_VERSION = '1.0.0';
 let DEVICE_TYPE = 'web';
 let token = localStorage.getItem("token")?localStorage.getItem("token"):'0552a7361f6fdfb829f5fc442d92d736a';
+let CINEMA_CODE = 'JC170001';
 const instance = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000,
@@ -83,22 +84,18 @@ var urlToObject = function (urlParams) {
 };
 
 instance.interceptors.request.use(config => {
-  console.log("===============request params", config);
   if (!config.params) {
     config.params = {}
   }
   let sign = getSign(config.params, config.data);
   //添加sign
   config.params.sign = sign
-  console.log("sign=" + sign)
-  console.log(" config.params", config.params);
   return config;
 });
 
 instance.interceptors.response.use(response => {
   console.log('resp-----------------------onse', response)
   let data = response.data
-  console.info(`URL【${response.config.url}】请求:`, data)
   if (data.status == 0) {
     return data
   } else {
@@ -127,5 +124,6 @@ function post(url, params) {
 export default {
   instance,
   get,
-  post
+  post,
+  CINEMA_CODE,
 }

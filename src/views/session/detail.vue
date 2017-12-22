@@ -66,12 +66,11 @@
       </div>
     </popup>
   </div>
-
-
 </template>
 <script>
   import PageScroller from 'views/components/PageScroller.vue'
   import {Popup, Checker, CheckerItem,XNumber} from 'vux'
+  import FilmApi from "api/filmApi"
   export default {
     props: ['isHermes'],
     components: {
@@ -84,7 +83,11 @@
         value:1
       }
     },
-    methods: {}
+    methods: {
+         async fetchData() {
+           let res = await FilmApi.getMove(1);
+         }
+    }
   }
 </script>
 <style lang="less" scoped>
@@ -122,14 +125,12 @@
     height: 200px;
     background-color: gray;
   }
-
   .titleTag {
     background-color: gray;
     color: white;
     padding: 5px 15px;
     margin-top: 10px;
   }
-
   .mainBody {
     background-color: white;
     margin: -20px 20px 80px;
