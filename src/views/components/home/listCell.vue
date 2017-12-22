@@ -1,8 +1,6 @@
 <template>
-  <div class="listCell" flex="dir:top" style="">
-    <div class="listTop" flex="dir:left">
-      <label class="menuItem">{{title}}</label>
-      <label class="menuItem">{{subtitle}}</label>
+  <div class="listCell"  flex="dir:top">
+    <div class="listTop"  v-bind:style="topStyle" flex="dir:left ">
       <div flex="dir:right cross:center" flex-box="1">
         <slot name="rightTop"></slot>
       </div>
@@ -13,23 +11,24 @@
 <script>
     export default {
       name: 'list-cell',
-      props: ['title', 'subtitle'],
+      props: ['title', 'subtitle',"topImg"],
         data(){
-            return {}
+            return {
+              topStyle:{backgroundImage:`url(${this.topImg})`}
+            }
         },
         methods: {}
     }
 </script>
 <style lang="less">
   .listTop {
-    margin: 10px 0;
-    .menuItem {
-      margin: 0 10px;
-    }
+    background: no-repeat center;
+    background-size: contain;
+    height: 50px;
+    padding: 12px;
   }
   .listCell {
     min-height: 200px;
     height: fit-content;
-    background-color: white;
   }
 </style>
