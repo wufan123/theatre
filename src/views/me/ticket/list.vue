@@ -23,8 +23,8 @@
 </template>
 <script>
 import PageScroller from 'views/components/PageScroller.vue'
-import API from 'api/member'
-  import {List,ListItem} from 'views/components/list'
+import orderApi from 'api/orderApi'
+import {List,ListItem} from 'views/components/list'
 
 export default {
   components:{PageScroller,List,ListItem},
@@ -35,15 +35,15 @@ export default {
   },
   methods:{
     getDataList(page){
-      return API.getCinemaList(page,5).then(res =>{
-        // res = {
-        //   data:[{name:'1111',id:'111111'},{name:'2222',id:'22222'},{name:'3333',id:'3333'}],
-        //   page:{
-        //     number:0,size:10,totalElements:3,totalPages:0
-        //   }
-        // }
-        page == 0 ? this.dataList= res.data : this.dataList= this.dataList.concat(res.data)
-        //this.dataList = this.dataList.concat(res.data)
+      return orderApi.getCinemaOrders(-1, page).then(success =>{
+        console.log(success)
+        page == 0 ? this.dataList= success.data : this.dataList= this.dataList.concat(success.data)
+        let res = {
+          data:this.dataList,
+          page:{
+            number:0,size:this.dataList.length,totalElements:this.dataList.length,totalPages:success.data.length=0?1:0
+          }
+        }
         return res
       })
     },

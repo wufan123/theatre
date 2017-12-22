@@ -2,8 +2,8 @@
   <page :footerText="`退出登录`" :footerLink="`Login`" :headerTitle="`我的`">
       <div slot="contain" class="me">
           <div class="me-top">
-            <span class="bold">138****800</span>
-            <p>余额：￥0.00  丨  积分：88</p>
+            <span class="bold">{{userInfo.userNickname}}</span>
+            <p>余额：￥{{userInfo.userMoney}}  丨  积分：{{userInfo.integral}}</p>
             <i class="member f12">剧坊会员</i>
           </div>
           <div class="me-order">
@@ -33,15 +33,24 @@
   </page>
 </template>
 <script>
-  import AuthApi from 'api/authApi'
-  import {List,ListItem} from '@/views/components/list'
-  import {XButton} from 'vux'
+import AuthApi from 'api/authApi'
+import {List,ListItem} from '@/views/components/list'
+import {XButton} from 'vux'
 export default {
   components: {List,ListItem,XButton},
+  data(){
+    return {
+      userInfo: {
+        userNickname: '-',
+        userMoney: '0.00',
+        integral: '0'
+      }
+    }
+  },
   methods:{
     fetchData(){
       AuthApi.getUserInfo().then(success => {
-        console.log(res)
+        this.userInfo = success.data
       }, error => {
         
       })
