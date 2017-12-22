@@ -1,1 +1,0 @@
-import apiHttp from './apiHttp'
