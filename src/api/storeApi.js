@@ -211,6 +211,19 @@ function getGoodsList(cinemaCode) {
     }
     return apiHttp.get('/Buying/getBuyingGoods', params)
   }
+
+  /**
+   * 抢购卖品下单
+   * @param {*} panicbuyingId 活动id
+   * @param {*} number 抢购数量
+   */
+  function createBuyingOrder(panicbuyingId, number) {
+    var params = {
+      panicbuyingId: panicbuyingId,
+      number: number
+    }
+    return apiHttp.get('/Sale/setCinemaBuyingOrderNew', params)
+  }
   
   
   export default {
