@@ -3,21 +3,44 @@
     <div slot="contain">
         <div class="form" >
            <div class="form-item">
-              <p>会员卡号</p>
-              <input type="text" style="display:none" >
-              <input type="text" placeholder="请输入会员卡号" class="input" >
+              <group title="会员卡号" class="form-item">
+                <x-input type="text" placeholder="请输入会员卡号" v-model="form.cardNo"></x-input>
+              </group>
            </div>
            <div class="form-item">
-             <p>会员卡密码</p>
-             <input type="password" placeholder="请输入会员卡密码" class="input" >
+              <group title="会员卡密码" class="form-item">
+              <x-input type="text" placeholder="请输入会员卡号" v-model="form.cardPw"></x-input>
+              </group>
            </div>
-           <x-button type="primary">确定</x-button>
+           <x-button type="primary" @click.native="confirm">确定</x-button>
         </div>
     </div>
   </page>
 </template>
 <script>
-export default {};
+import CardApi from 'api/cardApi'
+import { XInput, Group } from "vux";
+export default {
+  data(){
+    return{
+      form:{
+        cardNo:'',
+        cardPw:''
+      }
+    }
+  },
+  components: { XInput, Group },
+  methods: {
+    confirm: function() {
+      CardApi.setUserBind('JC170001', this.form.cardNo, this.form.cardPw).then(success => {
+        this.$vux.toast.text("添加成功", 'bottom');
+        this.$router.push('MemberCard')
+      }, error => {
+        this.$vux.toast.text("添加失败", 'bottom');
+      })
+    }
+  }
+};
 </script>
 <style lang="less" scoped>
 
