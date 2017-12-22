@@ -2,10 +2,8 @@ import apiHttp from './apiHttp'
 
 /**
  * 排片时间列表
- *
- * @param {*} cinemaCode 影院编码
- * @param {*} success_cb
- * @param {*} fail_cb
+ * 
+ * @param {*} filmNo 影片编号
  */
 function getTimes(param) {
     var vQuery = {};
@@ -19,10 +17,7 @@ function getTimes(param) {
 /**
  * 排片列表
  *
- * @param {*} time 时间
- * @param {*} cinemaCode 影院编码
- * @param {*} success_cb
- * @param {*} fail_cb
+ * @param {*} filmNo 影片编号
  */
 function getPlans(param) {
     var vQuery = {};
