@@ -1,5 +1,5 @@
 <template>
-  <page headerTitle="超级联合日" flex-box="1" >
+  <page headerTitle="详情" flex-box="1" >
     <div slot="contain" >
       <div class="goodPhoto">
         <img src="" />
@@ -24,7 +24,7 @@
           抡起刀背猛砸砧板上的鲜鱼，
         </div>
       </div>
-        <x-button class="no-radius bottomBtn" type="primary" >马上购买</x-button>
+        <x-button class="no-radius bottomBtn" type="primary"  @click.native="buy()">马上购买</x-button>
     </div>
   </page>
 </template>
@@ -41,6 +41,24 @@
       }
     },
     methods: {
+      buy(){
+        this.$vux.confirm.show({
+          title: 'Title',
+          content: 'Content',
+          onShow () {
+            console.log('plugin show')
+          },
+          onHide () {
+            console.log('plugin hide')
+          },
+          onCancel () {
+            console.log('plugin cancel')
+          },
+          onConfirm () {
+            console.log('plugin confirm')
+          }
+        })
+      }
     }
   }
 </script>

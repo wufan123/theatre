@@ -1,5 +1,5 @@
 <template>
-  <page headerTitle="超级联合日" flex-box="1" :white="true">
+  <page headerTitle="福州特产馆" flex-box="1" :white="true">
     <div slot="contain" style="background-color: white">
       <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-48' >
         <div v-for="(item,index) in dataList" :key="index" flex="dir:left cross:center" class="couponItem" @click="$router.push({name:'ProductDetail',params:{isHermes:isHermes}})">
