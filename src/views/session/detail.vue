@@ -60,6 +60,7 @@
   import {Popup, Checker, CheckerItem,XNumber} from 'vux'
   import FilmApi from "api/filmApi"
   import PlanApi from "api/planApi"
+  import OrderApi from "api/orderApi"
   export default {
     props: ['isHermes'],
     components: {
@@ -94,8 +95,19 @@
           this.loadSeat(itemValue.featureAppNo)
         }
       },
+      // 加载失败提示
+      toastLoadFilmError(msg) {
+        this.$vux.loading.hide()
+        this.$vux.toast.show({
+          type: 'cancel',
+          text: msg
+        })
+      },
       // 加载影片详情
       loadFilmDetail: function() {
+        this.$vux.loading.show({
+          text: '加载影片'
+        })
         FilmApi.getMove(1).then(success => {
           let filmList = success.data;
           if (filmList.length > 0) {
@@ -112,17 +124,20 @@
               this.filmDetail = filmDetail
               this.loadFilmTime()
             }, error => {
-
+              this.toastLoadFilmError('影片加载失败');
             })
           } else {
-            console.log(success)
+            this.toastLoadFilmError('影片加载失败');
           }
         }, error => {
-          console.log(error)
+          this.toastLoadFilmError('影片加载失败');
         })
       },
       // 加载营业日期
       loadFilmTime: function() {
+        this.$vux.loading.show({
+          text: '加载排期'
+        })
         let params = {
             filmNo: this.filmDetail.filmNo
         }
@@ -131,13 +146,18 @@
           if (this.filmTimeList.length > 0) {
               this.timeCheck = this.filmTimeList[0]
               this.loadFilmPlan(this.filmTimeList[0].time);
+          } else {
+            this.toastLoadFilmError('排期加载失败');
           }
         }, error => {
-          console.log(error)
+          this.toastLoadFilmError('排期加载失败');
         })
       },
       // 加载营业日排期
       loadFilmPlan: function(time) {
+        this.$vux.loading.show({
+          text: '加载排期'
+        })
         let params = {
             filmNo: this.filmDetail.filmNo,
             time: time
@@ -148,24 +168,51 @@
             this.filmPrice = this.filmPlanList[0].standardPrice // 取价格
             this.planCheck = this.filmPlanList[0]
             this.loadSeat(this.planCheck.featureAppNo);
+          } else {
+            this.toastLoadFilmError('排期加载失败');
           }
         }, error => {
-          console.log(error)
+          this.toastLoadFilmError('排期加载失败');
         })
       },
       // 加载座位信息
       loadSeat: function(featureAppNo) {
+        this.$vux.loading.show({
+          text: '加载座位'
+        })
+        let context = this
         FilmApi.getSeat(featureAppNo).then(success => {
-          if (success.data.hasOrder) {
-            // TODO 提示有未付订单
-            
-          }
+          this.$vux.loading.hide()
+          this.checkHasOrder(success.data)
           if (success.data.seatinfos) {
             this.seatList = success.data.seatinfos.seat;
           }
         }, error => {
-
+          this.toastLoadFilmError('座位加载失败');
         })
+      },
+      // 检查是否有未完成订单
+      checkHasOrder: function(data) {
+        if (data.hasOrder) {
+          // TODO 提示有未付订单
+          this.$vux.confirm.show({
+            title: '温馨提示',
+            content: '存在未付款影票订单',
+            confirmText: '支付订单',
+            cancelText: '取消订单',
+            onCancel () {
+              // 关闭订单
+              OrderApi.cancelOrder(data.hasOrder).then(success => {
+
+              }, error => {
+                
+              })
+            },
+            onConfirm () {
+              context.$router.push({path: '/ConfirmOrder?orderId='+data.hasOrder})
+            }
+          })
+        }
       }
     }
   }

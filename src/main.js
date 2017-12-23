@@ -7,7 +7,7 @@ import Page from '@/views/components/page.vue'
 import store from './store'
 import baseMixin from "./util/baseMixin";
 import 'flex.css'
-import  { ToastPlugin,ConfirmPlugin} from 'vux'
+import  { ToastPlugin,ConfirmPlugin, LoadingPlugin} from 'vux'
 
 
 FastClick.attach(document.body)
@@ -19,6 +19,7 @@ Vue.component('page',Page);
 Vue.mixin(baseMixin);
 Vue.use(ToastPlugin);
 Vue.use(ConfirmPlugin);
+Vue.use(LoadingPlugin);
 /* eslint-disable no-new */
 new Vue({
   router,
