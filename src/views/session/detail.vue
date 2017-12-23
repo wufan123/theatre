@@ -16,28 +16,20 @@
           <div flex="dir:left cross:center" class="titleBar">
             <div flex="dir:top">
               <label>
-                坊巷影音文化秀</label>
+                {{filmDetail==null?'坊巷文化影音秀':filmDetail.filmName}}</label>
               <label>
-                坊巷文化影音秀场次票</label>
+                {{filmDetail==null?'坊巷文化影音秀':filmDetail.filmName}}场次票</label>
             </div>
             <div flex="dir:top">
-              <label class="price">
-                ￥5.00</label>
-              <label class="primeCost">
-                ￥20.00</label>
+              <label class="price">￥{{filmPrice}}</label>
+              <!-- <label class="primeCost">￥20.00</label> -->
             </div>
           </div>
           <label class="titleTag">
             商品介绍
           </label>
           <div>
-            永和鱼丸是福建一带的地方风味名菜，属于闽菜系。永和鱼丸店创建于1934年，是福建福州市现存最老的鱼丸品牌，2001年获得“中华老字号”称号。
-
-            鱼丸最早出现于秦朝江浙一带。秦始皇云游江南到了福州，喜爱鱼米之乡的鲜鱼，但鱼肉剌多，吃起来极为不便，便下一道谕旨，要求随行厨子送上的鱼必须将鱼剌剔净，否则斩首。厨子前思后想不得要领，气急之下，抡起刀背猛砸砧板上的鲜鱼，没想到歪打正着，鱼肉与鱼骨竟截然离析。得来全不费功夫，这种剔骨法让厨子惊喜不已。他灵机一动，索性将鱼肉剁
-
-            抡起刀背猛砸砧板上的鲜鱼，没想到歪打正着，鱼肉与鱼骨竟截然离析。得来全不费功夫，这种剔骨法让厨子惊喜不已。他灵机一动，索性将鱼肉剁
-
-            抡起刀背猛砸砧板上的鲜鱼，
+            {{filmDetail?filmDetail.introduction:''}}
           </div>
         </div>
         <x-button class="no-radius bottomBtn" type="primary" @click.native="show=true">马上购买</x-button>
@@ -46,16 +38,12 @@
     <popup v-model="show" position="bottom">
       <div class="popBottom" flex="dir:top">
         <label>时间</label>
-        <checker v-model="timeCheck" default-item-class="check-item" selected-item-class="check-item-selected" class="checker">
-          <checker-item value="1">今天12.24</checker-item>
-          <checker-item value="2">今天12.24</checker-item>
-          <checker-item value="3">今天12.24</checker-item>
+        <checker v-model="timeCheck" default-item-class="check-item" selected-item-class="check-item-selected" class="checker" radio-required>
+          <checker-item :value="filmTime" v-for="(filmTime, index) in filmTimeList" :key="index" @on-item-click="changeTime">{{filmTime.dtime}}</checker-item>
         </checker>
         <label>场次</label>
-        <checker v-model="sessionTime" default-item-class="check-item" selected-item-class="check-item-selected" class="checker">
-          <checker-item value="1">12:24</checker-item>
-          <checker-item value="2">12:24</checker-item>
-          <checker-item value="3">12:24</checker-item>
+        <checker v-model="planCheck" default-item-class="check-item" selected-item-class="check-item-selected" class="checker" radio-required>
+          <checker-item :value="filmPlan" v-for="(filmPlan, index) in filmPlanList" :key="index" @on-item-click="changePlan">{{filmPlan.startTime}}</checker-item>
         </checker>
           <div class="numItem">
             <x-number title="数量" v-model="value"></x-number>
@@ -71,22 +59,110 @@
   import PageScroller from 'views/components/PageScroller.vue'
   import {Popup, Checker, CheckerItem,XNumber} from 'vux'
   import FilmApi from "api/filmApi"
+  import PlanApi from "api/planApi"
   export default {
     props: ['isHermes'],
     components: {
-      PageScroller, Popup, Checker, CheckerItem,XNumber},
+      PageScroller, Popup, Checker, CheckerItem,XNumber
+    },
     data(){
       return {
-        show: true,
-        timeCheck: '',
-        sessionTime: '',
-        value:1
+        show: false,
+        timeCheck: null,
+        planCheck: null,
+        value:1,
+        filmDetail: null,
+        filmPrice: '-',
+        filmTimeList: [],
+        filmPlanList: [],
+        seatList: null, // 选中排期座位详情
       }
     },
     methods: {
-         async fetchData() {
-           let res = await FilmApi.getMove(1);
-         }
+      async fetchData() {
+        this.loadFilmDetail()
+      },
+      // 选择日期
+      changeTime: function(itemValue, itemDisabled) {
+        if (itemValue.time != this.timeCheck.time) {
+          this.loadFilmPlan(itemValue.time)
+        }
+      },
+      // 选择排期
+      changePlan: function(itemValue, itemDisabled) {
+        if (itemValue.featureAppNo != this.planCheck.featureAppNo) {
+          this.loadSeat(itemValue.featureAppNo)
+        }
+      },
+      // 加载影片详情
+      loadFilmDetail: function() {
+        FilmApi.getMove(1).then(success => {
+          let filmList = success.data;
+          if (filmList.length > 0) {
+            FilmApi.getFilmDetail(filmList[0].id).then(success => {
+              let filmDetail = success.data
+              filmDetail.introduction = filmDetail.introduction.replace('&lt;html&gt;&lt;body&gt;', '')
+                                                      .replace('&lt;/body&gt;&lt;/html&gt;', '')
+                                                      .replace(/&lt;/g, "<")
+                                                      .replace(/&gt;/g, ">")
+                                                      .replace(/&amp;/g, "&")
+                                                      .replace(/&quot;/g, '"')
+                                                      .replace(/&apos;/g, "'")
+                                                      .replace(/\<br\s*\/\>/g, "\r\n")
+              this.filmDetail = filmDetail
+              this.loadFilmTime()
+            }, error => {
+
+            })
+          } else {
+            console.log(success)
+          }
+        }, error => {
+          console.log(error)
+        })
+      },
+      // 加载营业日期
+      loadFilmTime: function() {
+        let params = {
+            filmNo: this.filmDetail.filmNo
+        }
+        PlanApi.getTimes(params).then(success => {
+          this.filmTimeList = success.data;
+          if (this.filmTimeList.length > 0) {
+              this.timeCheck = this.filmTimeList[0]
+              this.loadFilmPlan(this.filmTimeList[0].time);
+          }
+        }, error => {
+          console.log(error)
+        })
+      },
+      // 加载营业日排期
+      loadFilmPlan: function(time) {
+        let params = {
+            filmNo: this.filmDetail.filmNo,
+            time: time
+        }
+        PlanApi.getPlans(params).then(success => {
+          if (success.data.planInfo) {
+            this.filmPlanList = success.data.planInfo;
+            this.filmPrice = this.filmPlanList[0].standardPrice // 取价格
+            this.planCheck = this.filmPlanList[0]
+            this.loadSeat(this.planCheck.featureAppNo);
+          }
+        }, error => {
+          console.log(error)
+        })
+      },
+      // 加载座位信息
+      loadSeat: function(featureAppNo) {
+        FilmApi.getSeat(featureAppNo).then(success => {
+          if (success.data.seatinfos) {
+            this.seatList = success.data.seatinfos.seat;
+          }
+        }, error => {
+
+        })
+      }
     }
   }
 </script>

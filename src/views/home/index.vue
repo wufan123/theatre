@@ -4,7 +4,7 @@
       <img :src="require('assets/images/logo.png')" class="logo">
       <div class="header-r" flex="cross:center">
         <img :src="require('assets/images/me.png')" class="header-r-icon" @click="$router.push('Me')">
-        <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('ConfirmOrder')">
+        <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('SessionDetail')">
       </div>
     </div>
     <!--<scroller height="-40" lock-x scrollbar-y :pulldown-config='pullDownConfig' :usePulldown='true' @on-pulldown-loading='refresh' ref="scroller">-->
