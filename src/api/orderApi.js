@@ -1,4 +1,23 @@
 import apiHttp from './apiHttp'
+
+/**
+ * 
+ * @param {*} featureAppNo 排期号
+ * @param {*} seatIntroduce  座位描述
+ * @param {*} phone 	手机号
+ * @param {*} seatInfo 锁座信息（json格式）[{"seatNo":"098089","seatPieceName":"座区名称","seatPieceNo":"2342332"}]
+ */
+function setPlanAndGoodsOrder(featureAppNo, seatIntroduce, phone, seatInfo) {
+    let params = {
+        cinemaCode: apiHttp.CINEMA_CODE,
+        featureAppNo: featureAppNo,
+        seatIntroduce: seatIntroduce,
+        mobile: mobile,
+        datas: seatInfo
+    }
+    return apiHttp.get('/user/setPlanAndGoodsOrder', params);
+}
+
 /**
  * 我的影票订单
  * @param {int} status 对应订单状态 -1所有订单1已完成 2未支付3其他9退款退票
