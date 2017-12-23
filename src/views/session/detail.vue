@@ -156,6 +156,10 @@
       // 加载座位信息
       loadSeat: function(featureAppNo) {
         FilmApi.getSeat(featureAppNo).then(success => {
+          if (success.data.hasOrder) {
+            // TODO 提示有未付订单
+            
+          }
           if (success.data.seatinfos) {
             this.seatList = success.data.seatinfos.seat;
           }
