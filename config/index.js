@@ -12,7 +12,8 @@ module.exports = {
         baseUrl:'/api',
         proxyTable: {
             '/api': {
-                target: "https://premapi.zmaxfilm.com/Api_35/",//设置你调用的接口域名和端口号 别忘了加http
+                target: "https://m.zmaxfilm.com/Api_35/",//设置你调用的接口域名和端口号 别忘了加http
+                // target: "https://premapi.zmaxfilm.com/Api_35/",//设置你调用的接口域名和端口号 别忘了加http
                 //target: "http://newzr10.zmaxfilm.net:8181/Api_35/",//设置你调用的接口域名和端口号 别忘了加http
                 changeOrigin: true,
                 pathRewrite: {

@@ -153,7 +153,7 @@
     }
     .index-header {
       min-height: 40px;
-      padding: 5px 10px;
+      padding:5px 10px;
       .logo {
         height: 30px;
       }
@@ -213,6 +213,7 @@
           font-size: 16px;
           font-weight: bold;
           margin-left: -5px;
+          border-bottom: dashed @color-primary 1px;
         }
         .des{
           font-size: 14px;

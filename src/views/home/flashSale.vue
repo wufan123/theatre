@@ -1,15 +1,15 @@
 <template>
   <page :headerTitle="`限时抢`" flex-box="1" :white="true">
-    <div slot="contain" style="background-color: white">
-      <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-48' >
-        <div v-for="(item,index) in dataList" :key="index" flex="dir:left cross:center" class="couponItem" @click="listItemClick">
-          <div flex="dir:top" flex-box="1">
-            <label>¥150</label>
-            <label>有效期:2017-12-11</label>
+    <div slot="contain" >
+      <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-46' >
+        <div v-for="(item,index) in 7" :key="index" flex="dir:left cross:center" class="couponItem" @click="listItemClick">
+          <div flex="dir:top" :style="{backgroundImage:`url(${require('assets/images/home/sale_bg.png')})`}" class="left">
+            <label class="title">¥150</label>
+            <label class="info">有效期:2017-12-11</label>
           </div>
-          <div flex="dir:top">
-            <label>立即抢</label>
-            <label>已抢光20%</label>
+          <div flex="dir:top" class="right" :style="{backgroundImage:index==0?`url(${require('assets/images/home/flash_sale_right_2.png')})`:`url(${require('assets/images/home/flash_sale_right_1.png')})`}">
+              <label class="title">立即抢</label>
+              <label class="tip">已抢光20%</label>
           </div>
         </div>
       </page-scroller>
@@ -55,10 +55,45 @@
 <style lang="less">
   @import "~style/base-variables";
   .couponItem{
-    height: 60px;
-    border: solid @border-color 1px;
-    margin: 10px 20px;
-    padding: 10px;
+    height: 90px;
+    margin: 15px;
     border-radius: 5px;
+    .right{
+      height: 100%;
+      width: 75px;
+      background: center no-repeat;
+      background-size: 100%100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      .title{
+        font-size: 15px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 40px;
+      }
+      .tip {
+        font-size: 9px;
+      }
+    }
+    .left{
+      height: 100%;
+      flex: 1;
+      background: center no-repeat;
+      background-size: 100%100%;
+      display: flex;
+      justify-content: center;
+      padding-left: 25px;
+      .title{
+        font-size: 20px;
+        font-weight: bold;
+        color: @color-primary;
+      }
+      .info{
+        font-size: 12px;
+        color: @font-color;
+      }
+    }
   }
 </style>
