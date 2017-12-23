@@ -28,7 +28,7 @@
     padding: 12px;
   }
   .listCell {
-    min-height: 200px;
+    min-height: 180px;
     height: fit-content;
   }
 </style>
