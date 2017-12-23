@@ -13,7 +13,7 @@
 <style lang="less">
   @import '~vux/src/styles/reset.less';
   @import "style/base-variables";
-  @import "style/reset";
+  @import "style/reset-vux";
   @import "style/common";
   @import "style/style";
   #app {

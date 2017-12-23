@@ -94,9 +94,9 @@
   import ScrollView from 'views/components/simpleScrollView.vue'
   import ListCell from 'views/components/home/listCell.vue'
   const imgList = [
-    require('assets/images/home/default.png'),
-    require('assets/images/home/default.png'),
-    require('assets/images/home/default.png')
+    require('assets/images/home/banner_default.png'),
+    require('assets/images/home/banner_default.png'),
+    require('assets/images/home/banner_default.png')
   ]
   const banerList = imgList.map((one, index) => ({
     url: 'javascript:',

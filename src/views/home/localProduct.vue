@@ -1,23 +1,21 @@
 <template>
-  <page headerTitle="福州特产馆" flex-box="1" :white="true">
-    <div slot="contain" style="background-color: white">
+  <page headerTitle="福州特产馆" flex-box="1" >
+    <div slot="contain" >
       <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-48' >
-        <div v-for="(item,index) in dataList" :key="index" flex="dir:left cross:center" class="couponItem" @click="$router.push({name:'ProductDetail',params:{isHermes:isHermes}})">
-          <div flex="dir:left" flex-box="1">
-            <div flex="dir:left cross:center">
-                <img :src="require('assets/images/all.png')" class="icon">
+        <div v-for="(item,index) in 8" :key="index" flex="dir:left cross:center" class="couponItem" @click="$router.push({name:'ProductDetail',params:{isHermes:isHermes}})">
+          <div flex="dir:left" flex-box="3">
+            <div flex="dir:left cross:center" >
+                <img :src="require('assets/images/home/local_default.png')" class="goodImg">
             </div>
-            <div flex="dir:top">
-              <label>永和鱼丸提货券</label>
-              <div>
-                <label>¥150</label>
+            <div flex="dir:top"  flex-box="1" class="content">
+              <label class="title">永和鱼丸提货券</label>
+              <div class="info">
+                <label class="price">¥150</label>
                 <label class="primeCost" v-if="isHermes">¥20</label>
               </div>
             </div>
           </div>
-          <div >
-              <x-button type="primary" mini>马上购买</x-button>
-          </div>
+          <label class="txtBtn buyBtn" >马上购买</label>
         </div>
       </page-scroller>
     </div>
@@ -65,16 +63,47 @@
   @import "~style/base-variables";
   .primeCost{
     text-decoration: line-through;
+    color: @font-color-sub;
   }
   .icon{
     height: 46px;
     width: 46px;
   }
   .couponItem{
-    height: 60px;
-    border: solid @border-color 1px;
-    margin: 10px 20px;
+    height: 100px;
+    margin: 15px 10px;
     padding: 10px;
-    border-radius: 5px;
+    background: url(../../assets/images/home/sale_bg.png) center no-repeat;
+    background-size: 100%100%;
+    .buyBtn{
+        margin: 40px 20px 0 0;
+    }
+    .goodImg{
+      width: 100px;
+      height: 62px;
+      margin-left: 10px;
+    }
+    .content{
+      align-items: center;
+
+      .title{
+        text-align: center;
+        font-size: 15px;
+        height: 24px;
+        font-weight: bold;
+        color: @font-color;
+        width: 105px;
+        overflow: hidden;
+      }
+      .info{
+        width: 105px;
+        margin-top: 10px;
+        .price{
+          font-size: 20px;
+          color: @color-primary;
+          font-weight: bold;
+        }
+      }
+    }
   }
 </style>

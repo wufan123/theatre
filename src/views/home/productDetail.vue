@@ -5,13 +5,13 @@
         <img src="" />
       </div>
       <div class="mainBody" flex="dir:top cross:center">
-        <label>
+        <label class="title">
           永和鱼丸提货券</label>
-        <label>
+        <label class="price">
           ￥5.00</label>
         <label class="primeCost" v-if="isHermes">
           ￥20.00</label>
-        <label class="title">
+        <label class="dividerTitle">
           商品介绍
         </label>
         <div>
@@ -68,12 +68,6 @@
     position: fixed;
     bottom: 0;
   }
-  .title{
-    background-color:gray;
-    color: white;
-    padding: 5px 15px;
-    margin-top: 10px;
-  }
   .primeCost{
     text-decoration: line-through;
   }
@@ -86,5 +80,26 @@
     margin: -20px 20px 80px;
     padding: 20px;
     border-radius: 5px;
+    .dividerTitle{
+      background: url(../../assets/images/home/title_bg.png) center no-repeat;
+      background-size: 100%100%;
+      width: 128px;
+      height: 34px;
+      color: @color-sub;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 34px;
+      margin: 10px 0px;
+    }
+    .title{
+      font-size: 20px;
+      color: @font-color;
+    }
+    .price{
+      color: @color-sub;
+      font-size: 21px;
+
+    }
   }
 </style>
