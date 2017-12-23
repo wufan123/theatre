@@ -21,10 +21,8 @@
                 {{filmDetail==null?'坊巷文化影音秀':filmDetail.filmName}}场次票</label>
             </div>
             <div flex="dir:top">
-              <label class="price">
-                ￥{{filmPrice}}</label>
-              <label class="primeCost">
-                ￥20.00</label>
+              <label class="price">￥{{filmPrice}}</label>
+              <!-- <label class="primeCost">￥20.00</label> -->
             </div>
           </div>
           <label class="titleTag">
@@ -45,7 +43,7 @@
         </checker>
         <label>场次</label>
         <checker v-model="planCheck" default-item-class="check-item" selected-item-class="check-item-selected" class="checker" radio-required>
-          <checker-item :value="filmPlan" v-for="(filmPlan, index) in filmPlanList" :key="index">{{filmPlan.startTime}}</checker-item>
+          <checker-item :value="filmPlan" v-for="(filmPlan, index) in filmPlanList" :key="index" @on-item-click="changePlan">{{filmPlan.startTime}}</checker-item>
         </checker>
           <div class="numItem">
             <x-number title="数量" v-model="value"></x-number>
@@ -65,7 +63,8 @@
   export default {
     props: ['isHermes'],
     components: {
-      PageScroller, Popup, Checker, CheckerItem,XNumber},
+      PageScroller, Popup, Checker, CheckerItem,XNumber
+    },
     data(){
       return {
         show: false,
@@ -75,16 +74,24 @@
         filmDetail: null,
         filmPrice: '-',
         filmTimeList: [],
-        filmPlanList: []
+        filmPlanList: [],
+        seatList: null, // 选中排期座位详情
       }
     },
     methods: {
       async fetchData() {
         this.loadFilmDetail()
       },
+      // 选择日期
       changeTime: function(itemValue, itemDisabled) {
         if (itemValue.time != this.timeCheck.time) {
           this.loadFilmPlan(itemValue.time)
+        }
+      },
+      // 选择排期
+      changePlan: function(itemValue, itemDisabled) {
+        if (itemValue.featureAppNo != this.planCheck.featureAppNo) {
+          this.loadSeat(itemValue.featureAppNo)
         }
       },
       // 加载影片详情
@@ -114,6 +121,7 @@
           console.log(error)
         })
       },
+      // 加载营业日期
       loadFilmTime: function() {
         let params = {
             filmNo: this.filmDetail.filmNo
@@ -128,6 +136,7 @@
           console.log(error)
         })
       },
+      // 加载营业日排期
       loadFilmPlan: function(time) {
         let params = {
             filmNo: this.filmDetail.filmNo,
@@ -138,9 +147,20 @@
             this.filmPlanList = success.data.planInfo;
             this.filmPrice = this.filmPlanList[0].standardPrice // 取价格
             this.planCheck = this.filmPlanList[0]
+            this.loadSeat(this.planCheck.featureAppNo);
           }
         }, error => {
           console.log(error)
+        })
+      },
+      // 加载座位信息
+      loadSeat: function(featureAppNo) {
+        FilmApi.getSeat(featureAppNo).then(success => {
+          if (success.data.seatinfos) {
+            this.seatList = success.data.seatinfos.seat;
+          }
+        }, error => {
+
         })
       }
     }
