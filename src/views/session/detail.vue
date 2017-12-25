@@ -91,7 +91,8 @@
     },
     methods: {
       async fetchData() {
-        this.loadFilmDetail()
+        //this.loadFilmDetail()
+        this.loadFilmTime()
       },
       // 选择日期
       changeTime: function (itemValue, itemDisabled) {
@@ -114,14 +115,14 @@
         })
       },
       // 加载影片详情
-      loadFilmDetail: function () {
+      loadFilmDetail: function (filmId) {
         this.$vux.loading.show({
           text: '加载影片'
         })
-        FilmApi.getMove(1).then(success => {
-          let filmList = success.data;
-          if (filmList.length > 0) {
-            FilmApi.getFilmDetail(filmList[0].id).then(success => {
+        // FilmApi.getMove(1).then(success => {
+        //   let filmList = success.data;
+        //   if (filmList.length > 0) {
+            FilmApi.getFilmDetail(filmId).then(success => {
               let filmDetail = success.data
               filmDetail.introduction = filmDetail.introduction.replace('&lt;html&gt;&lt;body&gt;', '')
                 .replace('&lt;/body&gt;&lt;/html&gt;', '')
@@ -132,24 +133,24 @@
                 .replace(/&apos;/g, "'")
                 .replace(/\<br\s*\/\>/g, "\r\n")
               this.filmDetail = filmDetail
-              this.loadFilmTime()
+              //this.loadFilmTime()
             }, error => {
               this.toastLoadFilmError('影片加载失败');
             })
-          } else {
-            this.toastLoadFilmError('影片加载失败');
-          }
-        }, error => {
-          this.toastLoadFilmError('影片加载失败');
-        })
+        //   } else {
+        //     this.toastLoadFilmError('影片加载失败');
+        //   }
+        // }, error => {
+        //   this.toastLoadFilmError('影片加载失败');
+        // })
       },
       // 加载营业日期
       loadFilmTime: function () {
         this.$vux.loading.show({
-          text: '加载排期'
+          text: '加载中'
         })
         let params = {
-          filmNo: this.filmDetail.filmNo
+          //filmNo: this.filmDetail.filmNo
         }
         PlanApi.getTimes(params).then(success => {
           this.filmTimeList = success.data;
@@ -157,32 +158,37 @@
             this.timeCheck = this.filmTimeList[0]
             this.loadFilmPlan(this.filmTimeList[0].time);
           } else {
-            this.toastLoadFilmError('排期加载失败');
+            this.toastLoadFilmError('加载失败');
           }
         }, error => {
-          this.toastLoadFilmError('排期加载失败');
+          this.toastLoadFilmError('加载失败');
         })
       },
       // 加载营业日排期
       loadFilmPlan: function (time) {
         this.$vux.loading.show({
-          text: '加载排期'
+          text: '加载中'
         })
         let params = {
-          filmNo: this.filmDetail.filmNo,
+          //filmNo: this.filmDetail.filmNo,
           time: time
         }
         PlanApi.getPlans(params).then(success => {
-          if (success.data.planInfo) {
-            this.filmPlanList = success.data.planInfo;
+          console.log(success)
+          if (success.data && success.data.length > 0) {
+            // 获取影片详情
+            if (!this.filmDetail) {
+              this.loadFilmDetail(success.data[0].filmId)
+            }
+            this.filmPlanList = success.data[0].planInfo;
             this.filmPrice = this.filmPlanList[0].standardPrice // 取价格
             this.planCheck = this.filmPlanList[0]
             this.loadSeat(this.planCheck.featureAppNo);
           } else {
-            this.toastLoadFilmError('排期加载失败');
+            this.toastLoadFilmError('加载失败');
           }
         }, error => {
-          this.toastLoadFilmError('排期加载失败');
+          this.toastLoadFilmError('加载失败');
         })
       },
       // 加载座位信息
