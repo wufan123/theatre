@@ -20,7 +20,7 @@
         </div>
       </div>
       <!--介绍-->
-      <list-cell  style="margin-top: 5px;" :topImg="require('assets/images/home/title_session.png')">
+      <list-cell  style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')">
         <label slot="rightTop" @click="$router.push('IntroduceList')">更多</label>
         <scroll-view slot="main">
           <div flex="dir:top " v-for="i in 11" class="introduceItem"
@@ -37,39 +37,39 @@
       <!--场次票-->
       <list-cell   :topImg="require('assets/images/home/title_session.png')">
         <scroll-view slot="main">
-        <div  @click="$router.push('sessionDetail')" :style="{backgroundImage:`url(${require('assets/images/home/session_bg.png')})`}" class="ticketItem" flex="dir:left main:center cross:center">
-          <div flex="dir:top">
+        <div  @click="$router.push('sessionDetail')" :style="{backgroundImage:`url(${require('assets/images/home/session_bg.png')})`}" class="ticketItem">
+          <div flex="dir:top" class="info">
             <label class="title">《三坊七巷》</label>
-            <label class="des">中瑞剧坊，坊巷文化影音秀</label>
+            <label class="des f12">中瑞剧坊，坊巷文化影音秀</label>
             <label class="price">￥228</label>
           </div>
-          <img class="button" :src="require('assets/images/home/button.png')">
+          <div class="s-button buy" >购买</div>
         </div>
         </scroll-view>
       </list-cell>
       <!--套票-->
       <list-cell   :topImg="require('assets/images/home/title_package.png')">
         <scroll-view slot="main">
-          <div  :style="{backgroundImage:`url(${require('assets/images/home/package_bg.png')})`}" class="ticketItem" flex="dir:left main:center cross:center">
-            <div flex="dir:top">
+          <div  :style="{backgroundImage:`url(${require('assets/images/home/package_bg.png')})`}" class="ticketItem">
+            <div flex="dir:top" class="info">
               <label class="title">《三坊七巷》</label>
-              <label class="des">中瑞剧坊，坊巷文化影音秀</label>
+              <label class="des f12">中瑞剧坊，坊巷文化影音秀</label>
               <label class="price">￥228</label>
             </div>
-            <img class="button" :src="require('assets/images/home/button.png')">
+            <div class="s-button buy" >购买</div>
           </div>
         </scroll-view>
       </list-cell>
       <!--通兑券-->
       <list-cell   :topImg="require('assets/images/home/title_stamps.png')">
         <scroll-view slot="main">
-          <div v-for="i in 7"  :style="{backgroundImage:`url(${require('assets/images/home/stamps_bg.png')})`}" class="ticketItem" flex="dir:left main:center cross:center">
-            <div flex="dir:top">
+          <div v-for="i in 7"  :style="{backgroundImage:`url(${require('assets/images/home/stamps_bg.png')})`}" class="ticketItem">
+            <div flex="dir:top" class="info">
               <label class="title">《三坊七巷》</label>
-              <label class="des">中瑞剧坊，坊巷文化影音秀</label>
+              <label class="des f12">中瑞剧坊，坊巷文化影音秀</label>
               <label class="price">￥228</label>
             </div>
-            <img class="button" :src="require('assets/images/home/button.png')">
+            <div class="s-button buy" >购买</div>
           </div>
         </scroll-view>
       </list-cell>
@@ -109,7 +109,7 @@
     img: one
   }));
   const munuList = [{
-    name: '限时抢票', 
+    name: '限时抢', 
     pathName: 'FlashSale', 
     icon: require('assets/images/home/flash_sale.png')
   }, {
@@ -184,6 +184,7 @@
   @import "~style/base-variables.less";
   .homeOut{
     background:repeat;
+    background-size: 68px 68px;
     .convert{
       height: 31px;
       width: 135px;
@@ -227,8 +228,8 @@
         margin-top: 7px;
       }
       .contentImg{
-        height: 160px;
-        width: 245px;
+        height: 166px;
+        width: 250px;
       }
       .contentImgSquare{
         height: 160px;
@@ -240,29 +241,24 @@
       }
     }
     .ticketItem{
-      width: 320px;
-      height: 105px;
+      width: 302px;
+      height: 102px;
       color: @color-primary;
       background: no-repeat center;
       background-size: contain;
       margin-left: 15px;
       position: relative;
-        .title{
+        .info{margin: 15px 20px 0px 70px;}
+        .title{margin-bottom: 5px;
+          font-weight: bolder;
           font-size: 16px;
-          font-weight: bold;
           margin-left: -5px;
-          border-bottom: dashed @color-primary 1px;
-        }
-        .des{
-          font-size: 14px;
         }
         .price{
           font-size: 17px;
           font-weight: bold;
         }
-        .button{
-          height: 25px;
-          width: 45px;
+        .buy{
           position: absolute;
           bottom: 15px;
           right: 20px;
@@ -276,7 +272,7 @@
       background-size:100% 100%;
     }
     .menuItem{
-      height: 60px;
+      height: 60px;width: 60px;
     }
   }
 </style>
