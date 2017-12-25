@@ -14,7 +14,7 @@
       <!--菜单-->
       <div flex="dir:left main:center cross:center" style="justify-content: space-around" class="menuCell">
         <div flex="dir:top main:center cross:center" v-for="(item,index) in munuList"
-             @click="$router.push({ name:item.pathName, params:item.params})">
+             @click="$router.push({ path:item.pathName, query:item.params})">
           <img :src="item.icon" flex="main:center cross:center" class="menuItem"/>
           <label>{{item.name}}</label>
         </div>
@@ -100,22 +100,27 @@
   import {Swiper, GroupTitle, SwiperItem, XButton, Divider, Scroller} from 'vux'
   import ScrollView from 'views/components/simpleScrollView.vue'
   import ListCell from 'views/components/home/listCell.vue'
+  import TheatreApi from 'api/theatreApi'
   const imgList = [
-    require('assets/images/home/banner_default.png'),
-    require('assets/images/home/banner_default.png'),
     require('assets/images/home/banner_default.png')
   ]
   const banerList = imgList.map((one, index) => ({
     url: 'javascript:',
     img: one
   }));
-  const munuList = [{name: '限时抢票', pathName: 'FlashSale', icon: require('assets/images/home/flash_sale.png')}, {
+  const munuList = [{
+    name: '限时抢票', 
+    pathName: 'FlashSale', 
+    icon: require('assets/images/home/flash_sale.png')
+  }, {
     name: '超级联合日',
     pathName: 'LocalProduct',
-    params: {isHermes: true},
+    params: {classType: 101},
     icon: require('assets/images/home/local.png')
   }, {
-    name: '福州特产馆', pathName: 'LocalProduct',
+    name: '福州特产馆', 
+    pathName: 'LocalProduct',
+    params: {classType: 102},
     icon: require('assets/images/home/hemers.png')
   }];
   export default {
@@ -140,6 +145,32 @@
       }
     },
     methods: {
+      fetchData(){
+        // banner
+        TheatreApi.getInformationList(10).then(success => {
+          if (success.data && success.data.length > 0) {
+            this.banerList = success.data.map((data) => ({
+                url: data.contentUrl,
+                img: data.thumbUrl
+            }))
+          } 
+        }, error => {
+          console.log(error)
+        });
+        // 套票
+        TheatreApi.getPackageList(200).then(success => {
+          console.log(success)
+        }, error => {
+          console.log(success)
+        })
+
+        // 通兑券
+        TheatreApi.getPackageList(201).then(success => {
+          console.log(success)
+        }, error => {
+          console.log(success)
+        })
+      },
       refresh(){
         setTimeout(() => {
           this.$refs.scroller.donePulldown()

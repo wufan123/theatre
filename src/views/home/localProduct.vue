@@ -1,8 +1,8 @@
 <template>
-  <page headerTitle="福州特产馆" flex-box="1" >
+  <page :headerTitle="classType==101?'超级联合日':'福州特产馆'" flex-box="1" >
     <div slot="contain" >
       <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-48' >
-        <div v-for="(item,index) in 8" :key="index" flex="dir:left cross:center" class="couponItem" @click="$router.push({name:'ProductDetail',params:{isHermes:isHermes}})">
+        <div v-for="(item,index) in 8" :key="index" flex="dir:left cross:center" class="couponItem" @click="$router.push({path:'ProductDetail'})">
           <div flex="dir:left" flex-box="3">
             <div flex="dir:left cross:center" >
                 <img :src="require('assets/images/home/local_default.png')" class="goodImg">
@@ -11,7 +11,7 @@
               <label class="title">永和鱼丸提货券</label>
               <div class="info">
                 <label class="price">¥150</label>
-                <label class="primeCost" v-if="isHermes">¥20</label>
+                <label class="primeCost" v-if="classType==101">¥20</label>
               </div>
             </div>
           </div>
@@ -24,19 +24,20 @@
 <script>
   import PageScroller from 'views/components/PageScroller.vue'
   import {XButton} from 'vux'
+  import TheatreApi from 'api/theatreApi'
   import StoreApi from 'api/storeApi'
   export default {
-      props:['isHermes'],
     components:{PageScroller,XButton},
     data(){
       return {
         value:'11111',
-        dataList:[]
+        dataList:[],
+        classType: this.$route.query.classType
       }
     },
     methods: {
       getDataList(page){
-        return StoreApi.getGoodsList().then(success => {
+        return TheatreApi.getGoodsList(this.classType).then(success => {
           console.log(success)
           this.dataList= success.data
           let res = {

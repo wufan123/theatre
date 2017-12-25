@@ -12,12 +12,12 @@ module.exports = {
         baseUrl:'/api',
         proxyTable: {
             '/api': {
-                target: "https://m.zmaxfilm.com/Api_35/",//设置你调用的接口域名和端口号 别忘了加http
+                target: "https://jufang.zmaxfilm.com/",//设置你调用的接口域名和端口号 别忘了加http
                 // target: "https://premapi.zmaxfilm.com/Api_35/",//设置你调用的接口域名和端口号 别忘了加http
                 //target: "http://newzr10.zmaxfilm.net:8181/Api_35/",//设置你调用的接口域名和端口号 别忘了加http
                 changeOrigin: true,
                 pathRewrite: {
-                    '^/api': ''//这里理解成用‘/api'代替target里面的地址，后面组件中我们掉接口时直接用api代替
+                    //'^/api': ''//这里理解成用‘/api'代替target里面的地址，后面组件中我们掉接口时直接用api代替
                     //比如我要调用'http://40.00.100.133:3002/user/login'，直接写‘/api/user/login'即可
                 }
             }
@@ -63,11 +63,11 @@ module.exports = {
         // Template for index.html
         index: path.resolve(__dirname, '../dist/index.html'),
 
-    // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: './static',
-    assetsPublicPath: './',
-      baseUrl:'/api',
+        // Paths
+        assetsRoot: path.resolve(__dirname, '../dist'),
+        assetsSubDirectory: './static',
+        assetsPublicPath: './',
+        baseUrl:'/api',
 
         /**
          * Source Maps
@@ -84,10 +84,10 @@ module.exports = {
         productionGzip: false,
         productionGzipExtensions: ['js', 'css'],
 
-    // Run the build command with an extra argument to
-    // View the bundle analyzer report after build finishes:
-    // `npm run build --report`
-    // Set to `true` or `false` to always turn it on or off
-    bundleAnalyzerReport: process.env.npm_config_report
+        // Run the build command with an extra argument to
+        // View the bundle analyzer report after build finishes:
+        // `npm run build --report`
+        // Set to `true` or `false` to always turn it on or off
+        bundleAnalyzerReport: process.env.npm_config_report
   }
 }
