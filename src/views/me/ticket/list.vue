@@ -22,42 +22,60 @@
   </page>
 </template>
 <script>
-import PageScroller from 'views/components/PageScroller.vue'
-import orderApi from 'api/orderApi'
-import {List,ListItem} from 'views/components/settingList'
+import PageScroller from "views/components/PageScroller.vue";
+import TheatreApi from "api/theatreApi";
+import { List, ListItem } from "views/components/settingList";
 
 export default {
-  components:{PageScroller,List,ListItem},
-  data(){
-    return{
-      dataList:[]
-    }
+  components: { PageScroller, List, ListItem },
+  data() {
+    return {
+      dataList: []
+    };
   },
-  methods:{
-    getDataList(page){
-      return orderApi.getCinemaOrders(-1, page).then(success =>{
-        console.log(success)
-        page == 0 ? this.dataList= success.data : this.dataList= this.dataList.concat(success.data)
-        let res = {
-          data:this.dataList,
-          page:{
-            number:0,size:this.dataList.length,totalElements:this.dataList.length,totalPages:success.data.length=0?1:0
-          }
+  methods: {
+    getDataList(page) {
+      return TheatreApi.getPackageList(202).then(
+        success => {
+          console.log(success);
+          this.dataList = success.data;
+          let res = {
+            data: success.data,
+            page: {
+              number: 0,
+              size: success.data.length,
+              totalElements: success.data.length,
+              totalPages: 1
+            }
+          };
+          return res;
+        },
+        error => {
+          console.log(success);
         }
-        return res
-      })
+      );
     },
-    fetchData(){
-      return this.$refs.scroller.reset()
+    fetchData() {
+      return this.$refs.scroller.reset();
     }
   }
-}
+};
 </script>
 <style lang="less">
-.ticket-list{padding:0 15px 15px;background: #ffffff;
-  .am-list .am-list-item:first-child:last-child{background-size: 0 0, 0 0, 100% 0px, 100% 1px;padding:0 0 10px 0;}
-  .am-list .am-list-item.twoline .am-list-thumb img{width: 50px;height: 80px;}
-  .am-list .am-list-item .am-list-content{height: 80px;}
+.ticket-list {
+  padding: 0 15px 15px;
+  background: #ffffff;
+  .am-list .am-list-item:first-child:last-child {
+    background-size: 0 0, 0 0, 100% 0px, 100% 1px;
+    padding: 0 0 10px 0;
+  }
+  .am-list .am-list-item.twoline .am-list-thumb img {
+    width: 50px;
+    height: 80px;
+  }
+  .am-list .am-list-item .am-list-content {
+    height: 80px;
+  }
 }
 </style>
 
