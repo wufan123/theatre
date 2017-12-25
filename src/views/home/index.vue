@@ -150,7 +150,19 @@
         }, error => {
           console.log(error)
         });
-        // 
+        // 套票
+        TheatreApi.getPackageList(200).then(success => {
+          console.log(success)
+        }, error => {
+          console.log(success)
+        })
+
+        // 通兑券
+        TheatreApi.getPackageList(201).then(success => {
+          console.log(success)
+        }, error => {
+          console.log(success)
+        })
       },
       refresh(){
         setTimeout(() => {
