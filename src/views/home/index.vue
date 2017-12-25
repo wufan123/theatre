@@ -150,6 +150,18 @@
         }, error => {
           console.log(error)
         });
+        // 介绍
+        TheatreApi.getInformationList(20).then(success => {
+          console.log(success)
+        }, error => {
+          console.log(error)
+        });
+        // 发现列表
+        TheatreApi.getInformationList(30).then(success => {
+          console.log(success)
+        }, error => {
+          console.log(error)
+        });
         // 套票
         TheatreApi.getPackageList(200).then(success => {
           console.log(success)
