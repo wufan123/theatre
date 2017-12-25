@@ -8,7 +8,7 @@
         </x-header>
       </div>
     </div>
-    <div class="contain" :class="{white:white}" ref="contain">
+    <div class="contain" ref="contain">
       <slot name="contain"></slot>
     </div>
     <div class="footer" v-if="footerText">

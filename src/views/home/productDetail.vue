@@ -1,47 +1,43 @@
 <template>
   <page headerTitle="详情" flex-box="1" >
     <div slot="contain" >
-      <div class="goodPhoto">
-        <img src="" />
+      <div class="ImgOut" >
+        <img  :src="data.goodsImg" />
       </div>
-      <div class="mainBody" flex="dir:top cross:center">
-        <label class="title">
-          永和鱼丸提货券</label>
-        <label class="price">
-          ￥5.00</label>
-        <label class="primeCost" v-if="isHermes">
-        ￥20.00</label>
-        <div flex="dir:left cross:center" style="width: 100%">
-          <div class="divider"></div>
-          <label class="dividerTitle">
-            商品介绍
-          </label>
-          <div class="divider"></div>
-        </div>
-        <div class="content">
-          永和鱼丸是福建一带的地方风味名菜，属于闽菜系。永和鱼丸店创建于1934年，是福建福州市现存最老的鱼丸品牌，2001年获得“中华老字号”称号。
-
-          鱼丸最早出现于秦朝江浙一带。秦始皇云游江南到了福州，喜爱鱼米之乡的鲜鱼，但鱼肉剌多，吃起来极为不便，便下一道谕旨，要求随行厨子送上的鱼必须将鱼剌剔净，否则斩首。厨子前思后想不得要领，气急之下，抡起刀背猛砸砧板上的鲜鱼，没想到歪打正着，鱼肉与鱼骨竟截然离析。得来全不费功夫，这种剔骨法让厨子惊喜不已。他灵机一动，索性将鱼肉剁
-
-          抡起刀背猛砸砧板上的鲜鱼，没想到歪打正着，鱼肉与鱼骨竟截然离析。得来全不费功夫，这种剔骨法让厨子惊喜不已。他灵机一动，索性将鱼肉剁
-
-          抡起刀背猛砸砧板上的鲜鱼，
+      <div class="mainOut" >
+        <div class="mainBody" flex="dir:top cross:center">
+          <label class="title">
+            {{data.goodsName}}</label>
+          <label class="price">
+            ￥{{data.price}}</label>
+          <label class="primeCost" v-if="isHermes">
+            ￥{{data.showPrice}}</label>
+          <div flex="dir:left cross:center" style="width: 100%">
+            <div class="divider"></div>
+            <label class="dividerTitle">
+              商品介绍
+            </label>
+            <div class="divider"></div>
+          </div>
+          <div class="content">
+            {{data.detail}}
+          </div>
         </div>
       </div>
-        <x-button class="no-radius bottomBtn" type="primary"  @click.native="buy()">马上购买</x-button>
+      <x-button class="no-radius bottomBtn" type="primary"  @click.native="buy()">马上购买</x-button>
     </div>
   </page>
 </template>
 <script>
   import PageScroller from 'views/components/PageScroller.vue'
+  import StoreApi from 'api/storeApi'
   import {XButton} from 'vux'
-  import API from 'api/member'
   export default {
       props:['isHermes'],
     components:{PageScroller,XButton},
     data(){
       return {
-        dataList:[]
+        data:[]
       }
     },
     methods: {
@@ -62,57 +58,71 @@
             console.log('plugin confirm')
           }
         })
+      },
+      async fetchData(){
+         let res = await StoreApi.getGoodsDetail(this.$route.query.hyGoodsId)
+          if(res&&res.data)
+          {
+              this.data =res.data.goodInfo
+          }
       }
     }
   }
 </script>
 <style lang="less" scoped>
   @import "~style/base-variables";
-  .bottomBtn{
-    position: fixed;
-    bottom: 0;
-  }
   .primeCost{
     text-decoration: line-through;
   }
-  .goodPhoto{
+  .ImgOut{
+    width: 100%;
     height: 200px;
-    background-color: gray;
-  }
-  .mainBody{
-    background-color: white;
-    margin: -20px 20px 80px;
-    padding: 20px;
-    border-radius: 5px;
-    .content{
-      text-indent: 2em;
-    }
-    .divider{
-      border-bottom: dashed @color-sub 1px;
-      height: 1px;
+    img{
+      height: 200px;
       width: 100%;
-      margin: 0 5px;
     }
-    .dividerTitle{
-      background: url(../../assets/images/home/title_bg.png) center no-repeat;
-      background-size: 100%100%;
-      width: 256px;
-      height: 34px;
-      color: @color-sub;
-      text-align: center;
-      font-size: 16px;
-      font-weight: bold;
-      line-height: 34px;
-      margin: 10px 0px;
-    }
-    .title{
-      font-size: 20px;
-      color: @font-color;
-    }
-    .price{
-      color: @color-sub;
-      font-size: 21px;
+  }
+  .mainOut{
+    position: relative;
+    width: 100%;
+    .mainBody{
+      position: absolute;
+      z-index: 100;
+      background-color: white;
+      margin: -20px 20px 80px;
+      padding: 20px;
+      border-radius: 5px;
+      width: 295px;
+      .content{
+        text-indent: 2em;
+      }
+      .divider{
+        border-bottom: dashed @color-sub 1px;
+        height: 1px;
+        width: 100%;
+        margin: 0 5px;
+      }
+      .dividerTitle{
+        background: url(../../assets/images/home/title_bg.png) center no-repeat;
+        background-size: 100%100%;
+        width: 256px;
+        height: 34px;
+        color: @color-sub;
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 34px;
+        margin: 10px 0px;
+      }
+      .title{
+        font-size: 20px;
+        color: @font-color;
+      }
+      .price{
+        color: @color-sub;
+        font-size: 21px;
 
+      }
     }
   }
 </style>

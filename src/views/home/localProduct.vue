@@ -2,16 +2,18 @@
   <page :headerTitle="classType==101?'超级联合日':'福州特产馆'" flex-box="1" >
     <div slot="contain" >
       <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-48' >
-        <div v-for="(item,index) in 8" :key="index" flex="dir:left cross:center" class="couponItem" @click="$router.push({path:'ProductDetail'})">
+        <div v-for="(item,index) in dataList" :key="index" flex="dir:left cross:center" class="couponItem" @click="$router.push({path:'ProductDetail',query:{
+            hyGoodsId:item.hyGoodsId
+        }})">
           <div flex="dir:left" flex-box="3">
             <div flex="dir:left cross:center" >
-                <img :src="require('assets/images/home/local_default.png')" class="goodImg">
+                <img :src="item.goodsCoverImage" class="goodImg">
             </div>
             <div flex="dir:top"  flex-box="1" class="content">
-              <label class="title">永和鱼丸提货券</label>
+              <label class="title text-ellipsis-line">{{item.goodsName}}</label>
               <div class="info">
-                <label class="price">¥150</label>
-                <label class="primeCost" v-if="classType==101">¥20</label>
+                <label class="price">￥{{item.channelFee}}</label>
+                <label class="primeCost" v-if="classType==101">￥{{item.marketFee}}</label>
               </div>
             </div>
           </div>
@@ -38,7 +40,6 @@
     methods: {
       getDataList(page){
         return TheatreApi.getGoodsList(this.classType).then(success => {
-          console.log(success)
           this.dataList= success.data
           let res = {
             data:success.data,
@@ -53,9 +54,6 @@
       },
       fetchData(){
         return this.$refs.scroller.reset()
-      },
-      listItemClick(){
-        this.$vux.toast.text('请到我的优惠券中查看', 'bottom');
       }
     }
   }
@@ -86,9 +84,8 @@
     }
     .content{
       align-items: center;
-
       .title{
-        text-align: center;
+        margin-left: 5px;
         font-size: 15px;
         height: 24px;
         font-weight: bold;

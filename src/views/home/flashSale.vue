@@ -1,15 +1,15 @@
 <template>
-  <page :headerTitle="`限时抢`" flex-box="1" :white="true">
+  <page :headerTitle="`限时抢`" flex-box="1">
     <div slot="contain" >
-      <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-46' >
-        <div v-for="(item,index) in 7" :key="index" flex="dir:left cross:center" class="couponItem" @click="listItemClick">
+      <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown :height="'-46'">
+        <div v-for="(item,index) in dataList" :key="index" flex="dir:left cross:center" class="couponItem" @click="listItemClick">
           <div flex="dir:top" :style="{backgroundImage:`url(${require('assets/images/home/sale_bg.png')})`}" class="left">
-            <label class="title">¥150</label>
-            <label class="info">有效期:2017-12-11</label>
+            <label class="title">￥{{item.price}}</label>
+            <label class="info">{{item.packageName}}</label>
           </div>
           <div flex="dir:top" class="right" :style="{backgroundImage:index==0?`url(${require('assets/images/home/flash_sale_right_2.png')})`:`url(${require('assets/images/home/flash_sale_right_1.png')})`}">
               <label class="title">立即抢</label>
-              <label class="tip">已抢光20%</label>
+              <label class="tip">剩余{{item.stock}}份</label>
           </div>
         </div>
       </page-scroller>
@@ -24,15 +24,13 @@
       components:{PageScroller},
       data(){
         return {
-          value:'11111',
           dataList:[]
         }
       },
       methods: {
         getDataList(page){
           return TheatreApi.getPackageList(202).then(success => {
-            console.log(success)
-            this.dataList= success.data
+            this.dataList= success.data;
             let res = {
               data:success.data,
               page:{
