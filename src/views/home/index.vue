@@ -20,56 +20,58 @@
         </div>
       </div>
       <!--介绍-->
-      <list-cell  style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')">
+      <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')">
         <label slot="rightTop" @click="$router.push('IntroduceList')">更多</label>
         <scroll-view slot="main">
-          <div flex="dir:top " v-for="i in 11" class="introduceItem"
+          <div flex="dir:top " v-for="(item,index) in introduceList" class="introduceItem" :key="index"
                @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})">
             <div flex="dir:left">
-              <img :src="require('assets/images/home/introduce.png')"  class="contentImg">
+              <img :src="item.thumbUrl" class="contentImg">
               <div class="rightBorder"></div>
             </div>
             <div class="bottomBorder"></div>
-            <label class='contentTxt'>缘起三坊，花开七巷</label>
+            <label class='contentTxt text-ellipsis-line'>{{item.title}}</label>
           </div>
         </scroll-view>
       </list-cell>
       <!--场次票-->
-      <list-cell   :topImg="require('assets/images/home/title_session.png')">
+      <list-cell :topImg="require('assets/images/home/title_session.png')">
         <scroll-view slot="main">
-        <div  @click="$router.push('sessionDetail')" :style="{backgroundImage:`url(${require('assets/images/home/session_bg.png')})`}" class="ticketItem">
-          <div flex="dir:top" class="info">
-            <label class="title">《三坊七巷》</label>
-            <label class="des f12">中瑞剧坊，坊巷文化影音秀</label>
-            <label class="price">￥228</label>
-          </div>
-          <div class="s-button buy" >购买</div>
-        </div>
-        </scroll-view>
-      </list-cell>
-      <!--套票-->
-      <list-cell   :topImg="require('assets/images/home/title_package.png')">
-        <scroll-view slot="main">
-          <div  :style="{backgroundImage:`url(${require('assets/images/home/package_bg.png')})`}" class="ticketItem">
+          <div @click="$router.push('sessionDetail')"
+               :style="{backgroundImage:`url(${require('assets/images/home/session_bg.png')})`}" class="ticketItem">
             <div flex="dir:top" class="info">
               <label class="title">《三坊七巷》</label>
               <label class="des f12">中瑞剧坊，坊巷文化影音秀</label>
               <label class="price">￥228</label>
             </div>
-            <div class="s-button buy" >购买</div>
+            <div class="s-button buy">购买</div>
+          </div>
+        </scroll-view>
+      </list-cell>
+      <!--套票-->
+      <list-cell :topImg="require('assets/images/home/title_package.png')">
+        <scroll-view slot="main">
+          <div v-for="(item,index) in packageList" :key="index" :style="{backgroundImage:`url(${require('assets/images/home/package_bg.png')})`}" class="ticketItem">
+            <div flex="dir:top" class="info">
+              <label class="title ">《{{item.packageName}}》</label>
+              <label class="des f12">{{item.detail}}</label>
+              <label class="price">￥{{item.price}}</label>
+            </div>
+            <div class="s-button buy">购买</div>
           </div>
         </scroll-view>
       </list-cell>
       <!--通兑券-->
-      <list-cell   :topImg="require('assets/images/home/title_stamps.png')">
+      <list-cell :topImg="require('assets/images/home/title_stamps.png')">
         <scroll-view slot="main">
-          <div v-for="i in 7"  :style="{backgroundImage:`url(${require('assets/images/home/stamps_bg.png')})`}" class="ticketItem">
+          <div v-for="(item,index) in stampsList" :key="index" :style="{backgroundImage:`url(${require('assets/images/home/stamps_bg.png')})`}"
+               class="ticketItem">
             <div flex="dir:top" class="info">
-              <label class="title">《三坊七巷》</label>
-              <label class="des f12">中瑞剧坊，坊巷文化影音秀</label>
-              <label class="price">￥228</label>
+              <label class="title">《{{item.packageName}}》</label>
+              <label class="des f12">{{item.detail}}</label>
+              <label class="price">￥{{item.price}}</label>
             </div>
-            <div class="s-button buy" >购买</div>
+            <div class="s-button buy">购买</div>
           </div>
         </scroll-view>
       </list-cell>
@@ -77,20 +79,20 @@
       <div flex="dir:left main:center">
         <img :src="require('assets/images/home/convert.png')" class="convert">
       </div>
-      <!--通兑券-->
-      <list-cell  :topImg="require('assets/images/home/title_stamps.png')">
+      <!-- 探索-->
+      <list-cell :topImg="require('assets/images/home/title_stamps.png')" v-show="findList&&findList.length>0">
         <div slot="main" style="display: flex;flex-wrap: wrap;padding-left: 15px">
-            <div flex="dir:top " v-for="i in 11" class="introduceItem" style="margin-top: 20px"
-                 @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})">
-              <div flex="dir:left">
-                <img :src="require('assets/images/home/introduce.png')"  class="contentImgSquare">
-                <div class="rightBorder"></div>
-              </div>
-              <div class="bottomBorder"></div>
-              <label class='contentTxt'>缘起三坊，花开七巷</label>
+          <div flex="dir:top " v-for="(item,index) in findList" style="margin-top: 20px" class="findItem"
+               @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})">
+            <div flex="dir:left" >
+              <img :src="item.thumbUrl" class="contentImgSquare">
+              <div class="rightBorder"></div>
             </div>
-
+            <div class="bottomBorder"></div>
+            <label class='contentTxt'>{{item.title}}</label>
           </div>
+
+        </div>
       </list-cell>
     </div>
     <!--</scroller>-->
@@ -141,47 +143,62 @@
           loadingContent: '加载中...',
           clsPrefix: 'xxs-plugin-pullup-'
         },
-        munuList:munuList
+        munuList: munuList,
+        introduceList: [],
+        packageList:[],
+        stampsList:[],
+        findList:[],
       }
     },
     methods: {
+      async getBanner(){
+        let res = await TheatreApi.getInformationList(10);
+        if (res) {
+          this.banerList = res.data.map((data) => ({
+            url: data.contentUrl,
+            img: data.thumbUrl
+          }))
+        }
+      },
+      async getIntroduce(){
+          let res = await TheatreApi.getInformationList(20);
+          if(res)
+          {
+              this.introduceList = res.data
+          }
+      },
+      async getFind(){
+        let res = await  TheatreApi.getInformationList(30);
+        if(res)
+        {
+          this.findList =res.data;
+        }
+      },
+      async getPackage(){
+          let res = await TheatreApi.getPackageList(200)
+          if(res){
+              this.packageList =res.data;
+          }
+      },
+      async getStamps(){
+        let res = await TheatreApi.getPackageList(201)
+        console.log(res)
+        if(res){
+          this.stampsList =res.data;
+        }
+      },
       fetchData(){
         // banner
-        TheatreApi.getInformationList(10).then(success => {
-          if (success.data && success.data.length > 0) {
-            this.banerList = success.data.map((data) => ({
-                url: data.contentUrl,
-                img: data.thumbUrl
-            }))
-          }
-        }, error => {
-          console.log(error)
-        });
+        this.getBanner();
         // 介绍
-        TheatreApi.getInformationList(20).then(success => {
-          console.log(success)
-        }, error => {
-          console.log(error)
-        });
+        this.getIntroduce();
         // 发现列表
-        TheatreApi.getInformationList(30).then(success => {
-          console.log(success)
-        }, error => {
-          console.log(error)
-        });
+        this.getFind();
         // 套票
-        TheatreApi.getPackageList(200).then(success => {
-          console.log(success)
-        }, error => {
-          console.log(success)
-        })
-
+        this.getPackage();
         // 通兑券
-        TheatreApi.getPackageList(201).then(success => {
-          console.log(success)
-        }, error => {
-          console.log(success)
-        })
+        this.getStamps();
+
       },
       refresh(){
         setTimeout(() => {
@@ -194,17 +211,21 @@
 </script>
 <style lang="less" scoped>
   @import "~style/base-variables.less";
-  .homeOut{
-    background:repeat;
+  @import "~style/style.less";
+  .homeOut {
+    background: repeat;
     background-size: 68px 68px;
-    .convert{
+    label{
+      .text-ellipsis-line();
+    }
+    .convert {
       height: 31px;
       width: 135px;
       margin-top: 15px;
     }
     .index-header {
       min-height: 40px;
-      padding:5px 10px;
+      padding: 5px 10px;
       .logo {
         height: 30px;
       }
@@ -213,46 +234,40 @@
         margin-left: 10px;
       }
     }
-    .findItemContent {
-      flex: 1;
-      height: 100px;
-      background-color: gray;
-      margin: 10px
-    }
     .findItem {
-      width: 50%;
-      display: flex;
-      justify-content: center;
-      height: fit-content;
-      max-width: 50%;
+        width: 165px;
+      margin-right: 15px;
+      text-align: center;
+      .contentImgSquare{
+        width: 160px;
+        height: 160px;
+      }
+    }
+
+    .bottomBorder {
+      background: @color-primary;
+      height: 5px;
+      margin-left: 7px;
+    }
+    .rightBorder {
+      background: @color-primary;
+      width: 5px;
+      margin-top: 7px;
     }
     .introduceItem {
       overflow: visible;
       margin-right: 15px;
-      .bottomBorder{
-        background:  @color-primary;
-        height:5px;
-        margin-left: 7px;
-      }
-      .rightBorder{
-        background: @color-primary;
-        width:5px;
-        margin-top: 7px;
-      }
-      .contentImg{
+      width: 255px;
+      .contentImg {
         height: 166px;
         width: 250px;
       }
-      .contentImgSquare{
-        height: 160px;
-        width: 160px;
-      }
-      .contentTxt{
+      .contentTxt {
         text-align: center;
         margin-top: 15px;
       }
     }
-    .ticketItem{
+    .ticketItem {
       width: 302px;
       height: 102px;
       color: @color-primary;
@@ -260,31 +275,41 @@
       background-size: contain;
       margin-left: 15px;
       position: relative;
-        .info{margin: 15px 20px 0px 70px;}
-        .title{margin-bottom: 5px;
-          font-weight: bolder;
-          font-size: 16px;
-          margin-left: -5px;
-        }
-        .price{
-          font-size: 17px;
-          font-weight: bold;
-        }
-        .buy{
-          position: absolute;
-          bottom: 15px;
-          right: 20px;
-        }
+      .info {
+        margin: 15px 20px 0px 70px;
+        width: 185px;
+      }
+      .title {
+        margin-bottom: 5px;
+        font-weight: bolder;
+        font-size: 16px;
+        margin-left: -5px;
+      }
+      .price {
+        font-size: 17px;
+        font-weight: bold;
+        width: 175px;
+      }
+      .buy {
+        position: absolute;
+        bottom: 15px;
+        right: 20px;
+      }
 
     }
     .menuCell {
       height: 100px;
       padding: 22px 22px 0px;
-      background:url(../../assets/images/home/menu_bg.png) no-repeat;
-      background-size:100% 100%;
+      background: url(../../assets/images/home/menu_bg.png) no-repeat;
+      background-size: 100% 100%;
+      label{
+        text-align: center;
+        width: 70px;
+      }
     }
-    .menuItem{
-      height: 55px;width: 55px;
+    .menuItem {
+      height: 55px;
+      width: 55px;
     }
   }
 </style>
