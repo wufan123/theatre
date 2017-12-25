@@ -22,7 +22,18 @@ function getInformationList(classType) {
     })
 }
 
+/**
+ * 卖品列表
+ * @param {*} classType 
+ */
+function getGoodsList(classType) {
+    return apiHttp.getTheatre("/goods/list", {
+        classType: classType
+    })
+}
+
 export default {
     getClassList: getClassList,
-    getInformationList: getInformationList
+    getInformationList: getInformationList,
+    getGoodsList: getGoodsList
 }
