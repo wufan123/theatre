@@ -93,6 +93,7 @@
   import {Swiper, GroupTitle, SwiperItem, XButton, Divider, Scroller} from 'vux'
   import ScrollView from 'views/components/simpleScrollView.vue'
   import ListCell from 'views/components/home/listCell.vue'
+  import TheatreApi from 'api/theatreApi'
   const imgList = [
     require('assets/images/home/banner_default.png'),
     require('assets/images/home/banner_default.png'),
@@ -133,6 +134,19 @@
       }
     },
     methods: {
+      fetchData(){
+        TheatreApi.getInformationList(10).then(success => {
+          console.log(success.data)
+          if (success.data && success.data.length > 0) {
+            this.banerList = success.data.map((data) => ({
+                url: data.contentUrl,
+                img: data.thumbUrl
+            }))
+          } 
+        }, error => {
+          console.log(error)
+        });
+      },
       refresh(){
         setTimeout(() => {
           this.$refs.scroller.donePulldown()

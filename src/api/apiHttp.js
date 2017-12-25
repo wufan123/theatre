@@ -20,7 +20,7 @@ const instance = axios.create({
 
 async function getToken(config) {
 
-    var res = await instance.post('service/getToken', {
+    var res = await instance.post('/huoying'+'/service/getToken', {
       'appAccount': APP_ACCOUNT,
       'appPasswd': APP_PASSWORD,
       'appVersion': API_VERSION,
@@ -113,11 +113,15 @@ instance.interceptors.response.use(response => {
 
 
 function get(url, params) {
-  return instance.get(url, {params: params})
+  return instance.get('/huoying'+url, {params: params})
 }
 
 function post(url, params) {
-  return instance.post(url, params)
+  return instance.post('/huoying'+url, params)
+}
+
+function getTheatre(url, params) {
+  return instance.get('/theatre'+url, {params: params})
 }
 
 
@@ -125,5 +129,6 @@ export default {
   instance,
   get,
   post,
+  getTheatre,
   CINEMA_CODE,
 }
