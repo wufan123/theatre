@@ -69,7 +69,8 @@
   .contain {
     overflow: auto;
     flex: 1;
-    background: url(../../assets/images/page_bg.png) repeat
+    background: url(../../assets/images/page_bg.png) repeat;
+    background-size: 68px 68px;
   }
 
   .footer {

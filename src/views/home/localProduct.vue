@@ -6,7 +6,7 @@
             hyGoodsId:item.hyGoodsId
         }})">
           <div flex="dir:left" flex-box="3">
-            <div flex="dir:left cross:center" >
+            <div flex="dir:left cross:center">
                 <img :src="item.goodsCoverImage" class="goodImg">
             </div>
             <div flex="dir:top"  flex-box="1" class="content">
@@ -16,8 +16,8 @@
                 <label class="primeCost" v-if="classType==101">￥{{item.marketFee}}</label>
               </div>
             </div>
+            <div class="s-button buyBtn khaki" >马上购买</div>
           </div>
-          <label class="txtBtn buyBtn" >马上购买</label>
         </div>
       </page-scroller>
     </div>
@@ -60,6 +60,9 @@
 </script>
 <style lang="less" scoped>
   @import "~style/base-variables";
+  .list {
+  padding-top: 15px;
+}
   .primeCost{
     text-decoration: line-through;
     color: @font-color-sub;
@@ -70,12 +73,12 @@
   }
   .couponItem{
     height: 100px;
-    margin: 15px 10px;
+    margin:0 15px 10px;
     padding: 10px;
     background: url(../../assets/images/home/sale_bg.png) center no-repeat;
     background-size: 100%100%;
     .buyBtn{
-        margin: 40px 20px 0 0;
+        margin: 40px 10px 0 0;
     }
     .goodImg{
       width: 100px;
@@ -88,7 +91,6 @@
         margin-left: 5px;
         font-size: 15px;
         height: 24px;
-        font-weight: bold;
         color: @font-color;
         width: 105px;
         overflow: hidden;
@@ -98,7 +100,7 @@
         margin-top: 10px;
         .price{
           font-size: 20px;
-          color: @color-primary;
+          color: @color-primary2;
           font-weight: bold;
         }
       }

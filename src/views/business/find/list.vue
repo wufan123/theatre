@@ -48,6 +48,7 @@ export default {
     position: fixed;top: 46px; width: 375px;
     font-weight: bold;
     background: url(../../../assets/images/page_bg.png) repeat;
+    background-size: 68px 68px;
   }
 .find{margin-bottom: 20px;
   .find-vidio{width: 100%;height: 160px;}
