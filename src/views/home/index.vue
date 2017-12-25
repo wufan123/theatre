@@ -139,6 +139,7 @@
     },
     methods: {
       fetchData(){
+        // banner
         TheatreApi.getInformationList(10).then(success => {
           if (success.data && success.data.length > 0) {
             this.banerList = success.data.map((data) => ({
@@ -149,6 +150,7 @@
         }, error => {
           console.log(error)
         });
+        // 
       },
       refresh(){
         setTimeout(() => {
