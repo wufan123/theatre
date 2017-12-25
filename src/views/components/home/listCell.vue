@@ -26,6 +26,9 @@
     background-size: contain;
     height: 50px;
     padding: 12px;
+    label{
+      width: auto !important;
+    }
   }
   .listCell {
     min-height: 180px;
