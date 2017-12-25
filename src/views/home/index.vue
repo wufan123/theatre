@@ -4,12 +4,14 @@
       <img :src="require('assets/images/logo.png')" class="logo">
       <div class="header-r" flex="cross:center">
         <img :src="require('assets/images/me.png')" class="header-r-icon" @click="$router.push('Me')">
-        <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('SessionDetail')">
+        <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('FindList')">
       </div>
     </div>
     <!--<scroller height="-40" lock-x scrollbar-y :pulldown-config='pullDownConfig' :usePulldown='true' @on-pulldown-loading='refresh' ref="scroller">-->
     <div style="overflow-y: scroll">
+      <!--广告-->
       <swiper :list="banerList" auto height="251px" dots-class="custom-bottom" dots-position="center"></swiper>
+      <!--菜单-->
       <div flex="dir:left main:center cross:center" style="justify-content: space-around" class="menuCell">
         <div flex="dir:top main:center cross:center" v-for="(item,index) in munuList"
              @click="$router.push({ path:item.pathName, query:item.params})">
@@ -17,6 +19,7 @@
           <label>{{item.name}}</label>
         </div>
       </div>
+      <!--介绍-->
       <list-cell  style="margin-top: 5px;" :topImg="require('assets/images/home/title_session.png')">
         <label slot="rightTop" @click="$router.push('IntroduceList')">更多</label>
         <scroll-view slot="main">
@@ -31,9 +34,10 @@
           </div>
         </scroll-view>
       </list-cell>
+      <!--场次票-->
       <list-cell   :topImg="require('assets/images/home/title_session.png')">
         <scroll-view slot="main">
-        <div  :style="{backgroundImage:`url(${require('assets/images/home/session_bg.png')})`}" class="ticketItem" flex="dir:left main:center cross:center">
+        <div  @click="$router.push('sessionDetail')" :style="{backgroundImage:`url(${require('assets/images/home/session_bg.png')})`}" class="ticketItem" flex="dir:left main:center cross:center">
           <div flex="dir:top">
             <label class="title">《三坊七巷》</label>
             <label class="des">中瑞剧坊，坊巷文化影音秀</label>
@@ -43,6 +47,7 @@
         </div>
         </scroll-view>
       </list-cell>
+      <!--套票-->
       <list-cell   :topImg="require('assets/images/home/title_package.png')">
         <scroll-view slot="main">
           <div  :style="{backgroundImage:`url(${require('assets/images/home/package_bg.png')})`}" class="ticketItem" flex="dir:left main:center cross:center">
@@ -55,6 +60,7 @@
           </div>
         </scroll-view>
       </list-cell>
+      <!--通兑券-->
       <list-cell   :topImg="require('assets/images/home/title_stamps.png')">
         <scroll-view slot="main">
           <div v-for="i in 7"  :style="{backgroundImage:`url(${require('assets/images/home/stamps_bg.png')})`}" class="ticketItem" flex="dir:left main:center cross:center">
@@ -67,10 +73,11 @@
           </div>
         </scroll-view>
       </list-cell>
+      <!--兑换票券-->
       <div flex="dir:left main:center">
         <img :src="require('assets/images/home/convert.png')" class="convert">
       </div>
-
+      <!--通兑券-->
       <list-cell  :topImg="require('assets/images/home/title_stamps.png')">
         <div slot="main" style="display: flex;flex-wrap: wrap;padding-left: 15px">
             <div flex="dir:top " v-for="i in 11" class="introduceItem" style="margin-top: 20px"

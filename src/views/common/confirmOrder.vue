@@ -4,9 +4,9 @@
     <div class="c-order">
       <div class="c-goods">
           <list twoLine>
-            <list-item :img="`https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513599973802&di=e0ed1059c34a8eb1d89a8e8bd1c7da11&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F4b90f603738da97726166db6ba51f8198618e376.jpg`" 
+            <list-item :img="`https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513599973802&di=e0ed1059c34a8eb1d89a8e8bd1c7da11&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F4b90f603738da97726166db6ba51f8198618e376.jpg`"
             :contentTitle="`坊巷文化影音秀`"   extra="￥228.00" :contentBrief="`x 1`"  ></list-item>
-            <list-item :img="`https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513599973802&di=e0ed1059c34a8eb1d89a8e8bd1c7da11&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F4b90f603738da97726166db6ba51f8198618e376.jpg`" 
+            <list-item :img="`https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513599973802&di=e0ed1059c34a8eb1d89a8e8bd1c7da11&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F4b90f603738da97726166db6ba51f8198618e376.jpg`"
             :contentTitle="`永和鱼丸`"   extra="￥10.00" :contentBrief="`x 1`"  ></list-item>
           </list>
         </div>
@@ -32,7 +32,7 @@
 </page>
 </template>
 <script>
-  import {List,ListItem} from 'views/components/list'
+  import {List,ListItem} from 'views/components/settingList'
     import { XInput, Group } from "vux";
 export default {
   data(){
@@ -51,7 +51,7 @@ export default {
 .c-order{padding:0 15px ;background: #ffffff;
   .am-list{padding: 0}
   .c-goods{
-    
+
     .am-list .am-list-item{background: none;}
   }
   .am-list-item{padding: 15px  0;margin-top: -1px;}

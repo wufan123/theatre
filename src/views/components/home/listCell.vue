@@ -10,7 +10,7 @@
 </template>
 <script>
     export default {
-      name: 'list-cell',
+      name: 'settingList-cell',
       props: ['title', 'subtitle',"topImg"],
         data(){
             return {
