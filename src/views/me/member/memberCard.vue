@@ -19,7 +19,7 @@
 <script>
 import PageScroller from 'views/components/PageScroller.vue'
 import CardApi from 'api/cardApi'
-import {List,ListItem} from 'views/components/list'
+import {List,ListItem} from 'views/components/settingList'
 
 export default {
   components:{PageScroller,List,ListItem},

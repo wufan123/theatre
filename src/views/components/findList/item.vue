@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="find">
     <img class="find-vidio"
          :src="img">
     <div class="find-body">

@@ -24,7 +24,7 @@
 <script>
 import PageScroller from 'views/components/PageScroller.vue'
 import orderApi from 'api/orderApi'
-import {List,ListItem} from 'views/components/list'
+import {List,ListItem} from 'views/components/settingList'
 
 export default {
   components:{PageScroller,List,ListItem},

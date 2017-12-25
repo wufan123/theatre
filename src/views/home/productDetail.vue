@@ -10,11 +10,15 @@
         <label class="price">
           ￥5.00</label>
         <label class="primeCost" v-if="isHermes">
-          ￥20.00</label>
-        <label class="dividerTitle">
-          商品介绍
-        </label>
-        <div>
+        ￥20.00</label>
+        <div flex="dir:left cross:center" style="width: 100%">
+          <div class="divider"></div>
+          <label class="dividerTitle">
+            商品介绍
+          </label>
+          <div class="divider"></div>
+        </div>
+        <div class="content">
           永和鱼丸是福建一带的地方风味名菜，属于闽菜系。永和鱼丸店创建于1934年，是福建福州市现存最老的鱼丸品牌，2001年获得“中华老字号”称号。
 
           鱼丸最早出现于秦朝江浙一带。秦始皇云游江南到了福州，喜爱鱼米之乡的鲜鱼，但鱼肉剌多，吃起来极为不便，便下一道谕旨，要求随行厨子送上的鱼必须将鱼剌剔净，否则斩首。厨子前思后想不得要领，气急之下，抡起刀背猛砸砧板上的鲜鱼，没想到歪打正着，鱼肉与鱼骨竟截然离析。得来全不费功夫，这种剔骨法让厨子惊喜不已。他灵机一动，索性将鱼肉剁
@@ -80,10 +84,19 @@
     margin: -20px 20px 80px;
     padding: 20px;
     border-radius: 5px;
+    .content{
+      text-indent: 2em;
+    }
+    .divider{
+      border-bottom: dashed @color-sub 1px;
+      height: 1px;
+      width: 100%;
+      margin: 0 5px;
+    }
     .dividerTitle{
       background: url(../../assets/images/home/title_bg.png) center no-repeat;
       background-size: 100%100%;
-      width: 128px;
+      width: 256px;
       height: 34px;
       color: @color-sub;
       text-align: center;

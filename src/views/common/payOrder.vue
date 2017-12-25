@@ -11,14 +11,14 @@
             <radio   :options="typeData" @on-change="change"  value="2" disabled ></radio>
           </group>
        </div>
-       
+
      </div>
     <div class="info"> <p>温馨提示：</p><p>订单一旦完成购买，不退不换</p></div>
   </div>
 </page>
 </template>
 <script>
-  import {List,ListItem} from 'views/components/list'
+  import {List,ListItem} from 'views/components/settingList'
     import { Group, Radio } from "vux";
 export default {
   data(){

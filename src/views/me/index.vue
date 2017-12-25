@@ -34,7 +34,7 @@
 </template>
 <script>
 import AuthApi from 'api/authApi'
-import {List,ListItem} from '@/views/components/list'
+import {List,ListItem} from '@/views/components/settingList'
 import {XButton} from 'vux'
 export default {
   components: {List,ListItem,XButton},
@@ -52,7 +52,7 @@ export default {
       AuthApi.getUserInfo().then(success => {
         this.userInfo = success.data
       }, error => {
-        
+
       })
     }
   }
