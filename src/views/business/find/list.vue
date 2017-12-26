@@ -9,11 +9,11 @@
         </tab>
       </div>
       <div style="margin-top:46px;" >
-          <find-item   v-for="(item,index) in dataList" :key="index" v-if="currentIndex===0" :title="item.title" :content="item.content" :img="item.img">
+          <find-item   v-for="(item,index) in strategyList" :key="index" v-if="currentIndex===0" :title="item.title" :content="item.content" :img="item.thumbUrl">
           </find-item>
-        <find-item   v-for="(item,index) in dataList" :key="index" v-if="currentIndex===1" :title="item.title" :content="item.content" :img="item.img">
+        <find-item   v-for="(item,index) in videoList" :key="index" v-if="currentIndex===1" :title="item.title" :content="item.content" :img="item.thumbUrl">
         </find-item>
-        <find-item   v-for="(item,index) in dataList" :key="index" v-if="currentIndex===2" :title="item.title" :content="item.content" :img="item.img">
+        <find-item   v-for="(item,index) in attentionList" :key="index" v-if="currentIndex===2" :title="item.title" :content="item.content" :img="item.thumbUrl">
         </find-item>
       </div>
     </div>
@@ -22,6 +22,7 @@
 <script>
 import {Tab,TabItem} from 'vux'
 import findItem from 'views/components/findList/item.vue'
+import TheatreApi from "../../../api/theatreApi";
 export default {
   data(){
       let list =[]
@@ -31,7 +32,10 @@ export default {
       }
     return{
       currentIndex:0,
-      dataList:list
+      dataList:list,
+      strategyList:[],
+      videoList:[],
+      attentionList:[]
     }
   },
   components:{Tab,TabItem,findItem},
@@ -39,6 +43,30 @@ export default {
     onItemClick (index) {
       this.currentIndex = index
       console.log('on item click:', index)
+    },
+    async getStrategy(){
+      let res = await  TheatreApi.getInformationList(31);
+      if(res)
+      {
+        this.strategyList =res.data;
+      }
+    },
+    async getVideo(){
+        let res = await TheatreApi.getInformationList(32);
+        if(res){
+            this.videoList =res.data;
+        }
+    },
+    async getAttention(){
+      let res = await TheatreApi.getInformationList(33);
+      if(res){
+        this.attentionList =res.data;
+      }
+    },
+    fetchData(){
+        this.getStrategy();
+        this.getVideo();
+        this.getAttention();
     }
   }
 }
