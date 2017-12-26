@@ -1,4 +1,4 @@
-
+@import "~style/base-variables.less";
 .am-list{
   padding: 10px 0;
   display: block;
@@ -11,7 +11,7 @@
   }
   .is-link.am-list-item{
     &.hover,&:active{
-      background-color:#eee;
+      //background-color:#eee;
       -webkit-background-size: 0 0, 0 0, 100% 1px, 100% 1px
     }
   }
@@ -26,8 +26,8 @@
     display: -webkit-flex;
     -webkit-box-align: center;
     -webkit-align-items: center;
-    background: -webkit-linear-gradient(-90deg, #fff, #fff) top left no-repeat, -webkit-linear-gradient(90deg, #fff, #fff) bottom left no-repeat, -webkit-linear-gradient(-90deg, #ddd, #ddd 63%, transparent 63%) top left no-repeat, -webkit-linear-gradient(90deg, #ddd, #ddd 63%, transparent 63%) bottom left no-repeat, #fff;
-    background: linear-gradient(180deg, #fff, #fff) top left no-repeat, linear-gradient(0deg, #fff, #fff) bottom left no-repeat, linear-gradient(180deg, #ddd, #ddd 63%, transparent 63%) top left no-repeat, linear-gradient(0deg, #ddd, #ddd 63%, transparent 63%) bottom left no-repeat, #fff;
+    //background: -webkit-linear-gradient(-90deg, #fff, #fff) top left no-repeat, -webkit-linear-gradient(90deg, #fff, #fff) bottom left no-repeat, -webkit-linear-gradient(-90deg, #ddd, #ddd 63%, transparent 63%) top left no-repeat, -webkit-linear-gradient(90deg, #ddd, #ddd 63%, transparent 63%) bottom left no-repeat, #fff;
+    //background: linear-gradient(180deg, #fff, #fff) top left no-repeat, linear-gradient(0deg, #fff, #fff) bottom left no-repeat, linear-gradient(180deg, #ddd, #ddd 63%, transparent 63%) top left no-repeat, linear-gradient(0deg, #ddd, #ddd 63%, transparent 63%) bottom left no-repeat, #fff;
     -webkit-background-size: 15px 1px, 15px 1px, 100% 0, 100% 1px;
     background-size: 15px 1px, 15px 1px, 100% 0, 100% 1px;
     &:first-child {
@@ -52,12 +52,14 @@
       white-space: nowrap
     }
     .am-list-title {
-      color: #000;
+      color: @font-color;
       line-height: 30px;
       width: auto;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap
+      white-space: nowrap;
+      font-size: 16px;
+      font-weight: bold;
     }
     .am-list-brief {
       color:#888;

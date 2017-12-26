@@ -12,7 +12,7 @@
       <slot name="contain"></slot>
     </div>
     <div class="footer" v-if="footerText">
-      <x-button flex-box="0" type="warn no-radius" action-type="button" @click.native="onClick">{{footerText}}
+      <x-button flex-box="0" type="primary no-radius" action-type="button" @click.native="onClick">{{footerText}}
       </x-button>
     </div>
   </div>
