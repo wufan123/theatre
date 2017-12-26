@@ -2,23 +2,12 @@
   <page :headerTitle="classType==101?'超级联合日':'福州特产馆'" flex-box="1" >
     <div slot="contain" >
       <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-48' >
-        <div v-for="(item,index) in dataList" :key="index" flex="dir:left cross:center" class="couponItem" @click="$router.push({path:'ProductDetail',query:{
+        <good-item v-for="(item,index) in dataList" :key="index" :goodsCoverImage="item.goodsCoverImage"  :goodsName="item.goodsName" :channelFee="item.channelFee"
+                   flex="dir:left cross:center" class="couponItem" @click="$router.push({path:'ProductDetail',query:{
             hyGoodsId:item.hyGoodsId
         }})">
-          <div flex="dir:left" flex-box="3">
-            <div flex="dir:left cross:center">
-                <img :src="item.goodsCoverImage" class="goodImg">
-            </div>
-            <div flex="dir:top"  flex-box="1" class="content">
-              <label class="title text-ellipsis-line">{{item.goodsName}}</label>
-              <div class="info">
-                <label class="price">￥{{item.channelFee}}</label>
-                <label class="primeCost" v-if="classType==101">￥{{item.marketFee}}</label>
-              </div>
-            </div>
-            <div class="s-button buyBtn khaki" >马上购买</div>
-          </div>
-        </div>
+          <div class="s-button buyBtn khaki" >马上购买</div>
+        </good-item>
       </page-scroller>
     </div>
   </page>
@@ -27,9 +16,10 @@
   import PageScroller from 'views/components/PageScroller.vue'
   import {XButton} from 'vux'
   import TheatreApi from 'api/theatreApi'
+  import GoodItem from 'views/components/goodList/item.vue'
   import StoreApi from 'api/storeApi'
   export default {
-    components:{PageScroller,XButton},
+    components:{PageScroller,XButton,GoodItem},
     data(){
       return {
         value:'11111',
