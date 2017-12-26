@@ -22,7 +22,7 @@
             </div>
             <div flex="dir:top cross:start">
               <label class="price">￥{{filmPrice}}</label>
-               <label class="des">满200立减30元</label>
+              <label class="des">满200立减30元</label>
             </div>
           </div>
           <div flex="dir:left cross:center" style="width: 100%">
@@ -41,26 +41,28 @@
     </page>
     <popup v-model="show" position="bottom">
       <div class="popBottom" flex="dir:top">
-        <label>时间</label>
-        <checker v-model="timeCheck" default-item-class="check-item" selected-item-class="check-item-selected"
-                 class="checker" radio-required>
-          <checker-item :value="filmTime" v-for="(filmTime, index) in filmTimeList" :key="index"
-                        @on-item-click="changeTime">{{filmTime.dtime}}
-          </checker-item>
-        </checker>
-        <label>场次</label>
-        <checker v-model="planCheck" default-item-class="check-item" selected-item-class="check-item-selected"
-                 class="checker" radio-required>
-          <checker-item :value="filmPlan" v-for="(filmPlan, index) in filmPlanList" :key="index"
-                        @on-item-click="changePlan">{{filmPlan.startTime}}
-          </checker-item>
-        </checker>
-        <div class="numItem">
-          <x-number title="数量" v-model="value"></x-number>
+        <div flex="dir:top" class="body">
+          <label class="title">时间</label>
+          <checker v-model="timeCheck" default-item-class="check-item"  selected-item-class="check-item-selected"
+                   class="checker" radio-required>
+            <checker-item :value="filmTime" v-for="(filmTime, index) in filmTimeList" :key="index"
+                          @on-item-click="changeTime">{{filmTime.dtime}}
+            </checker-item>
+          </checker>
+          <label class="title">场次</label>
+          <checker v-model="planCheck" default-item-class="check-item" selected-item-class="check-item-selected"
+                   class="checker" radio-required>
+            <checker-item :value="filmPlan" v-for="(filmPlan, index) in filmPlanList" :key="index"
+                          @on-item-click="changePlan">{{filmPlan.startTime}}
+            </checker-item>
+          </checker>
+          <div class="numItem">
+            <x-number title="购买数量" v-model="value"></x-number>
+          </div>
         </div>
-        <x-button type="primary" class="no-radius" @click.native="$router.push({name:'Snack'})">
+        <div class="btn" @click="$router.push({name:'Snack'})">
           确认
-        </x-button>
+        </div>
       </div>
     </popup>
   </div>
@@ -222,32 +224,36 @@
 <style lang="less" scoped>
   @import "~style/base-variables";
 
-  .numItem {
-    margin-top: 20px;
-    border-top: solid @border-color 1px;
-    padding-top: 10px;
-  }
+
 
   .checker {
     display: flex;
     justify-content: space-around;
-    margin-top: 20px;
-  }
-
-  .check-item {
-    border: 1px solid #ececec;
-    padding: 5px 15px;
-    width: 80px;
-    text-align: center;
-  }
-
-  .check-item-selected {
-    border: 1px solid green;
+    flex-wrap: wrap;
+    margin-top: 15px;
   }
 
   .popBottom {
-    padding: 10px;
-    background-color: white;
+    background: url(../../assets/images/page_bg.png);
+    .title{
+      font-size: 16px;
+      margin-top: 23px;
+      margin-left: 15px;
+    }
+    .body{
+      background: rgba(255,251,244,.5);
+    }
+    .btn{
+      font-size: 16px;
+      text-align: center;
+      line-height: 45px;
+    }
+    .numItem {
+      margin-top: 20px;
+      border-top: solid @border-color 1px;
+      padding-top: 10px;
+      font-size: 16px;
+    }
   }
 
   .bottomBtn {
@@ -293,11 +299,11 @@
     .titleBar {
       justify-content: space-around;
       width: 100%;
-      .title{
+      .title {
         font-size: 16px;
         font-weight: bold;
       }
-      .des{
+      .des {
         font-size: 11px;
       }
       .price {
