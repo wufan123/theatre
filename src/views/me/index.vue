@@ -50,6 +50,7 @@ export default {
   methods:{
     fetchData(){
       AuthApi.getUserInfo().then(success => {
+        this.$store.commit('common/setUserInfo', success.data)
         this.userInfo = success.data
       }, error => {
 

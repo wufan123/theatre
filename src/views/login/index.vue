@@ -39,6 +39,7 @@
       login(){
             Auth.smsLogin(this.form.phone,this.form.pw).then((success)=>{
               this.$vux.toast.text("登录成功", 'bottom');
+              this.$store.commit('common/setUserInfo', success.data)
               this.$router.push('Home')
             },(error)=>{
               this.$vux.toast.text(error.text, 'bottom');
