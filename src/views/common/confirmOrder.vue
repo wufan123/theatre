@@ -4,12 +4,12 @@
       <div class="c-order">
         <div class="c-goods">
           <list twoLine>
-            <list-item
-              :img="`https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513599973802&di=e0ed1059c34a8eb1d89a8e8bd1c7da11&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F4b90f603738da97726166db6ba51f8198618e376.jpg`"
-              :contentTitle="`坊巷文化影音秀`" extra="￥228.00" :contentBrief="`x 1`"></list-item>
-            <list-item
-              :img="`https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513599973802&di=e0ed1059c34a8eb1d89a8e8bd1c7da11&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F4b90f603738da97726166db6ba51f8198618e376.jpg`"
-              :contentTitle="`永和鱼丸`" extra="￥10.00" :contentBrief="`x 1`"></list-item>
+            <div v-if="orderInfo&&orderInfo.film">
+              <list-item :img="orderInfo.film.image" :contentTitle="orderInfo.film.filmName" :extra="`￥${orderInfo.film.price}`" :contentBrief="`x ${orderInfo.film.seatCount}`"></list-item>
+            </div>
+            <div v-if="orderInfo&&orderInfo.goods&&orderInfo.goods.list">
+              <list-item v-for="item in orderInfo.goods.list" :key="item.name" :img="item.goodsImg" :contentTitle="item.name" :extra="`￥${item.price}`" :contentBrief="`x ${item.number}`"></list-item>
+            </div>
           </list>
         </div>
         <list>
@@ -24,7 +24,7 @@
         </div>
       </div>
       <group>
-        <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile" v-model="telphone"></x-input>
+        <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile" v-model="mobilePhone"></x-input>
       </group>
       <div class="info">
         <p>温馨提示：</p>
@@ -36,10 +36,23 @@
 <script>
   import {List, ListItem} from 'views/components/settingList'
   import {XInput, Group} from "vux";
+  import OrderApi from 'api/orderApi'
   export default {
     data(){
       return {
-        telphone: '13800138000'
+        mobilePhone: '',
+        orderId: this.$route.query.orderId,
+        orderInfo: {}
+      }
+    },
+    methods: {
+      fetchData(){
+        this.mobilePhone = this.$store.state.common.userInfo.bindmobile
+        OrderApi.getCinemaOrderInfo(this.orderId).then(success => {
+          this.orderInfo = success.data
+        }, error => {
+          
+        })
       }
     },
     components: {List, ListItem, XInput, Group}
