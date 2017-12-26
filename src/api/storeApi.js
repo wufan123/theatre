@@ -47,6 +47,15 @@ function getGoodsList() {
       orderId: orderId
     })
   }
+
+  // 合并影票卖品订单
+  function mergeOrder(filmOrderId, goodsOrderId, mobile) {
+    return apiHttp.get('/user/mergeOrder', {
+      filmOrderId: filmOrderId,
+      goodsOrderId: goodsOrderId,
+      mobile: mobile
+    });
+  }
   
   /**
    * 生成套票订单
@@ -234,5 +243,6 @@ function getGoodsList() {
     createGoodsFilmOrder: createGoodsFilmOrder,
     getGoodsDetail: getGoodsDetail,
     updateGoodsOrder: updateGoodsOrder,
-    getBuyingGoods: getBuyingGoods
+    getBuyingGoods: getBuyingGoods,
+    mergeOrder: mergeOrder
   }
