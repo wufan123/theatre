@@ -7,7 +7,7 @@ import apiHttp from './apiHttp'
  * @param {*} phone 	手机号
  * @param {*} seatInfo 锁座信息（json格式）[{"seatNo":"098089","seatPieceName":"座区名称","seatPieceNo":"2342332"}]
  */
-function setPlanAndGoodsOrder(featureAppNo, seatIntroduce, phone, seatInfo) {
+function setPlanAndGoodsOrder(featureAppNo, seatIntroduce, mobile, seatInfo) {
     let params = {
         cinemaCode: apiHttp.CINEMA_CODE,
         featureAppNo: featureAppNo,
@@ -208,6 +208,7 @@ export default {
     getPackageOrders: getPackageOrders,
     cancelOrder: cancelOrder,
     updateOrderMobile: updateOrderMobile,
-    getFilmOrderInfo: getFilmOrderInfo
+    getFilmOrderInfo: getFilmOrderInfo,
+    setPlanAndGoodsOrder: setPlanAndGoodsOrder
 
 }

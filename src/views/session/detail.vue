@@ -56,9 +56,9 @@
           </checker-item>
         </checker>
         <div class="numItem">
-          <x-number title="数量" v-model="value"></x-number>
+          <x-number title="数量" v-model="ticketCount"></x-number>
         </div>
-        <x-button type="primary" class="no-radius" @click.native="$router.push({name:'Snack'})">
+        <x-button type="primary" class="no-radius" @click.native="createOrder">
           确认
         </x-button>
       </div>
@@ -81,7 +81,7 @@
         show: false,
         timeCheck: null,
         planCheck: null,
-        value: 1,
+        ticketCount: 1,
         filmDetail: null,
         filmPrice: '-',
         filmTimeList: [],
@@ -182,7 +182,6 @@
         this.$vux.loading.show({
           text: '加载座位'
         })
-        let context = this
         FilmApi.getSeat(featureAppNo).then(success => {
           this.$vux.loading.hide()
           this.checkHasOrder(success.data)
@@ -197,6 +196,7 @@
       checkHasOrder: function (data) {
         if (data.hasOrder) {
           // TODO 提示有未付订单
+          let context = this
           this.$vux.confirm.show({
             title: '温馨提示',
             content: '存在未付款影票订单',
@@ -207,7 +207,10 @@
               OrderApi.cancelOrder(data.hasOrder).then(success => {
 
               }, error => {
-
+                this.$vux.toast.show({
+                  type: 'cancel',
+                  text: '订单取消失败'
+                })
               })
             },
             onConfirm () {
@@ -215,6 +218,72 @@
             }
           })
         }
+      },
+      createOrder: function() {
+        let mobilePhone = this.$store.state.common.userInfo.bindmobile
+        if (!mobilePhone) {
+          this.$vux.toast.show({
+            type: 'cancel',
+            text: '获取用户信息失败'
+          })
+          return;
+        }
+        if (this.ticketCount <= 0) {
+          this.$vux.toast.show({
+            type: 'cancel',
+            text: '数量必须大于0'
+          })
+          return;
+        }
+        if (!this.seatList || this.seatList.length == 0) {
+          this.$vux.toast.show({
+            type: 'cancel',
+            text: '座位加载失败'
+          })
+          return;
+        }
+        let seat = [];
+        this.seatList.forEach(row => {
+          row.forEach(col => {
+            if (col.SeatState == 0) {
+              seat.push(col)
+            }
+          })
+        })
+        if (seat.length == 0) {
+          this.$vux.toast.show({
+            type: 'cancel',
+            text: '已售罄'
+          })
+          return;
+        }
+        if(seat.length < this.ticketCount){
+          this.$vux.toast.show({
+            type: 'cancel',
+            text: '余票不足'
+          })
+          return;
+        }
+
+        let selectedSeat = seat.slice(0, this.ticketCount)
+        let seatIntroduce = [], seatInfo = []
+        selectedSeat.forEach(e => {
+          seatIntroduce.push(e.SeatRow + '排' + e.SeatCol + '座')
+          seatInfo.push({ seatNo: e.SeatNo, seatPieceNo: e.seatPieceNo })
+        })
+        this.$vux.loading.show({
+          text: '锁座中'
+        })
+        OrderApi.setPlanAndGoodsOrder(this.planCheck.featureAppNo, seatIntroduce.join(','), mobilePhone, JSON.stringify(seatInfo)).then(success => {
+          this.$vux.loading.hide()
+          this.$router.push({path: 'Snack', query: {orderId: success.data.planOrderId}})
+        }, error => {
+          this.$vux.loading.hide()
+          this.$vux.toast.show({
+            type: 'cancel',
+            text: '锁座失败'
+          })
+        })
       }
     }
   }
