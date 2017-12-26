@@ -19,8 +19,22 @@ input.input{padding: 0 10px;border: 0;outline:none;background: #eee;width:-webki
 .bottomBtn{
   position: fixed !important;
   bottom: 0;
-  z-index: 1000;
+  z-index: 200;
 }
 .s-button{padding: 2px 10px;line-height: 22px; display: inline-block;border: 1px solid #cd2e1b;position: relative;background: #cd2e1b;color:#ffffff;}
 .s-button::before {content: "";display: block;border: 2px solid #1b2a3d;position: absolute; left: 0;right: 0;top: 0;bottom: 0;}
 .s-button.khaki::before{border-color:#fff3e2 }
+
+.check-item {
+  width: 105px;
+  height: 45px;
+  line-height: 45px;
+  margin-bottom: 10px;
+  text-align: center;
+  background: @color-primary3;
+  font-size: 14px;
+}
+
+.check-item-selected {
+  border: 1px solid @color-primary;
+}

@@ -20,7 +20,7 @@
         </div>
       </div>
       <!--介绍-->
-      <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')">
+      <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')" v-show="introduceList&&introduceList.length>0">
         <label slot="rightTop" @click="$router.push('IntroduceList')">更多</label>
         <scroll-view slot="main">
           <div flex="dir:top " v-for="(item,index) in introduceList" class="introduceItem" :key="index"
@@ -42,14 +42,14 @@
             <div flex="dir:top" class="info">
               <label class="title">《三坊七巷》</label>
               <label class="des f12">中瑞剧坊，坊巷文化影音秀</label>
-              <label class="price">￥228</label>
+              <label class="price">￥288</label>
             </div>
             <div class="s-button buy">购买</div>
           </div>
         </scroll-view>
       </list-cell>
       <!--套票-->
-      <list-cell :topImg="require('assets/images/home/title_package.png')">
+      <list-cell :topImg="require('assets/images/home/title_package.png')" v-show="packageList&&stampsList.length>0">
         <scroll-view slot="main">
           <div v-for="(item,index) in packageList" :key="index" :style="{backgroundImage:`url(${require('assets/images/home/package_bg.png')})`}" class="ticketItem">
             <div flex="dir:top" class="info">
@@ -62,7 +62,7 @@
         </scroll-view>
       </list-cell>
       <!--通兑券-->
-      <list-cell :topImg="require('assets/images/home/title_stamps.png')">
+      <list-cell :topImg="require('assets/images/home/title_stamps.png')" v-show="stampsList&&stampsList.length>0">
         <scroll-view slot="main">
           <div v-for="(item,index) in stampsList" :key="index" :style="{backgroundImage:`url(${require('assets/images/home/stamps_bg.png')})`}"
                class="ticketItem">
