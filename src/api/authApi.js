@@ -118,6 +118,15 @@ function findPasswd(userMobile, validateCode, userPasswd) {
     })
 }
 
+/**
+ * 获取微信配置信息
+ */
+function getWeixinConfig() {
+    return apiHttp.post('/user/getWeixinConfig', {
+        cinemaCode: apiHttp.CINEMA_CODE
+    })
+}
+
 
 export default {
     registered: registered,
@@ -128,5 +137,6 @@ export default {
     modifyUserInfo: modifyUserInfo,
     getValidateCode: getValidateCode,
     smsLogin: smsLogin,
-    registeredConfig: registeredConfig
+    registeredConfig: registeredConfig,
+    getWeixinConfig: getWeixinConfig
 }
