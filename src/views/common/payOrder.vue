@@ -32,11 +32,20 @@ export default {
         icon: 'http://dn-placeholder.qbox.me/110x110/FF2D55/000',
         key: '2',
         value: '微信'
-      }]
+      }],
+
+      orderId: this.$route.params.orderId,
+      orderType: this.$route.params.orderType,
+      payLockInfo: this.$route.params.payLockInfo
     }
   },
   components:{List,ListItem, Group,Radio},
   methods:{
+    fetchData(){
+      console.log('orderId='+this.orderId)
+      console.log('orderType='+this.orderType)
+      console.log(this.payLockInfo)
+    },
     change(val){
       console.log('change',val)
     }

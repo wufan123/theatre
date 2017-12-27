@@ -1,5 +1,5 @@
 <template>
-  <page :headerTitle="`确认订单`" :footerText="`支付`" :footerLink="`PayOrder`">
+  <page :headerTitle="`确认订单`" :footerText="`支付`" :footerFunc="lockAndPayOrder">
     <div slot="contain">
       <div class="c-order">
         <div class="c-goods">
@@ -19,12 +19,12 @@
           <list-item :content="`会员卡`" extra="未选择" isLink :link="`MemberCard`"></list-item>
         </list>
         <div class="price">
-          <div class="flexb"><label>总价</label><label>￥233.00</label></div>
-          <div class="flexb"><label>实付款</label><label>￥233.00</label></div>
+          <div class="flexb"><label>总价</label><label>￥{{orderInfo._price}}</label></div>
+          <div class="flexb"><label>实付款</label><label>￥{{orderInfo._price}}</label></div>
         </div>
       </div>
       <group>
-        <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile" v-model="mobilePhone"></x-input>
+        <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile" v-model="phone"></x-input>
       </group>
       <div class="info">
         <p>温馨提示：</p>
@@ -37,21 +37,85 @@
   import {List, ListItem} from 'views/components/settingList'
   import {XInput, Group} from "vux";
   import OrderApi from 'api/orderApi'
+  import StoreApi from 'api/storeApi'
   export default {
     data(){
       return {
-        mobilePhone: '',
+        phone: '',
         orderId: this.$route.query.orderId,
-        orderInfo: {}
+        orderType: 'goodsAndFilm',
+        orderInfo: {}, // 订单信息
+        orderPayWay: {}, // 优惠券信息
+        selectCard: null, // 选择的会员卡
+        oldPhone: null, // 保存旧手机号，判断是否有修改
       }
     },
     methods: {
       fetchData(){
-        this.mobilePhone = this.$store.state.common.userInfo.bindmobile
+        this.phone = this.$store.state.common.userInfo.bindmobile
+        this.oldPhone = this.phone
+        // 获取优惠券信息
+        StoreApi.getOrderPayWay(this.orderId, this.orderType).then(success => {
+          this.orderPayWay = success.data
+        }, error => {
+
+        })
+        // 获取订单信息
         OrderApi.getCinemaOrderInfo(this.orderId).then(success => {
           this.orderInfo = success.data
+          this.caculateCount()
         }, error => {
           
+        })
+      },
+      // 计算总价
+      caculateCount: function () {
+        //初始化显示订单价格
+        this.orderInfo.film._price = parseFloat(this.orderInfo.film.price)
+        // TODO 如果有使用会员卡
+        // if (this.selectCard) {
+        //     this.orderInfo.film._price = parseFloat(this.selectCard.settlementPrice) * parseInt(this.orderInfo.film.seatCount)
+        // }
+        // 原始总价
+        this.orderInfo._price = this.orderInfo.film._price + (parseFloat(this.orderInfo.goods ? this.orderInfo.goods.price : 0))
+        
+        // TODO 计算优惠券
+        
+      },
+      // 锁定，跳转到支付页面
+      lockAndPayOrder: function() {
+        if (this.phone === '') {
+            this.$vux.toast.show({
+              type: 'cancel',
+              text: '手机号不能为空'
+            })
+            return
+        }
+        if (this.oldPhone !== this.phone) {
+            OrderApi.updateOrderMobile(this.phone)
+        }
+        // 优惠券信息
+        var couponStr = ''
+        // 会员卡信息
+        var cardId = this.selectCard ? this.selectCard.id : null
+
+        this.$vux.loading.show({
+          text: '加载中'
+        })
+        StoreApi.getOrderPayLock(this.orderId, this.orderType, cardId, couponStr).then(success => {
+          this.$vux.loading.hide()
+          if (success && success.price == 0) {
+              // TODO 不需要实际支付，直接调用支付接口
+
+          } else {
+            this.$router.push({name: 'PayOrder', params: {
+              orderId: this.orderId,
+              orderType: this.orderType,
+              payLockInfo: success
+            }})
+          }
+        }, error => {
+          this.$vux.loading.hide()
         })
       }
     },
