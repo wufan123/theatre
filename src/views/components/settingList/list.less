@@ -2,6 +2,7 @@
 .am-list{
   padding: 10px 0;
   display: block;
+  font-size: 15px;
   .am-list-header{
     font-size: 12px;
     padding: 15px 15px 9px;
@@ -59,7 +60,6 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       font-size: 16px;
-      font-weight: bold;
     }
     .am-list-brief {
       color:#888;
@@ -133,8 +133,17 @@
     &.twoline{
       .am-list-thumb img{
         display: block;
-        width: 45px;
-        height: 45px
+        width: 95px;
+        height: 65px;
+        border-radius: 5px;
+      }
+      .am-list-title{
+        font-weight: bold;
+      }
+      .am-list-extra{
+          font-size: 17px;
+          font-weight: bold;
+        color: @color-primary;
       }
     }
   }
