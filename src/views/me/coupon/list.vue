@@ -23,7 +23,7 @@
     </page>
 </template>
 <script>
-  import PageScroller from 'views/components/PageScroller.vue'
+  import PageScroller from 'views/components/pageScroller.vue'
   import CouponItem from 'views/components/couponList/item.vue'
    import {XInput,XButton} from 'vux'
   import CouponApi from 'api/couponApi'

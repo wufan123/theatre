@@ -17,7 +17,7 @@
   </div>
 </template>
 <script>
-  import PageScroller from 'views/components/PageScroller.vue'
+  import PageScroller from 'views/components/pageScroller.vue'
   import GoodItem from 'views/components/goodList/item.vue'
   import StoreApi from 'api/storeApi'
   import {XNumber} from 'vux'

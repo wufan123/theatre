@@ -1,61 +1,100 @@
 <template>
   <page white :headerTitle="`剧坊会员卡`" :headerRText="`添加会员卡`" :headerRLink="`AddCard`">
     <div slot="contain">
-      <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage  usePulldown height='-46' >
-        <div v-for="(item,index) in dataList" class="card-list">
-          <div class="card-item">
-            <p class="center f12 mb20">{{index+1}}金牌导游：888888</p>
-            <p class="mb20">余额：￥20.00</p>
-            <div flex="main:justify">
-              <label>有效期：2018-10-11</label>
-              <x-button mini type="primary" style="margin:0">充值</x-button>
+      <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-46'>
+        <div v-for="(item,index) in dataList" class="card-item">
+          <div flex="dir:top" class="info">
+            <label class="title">{{index + 1}}金牌导游：888888</label>
+            <div class="sum">
+              <label >余额：</label>
+              <label >￥20.00</label>
             </div>
+            <label class="validity">有效期：2018-10-11</label>
           </div>
+          <div class="s-button khaki reCharge">充值</div>
+          <label class="delete">—</label>
         </div>
-        </page-scroller>
+      </page-scroller>
     </div>
   </page>
 </template>
 <script>
-import PageScroller from 'views/components/PageScroller.vue'
-import CardApi from 'api/cardApi'
-import {List,ListItem} from 'views/components/settingList'
+  import PageScroller from 'views/components/pageScroller.vue'
+  import CardApi from 'api/cardApi'
+  import {List, ListItem} from 'views/components/settingList'
 
-export default {
-  components:{PageScroller,List,ListItem},
-  data(){
-    return{
-      dataList:[]
-    }
-  },
-  methods:{
-    getDataList(page){
-      return CardApi.getCardInfo().then(res =>{
-        res = {
-          data:[{name:'1111',id:'111111'},{name:'2222',id:'22222'},{name:'3333',id:'3333'}],
-          page:{
-            number:0,size:10,totalElements:3,totalPages:0
-          }
-        }
-        page == 0 ? this.dataList= res.data : this.dataList= this.dataList.concat(res.data)
-        //this.dataList = this.dataList.concat(res.data)
-        return res
-      })
+  export default {
+    components: {PageScroller, List, ListItem},
+    data(){
+      return {
+        dataList: []
+      }
     },
-    fetchData(){
-      return this.$refs.scroller.reset()
+    methods: {
+      getDataList(page){
+        return CardApi.getCardInfo().then(res => {
+          res = {
+            data: [{name: '1111', id: '111111'}, {name: '2222', id: '22222'}, {name: '3333', id: '3333'}],
+            page: {
+              number: 0, size: 10, totalElements: 3, totalPages: 0
+            }
+          }
+          page == 0 ? this.dataList = res.data : this.dataList = this.dataList.concat(res.data);
+          //this.dataList = this.dataList.concat(res.data)
+          return res
+        })
+      },
+      fetchData(){
+        return this.$refs.scroller.reset()
+      }
     }
   }
-}
 </script>
 
 <style lang="less" scoped>
-.card-list{padding: 20px 40px;
-  .card-item{border:1px solid #eee;padding:10px 20px;}
-}
-.no-card{margin: 0px 60px;
-  .icon{height: 300px;
-  img{width: 80px;height: 80px;margin-bottom: 20px;}}
-}
+  @import "~style/base-variables.less";
+  .card-item {
+    height: 125px;
+    width: 345px;
+    margin: 0 15px 15px;
+    background-size: 100% 100% !important;
+    background: url(../../../assets/images/me/member_card_bg.png);
+    position: relative;
+    .info {
+      margin-left: 90px;
+      font-size: 14px;
+      .title {
+        margin-top: 20px;
+        color: @color-sub;
+        font-size: 12px;
+      }
+      .sum{
+        margin-top: 15px;
+        :nth-child(2){
+          font-size: 20px;
+          color: @color-primary;
+        }
+      }
+    }
+    .reCharge{
+      position: absolute;
+      bottom: 25px;
+      right: 25px;
+    }
+    .delete{
+      font-weight: bold;
+      color: white;
+      background: @color-active;
+      border-radius: 50%;
+      display: inline-flex;
+      height: 18px;
+      width: 18px;
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 </style>
 

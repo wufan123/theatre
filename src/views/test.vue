@@ -29,7 +29,7 @@
 </template>
 <script>
   import {List,ListItem} from '@/views/components/settingList'
-  import PageScroller from './components/PageScroller.vue'
+  import PageScroller from './components/pageScroller.vue'
   import orderApi from 'api/orderApi'
 export default {
   data(){

@@ -68,7 +68,7 @@
   </div>
 </template>
 <script>
-  import PageScroller from 'views/components/PageScroller.vue'
+  import PageScroller from 'views/components/pageScroller.vue'
   import {Popup, Checker, CheckerItem, XNumber} from 'vux'
   import FilmApi from "api/filmApi"
   import PlanApi from "api/planApi"

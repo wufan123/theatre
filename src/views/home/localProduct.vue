@@ -13,7 +13,7 @@
   </page>
 </template>
 <script>
-  import PageScroller from 'views/components/PageScroller.vue'
+  import PageScroller from 'views/components/pageScroller.vue'
   import {XButton} from 'vux'
   import TheatreApi from 'api/theatreApi'
   import GoodItem from 'views/components/goodList/item.vue'

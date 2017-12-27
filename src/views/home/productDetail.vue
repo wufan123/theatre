@@ -29,7 +29,7 @@
   </page>
 </template>
 <script>
-  import PageScroller from 'views/components/PageScroller.vue'
+  import PageScroller from 'views/components/pageScroller.vue'
   import StoreApi from 'api/storeApi'
   import {XButton} from 'vux'
   export default {

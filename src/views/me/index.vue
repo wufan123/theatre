@@ -63,7 +63,7 @@ export default {
   .me-top{text-align: center;padding:20px 0;line-height: 30px;background: #ffffff;border-bottom: 1px solid #ccc;}
   i.member{background: #ccc;display: inline-block;line-height: 20px;padding: 2px 15px;border-radius: 20px;position: relative;
     &:before{ content:'';width: 15px;height: 15px;display: inline-block;background-size:100%;
-    background-image:url('../../assets/images/member_icon.png'); position: relative;margin:1px 8px -3px 0;
+    background-image:url('../../assets/images/me.png'); position: relative;margin:1px 8px -3px 0;
     }
   }
   .me-order{background: #ffffff;padding:10px 0;

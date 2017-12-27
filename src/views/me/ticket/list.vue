@@ -22,7 +22,7 @@
   </page>
 </template>
 <script>
-import PageScroller from "views/components/PageScroller.vue";
+import PageScroller from "views/components/pageScroller.vue";
 import TheatreApi from "api/theatreApi";
 import { List, ListItem } from "views/components/settingList";
 

@@ -14,7 +14,7 @@
   </page>
 </template>
 <script>
-  import PageScroller from 'views/components/PageScroller.vue'
+  import PageScroller from 'views/components/pageScroller.vue'
   import CouponItem from 'views/components/couponList/item.vue'
   import StoreApi from 'api/storeApi'
   import TheatreApi from 'api/theatreApi'
