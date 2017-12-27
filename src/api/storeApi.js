@@ -92,10 +92,10 @@ function getGoodsList() {
    * 提交第一步确认支付 包含一起使用电影优惠券跟卖品券 会员卡
    * @param {*} orderId 
    * @param {*} orderType 
-   * @param {*} success_cb 
-   * @param {*} fail_cb 
+   * @param {*} cardId 
+   * @param {*} couponCode 
    */
-  function getOrderPayLock(orderId, orderType, cardId) {
+  function getOrderPayLock(orderId, orderType, cardId, couponCode) {
     var param = {
       cinemaCode: apiHttp.CINEMA_CODE,
       orderId: orderId,

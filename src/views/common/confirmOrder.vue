@@ -24,7 +24,7 @@
         </div>
       </div>
       <group>
-        <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile" v-model="mobilePhone"></x-input>
+        <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile" v-model="phone"></x-input>
       </group>
       <div class="info">
         <p>温馨提示：</p>
@@ -41,17 +41,19 @@
   export default {
     data(){
       return {
-        mobilePhone: '',
+        phone: '',
         orderId: this.$route.query.orderId,
         orderType: 'goodsAndFilm',
         orderInfo: {}, // 订单信息
         orderPayWay: {}, // 优惠券信息
-        selectCard: null // 选择的会员卡
+        selectCard: null, // 选择的会员卡
+        oldPhone: null, // 保存旧手机号，判断是否有修改
       }
     },
     methods: {
       fetchData(){
-        this.mobilePhone = this.$store.state.common.userInfo.bindmobile
+        this.phone = this.$store.state.common.userInfo.bindmobile
+        this.oldPhone = this.phone
         // 获取优惠券信息
         StoreApi.getOrderPayWay(this.orderId, this.orderType).then(success => {
           this.orderPayWay = success.data
@@ -82,7 +84,39 @@
       },
       // 锁定，跳转到支付页面
       lockAndPayOrder: function() {
-        console.log("lockAndPayOrder")
+        if (this.phone === '') {
+            this.$vux.toast.show({
+              type: 'cancel',
+              text: '手机号不能为空'
+            })
+            return
+        }
+        if (this.oldPhone !== this.phone) {
+            OrderApi.updateOrderMobile(this.phone)
+        }
+        // 优惠券信息
+        var couponStr = ''
+        // 会员卡信息
+        var cardId = this.selectCard ? this.selectCard.id : null
+
+        this.$vux.loading.show({
+          text: '加载中'
+        })
+        StoreApi.getOrderPayLock(this.orderId, this.orderType, cardId, couponStr).then(success => {
+          this.$vux.loading.hide()
+          if (success && success.price == 0) {
+              // TODO 不需要实际支付，直接调用支付接口
+
+          } else {
+            this.$router.push({name: 'PayOrder', params: {
+              orderId: this.orderId,
+              orderType: this.orderType,
+              payLockInfo: success
+            }})
+          }
+        }, error => {
+          this.$vux.loading.hide()
+        })
       }
     },
     components: {List, ListItem, XInput, Group}
