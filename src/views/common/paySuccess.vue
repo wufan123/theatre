@@ -1,14 +1,21 @@
 <template>
   <page :headerTitle="`购买成功`">
-    <div slot="contain">
-      <div class="result">
-        <x-button type="primary" @click.native="$router.push('/')">返回</x-button>
-      </div>
-      
+    <div slot="contain" flex="dir:top cross:center">
+      <img :src="require('assets/images/pay/success.png')" class="result"/>
+      <img :src="require('assets/images/pay/check_order.png')" class="resultTip"/>
     </div>
   </page>
 </template>
 <style lang="less" scoped>
-  .result{margin: 60px;}
+  .result{
+    height: 80px;
+    width: 80px;
+    margin-top: 45px;
+  }
+  .resultTip{
+    height: 31px;
+    width: 175px;
+    margin-top: 56px;
+  }
 </style>
 
