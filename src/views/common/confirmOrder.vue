@@ -2,9 +2,9 @@
   <page :headerTitle="`确认订单`" :footerText="`支付`" :footerFunc="lockAndPayOrder">
     <div slot="contain">
       <div class="c-order">
-        <div class="c-goods">
+        <div class="c-info">
           <list twoLine>
-            <div v-if="orderInfo&&orderInfo.film">
+            <div v-if="orderInfo&&orderInfo.film" class="good-content">
               <list-item :img="orderInfo.film.image" :contentTitle="orderInfo.film.filmName" :extra="`￥${orderInfo.film.price}`" :contentBrief="`x ${orderInfo.film.seatCount}`"></list-item>
             </div>
             <div v-if="orderInfo&&orderInfo.goods&&orderInfo.goods.list">
@@ -12,15 +12,19 @@
             </div>
           </list>
         </div>
-        <list>
-          <list-item :content="`优惠券`" extra="4张可用" isLink :link="`CouponList`"></list-item>
-        </list>
-        <list>
-          <list-item :content="`会员卡`" extra="未选择" isLink :link="`MemberCard`"></list-item>
-        </list>
+        <div class="c-info">
+          <list>
+            <list-item :content="`优惠券`" extra="4张可用" isLink :link="`CouponList`"></list-item>
+          </list>
+        </div>
+        <div class="c-info">
+          <list>
+            <list-item :content="`会员卡`" extra="未选择" isLink :link="`MemberCard`"></list-item>
+          </list>
+        </div>
         <div class="price">
           <div class="flexb"><label>总价</label><label>￥{{orderInfo._price}}</label></div>
-          <div class="flexb"><label>实付款</label><label>￥{{orderInfo._price}}</label></div>
+          <div class="flexb payment"><label >实付款</label><label>￥{{orderInfo._price}}</label></div>
         </div>
       </div>
       <group>
@@ -65,7 +69,7 @@
           this.orderInfo = success.data
           this.caculateCount()
         }, error => {
-          
+
         })
       },
       // 计算总价
@@ -78,9 +82,9 @@
         // }
         // 原始总价
         this.orderInfo._price = this.orderInfo.film._price + (parseFloat(this.orderInfo.goods ? this.orderInfo.goods.price : 0))
-        
+
         // TODO 计算优惠券
-        
+
       },
       // 锁定，跳转到支付页面
       lockAndPayOrder: function() {
@@ -127,21 +131,33 @@
   .c-order{
     padding: 0 15px;
     background: @base-bg-color;
-    .am-list {
-      padding: 0
-    }
-    .c-goods {
+    .c-info {
+      border-bottom: dashed @border-color 1px;
     }
     .am-list-item {
       padding: 15px 0;
       margin-top: -1px;
     }
     .price {
-      padding: 10px 0;
+      padding: 15px 0;
+      font-size: 14px;
+      color: @font-color-sub;
+      .payment{
+        :first-child{
+          color: @font-color;
+          font-size: 15px;
+        }
+        :nth-child(2){
+          font-size: 17px;
+          color: @color-primary;
+          font-weight: bold;
+        }
+      }
     }
   }
   .info {
     margin: 15px;
+    font-size: 16px;
   }
 
 </style>
