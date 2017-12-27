@@ -1,35 +1,34 @@
 <template>
     <page :headerTitle="`优惠券`" flex-box="1" :white="true">
       <img src="../../../assets/images/scan.png" slot="rightTop" class="icon"/>
-      <div slot="contain" style="background-color: white">
-        <div flex="dir:left cross:center main:center">
-          <div class="inputOut">
-            <x-input  v-model="value" ></x-input>
+      <div slot="contain">
+
+        <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-48' >
+          <div flex="dir:left cross:center " class="topBar">
+            <div class="inputOut">
+              <x-input  v-model="value" ></x-input>
+            </div>
+            <div class="s-button khaki">添加</div>
           </div>
-          <div>
-            <XButton  class="no-radius" type="primary" mini>添加</XButton>
+          <coupon-item v-for="item in 7">
+            <label class="leftTitle" slot="right">立减券</label>
+            <label class="leftInfo" slot="right">有效期 2017-12-11</label>
+            <label class="rightTitle" slot="left">￥30</label>
+          </coupon-item>
+          <div flex="flex:left main:center">
+              <img :src="require('assets/images/me/coupon_lost.png')" class="couponLost">
           </div>
-        </div>
-        <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-88' >
-        <div v-for="(item,index) in dataList" :key="index" flex="dir:left cross:center" class="couponItem">
-          <div flex="dir:top" flex-box="1">
-            <label>{{item.cinemaName}}立减券</label>
-            <label>有效期:2017-12-11</label>
-          </div>
-          <div>
-             <label>¥20</label>
-          </div>
-        </div>
         </page-scroller>
       </div>
     </page>
 </template>
 <script>
-  import PageScroller from '../../components/PageScroller.vue'
+  import PageScroller from 'views/components/PageScroller.vue'
+  import CouponItem from 'views/components/couponList/item.vue'
    import {XInput,XButton} from 'vux'
   import CouponApi from 'api/couponApi'
     export default {
-      components:{XInput,XButton,PageScroller},
+      components:{XInput,XButton,PageScroller,CouponItem},
       data(){
             return {
               value:'11111',
@@ -57,24 +56,49 @@
 
     }
 </script>
-<style lang="less">
+<style lang="less" scoped>
   @import "~style/base-variables";
-  .couponItem{
-    height: 60px;
-    border: solid @border-color 1px;
-    margin: 10px 20px;
-    padding: 10px;
-    border-radius: 5px;
+  .topBar{
+    padding: 15px 15px;
+    justify-content: space-between;
+    .inputOut{
+      border-top: solid @color-active 1px;
+      border-bottom: solid @color-active 1px;
+      font-size: 14px;
+      height: 30px;
+      width: 275px;
+      .weui-cell{
+        padding: 5px 11px;
+      }
+    }
   }
-  .inputOut{
-    background-color: #eee;
-    width: 200px;
+  .couponLost{
+    height: 31px;
   }
   .icon{
     height: 22px;
     width: 22px;
   }
-  .commonButton{
-    width: 100px;
+  .rightTitle {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 40px;
+  }
+
+  .rightTip {
+    font-size: 9px;
+  }
+
+  .leftTitle {
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    color: @color-sub;
+  }
+
+  .leftInfo {
+    font-size: 12px;
+    color: @font-color;
   }
 </style>

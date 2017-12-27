@@ -145,7 +145,7 @@ export default {
     }
 }
 </script>
-<style lang="less" >
+<style lang="less" scoped>
 @import '../../style/base-variables';
 .xxs-plugin-pullup-container {
     color: @font-color;
@@ -158,13 +158,11 @@ export default {
     width: 100%;
     height: 500px;
     .img {
-        background-image: url('../../assets/images/member_icon.png');
-        background-position: center bottom;
-        background-size: 100% 100%;
-        height: 76px;
-        width: 86px;
+      background-size:contain !important;
+        height: 105px;
+      width: 88px;
         margin-bottom: 20px;
-        background-repeat: no-repeat;
+      background: url(../../assets/images/no_data.png) center;
     }
 }
 </style>

@@ -1,36 +1,33 @@
 <template>
   <page :headerTitle="`限时抢`" flex-box="1">
-    <div slot="contain" >
-      <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown :height="'-46'">
-        <div v-for="(item,index) in dataList" :key="index" flex="dir:left cross:center" class="couponItem" @click="listItemClick">
-
-          <div flex="dir:top" :style="{backgroundImage:`url(${require('assets/images/home/sale_bg.png')})`}" class="left">
-            <label class="title">￥{{item.price}}</label>
-            <label class="info">{{item.packageName}}</label>
-          </div>
-          <div flex="dir:top" class="right" :style="{backgroundImage:index==0?`url(${require('assets/images/home/flash_sale_right_2.png')})`:`url(${require('assets/images/home/flash_sale_right_1.png')})`}">
-              <label class="title">立即抢</label>
-              <label class="tip">剩余{{item.stock}}份</label>
-          </div>
-        </div>
+    <div slot="contain">
+      <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage usePulldown
+                     :height="'-46'">
+        <coupon-item v-for="item in dataList">
+          <label class="leftTitle" slot="right">￥{{item.price}}</label>
+          <label class="leftInfo" slot="right">{{item.packageName}}</label>
+          <label class="rightTitle" slot="left">立即抢</label>
+          <label class="rightTip" slot="left">剩余{{item.stock}}份</label>
+        </coupon-item>
       </page-scroller>
     </div>
   </page>
 </template>
 <script>
   import PageScroller from 'views/components/PageScroller.vue'
+  import CouponItem from 'views/components/couponList/item.vue'
   import StoreApi from 'api/storeApi'
   import TheatreApi from 'api/theatreApi'
-    export default {
-      components:{PageScroller},
-      data(){
-        return {
-          dataList:[]
-        }
-      },
-      methods: {
-        getDataList(page){
-          return TheatreApi.getPackageList(202).then(success => {
+  export default {
+    components: {PageScroller, CouponItem},
+    data(){
+      return {
+        dataList: []
+      }
+    },
+    methods: {
+      getDataList(){
+        return TheatreApi.getPackageList(202).then(success => {
             this.dataList = success.data;
             let res = {
               data: success.data,
@@ -38,68 +35,49 @@
                 number: 0, size: success.data.length, totalElements: success.data.length, totalPages: 1
               }
             }
-          return res;
-        },
-        error => {
-          console.log(success);
-        }
-      );
-    },
-    fetchData() {
-      return this.$refs.scroller.reset();
-    },
-    listItemClick() {
-      this.$vux.toast.text("请到我的优惠券中查看", "bottom");
+            return res;
+          },
+          error => {
+            console.log(success);
+          }
+        );
+      },
+      fetchData() {
+        return this.$refs.scroller.reset();
+      },
+      listItemClick() {
+        this.$vux.toast.text("请到我的优惠券中查看", "bottom");
+      }
     }
-  }
-};
+  };
 </script>
-<style lang="less">
-@import "~style/base-variables";
-.coupon-list {
-  padding-top: 15px;
-}
-.couponItem {
-  height: 90px;
-  margin: 0 15px 15px;
-  border-radius: 5px;
-  .right {
-    height: 100%;
-    width: 75px;
-    background: center no-repeat;
-    background-size: 100%100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    .title {
-      font-size: 15px;
-      font-weight: bold;
-      text-align: center;
-      line-height: 40px;
-    }
-    .tip {
-      font-size: 9px;
-    }
+<style lang="less" scoped>
+  @import "~style/base-variables";
+
+  .coupon-list {
+    padding-top: 15px;
   }
-  .left {
-    height: 100%;
-    flex: 1;
-    background: center no-repeat;
-    background-size: 100%100%;
-    display: flex;
-    justify-content: center;
-    padding-left: 25px;
-    .title {
-      margin-bottom: 5px;
-      font-size: 20px;
-      font-weight: bold;
-      color: @color-primary2;
-    }
-    .info {
-      font-size: 12px;
-      color: @font-color;
-    }
+
+  .rightTitle {
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 40px;
   }
-}
+
+  .rightTip {
+    font-size: 9px;
+  }
+
+  .leftTitle {
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    color: @color-primary2;
+  }
+
+  .leftInfo {
+    font-size: 12px;
+    color: @font-color;
+  }
 </style>
