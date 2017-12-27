@@ -31,11 +31,18 @@
       footerLink: {
         type: [String, Object]
       },
+      footerFunc: {
+        type: Function
+      },
       contain: String
     },
     methods: {
       onClick () {
-        go(this.footerLink, this.$router)
+        if (this.footerLink) {
+          go(this.footerLink, this.$router)
+        } else if (this.footerFunc) {
+          this.footerFunc()
+        }
       },
       onClickR () {
         go(this.headerRLink, this.$router)
