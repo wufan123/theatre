@@ -1,5 +1,5 @@
 <template>
-<page :headerTitle="`支付订单`" :footerText="`确认支付`" :footerLink="`PaySuccess`" >
+<page :headerTitle="`支付订单`" :footerText="`确认支付`" :footerFunc="confirmPay" >
   <div slot="contain">
     <div class="center last-time">支付剩余时间：15：00</div>
     <list>
@@ -19,7 +19,9 @@
 </template>
 <script>
   import {List,ListItem} from 'views/components/settingList'
-    import { Group, Radio } from "vux";
+  import { Group, Radio } from "vux";
+  import StoreApi from 'api/storeApi'
+  import WxApi from 'api/wxApi'
 export default {
   data(){
     return{
@@ -45,6 +47,55 @@ export default {
       console.log('orderId='+this.orderId)
       console.log('orderType='+this.orderType)
       console.log(this.payLockInfo)
+    },
+    // 获取支付方式
+    getPayType: function () {
+      var payType = ""
+      if (!this.payLockInfo)
+          return payType
+      // if (this.useAccount > 0)
+      //     payType = "account"
+      // if (this.data.useIntegral > 0) {
+      //     if (payType)
+      //         payType += ","
+      //     payType += "integral"
+      // }
+      if (this.payLockInfo.price == 0) {
+          //如果当前无需支付任何金额，优惠券全抵扣的情况下，默认传account
+          if (!payType)
+              payType = "account"
+      } else {
+          if (payType)
+              payType += ","
+          payType += "weixinpay"
+      }
+      return payType
+    },
+    // 点击确认支付
+    confirmPay: function() {
+      // var orderType = this.orderType
+      // var orderId = this.orderId
+      // var openId = app.getOpenId()
+      // modalUtils.showLoadingToast()
+      StoreApi.goodsAndFilmComfirmNewPay(this.orderId, this.orderType, this.getPayType(), 0, null).then(success => {
+        if (success.status == 0) {
+          let payInfo = success.data.weixinpay
+          WxApi.wxPay(payInfo, success => {
+
+          }, error => {
+
+          })
+        }
+        // modalUtils.hideLoadingToast()
+          // if (this.data.payCount == 0) {
+          //   pageUtil.gotoPaySuccess(this.data.orderId, this.data.orderType)
+          // }
+          // else {//启动微信支付
+          //   this.requestWxPay(res.weixinpay)
+          // }
+      }, error => {
+
+      })
     },
     change(val){
       console.log('change',val)
