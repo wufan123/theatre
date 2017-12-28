@@ -12,12 +12,11 @@
             ￥{{data.price}}</label>
           <label class="primeCost" v-if="isHermes">
             ￥{{data.showPrice}}</label>
-          <div flex="dir:left cross:center" style="width: 100%">
-            <div class="divider"></div>
+          <div flex="main:center cross:center" class="divider">
             <label class="dividerTitle">
               商品介绍
             </label>
-            <div class="divider"></div>
+            <div class="dividerLine"></div>
           </div>
           <div class="content">
             {{data.detail}}
@@ -88,24 +87,23 @@
     .mainBody{
       position: absolute;
       z-index: 100;
-      background-color: white;
+      background-color: @page_bg2;
       margin: -20px 20px 80px;
       padding: 20px;
       border-radius: 5px;
       width: 295px;
-      .content{
-        text-indent: 2em;
+      .content{margin-top: 20px;
+        text-indent: 2em;text-align:left;width: 100%;
       }
-      .divider{
-        border-bottom: dashed @color-sub 1px;
-        height: 1px;
-        width: 100%;
-        margin: 0 5px;
+      .divider{position: relative;width: 100%;}
+      .dividerLine{
+        border-bottom: dotted @color-sub 1px;
+        position: absolute;width: 100%;z-index: 2;
       }
       .dividerTitle{
-        background: url(../../assets/images/home/title_bg.png) center no-repeat;
-        background-size: 100%100%;
-        width: 256px;
+        background: @page_bg2 url(../../assets/images/home/title_bg.png) center no-repeat;
+        background-size: 100%100%;z-index: 3;
+        width: 128px;
         height: 34px;
         color: @color-sub;
         text-align: center;

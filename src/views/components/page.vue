@@ -11,9 +11,10 @@
     <div class="contain" ref="contain">
       <slot name="contain"></slot>
     </div>
-    <div class="footer" v-if="footerText">
-      <x-button flex-box="0" type="primary no-radius" action-type="button" @click.native="onClick">{{footerText}}
+    <div class="footer">
+      <x-button v-if="footerText" flex-box="0" type="primary no-radius" action-type="button" @click.native="onClick">{{footerText}}
       </x-button>
+      <slot name="footer"></slot>
     </div>
   </div>
 </template>
@@ -63,7 +64,7 @@
   @import "~style/base-variables.less";
   .page {
     display: flex;
-    flex-direction: column;
+    flex-direction: column;background: url(../../assets/images/page_bg.png) repeat;
   }
   .header {
     flex: 0;
@@ -73,12 +74,12 @@
   .contain {
     overflow: auto;
     flex: 1;
-    background: url(../../assets/images/page_bg.png) repeat;
+    
     background-size: 68px 68px;
   }
 
   .footer {
-    flex: 0
+    flex: 0;
   }
 </style>
 

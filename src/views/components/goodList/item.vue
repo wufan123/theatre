@@ -1,5 +1,5 @@
 <template>
-  <div flex="dir:left cross:center" class="couponItem">
+  <div flex="dir:left cross:center" class="goodItem">
     <div flex="dir:left" flex-box="3">
       <div flex="dir:left cross:center">
         <img :src="goodsCoverImage" class="goodImg">
@@ -25,23 +25,23 @@
         methods: {}
     }
 </script>
-<style lang="less">
+<style lang="less" >
   @import "~style/base-variables.less";
-  .couponItem{
+  .goodItem{
     height: 100px;
-    margin:0 15px 10px;
+    margin:10px 15px 10px;
     padding: 10px;
     background: url(../../../assets/images/home/sale_bg.png) center no-repeat;
-    background-size: 100%100%;
+    background-size: 100% 100%;
     .buyBtn{
       margin: 40px 10px 0 0;
     }
     .goodImg{
-      width: 100px;
-      height: 62px;
+      width: 101px;
+      height: 68px;
       margin-left: 10px;
     }
-    .content{
+    .content{margin-left: 10px;
       .title{
         margin-left: 5px;
         font-size: 15px;

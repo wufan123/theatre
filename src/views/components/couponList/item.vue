@@ -1,6 +1,6 @@
 <template>
   <div  flex="dir:left cross:center" class="couponItem">
-    <div flex="dir:top" :style="{backgroundImage:`url(${require('assets/images/home/sale_bg.png')})`}" class="left">
+    <div flex="dir:top" :style="{backgroundImage:`url(${require('assets/images/home/card_body.png')})`}" class="left">
       <slot name="right"></slot>
     </div>
     <div flex="dir:top" class="right" :style="{backgroundImage:type?`url(${require('assets/images/home/flash_sale_right_2.png')})`:`url(${require('assets/images/home/flash_sale_right_1.png')})`}">
@@ -21,7 +21,7 @@
 <style lang="less" scoped>
   .couponItem {
     height: 90px;
-    margin: 0 15px 15px;
+    margin: 0px 15px 15px;
     border-radius: 5px;
     .right {
       height: 100%;

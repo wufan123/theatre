@@ -2,23 +2,29 @@
     <page :headerTitle="`优惠券`" flex-box="1" :white="true">
       <img src="../../../assets/images/scan.png" slot="rightTop" class="icon"/>
       <div slot="contain">
+          <div flex="dir:top">
+              <div flex-box="0" flex="dir:left cross:center " class="topBar">
+                <div class="inputOut">
+                  <x-input  v-model="value" ></x-input>
+                </div>
+                <div class="s-button khaki">添加</div>
+              </div>
+              <div flex-box="1">
+                <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-110' >
+                  <coupon-item v-for="item in 8">
+                    <label class="leftTitle" slot="right">立减券</label>
+                    <label class="leftInfo" slot="right">有效期 2017-12-11</label>
+                    <label class="rightTitle" slot="left">￥30</label>
+                  </coupon-item>
+                  <div flex="flex:left main:center">
+                      <img :src="require('assets/images/me/coupon_lost.png')" class="couponLost">
+                  </div>
+                </page-scroller>
 
-        <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-48' >
-          <div flex="dir:left cross:center " class="topBar">
-            <div class="inputOut">
-              <x-input  v-model="value" ></x-input>
-            </div>
-            <div class="s-button khaki">添加</div>
+              </div>
+
           </div>
-          <coupon-item v-for="item in 7">
-            <label class="leftTitle" slot="right">立减券</label>
-            <label class="leftInfo" slot="right">有效期 2017-12-11</label>
-            <label class="rightTitle" slot="left">￥30</label>
-          </coupon-item>
-          <div flex="flex:left main:center">
-              <img :src="require('assets/images/me/coupon_lost.png')" class="couponLost">
-          </div>
-        </page-scroller>
+        
       </div>
     </page>
 </template>
@@ -59,11 +65,11 @@
 <style lang="less" scoped>
   @import "~style/base-variables";
   .topBar{
-    padding: 15px 15px;
+    padding: 15px 15px 10px;
     justify-content: space-between;
-    .inputOut{
-      border-top: solid @color-active 1px;
-      border-bottom: solid @color-active 1px;
+    .s-button{padding: 6px 15px;}
+    .inputOut{padding-bottom: 2px;
+      border: solid @color-active 1px;
       font-size: 14px;
       height: 30px;
       width: 275px;
@@ -73,7 +79,7 @@
     }
   }
   .couponLost{
-    height: 31px;
+    height: 31px;margin-bottom: 10px;
   }
   .icon{
     height: 22px;

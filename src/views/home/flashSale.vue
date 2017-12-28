@@ -1,15 +1,21 @@
 <template>
   <page :headerTitle="`限时抢`" flex-box="1">
-    <div slot="contain">
+    <div slot="contain" class="contain">
       <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage usePulldown
                      :height="'-46'">
-        <coupon-item v-for="(item,index) in dataList" :key="index" @click.native="listItemClick(item)">
+        <div class="flash">
+          <coupon-item v-for="(item,index) in dataList" :key="index" @click.native="listItemClick(item)">
           <label class="leftTitle" slot="right">￥{{item.price}}</label>
           <label class="leftInfo" slot="right">{{item.packageName}}</label>
           <label class="rightTitle" slot="left">立即抢</label>
           <label class="rightTip" slot="left">剩余{{item.stock}}份</label>
         </coupon-item>
+        </div>
       </page-scroller>
+    </div>
+    <div slot="footer">
+        <div class="see-coupon" flex="cross:center main:center">
+          <img :src="require('assets/images/home/see_card.png')" class="see-coupon-img" ></div>
     </div>
   </page>
 </template>
@@ -57,11 +63,12 @@
 </script>
 <style lang="less" scoped>
   @import "~style/base-variables";
-
+  .see-coupon{height: 50px;}
+  .see-coupon-img{width: 215px;height: 30px;margin: 0 auto;}
   .coupon-list {
     padding-top: 15px;
   }
-
+  .flash{padding-top: 20px;}
   .rightTitle {
     font-size: 15px;
     font-weight: bold;
