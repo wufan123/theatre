@@ -50,7 +50,10 @@
       width: auto;
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap
+      white-space: nowrap;
+      display: flex;
+      justify-content: space-around;
+      flex-direction: column;
     }
     .am-list-title {
       color: @font-color;
@@ -62,10 +65,10 @@
       font-size: 16px;
     }
     .am-list-brief {
-      color:#888;
       line-height: 18px;
       width: auto;
       overflow: hidden;
+      line-height: 25px;
       text-overflow: ellipsis;
       white-space: nowrap
     }
@@ -107,7 +110,7 @@
         width: 6px;
         height: 6px;
         margin-left: 0;
-        border: 2px solid #ccc;
+        border: 2px solid #c6ac88;
         border-top: 0 none;
         border-left: 0 none
       }
