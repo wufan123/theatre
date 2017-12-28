@@ -3,7 +3,7 @@
     <div slot="contain">
       <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage usePulldown
                      :height="'-46'">
-        <coupon-item v-for="item in dataList">
+        <coupon-item v-for="(item,index) in dataList" :key="index" @click.native="listItemClick(item)">
           <label class="leftTitle" slot="right">￥{{item.price}}</label>
           <label class="leftInfo" slot="right">{{item.packageName}}</label>
           <label class="rightTitle" slot="left">立即抢</label>
@@ -34,7 +34,7 @@
               page: {
                 number: 0, size: success.data.length, totalElements: success.data.length, totalPages: 1
               }
-            }
+            };
             return res;
           },
           error => {
@@ -45,8 +45,12 @@
       fetchData() {
         return this.$refs.scroller.reset();
       },
-      listItemClick() {
+      listItemClick(item) {
         this.$vux.toast.text("请到我的优惠券中查看", "bottom");
+
+      },
+      async createPackageOrder(){
+          let res = StoreApi.createComboOrder(this.$store.state.common.userInfo.bindmobile)
       }
     }
   };

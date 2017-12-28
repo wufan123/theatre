@@ -18,7 +18,6 @@
   </div>
 </template>
 <script>
-
   export default {
     props: {
       headerTitle: String,
@@ -34,7 +33,7 @@
       footerFunc: {
         type: Function
       },
-      contain: String
+      contain: String,
     },
     methods: {
       onClick () {
@@ -62,12 +61,10 @@
 
 <style lang="less">
   @import "~style/base-variables.less";
-
   .page {
     display: flex;
     flex-direction: column;
   }
-
   .header {
     flex: 0;
     background: @color-sub !important;

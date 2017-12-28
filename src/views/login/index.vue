@@ -1,5 +1,5 @@
 <template>
-  <page :headerTitle="`登录`" white >
+  <page :headerTitle="`登录`">
     <div slot="contain">
         <div class="form">
           <group title="手机号" class="form-item">
