@@ -1,0 +1,898 @@
+[33mcommit b3545715d6dc9a1e7f83c56059047eac672bafeb[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m, [m[1;31morigin/develop[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Thu Dec 28 11:22:22 2017 +0800
+
+    vuex fix
+
+[33mcommit f6d6fc8cc72cc1f762a7509b5e72bd70502615a4[m
+Author: whr <357114638@qq.com>
+Date:   Thu Dec 28 10:09:52 2017 +0800
+
+    限时抢接口
+
+[33mcommit 327e7f9b096d5a0579d346df784eace122576fb6[m
+Author: whr <357114638@qq.com>
+Date:   Wed Dec 27 17:27:10 2017 +0800
+
+    支付结果
+
+[33mcommit 5d73508e2a9f1979ea61a6ca373d0a6ef5f39bb7[m
+Author: whr <357114638@qq.com>
+Date:   Wed Dec 27 17:15:49 2017 +0800
+
+    支付订单ui
+
+[33mcommit b5d3b1720884248df4fcda0b262f3ce82b593ee9[m
+Author: whr <357114638@qq.com>
+Date:   Wed Dec 27 16:11:19 2017 +0800
+
+    会员卡
+
+[33mcommit e6e8a1c01852a53eb8416050b7341aa2516af262[m
+Merge: 8ec0480 3362b42
+Author: whr <357114638@qq.com>
+Date:   Wed Dec 27 14:34:36 2017 +0800
+
+    Merge branch 'develop' of 192.168.10.223:ruihua/ruihua-wap into develop
+
+[33mcommit 8ec04804e9f7204c84150880d9e3bc50ca20356e[m
+Author: whr <357114638@qq.com>
+Date:   Wed Dec 27 14:34:17 2017 +0800
+
+    我的优惠券UI
+
+[33mcommit 3362b4241ec45053816e19c0df34d209cae7ddb7[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Wed Dec 27 13:41:45 2017 +0800
+
+    微信配置初始化
+
+[33mcommit 6524a3bd1350cdb5aaf4118a7117d5158f3fdcf4[m
+Merge: fed004e c480f0b
+Author: 林傅荣 <459558744@qq.com>
+Date:   Wed Dec 27 11:13:08 2017 +0800
+
+    Merge branch 'develop' of http://192.168.10.223/ruihua/ruihua-wap into develop
+
+[33mcommit fed004e6917784c1b3af42605aa85c75ceea2212[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Wed Dec 27 11:12:59 2017 +0800
+
+    微信支付接口
+
+[33mcommit c480f0b5b8210f15b66c4c990ec78ecd9b42460e[m
+Author: whr <357114638@qq.com>
+Date:   Wed Dec 27 10:49:40 2017 +0800
+
+    确认订单界面
+
+[33mcommit e4bf2e3c84de8e1bfeaf28c78409da12b79eb9d2[m
+Merge: bbab513 122fadc
+Author: whr <357114638@qq.com>
+Date:   Wed Dec 27 09:56:57 2017 +0800
+
+    Merge branch 'develop' of 192.168.10.223:ruihua/ruihua-wap into develop
+
+[33mcommit bbab513c99bbac0ca43769301317cd928a38bf33[m
+Author: whr <357114638@qq.com>
+Date:   Wed Dec 27 09:56:46 2017 +0800
+
+    小吃逻辑
+
+[33mcommit 122fadc9189610816a0970cb6932a567681f0e3f[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Wed Dec 27 09:53:45 2017 +0800
+
+    支付逻辑
+
+[33mcommit 74322bb86ba159f2ea57f72281ffd0e4e2772c64[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Wed Dec 27 09:21:47 2017 +0800
+
+    获取优惠券，支付动作
+
+[33mcommit 13c2ccbcb1d99aaa265e6d5e44b862701b2a29f4[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Tue Dec 26 16:07:05 2017 +0800
+
+    订单详情
+
+[33mcommit 1102e89c914df6ec8915c633fb744207d734f9d4[m
+Merge: 8772b9b b89a2e5
+Author: whr <357114638@qq.com>
+Date:   Tue Dec 26 15:40:49 2017 +0800
+
+    Merge branch 'develop' of 192.168.10.223:ruihua/ruihua-wap into develop
+
+[33mcommit b89a2e59c64ec015c46fed52491dc45020a20607[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Tue Dec 26 15:40:45 2017 +0800
+
+    卖品
+
+[33mcommit 8772b9b115b9371c10735ae873fc2c2392692a8b[m
+Author: whr <357114638@qq.com>
+Date:   Tue Dec 26 15:40:42 2017 +0800
+
+    确认订单ui
+
+[33mcommit d4b596a7bc1d798b23e84de9a2274157d20c823c[m
+Merge: a5ad899 c2ab0ad
+Author: 林傅荣 <459558744@qq.com>
+Date:   Tue Dec 26 14:56:44 2017 +0800
+
+    Merge branch 'develop' of http://192.168.10.223/ruihua/ruihua-wap into develop
+
+[33mcommit a5ad899acc53bd93a137c8941eb48afd1c530a70[m
+Merge: cbf7a3e d54a701
+Author: 林傅荣 <459558744@qq.com>
+Date:   Tue Dec 26 14:54:07 2017 +0800
+
+    合并冲突
+
+[33mcommit c2ab0ad291451a3ffc327f35f56f71adbf685350[m
+Author: whr <357114638@qq.com>
+Date:   Tue Dec 26 14:53:37 2017 +0800
+
+    来点小吃ui
+
+[33mcommit cbf7a3ebab1cfd7ae7b622320dc7d794527914e6[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Tue Dec 26 14:51:35 2017 +0800
+
+    锁座
+
+[33mcommit d54a7016037a9b06cb5ed0df7c9621a0f1f84bb8[m
+Author: whr <357114638@qq.com>
+Date:   Tue Dec 26 14:09:10 2017 +0800
+
+    场次票详情ui
+
+[33mcommit 5ec9485fea3462c1dc83f20a13ef37b6c1e8beca[m
+Merge: 3a4232c 76c40ac
+Author: whr <357114638@qq.com>
+Date:   Tue Dec 26 09:29:23 2017 +0800
+
+    Merge branch 'develop' of 192.168.10.223:ruihua/ruihua-wap into develop
+
+[33mcommit 3a4232c8383c1b72e3481c117bb7fb3378941c86[m
+Author: whr <357114638@qq.com>
+Date:   Tue Dec 26 09:29:16 2017 +0800
+
+    发现，探索
+
+[33mcommit 76c40ac5a7571107092f66e7d20d274ca87d56c5[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Tue Dec 26 08:53:00 2017 +0800
+
+    fix config
+
+[33mcommit 3b5d539e6683213816418243c2f0969abe5d5691[m
+Author: whr <357114638@qq.com>
+Date:   Mon Dec 25 17:28:24 2017 +0800
+
+    首页ui调整
+
+[33mcommit e0da4dc22d45654a3d9c3149515466ea912598f2[m
+Merge: 0426d39 15d0da2
+Author: whr <357114638@qq.com>
+Date:   Mon Dec 25 17:24:44 2017 +0800
+
+    Merge branch 'develop' of 192.168.10.223:ruihua/ruihua-wap into develop
+
+[33mcommit 0426d3925e1c935ca85cdba58cb6ddb409d09e85[m
+Author: whr <357114638@qq.com>
+Date:   Mon Dec 25 17:24:36 2017 +0800
+
+    首页接口
+
+[33mcommit 15d0da2f3699cf9c726c3c0e54d795d07ee3b0b2[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Mon Dec 25 16:33:24 2017 +0800
+
+    fix
+
+[33mcommit 8ff514d3ded18189a569264fdb29f04ae4005e25[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Mon Dec 25 16:31:35 2017 +0800
+
+    获取影片详情
+
+[33mcommit 98eeec7332a50264367322d31d4e9a3ad5474bda[m
+Merge: 0d38ef3 7600aea
+Author: whr <357114638@qq.com>
+Date:   Mon Dec 25 16:07:15 2017 +0800
+
+    Merge branch 'develop' of 192.168.10.223:ruihua/ruihua-wap into develop
+
+[33mcommit 0d38ef3e884bb9d92621fc0a49f9800954773b16[m
+Merge: 635f4fd 76ee1bc
+Author: whr <357114638@qq.com>
+Date:   Mon Dec 25 16:07:08 2017 +0800
+
+    合并冲突
+
+[33mcommit 7600aea02ffb7333e72675ea6de0162540bf228e[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Mon Dec 25 16:06:34 2017 +0800
+
+    fix
+
+[33mcommit 635f4fdf970aa1dca564d9fd218365664883a203[m
+Author: whr <357114638@qq.com>
+Date:   Mon Dec 25 15:50:28 2017 +0800
+
+    特产馆api
+
+[33mcommit 76ee1bcb0d9055c95a96fa2c5739dc5c7ac25e1b[m
+Merge: b41f5a9 987519d
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Mon Dec 25 15:50:21 2017 +0800
+
+    Merge branch 'develop' of http://192.168.10.223/ruihua/ruihua-wap into develop
+
+[33mcommit b41f5a96bbdb707c83fa80c933fe73d9a0e13e5f[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Mon Dec 25 15:49:44 2017 +0800
+
+    UI调整
+
+[33mcommit 987519dd2e8534bca0627e2b2b33301232dfc512[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Mon Dec 25 14:18:45 2017 +0800
+
+    fxi
+
+[33mcommit 2083284e76f7fd713fd7f54e2a5727ece32eb822[m
+Merge: 7720bff 5907d58
+Author: 林傅荣 <459558744@qq.com>
+Date:   Mon Dec 25 13:58:01 2017 +0800
+
+    Merge branch 'develop' of http://192.168.10.223/ruihua/ruihua-wap into develop
+
+[33mcommit 7720bff189513c63aeeab1f59792f9bbaf3ccdf8[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Mon Dec 25 13:57:49 2017 +0800
+
+    发现/介绍
+
+[33mcommit 5907d5896be9fcc324a74f07c6036718130b2c51[m
+Merge: ecb4ac1 456a26f
+Author: whr <357114638@qq.com>
+Date:   Mon Dec 25 11:45:07 2017 +0800
+
+    Merge branch 'develop' of 192.168.10.223:ruihua/ruihua-wap into develop
+
+[33mcommit ecb4ac1bdc6c86db1d76bd1fe9494d7116a9919c[m
+Author: whr <357114638@qq.com>
+Date:   Mon Dec 25 11:45:02 2017 +0800
+
+    场次票，发现，介绍
+
+[33mcommit 3f9f3155892530e72d4d045577b58c5b194e42eb[m
+Author: whr <357114638@qq.com>
+Date:   Mon Dec 25 11:44:38 2017 +0800
+
+    场次票，发现，介绍
+
+[33mcommit 456a26f02d9e5f814d18a530aec3d0b19a5d6d59[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Mon Dec 25 11:36:49 2017 +0800
+
+    套票接口
+
+[33mcommit a26db1045ac842c9cd38e2dc4b8aafbea9593363[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Mon Dec 25 11:19:48 2017 +0800
+
+    套票接口
+
+[33mcommit 3eb5bf1fb5473f952abd640620eb54fe3e5cae68[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Mon Dec 25 10:37:54 2017 +0800
+
+    卖品接口
+
+[33mcommit e0282fcc9aa815c8fd13ed6273bc273a8da46895[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Mon Dec 25 10:14:19 2017 +0800
+
+    bannel接口
+
+[33mcommit dac5644b309e247674231a630b1549c75ff2a996[m
+Author: whr <357114638@qq.com>
+Date:   Sat Dec 23 19:38:34 2017 +0800
+
+     特产馆ui
+
+[33mcommit a98f5c48b3a731b85b075b5c81de51bad1fe15f7[m
+Author: whr <357114638@qq.com>
+Date:   Sat Dec 23 17:44:40 2017 +0800
+
+    限时特卖
+
+[33mcommit 6e8f085802156ae16da4eefaa4a10134e75e1d7c[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Sat Dec 23 17:17:23 2017 +0800
+
+    详情页加载逻辑
+
+[33mcommit 35a15c49f6ff027298b701f3359eb8a0baaa4eb6[m
+Merge: 51c9a6f b82063f
+Author: whr <357114638@qq.com>
+Date:   Sat Dec 23 15:54:34 2017 +0800
+
+    Merge branch 'develop' of 192.168.10.223:ruihua/ruihua-wap into develop
+
+[33mcommit 51c9a6fb7064b8427ab6fbb89409df66ee71f68f[m
+Author: whr <357114638@qq.com>
+Date:   Sat Dec 23 15:54:26 2017 +0800
+
+    dialog 全局插件
+
+[33mcommit 626c1cdf4ea1a06303cde62f96bc72159cc20ab2[m
+Author: whr <357114638@qq.com>
+Date:   Sat Dec 23 15:50:56 2017 +0800
+
+    dialog
+
+[33mcommit b82063f5ae36d6dae701888ca202879a8b4f6b7c[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Sat Dec 23 15:50:34 2017 +0800
+
+    添加锁座接口
+
+[33mcommit 1f5d8f3511e0f4d5d874b143bbc1326c64fef83d[m
+Merge: e9b9c00 927d9a7
+Author: whr <357114638@qq.com>
+Date:   Sat Dec 23 15:46:04 2017 +0800
+
+    Merge branch 'develop' of 192.168.10.223:ruihua/ruihua-wap into develop
+
+[33mcommit e9b9c001d31f46584fb6312ee597d34f4b4d95f9[m
+Author: whr <357114638@qq.com>
+Date:   Sat Dec 23 15:45:59 2017 +0800
+
+    首页UI
+
+[33mcommit 927d9a7be1760288468418c55d8af34b0f813b1a[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Sat Dec 23 15:35:29 2017 +0800
+
+    对接订单座位接口
+
+[33mcommit a53a94e871cd60f09db6cd43da18a5c3d0beb68e[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Fri Dec 22 16:34:17 2017 +0800
+
+    订单下单数据绑定
+
+[33mcommit e1bccd695c8f24beed58d5bc2a0cab4f660278ee[m
+Merge: e8537d4 60fefa0
+Author: 林傅荣 <459558744@qq.com>
+Date:   Fri Dec 22 16:05:59 2017 +0800
+
+    Merge branch 'develop' of http://192.168.10.223/ruihua/ruihua-wap into develop
+
+[33mcommit e8537d4bf7a574af7c510ca01a426a77ccc81eaa[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Fri Dec 22 16:05:51 2017 +0800
+
+    影片详情
+
+[33mcommit 60fefa006ca709b7ac7c58a86e2d68513e683817[m
+Author: whr <357114638@qq.com>
+Date:   Fri Dec 22 14:35:03 2017 +0800
+
+    首页
+
+[33mcommit 83a907e386a2a5e4f3ac2ac8410739952ea26792[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Fri Dec 22 11:26:45 2017 +0800
+
+    更新接口，固定影院编码
+
+[33mcommit c3589c34595ea47adc070851c21336021cd1dfcd[m
+Merge: a916e8b 8a90169
+Author: whr <357114638@qq.com>
+Date:   Fri Dec 22 11:14:13 2017 +0800
+
+    Merge branch 'develop' of 192.168.10.223:ruihua/ruihua-wap into develop
+
+[33mcommit 8a9016942d1207186ea364a38f0288f9e814cd49[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Fri Dec 22 11:14:49 2017 +0800
+
+    对接我的信息
+
+[33mcommit 0c100a92e3cdf35f4f5b2c0da8cde6ac092bf43f[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Fri Dec 22 10:51:26 2017 +0800
+
+    票务订单接口
+
+[33mcommit 27320cb4944365cbc1bed693ee9c835969fdbf74[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Fri Dec 22 10:22:12 2017 +0800
+
+    添加会员卡
+
+[33mcommit a916e8bb9e636c80483fed60ad359b2903a71388[m
+Merge: 90dd08c 63b9b1e
+Author: whr <357114638@qq.com>
+Date:   Fri Dec 22 10:18:51 2017 +0800
+
+    Merge branch 'develop' of 192.168.10.223:ruihua/ruihua-wap into develop
+
+[33mcommit 90dd08c35170dd90dc624430aa689b70f3e06998[m
+Author: whr <357114638@qq.com>
+Date:   Fri Dec 22 10:18:34 2017 +0800
+
+    全局cinemacode
+
+[33mcommit 63b9b1eb70284b49364dabe91efedda2af76025b[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Fri Dec 22 09:40:07 2017 +0800
+
+    抢购卖品下单
+
+[33mcommit 368606b9dae218a9a38e82e446cbaf46f0aa5201[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Fri Dec 22 09:26:00 2017 +0800
+
+    影片排期接口
+
+[33mcommit e6eed05d4073e2fe3356be559d44a2ca586f9bc6[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Fri Dec 22 09:00:20 2017 +0800
+
+    抢购卖品列表
+
+[33mcommit de249ba0b2e395d9f4c710b08c03b124cf6a7dc0[m
+Merge: 66de19a 76d0247
+Author: 林傅荣 <459558744@qq.com>
+Date:   Thu Dec 21 17:58:41 2017 +0800
+
+    Merge branch 'develop' of http://192.168.10.223/ruihua/ruihua-wap into develop
+
+[33mcommit 66de19aa831e158c8cbd160e29612dff7e867621[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Thu Dec 21 17:58:32 2017 +0800
+
+    优惠券接口
+
+[33mcommit 76d0247cf22ce81a658488f1e6677b5cd6c0dccd[m
+Merge: bf87de9 9afe9fc
+Author: whr <357114638@qq.com>
+Date:   Thu Dec 21 17:52:33 2017 +0800
+
+    Merge branch 'develop' of 192.168.10.223:ruihua/ruihua-wap into develop
+
+[33mcommit bf87de955f96711696096a9c93b947bffdf4677e[m
+Author: whr <357114638@qq.com>
+Date:   Thu Dec 21 17:52:24 2017 +0800
+
+    来点小吃页面
+
+[33mcommit 9afe9fcfe68989a5a6840d7cb6f26492bb692844[m
+Merge: eb872b6 0a0eeb5
+Author: 林傅荣 <459558744@qq.com>
+Date:   Thu Dec 21 17:50:00 2017 +0800
+
+    合并冲突
+
+[33mcommit eb872b6886306bd8af4deb0c11bdb6045c5f9b5d[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Thu Dec 21 17:49:17 2017 +0800
+
+    会员卡接口
+
+[33mcommit 0a0eeb58576edffe367db916ff1cc20ba4901e7f[m
+Author: whr <357114638@qq.com>
+Date:   Thu Dec 21 17:20:25 2017 +0800
+
+    忽略yarn.lock
+
+[33mcommit bfa61139ba567ca48ebcd744e21cfc9e54d428e6[m
+Merge: 0f2d2d4 83413a0
+Author: whr <357114638@qq.com>
+Date:   Thu Dec 21 17:11:29 2017 +0800
+
+    合并冲突
+
+[33mcommit 0f2d2d454f47845680f12214c414fd087d29f735[m
+Author: whr <357114638@qq.com>
+Date:   Thu Dec 21 17:09:53 2017 +0800
+
+    token本地化
+
+[33mcommit 83413a02b34361e295783e27f203195cbda13d29[m
+Author: 林傅荣 <459558744@qq.com>
+Date:   Thu Dec 21 16:54:05 2017 +0800
+
+    添加商品接口
+
+[33mcommit f7720a6c27d2840b0294aab1b8834b41538aaedd[m
+Author: whr <357114638@qq.com>
+Date:   Thu Dec 21 16:25:40 2017 +0800
+
+    路由重定向
+
+[33mcommit 2465b7893ec63f97b0405bbf409a68b15a771a28[m
+Author: whr <357114638@qq.com>
+Date:   Thu Dec 21 15:45:29 2017 +0800
+
+    登录界面接口对接
+
+[33mcommit 8e687adcf4f6b55e632e5fd1388c369df97f2b00[m
+Merge: 424182f 601f818
+Author: whr <357114638@qq.com>
+Date:   Thu Dec 21 14:35:29 2017 +0800
+
+    Merge branch 'develop' of 192.168.10.223:ruihua/ruihua-wap into develop
+
+[33mcommit 601f818ec09be614c6d9b237a7bb1c9d998995ff[m
+Author: linling <137391525@qq.com>
+Date:   Thu Dec 21 14:35:55 2017 +0800
+
+    修改接口
+
+[33mcommit 424182f674ebcfe02a1c6a09a8773c5d6576d799[m
+Merge: b326ee1 83e0da0
+Author: whr <357114638@qq.com>
+Date:   Thu Dec 21 14:35:23 2017 +0800
+
+    合并冲突
+
+[33mcommit 83e0da0a0cf687bd8c771b095529f9df57f1f789[m
+Author: linling <137391525@qq.com>
+Date:   Thu Dec 21 14:34:17 2017 +0800
+
+    接口调整
+
+[33mcommit b326ee1db45c73bac9e9b272a13215937c1c6ac7[m
+Merge: b79fbb6 65a4881
+Author: whr <357114638@qq.com>
+Date:   Thu Dec 21 14:34:12 2017 +0800
+
+    合并冲突
+
+[33mcommit b79fbb6670c90435d10b146c0df48f65cdcc1fcd[m
+Author: whr <357114638@qq.com>
+Date:   Thu Dec 21 14:24:35 2017 +0800
+
+    场次票详情
+
+[33mcommit 65a4881ff30eb51367bc6ccc99e84f213d703f56[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Thu Dec 21 14:00:40 2017 +0800
+
+    fix
+
+[33mcommit a156568ca1aeffa803f14269660a7f379f0b0f7b[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Thu Dec 21 13:59:11 2017 +0800
+
+    vuex插件
+
+[33mcommit a4314f8862dcdcb258ff50b8cfa6029a82b7d698[m
+Merge: bd295f3 c645832
+Author: whr <357114638@qq.com>
+Date:   Thu Dec 21 11:39:15 2017 +0800
+
+    合并冲突
+
+[33mcommit c645832fb7bdd234b564118132a8050e5ae2390d[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Thu Dec 21 11:37:03 2017 +0800
+
+    支付+确认订单
+
+[33mcommit bd295f3dc64202b36849a3fedc85a8c05f26c2be[m
+Merge: cbcf4d6 48ab068
+Author: whr <357114638@qq.com>
+Date:   Thu Dec 21 11:36:37 2017 +0800
+
+    场次票
+
+[33mcommit 48ab0681371de20850565a571b3109716762ed21[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Thu Dec 21 10:37:54 2017 +0800
+
+    解决冲突
+
+[33mcommit 3ef143d96cbf30c0215e47b0feecd3cb916b5a4d[m
+Merge: bd01294 67a9bff
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Thu Dec 21 10:37:41 2017 +0800
+
+    解决冲突
+
+[33mcommit cbcf4d60315dded5be66b07e90c844f3e0623b76[m
+Author: whr <357114638@qq.com>
+Date:   Thu Dec 21 10:36:39 2017 +0800
+
+    场次票
+
+[33mcommit bd01294131e94f9356a122af039171a68db5f19b[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Thu Dec 21 10:32:08 2017 +0800
+
+    确认订单
+
+[33mcommit 67a9bff3e28f2738db19263a0d1d1c327aca67da[m
+Merge: a8c3edc bd35824
+Author: linling <137391525@qq.com>
+Date:   Thu Dec 21 10:05:21 2017 +0800
+
+    添加接口
+
+[33mcommit a8c3edcaccf02f65a9beb25eba6166b422c4b4e9[m
+Author: linling <137391525@qq.com>
+Date:   Thu Dec 21 09:46:32 2017 +0800
+
+    接口调试
+
+[33mcommit bd35824d1b4aa503569c8b379d4c54249350e021[m
+Author: whr <357114638@qq.com>
+Date:   Wed Dec 20 17:57:27 2017 +0800
+
+    特产馆
+
+[33mcommit 08a5751e616c2c9c820c182d029b4f4bb105dfe0[m
+Merge: 8bce8a9 8e7a41d
+Author: whr <357114638@qq.com>
+Date:   Wed Dec 20 17:45:28 2017 +0800
+
+    特产馆页面
+
+[33mcommit 8bce8a962d9a005568bb5ca5af148b5f8906a18a[m
+Author: whr <357114638@qq.com>
+Date:   Wed Dec 20 17:32:49 2017 +0800
+
+    编译路径修改
+
+[33mcommit 8e7a41d864927c32683a5e5d08a395b039247628[m
+Merge: ef5df90 5d1c879
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Wed Dec 20 17:24:04 2017 +0800
+
+    解决冲突
+
+[33mcommit ef5df9004e907876cb076976fd0a66208044bb71[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Wed Dec 20 17:22:34 2017 +0800
+
+    介绍+发现
+
+[33mcommit 5d1c879fe320fc5c209339844cc80e4014aca97d[m
+Merge: addf522 ebfc233
+Author: whr <357114638@qq.com>
+Date:   Wed Dec 20 16:39:40 2017 +0800
+
+    合并冲突
+
+[33mcommit addf52206259092d981980fccded31180a2ce93a[m
+Author: whr <357114638@qq.com>
+Date:   Wed Dec 20 16:38:25 2017 +0800
+
+    超级联合日
+
+[33mcommit ebfc233d480e87b087a8a0813a3bf1679874bb20[m
+Merge: 93f5b52 fdffae7
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Wed Dec 20 15:45:33 2017 +0800
+
+    解决冲突
+
+[33mcommit 93f5b529524af86e4cc324a8d66f598f1e564561[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Wed Dec 20 15:44:50 2017 +0800
+
+    ticket
+
+[33mcommit fdffae790a09d1efff31d56e151bb31cb4e74a33[m
+Merge: d42809c c65ce89
+Author: whr <357114638@qq.com>
+Date:   Wed Dec 20 15:42:02 2017 +0800
+
+    合并冲突
+
+[33mcommit d42809cbd5fc85e72fc1577260c58ee8446d7597[m
+Author: whr <357114638@qq.com>
+Date:   Wed Dec 20 15:40:56 2017 +0800
+
+    限时抢票
+
+[33mcommit c65ce89318edfa229a1220752623b6a0ab1078d7[m
+Merge: ea800d8 d5d167b
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Wed Dec 20 14:03:43 2017 +0800
+
+    解决冲突
+
+[33mcommit ea800d810fe8d3cfd2c47e4e6792d2a39217adbf[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Wed Dec 20 13:59:13 2017 +0800
+
+    login页面
+
+[33mcommit d5d167bcf1d1b00574cd8d2cd87df3edadf87ab1[m
+Merge: c6e8ebc 968266b
+Author: whr <357114638@qq.com>
+Date:   Wed Dec 20 11:05:56 2017 +0800
+
+    合并冲突
+
+[33mcommit c6e8ebcc53e41fc26244a8f941dfa5881ebc731e[m
+Author: whr <357114638@qq.com>
+Date:   Wed Dec 20 11:01:59 2017 +0800
+
+    优惠券
+
+[33mcommit 968266b6f78094b80b4fd89922599dc9609a32f3[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Tue Dec 19 17:57:49 2017 +0800
+
+    fix
+
+[33mcommit 2a91e2c02f744840a411eb47a14fb071aa843b59[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Tue Dec 19 17:53:29 2017 +0800
+
+    fix
+
+[33mcommit a228e79f6f96465e2c671ed74d536ac266357ca8[m
+Author: whr <357114638@qq.com>
+Date:   Tue Dec 19 17:31:34 2017 +0800
+
+    合并冲突
+
+[33mcommit b251b077be451e42e815ce01967fe980c27c673b[m
+Author: whr <357114638@qq.com>
+Date:   Tue Dec 19 17:30:39 2017 +0800
+
+    合并
+
+[33mcommit ed1fb7cfa16374db189f903a7b8aa294d9b463d5[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Tue Dec 19 17:26:46 2017 +0800
+
+    fix
+
+[33mcommit abd6aacdc59868775fa598e871d02c4a6b4d9190[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Tue Dec 19 17:21:26 2017 +0800
+
+    调整MIMIN目录
+
+[33mcommit 668c3e624082865ba6850a1f480a984e8ec99eab[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Tue Dec 19 17:11:48 2017 +0800
+
+    首页修复+test下拉刷新
+
+[33mcommit 1f04ae6bd4c7b4e64a797a11ca0e9afbdec2f98b[m
+Merge: 59dc40b 95b8b43
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Tue Dec 19 17:01:10 2017 +0800
+
+    Merge branch 'develop' of http://192.168.10.223/ruihua/ruihua-wap into develop
+
+[33mcommit 59dc40b86a7d144a6e617d906e3f1eee97a80a94[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Tue Dec 19 17:00:54 2017 +0800
+
+    下拉刷新和上啦加载组件
+
+[33mcommit 1b8aee3b958f7fad764221432bdf5dcb21add546[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Tue Dec 19 14:45:44 2017 +0800
+
+    会员卡
+
+[33mcommit 95b8b434184e7964a3e306576c7bd2dd22a0541e[m
+Merge: f7d2100 1b8aee3
+Author: whr <357114638@qq.com>
+Date:   Tue Dec 19 14:45:37 2017 +0800
+
+    合并冲突
+
+[33mcommit f7d2100ade3ce21baa511ce6404567122a0109bd[m
+Author: whr <357114638@qq.com>
+Date:   Tue Dec 19 14:06:39 2017 +0800
+
+    去除better scroll
+
+[33mcommit 35f3a1bfae7db732b5847796dcc62127c22b4085[m
+Merge: 00f96e0 c99bf7c
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Tue Dec 19 11:57:34 2017 +0800
+
+    解决冲突
+
+[33mcommit 00f96e08bad97c10f8761d0c3789cac024d83f15[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Tue Dec 19 11:55:32 2017 +0800
+
+    全局注册page组件
+
+[33mcommit 56614532f67159cc514637ffccb816630b6484bd[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Tue Dec 19 11:39:29 2017 +0800
+
+    page框架组件封装
+
+[33mcommit c99bf7cac7f82bbd1d0e123a243a65f7ddd57e4f[m
+Author: whr <357114638@qq.com>
+Date:   Tue Dec 19 10:21:43 2017 +0800
+
+    主页布局
+
+[33mcommit 876f407844f31862fedce8b41057647328411476[m
+Merge: f877bc0 05a5a76
+Author: whr <357114638@qq.com>
+Date:   Tue Dec 19 10:19:42 2017 +0800
+
+    Merge branch 'develop' of 192.168.10.223:ruihua/ruihua-wap into develop
+
+[33mcommit f877bc0c9e2d80e6b0524c8b0c4d77610eb12f83[m
+Author: whr <357114638@qq.com>
+Date:   Tue Dec 19 10:19:36 2017 +0800
+
+    主页布局
+
+[33mcommit 05a5a76ed21ed1149584933ae7f6330bed51877c[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Mon Dec 18 18:04:13 2017 +0800
+
+    组件修改
+
+[33mcommit 68c1f63fdb44fdf51bdf57830f20faf19a1f42cc[m
+Merge: affc2aa 4c4fb27
+Author: whr <357114638@qq.com>
+Date:   Mon Dec 18 17:52:54 2017 +0800
+
+    合并冲突
+
+[33mcommit 4c4fb27325fcae4c275e2661f9a0b28b4c03dcf0[m
+Author: liuyueyuan <liuyueyuan@zrfilm.com>
+Date:   Mon Dec 18 17:47:00 2017 +0800
+
+    通用组件的封装
+
+[33mcommit affc2aa4a3d0f1819bea7f7c43d6e97bd03acd62[m
+Author: whr <357114638@qq.com>
+Date:   Mon Dec 18 17:46:19 2017 +0800
+
+    主页布局
+
+[33mcommit e33bebb3ca4400a0fba0549a3a2a2357f94c1f18[m
+Author: whr <357114638@qq.com>
+Date:   Mon Dec 18 16:13:22 2017 +0800
+
+    主页
+
+[33mcommit bb6f8cf0cdd8dd137440efd89b396b431baf75e8[m
+Author: whr <357114638@qq.com>
+Date:   Mon Dec 18 15:08:52 2017 +0800
+
+    主页布局
+
+[33mcommit 1da302f0625826f4db15b9dffec7b86910546de6[m
+Author: whr <357114638@qq.com>
+Date:   Mon Dec 18 14:42:40 2017 +0800
+
+    目录，主页
+
+[33mcommit 557e90cdad979c92f9f9ab7a6724e605761c331c[m
+Author: whr <357114638@qq.com>
+Date:   Mon Dec 18 14:07:39 2017 +0800
+
+    vux按需加载的问题
+
+[33mcommit c5217ace73b29467676c264658952ad5d46a9815[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: whr <357114638@qq.com>
+Date:   Mon Dec 18 11:10:52 2017 +0800
+
+    first commit
