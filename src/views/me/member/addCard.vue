@@ -9,10 +9,10 @@
            </div>
            <div class="form-item">
               <group title="会员卡密码" class="form-item">
-              <x-input type="text" placeholder="请输入会员卡号" v-model="form.cardPw"></x-input>
+              <x-input type="text" placeholder="请输入会员卡密码" v-model="form.cardPw"></x-input>
               </group>
            </div>
-           <x-button type="primary" @click.native="confirm">确定</x-button>
+           <img :src="require('assets/images/me/comfirm_btn.png')" @click="confirm" class="comfirm-btn">
         </div>
     </div>
   </page>

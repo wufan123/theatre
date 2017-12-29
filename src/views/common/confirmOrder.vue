@@ -135,7 +135,7 @@
       border-bottom: dashed @border-color 1px;
     }
     .am-list-item {
-      padding: 15px 0;
+      padding: 5px 0;
       margin-top: -1px;
     }
     .price {
@@ -157,7 +157,6 @@
   }
   .info {
     margin: 15px;
-    font-size: 16px;
   }
 
 </style>
