@@ -1,16 +1,19 @@
 <template>
   <page :headerTitle="`登录`">
-    <div slot="contain">
+    <div slot="contain" class="contain login">
         <div class="form">
-          <group title="手机号" class="form-item">
-            <x-input  name="mobile" placeholder="请输入手机号码" v-model="form.phone" keyboard="number" is-type="china-mobile"></x-input>
+          <group class="form-item">
+            <x-input  name="mobile" placeholder="请输入手机号码" v-model="form.phone" keyboard="number" is-type="china-mobile">
+              <img slot="label" style="padding-right:10px;display:block;" :src="require('assets/images/me/login_phone.png')" width="24" height="24">
+            </x-input>
           </group>
-          <group title="验证码" class="form-item">
+          <group class="form-item">
             <x-input class="weui-vcode" placeholder="请输入验证码" v-model="form.pw">
+              <img slot="label" style="padding-right:10px;display:block;" :src="require('assets/images/me/login_code.png')" width="24" height="24">
               <x-button slot="right" type="primary" mini @click.native="getAuthCode">获取</x-button>
             </x-input>
           </group>
-           <x-button type="primary" @click.native="login">确定</x-button>
+          <div class="s-button khaki" @click="login">登录</div>
         </div>
     </div>
   </page>
@@ -49,3 +52,18 @@
     }
   };
 </script>
+<style lang="less">
+  @import "~style/base-variables";
+  .login{
+    &.contain{background-image: url('../../assets/images/me/login_bg.jpg');background-size: 100%100%;height: 100%;}
+    .form{padding: 110px 30px;}
+    .form-item:first-child{margin:0;}
+    .weui-cells{background: rgba(0, 0, 0, 0) !important;font-size: 15px!important;
+      &::after{border-bottom: 2px solid @color-sub;}
+      &::before{border-top: 0px;}
+    }
+    .weui-btn_mini{border-radius: 0; }
+    .s-button{display:block;padding:10px 0;margin-top:40px;}
+  }
+</style>
+

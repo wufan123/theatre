@@ -22,8 +22,8 @@
             <list-item :img="require('assets/images/me/cell_icon_02.png')"
               :contentTitle="`优惠券`"   extra="" isLink  :link="'CouponList'">
             </list-item>
-            <list-item :img="require('assets/images/me/cell_icon_03.png')"
-              :contentTitle="`邀请好友`"   extra="" isLink  :link="`/`"  >
+            <list-item :img="require('assets/images/me/cell_icon_03.png')" 
+              :contentTitle="`邀请好友`"   extra="" isLink  :link="`Share`"  >
             </list-item>
             <list-item :img="require('assets/images/me/cell_icon_04.png')"
               :contentTitle="`联系客服`"   extra="" isLink  :link="`/`"  >

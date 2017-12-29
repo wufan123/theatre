@@ -11,6 +11,7 @@ import CouponList from '@/views/me/coupon/list.vue'
 import CouponDetail from '@/views/me/coupon/detail.vue'
 import TicketList from '@/views/me/ticket/list.vue'
 import TicketDetail from '@/views/me/ticket/ticketDetail.vue'
+import Share from '@/views/me/share/share.vue'
 import FlashSale from 'views/home/flashSale.vue'
 import LocalProduct from 'views/home/localProduct.vue'
 import ProductDetail from 'views/home/productDetail.vue'
@@ -46,6 +47,7 @@ export default new Router({
     {path: '/PaySuccess', name: 'PaySuccess', component: PaySuccess},
     //me
     {path: '/Me', name: 'Me', component: Me},
+    {path: '/Share', name: 'Share', component: Share},
     {path: '/MemberCard', name: 'MemberCard', component: MemberCard},
     {path: '/AddCard', name: 'AddCard', component: AddCard},
     {path: '/Recharge', name: 'Recharge', component: Recharge},
