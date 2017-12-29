@@ -230,8 +230,8 @@
         height: 30px;
       }
       .header-r-icon {
-        height: 20px;
-        margin-left: 10px;
+        height: 20px;margin-right: 10px;
+        margin-left: 20px;
       }
     }
     .findItem {

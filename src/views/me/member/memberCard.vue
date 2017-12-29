@@ -2,7 +2,8 @@
   <page white :headerTitle="`剧坊会员卡`" :headerRText="`添加会员卡`" :headerRLink="`AddCard`">
     <div slot="contain">
       <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-46'>
-        <div v-for="(item,index) in dataList" class="card-item">
+       <div class="contain">
+          <div v-for="(item,index) in dataList" class="card-item">
           <div flex="dir:top" class="info">
             <label class="title text-ellipsis-line">{{item.levelName+item.cardNumber}}</label>
             <div class="sum" flex="dir:left">
@@ -11,9 +12,10 @@
             </div>
             <label class="validity">有效期：{{item.expireDate}}</label>
           </div>
-          <div class="s-button khaki reCharge">充值</div>
+          <div class="s-button khaki reCharge" @click="$router.push('Recharge')">充值</div>
           <label class="delete">—</label>
         </div>
+       </div>
       </page-scroller>
     </div>
   </page>
@@ -56,6 +58,9 @@
          return res
          })*/
       },
+      recharge(){
+
+      },
       fetchData(){
         return this.$refs.scroller.reset()
       }
@@ -65,7 +70,7 @@
 
 <style lang="less" scoped>
   @import "~style/base-variables.less";
-
+  .contain{padding-top: 15px;}
   .card-item {
     height: 125px;
     width: 345px;
