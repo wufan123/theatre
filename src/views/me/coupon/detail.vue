@@ -3,12 +3,12 @@
     <div slot="contain">
       <div class="detail">
         <coupon-item>
-          <label class="leftTitle" slot="right">立减券</label>
-          <label class="leftInfo" slot="right">有效期 2017-12-11</label>
-          <label class="rightTitle" slot="left">￥30</label>
+          <label class="leftTitle" slot="right">{{coupon.voucherName}}</label>
+          <label class="leftInfo" slot="right">有效期 {{new Date(coupon.validData*1000).format("yyyy-MM-dd")}}</label>
+          <label class="rightTitle" slot="left">￥{{coupon.voucherValue}}</label>
         </coupon-item>
         <div class="info">
-            <p class="title bold">优惠券编码：8888888888888</p>
+            <p class="title bold">优惠券编码：{{coupon.voucherNum}}</p>
             <p class="title">使用规则：</p>
             <p>1. 立减券可以在购买剧票时使用；</p>
             <p>2. 特惠场，见面会等特殊场次不可用</p>
@@ -23,8 +23,16 @@
 </template>
 <script>
 import CouponItem from 'views/components/couponList/item.vue'
+import {mapState} from "vuex";
 export default {
   components:{CouponItem},
+  computed:{
+    ...mapState("coupon/",['coupon'])
+  },
+  data(){
+      return{
+      }
+  }
 }
 </script>
 
