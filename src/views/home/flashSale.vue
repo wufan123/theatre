@@ -5,17 +5,17 @@
                      :height="'-46'">
         <div class="flash">
           <coupon-item v-for="(item,index) in dataList" :key="index" @click.native="listItemClick(item)">
-          <label class="leftTitle" slot="right">￥{{item.price}}</label>
-          <label class="leftInfo" slot="right">{{item.packageName}}</label>
-          <label class="rightTitle" slot="left">立即抢</label>
-          <label class="rightTip" slot="left">剩余{{item.stock}}份</label>
-        </coupon-item>
+            <label class="leftTitle" slot="right">￥{{item.price}}</label>
+            <label class="leftInfo" slot="right">{{item.packageName}}</label>
+            <label class="rightTitle" slot="left">立即抢</label>
+            <label class="rightTip" slot="left">剩余{{item.stock}}份</label>
+          </coupon-item>
         </div>
       </page-scroller>
     </div>
     <div slot="footer">
-        <div class="see-coupon" flex="cross:center main:center">
-          <img :src="require('assets/images/home/see_card.png')" class="see-coupon-img" ></div>
+      <div class="see-coupon" flex="cross:center main:center" @click="$router.push('CouponList')">
+        <img :src="require('assets/images/home/see_card.png')" class="see-coupon-img"></div>
     </div>
   </page>
 </template>
@@ -52,25 +52,47 @@
         return this.$refs.scroller.reset();
       },
       listItemClick(item) {
-            this.bindingTicket(item)
+        this.bindingTicket(item)
       },
       async bindingTicket(item){
-          let res = await StoreApi.createComboOrder(this.$store.state.common.userInfo.bindmobile,`${item.hyPackageId}:1`);
-          if(res&&res.data){
+        this.$vux.loading.show();
+        let res = await StoreApi.createComboOrder(this.$store.state.common.userInfo.bindmobile, `${item.hyPackageId}:1`);
+        if (res && res.data) {
+          let wayRes = await  StoreApi.getPackageBuyPayway(res.data.packageId);
+          if (wayRes && wayRes.status === 0) {
+            let payRes = await StoreApi.payPackage('account', res.data.packageId);
+            if (payRes && payRes.status === 0) {
+              this.$vux.toast.text("抢购成功", 'bottom');
 
+            }
           }
+        }
+        this.$vux.loading.hide();
       }
     }
   };
 </script>
 <style lang="less" scoped>
   @import "~style/base-variables";
-  .see-coupon{height: 50px;}
-  .see-coupon-img{width: 215px;height: 30px;margin: 0 auto;}
+
+  .see-coupon {
+    height: 50px;
+  }
+
+  .see-coupon-img {
+    width: 215px;
+    height: 30px;
+    margin: 0 auto;
+  }
+
   .coupon-list {
     padding-top: 15px;
   }
-  .flash{padding-top: 20px;}
+
+  .flash {
+    padding-top: 20px;
+  }
+
   .rightTitle {
     font-size: 15px;
     font-weight: bold;

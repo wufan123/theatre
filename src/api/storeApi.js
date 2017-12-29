@@ -130,6 +130,14 @@ function getGoodsList() {
     return apiHttp.get('/pay/getPackageBuyPayway', param)
   }
 
+
+  function payPackage(payType,orderId) {
+    let param = {
+      payType,orderId
+    }
+    return apiHttp.get('/pay/packagePay',param);
+  }
+
   /**
    * 添加票券
    * @param {*} voucherNum
@@ -252,5 +260,6 @@ function getGoodsList() {
     updateGoodsOrder: updateGoodsOrder,
     getBuyingGoods: getBuyingGoods,
     mergeOrder: mergeOrder,
-    getGoodsOrderDetail
+    getGoodsOrderDetail,
+    payPackage
   }
