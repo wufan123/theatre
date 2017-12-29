@@ -34,7 +34,7 @@ export default {
     confirm: function() {
       CardApi.setUserBind(this.form.cardNo, this.form.cardPw).then(success => {
         this.$vux.toast.text("添加成功", 'bottom');
-        this.$router.push('MemberCard')
+        this.$router.go(-1) 
       }, error => {
         this.$vux.toast.text("添加失败", 'bottom');
       })

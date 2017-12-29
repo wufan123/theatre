@@ -31,35 +31,30 @@
   import PageScroller from 'views/components/pageScroller.vue'
   import StoreApi from 'api/storeApi'
   import {XButton} from 'vux'
+  import {mapState} from "vuex";
   export default {
       props:['isHermes'],
     components:{PageScroller,XButton},
     data(){
       return {
-        data:[]
+        data:{},
       }
     },
+    computed: {
+      ...mapState('common/', ['userInfo'])
+    },
     methods: {
-      buy(){
-        this.$vux.confirm.show({
-          title: 'Title',
-          content: 'Content',
-          onShow () {
-            console.log('plugin show')
-          },
-          onHide () {
-            console.log('plugin hide')
-          },
-          onCancel () {
-            console.log('plugin cancel')
-          },
-          onConfirm () {
-            console.log('plugin confirm')
+      async buy(){
+          let goodsId =  this.data.goodsId;
+          let res = await StoreApi.createGoodsOrder(this.userInfo.bindmobile,`${goodsId}:1`);
+          if(res&&res.data){
+              this.$router.push({name:"ConfirmGoodOrder",query:{
+                goodsId
+              }})
           }
-        })
       },
       async fetchData(){
-         let res = await StoreApi.getGoodsDetail(this.$route.query.hyGoodsId)
+         let res = await StoreApi.getGoodsDetail(this.$route.query.hyGoodsId);
           if(res&&res.data)
           {
               this.data =res.data.goodInfo

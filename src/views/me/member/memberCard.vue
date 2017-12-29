@@ -5,10 +5,10 @@
        <div class="contain">
           <div v-for="(item,index) in dataList" class="card-item">
           <div flex="dir:top" class="info">
-            <label class="title">{{index + 1}}金牌导游：888888</label>
-            <div class="sum">
-              <label >余额：</label>
-              <label >￥20.00</label>
+            <label class="title text-ellipsis-line">{{item.levelName+item.cardNumber}}</label>
+            <div class="sum" flex="dir:left">
+              <label>余额：</label>
+              <label class="text-ellipsis-line">￥200000000000.00</label>
             </div>
             <label class="validity">有效期：2018-10-11</label>
           </div>
@@ -33,18 +33,25 @@
       }
     },
     methods: {
-      getDataList(page){
-        return CardApi.getCardInfo().then(res => {
-          res = {
-            data: [{name: '1111', id: '111111'}, {name: '2222', id: '22222'}, {name: '3333', id: '3333'}],
-            page: {
-              number: 0, size: 10, totalElements: 3, totalPages: 0
-            }
+      async getDataList(page){
+        let res = await CardApi.getCardInfo();
+        page === 0 ? this.dataList = res.data : this.dataList = this.dataList.concat(res.data);
+        return {
+          ...res, page: {
+            number: 0, size: 10, totalElements: 3, totalPages: 0
           }
-          page == 0 ? this.dataList = res.data : this.dataList = this.dataList.concat(res.data);
-          //this.dataList = this.dataList.concat(res.data)
-          return res
-        })
+        }
+        /*return  CardApi.getCardInfo().then(res => {
+         res = {
+         data: [{name: '1111', id: '111111'}, {name: '2222', id: '22222'}, {name: '3333', id: '3333'}],
+         page: {
+         number: 0, size: 10, totalElements: 3, totalPages: 0
+         }
+         }
+
+         //this.dataList = this.dataList.concat(res.data)
+         return res
+         })*/
       },
       recharge(){
 
@@ -69,25 +76,31 @@
     .info {
       margin-left: 90px;
       font-size: 14px;
+      width: 200px;
       .title {
         margin-top: 20px;
         color: @color-sub;
         font-size: 12px;
+        height: 19px;
       }
-      .sum{
+      .sum {
         margin-top: 15px;
-        :nth-child(2){
+        :first-child{
+          line-height: 32px;
+          width: 60px;
+        }
+        :nth-child(2) {
           font-size: 20px;
           color: @color-primary;
         }
       }
     }
-    .reCharge{
+    .reCharge {
       position: absolute;
       bottom: 25px;
       right: 25px;
     }
-    .delete{
+    .delete {
       font-weight: bold;
       color: white;
       background: @color-active;
