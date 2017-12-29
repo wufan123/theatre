@@ -11,7 +11,7 @@
               </div>
               <div flex-box="1">
                 <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-110' >
-                  <coupon-item v-for="(item,index) in 8" :key="index">
+                  <coupon-item v-for="(item,index) in 8" :key="index" @click.native="$router.push('CouponDetail')">
                     <label class="leftTitle" slot="right">立减券</label>
                     <label class="leftInfo" slot="right">有效期 2017-12-11</label>
                     <label class="rightTitle" slot="left">￥30</label>

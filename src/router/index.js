@@ -8,6 +8,7 @@ import Recharge from '@/views/me/member/recharge.vue'
 import Login from '@/views/login/index.vue'
 import Test from '@/views/test.vue'
 import CouponList from '@/views/me/coupon/list.vue'
+import CouponDetail from '@/views/me/coupon/detail.vue'
 import TicketList from '@/views/me/ticket/list.vue'
 import TicketDetail from '@/views/me/ticket/ticketDetail.vue'
 import FlashSale from 'views/home/flashSale.vue'
@@ -49,6 +50,7 @@ export default new Router({
     {path: '/AddCard', name: 'AddCard', component: AddCard},
     {path: '/Recharge', name: 'Recharge', component: Recharge},
     {path: '/CouponList', name: 'CouponList', component: CouponList},
+    {path: '/CouponDetail', name: 'CouponDetail', component: CouponDetail},
     {path: '/TicketList', name: 'TicketList', component: TicketList},
     {path: '/TicketDetail', name: 'TicketDetail', component: TicketDetail},
     {path: '/Test', name: 'Test', component: Test},
