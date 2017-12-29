@@ -17,6 +17,7 @@ import IntroduceDetail from 'views/business/introduce/detail.vue'
 import SessionDetail from 'views/session/detail.vue'
 import FindList from 'views/business/find/list.vue'
 import ConfirmOrder from 'views/common/confirmOrder.vue'
+import ConfirmGoodOrder from 'views/common/confirmGoodOrder.vue'
 import PayOrder from 'views/common/payOrder.vue'
 import PaySuccess from 'views/common/paySuccess.vue'
 import Snack from 'views/common/snack.vue'
@@ -37,6 +38,7 @@ export default new Router({
     {path: '/FindList', name: 'FindList', component: FindList},
     //common
     {path: '/ConfirmOrder', name: 'ConfirmOrder', component: ConfirmOrder},
+    {path: '/ConfirmGoodOrder', name: 'ConfirmGoodOrder', component: ConfirmGoodOrder,props: true},
     {path: '/Snack', name: 'Snack', component: Snack},
     {path: '/PayOrder', name: 'PayOrder', component: PayOrder},
     {path: '/PaySuccess', name: 'PaySuccess', component: PaySuccess},

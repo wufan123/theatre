@@ -52,11 +52,13 @@
         return this.$refs.scroller.reset();
       },
       listItemClick(item) {
-        this.$vux.toast.text("请到我的优惠券中查看", "bottom");
-
+            this.bindingTicket(item)
       },
-      async createPackageOrder(){
-          let res = StoreApi.createComboOrder(this.$store.state.common.userInfo.bindmobile)
+      async bindingTicket(item){
+          let res = await StoreApi.createComboOrder(this.$store.state.common.userInfo.bindmobile,`${item.hyPackageId}:1`);
+          if(res&&res.data){
+
+          }
       }
     }
   };
