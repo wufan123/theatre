@@ -11,7 +11,8 @@
               </div>
               <div flex-box="1">
                 <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-110' >
-                  <coupon-item v-for="(item,index) in 8" :key="index" @click.native="$router.push('CouponDetail')">
+
+                  <coupon-item v-for="(item,index) in dataList" :key="index" @click.native="$router.push('CouponDetail')">
                     <label class="leftTitle" slot="right">立减券</label>
                     <label class="leftInfo" slot="right">有效期 2017-12-11</label>
                     <label class="rightTitle" slot="left">￥30</label>
@@ -39,18 +40,16 @@
             }
         },
         methods: {
-          getDataList(page){
-            return CouponApi.userVoucherList(page,0).then(success =>{
-              console.log(success)
-              this.dataList= success.data.voucherList
-              let res = {
-                data:success.data,
-                page:{
-                  number:0,size:this.dataList.length,totalElements:this.dataList.length,totalPages:1
-                }
+        async  getDataList(page){
+            let res = await  CouponApi.userVoucherList(page,0);
+            if(res&&res.data){
+                this.dataList = res.data.voucherList;
+            }
+            return{
+              page:{
+                number:res.data.voucherNumber,size:100,totalElements:res.data.totalNum,totalPages:1
               }
-              return res
-            })
+            }
           },
           fetchData(){
             return this.$refs.scroller.reset()

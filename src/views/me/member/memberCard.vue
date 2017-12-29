@@ -8,9 +8,9 @@
             <label class="title text-ellipsis-line">{{item.levelName+item.cardNumber}}</label>
             <div class="sum" flex="dir:left">
               <label>余额：</label>
-              <label class="text-ellipsis-line">￥200000000000.00</label>
+              <label class="text-ellipsis-line">￥{{item.money}}</label>
             </div>
-            <label class="validity">有效期：2018-10-11</label>
+            <label class="validity">有效期：{{item.expireDate}}</label>
           </div>
           <div class="s-button khaki reCharge" @click="$router.push('Recharge')">充值</div>
           <label class="delete">—</label>
@@ -35,6 +35,11 @@
     methods: {
       async getDataList(page){
         let res = await CardApi.getCardInfo();
+        res.data = res.data.map(item=>{
+            console.log(item.expireDate);
+            item.expireDate =new Date(item.expireDate*1000).format("yyyy-MM-dd");
+            return item;
+        })
         page === 0 ? this.dataList = res.data : this.dataList = this.dataList.concat(res.data);
         return {
           ...res, page: {
