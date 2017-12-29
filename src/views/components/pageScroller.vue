@@ -36,7 +36,7 @@ export default {
         },
         noMoreText: {
             type: String,
-            default: '没有更多'
+            default: '没有更多数据'
         },
         noRecordText: {
             type: String,

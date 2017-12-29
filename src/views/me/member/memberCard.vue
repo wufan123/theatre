@@ -15,6 +15,9 @@
           <div class="s-button khaki reCharge" @click="$router.push('Recharge')">充值</div>
           <label class="delete">—</label>
         </div>
+        <div class="center no-data">
+          <img :src="require('assets/images/me/no_data.png')">
+        </div>
        </div>
       </page-scroller>
     </div>
@@ -71,6 +74,9 @@
 <style lang="less" scoped>
   @import "~style/base-variables.less";
   .contain{padding-top: 15px;}
+  .no-data{
+    img{width: 150px;margin-top: 160px;margin-bottom: 10px;}
+  }
   .card-item {
     height: 125px;
     width: 345px;
