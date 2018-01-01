@@ -11,11 +11,13 @@ let CINEMA_CODE = 'JC170001';
 const instance = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000,
-  headers: {},
+  headers: {
+    'Accept':"application/json"
+  },
   transformRequest: [function (data, headers) {
     return changeData(data);
   }],
-})
+});
 
 
 async function getToken(config) {
@@ -94,19 +96,19 @@ instance.interceptors.request.use(config => {
 });
 
 instance.interceptors.response.use(response => {
-  console.log('resp-----------------------onse', response)
+  // console.log('resp-----------------------onse', response)
   let data = response.data
   if (data.status == 0) {
     return data
   } else {
-    console.log("response error", data)
+    // console.log("response error", data)
     if (!response.config.tryAgain && data && data.status == '10001') {
       return getToken(response.config)
     }
     return Promise.reject(data);
   }
 }, error => {
-  console.log("error.response", error.response)
+  // console.log("error.response", error.response)
   return Promise.reject(error);
   //CommonAlert.netError("网络异常:"+error.response.status)
 });
