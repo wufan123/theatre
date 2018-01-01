@@ -69,11 +69,13 @@
           <div v-for="(item,index) in stampsList" :key="index" :style="{backgroundImage:`url(${require('assets/images/home/stamps_bg.png')})`}"
                class="ticketItem">
             <div flex="dir:top" class="info">
-              <label class="title">《{{item.packageName}}》</label>
+              <label class="title">《{{item.packageName}}》</label> 
               <label class="des f12">{{item.detail}}</label>
               <label class="price">￥{{item.price}}</label>
             </div>
-            <div class="s-button buy">购买</div>
+            <router-link :to="`/packageDetail?packageId=${item.hyPackageId}`">
+              <div class="s-button buy">购买</div>
+            </router-link>
           </div>
         </scroll-view>
       </list-cell>
