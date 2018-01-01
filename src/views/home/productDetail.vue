@@ -48,8 +48,9 @@
           let goodsId =  this.data.goodsId;
           let res = await StoreApi.createGoodsOrder(this.userInfo.bindmobile,`${goodsId}:1`);
           if(res&&res.data){
+              let orderId = res.data;
               this.$router.push({name:"ConfirmGoodOrder",query:{
-                goodsId
+                goodsId,orderId
               }})
           }
       },

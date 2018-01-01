@@ -55,22 +55,32 @@
       }
     },
     methods: {
-      fetchData(){
+      async fetchData(){
         this.phone = this.$store.state.common.userInfo.bindmobile
         this.oldPhone = this.phone
         // 获取优惠券信息
-        StoreApi.getOrderPayWay(this.orderId, this.orderType).then(success => {
-          this.orderPayWay = success.data
-        }, error => {
-
-        })
+        let wayRes;
+        try {
+          wayRes = await StoreApi.getOrderPayWay(this.orderId, this.orderType);
+        }catch (e){
+            console.log(e);
+        }
+        if(wayRes&&wayRes.data){
+            this.getOrderPayWay = wayRes.data;
+        }
         // 获取订单信息
-        OrderApi.getCinemaOrderInfo(this.orderId).then(success => {
-          this.orderInfo = success.data
-          this.caculateCount()
-        }, error => {
+        let orderRes ;
+        try {
+            orderRes = await OrderApi.getCinemaOrderInfo(this.orderId);
+        }catch (e)
+        {
+            console.log(e);
+        }
+        if(orderRes&&orderRes.data){
 
-        })
+            this.orderInfo = orderRes.data;
+            this.caculateCount();
+        }
       },
       // 计算总价
       caculateCount: function () {
@@ -87,7 +97,7 @@
 
       },
       // 锁定，跳转到支付页面
-      lockAndPayOrder: function() {
+      async lockAndPayOrder() {
         if (this.phone === '') {
             this.$vux.toast.show({
               type: 'cancel',
@@ -101,26 +111,27 @@
         // 优惠券信息
         var couponStr = ''
         // 会员卡信息
-        var cardId = this.selectCard ? this.selectCard.id : null
+        var cardId = this.selectCard ? this.selectCard.id : null;
 
-        this.$vux.loading.show({
-          text: '加载中'
-        })
-        StoreApi.getOrderPayLock(this.orderId, this.orderType, cardId, couponStr).then(success => {
-          this.$vux.loading.hide()
-          if (success && success.price == 0) {
-              // TODO 不需要实际支付，直接调用支付接口
-
-          } else {
-            this.$router.push({name: 'PayOrder', params: {
+        this.$vux.loading.show();
+        let res;
+        try {
+          res = await  StoreApi.getOrderPayLock(this.orderId,this.orderType);
+        } catch (err) {
+          console.log(err);
+        }
+        if (res) {
+          this.$store.commit("business/setPayLockInfo",
+            {
               orderId: this.orderId,
               orderType: this.orderType,
-              payLockInfo: success
-            }})
-          }
-        }, error => {
-          this.$vux.loading.hide()
-        })
+              ...res.data
+            });
+          this.$router.push({
+            name: 'PayOrder'
+          })
+        }
+        this.$vux.loading.hide();
       }
     },
     components: {List, ListItem, XInput, Group}

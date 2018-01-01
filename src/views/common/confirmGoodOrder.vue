@@ -10,21 +10,21 @@
                          :contentBrief="`x 1`"></list-item>
             </div>
             <!--<div v-if="orderInfo&&orderInfo.goods&&orderInfo.goods.list">-->
-              <!--<list-item v-for="item in orderInfo.goods.list" :key="item.name" :img="item.goodsImg"-->
-                         <!--:contentTitle="item.name" :extra="`￥${item.price}`"-->
-                         <!--:contentBrief="`x ${item.number}`"></list-item>-->
+            <!--<list-item v-for="item in orderInfo.goods.list" :key="item.name" :img="item.goodsImg"-->
+            <!--:contentTitle="item.name" :extra="`￥${item.price}`"-->
+            <!--:contentBrief="`x ${item.number}`"></list-item>-->
             <!--</div>-->
           </list>
         </div>
+        <div class="c-info">
+          <list>
+            <list-item :content="`优惠券`" extra="4张可用" isLink :link="`CouponList`"></list-item>
+          </list>
+        </div>
         <!--<div class="c-info">-->
-          <!--<list>-->
-            <!--<list-item :content="`优惠券`" extra="4张可用" isLink :link="`CouponList`"></list-item>-->
-          <!--</list>-->
-        <!--</div>-->
-        <!--<div class="c-info">-->
-          <!--<list>-->
-            <!--<list-item :content="`会员卡`" extra="未选择" isLink :link="`MemberCard`"></list-item>-->
-          <!--</list>-->
+        <!--<list>-->
+        <!--<list-item :content="`会员卡`" extra="未选择" isLink :link="`MemberCard`"></list-item>-->
+        <!--</list>-->
         <!--</div>-->
         <div class="price">
           <div class="flexb"><label>总价</label><label>￥{{orderInfo.price}}</label></div>
@@ -49,12 +49,13 @@
   import StoreApi from 'api/storeApi'
   import {mapState} from "vuex";
   export default {
-    props:['goodInfo'],
+    props: ['goodInfo'],
     data(){
       return {
         phone: '',
         goodsId: this.$route.query.goodsId,
-        orderType: 'goodsAndFilm',
+        orderId: this.$route.query.orderId,
+        orderType: 'goods',
         orderInfo: {}, // 订单信息
         orderPayWay: {}, // 优惠券信息
         selectCard: null, // 选择的会员卡
@@ -69,12 +70,12 @@
         this.phone = this.userInfo.bindmobile;
         this.oldPhone = this.phone;
         let res = await StoreApi.getGoodsDetail(this.goodsId);
-        if(res&&res.data){
-            this.orderInfo = res.data.goodInfo
+        if (res && res.data) {
+          this.orderInfo = res.data.goodInfo
         }
       },
       // 锁定，跳转到支付页面
-      lockAndPayOrder: function () {
+      async lockAndPayOrder () {
         if (this.phone === '') {
           this.$vux.toast.show({
             type: 'cancel',
@@ -88,28 +89,27 @@
         // 优惠券信息
         var couponStr = ''
         // 会员卡信息
-        var cardId = this.selectCard ? this.selectCard.id : null
+        var cardId = this.selectCard ? this.selectCard.id : null;
+        this.$vux.loading.show();
+        let res;
+        try {
+          res = await  StoreApi.getOrderPayLock(this.orderId,this.orderType);
+        } catch (err) {
+          console.log(err);
+        }
+        if (res) {
+          this.$store.commit("business/setPayLockInfo",
+            {
+              orderId: this.orderId,
+              orderType: this.orderType,
+              ...res.data
+            });
+          this.$router.push({
+            name: 'PayOrder'
+          })
+        }
+        this.$vux.loading.hide();
 
-        this.$vux.loading.show({
-          text: '加载中'
-        })
-        StoreApi.getOrderPayLock(this.goodsId, this.orderType, cardId, couponStr).then(success => {
-          this.$vux.loading.hide()
-          if (success && success.price == 0) {
-            // TODO 不需要实际支付，直接调用支付接口
-
-          } else {
-            this.$router.push({
-              name: 'PayOrder', params: {
-                goodsId: this.goodsId,
-                orderType: this.orderType,
-                payLockInfo: success
-              }
-            })
-          }
-        }, error => {
-          this.$vux.loading.hide()
-        })
       }
     },
     components: {List, ListItem, XInput, Group}
@@ -117,6 +117,7 @@
 </script>
 <style lang="less" scoped>
   @import "~style/base-variables.less";
+
   .c-order {
     padding: 0 15px;
     background: @base-bg-color;
