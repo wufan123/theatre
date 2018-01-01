@@ -57,7 +57,9 @@
               <label class="des f12">{{item.detail}}</label>
               <label class="price">￥{{item.price}}</label>
             </div>
+            <router-link :to="`/packageDetail?packageId=${item.hyPackageId}`">
             <div class="s-button buy">购买</div>
+            </router-link>
           </div>
         </scroll-view>
       </list-cell>

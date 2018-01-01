@@ -75,7 +75,7 @@
             if (--this.payTime <= 0) {
               clearInterval(this.timer)
             }
-          }, 1000) 
+          }, 1000)
         }
       },
       // 获取支付方式

@@ -59,7 +59,8 @@
         this.$set(this.dataList, item.index, newItem);
         let sum =this.dataList.map((i)=>{
             return i.num*i.showPrice
-        }).reduce((acc,i)=>{
+        })
+          .reduce((acc,i)=>{
             acc+=i;
             return acc
         });

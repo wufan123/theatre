@@ -1,47 +1,49 @@
 <template>
-  <detail-page :data="data" :click="buy">
-
-  </detail-page>
+  <page headerTitle="详情" flex-box="1" >
+    <div slot="contain" >
+      <div class="ImgOut" >
+        <img  :src="data.goodsImg" />
+      </div>
+      <div class="mainOut" >
+        <div class="mainBody" flex="dir:top cross:center">
+          <label class="title">
+            {{data.goodsName}}</label>
+          <label class="price">
+            ￥{{data.price}}</label>
+          <label class="primeCost" v-if="isHermes">
+            ￥{{data.showPrice}}</label>
+          <div flex="main:center cross:center" class="divider">
+            <label class="dividerTitle">
+              商品介绍
+            </label>
+            <div class="dividerLine"></div>
+          </div>
+          <div class="content">
+            {{data.detail}}
+          </div>
+        </div>
+      </div>
+      <x-button class="no-radius bottomBtn" type="primary"  @click.native="click">马上购买</x-button>
+    </div>
+  </page>
 </template>
 <script>
   import PageScroller from 'views/components/pageScroller.vue'
   import {XButton} from 'vux'
-  import DetailPage from "views/components/detailPage";
-  import {mapState} from "vuex";
-  import StoreApi from 'api/storeApi'
-  export default {
-      props:['isHermes'],
-    components:{PageScroller,XButton,DetailPage},
-    data(){
-      return {
-        data:{},
-      }
-    },
-    computed: {
-      ...mapState('common/', ['userInfo'])
-    },
-    methods: {
-      async buy(){
-          let goodsId =  this.data.goodsId;
-          let res = await StoreApi.createGoodsOrder(this.userInfo.bindmobile,`${goodsId}:1`);
-          if(res&&res.data){
-              let orderId = res.data;
-              this.$router.push({name:"ConfirmGoodOrder",query:{
-                goodsId,orderId
-              }})
-          }
-      },
-      async fetchData(){
-         let res = await StoreApi.getGoodsDetail(this.$route.query.hyGoodsId);
-          if(res&&res.data)
-          {
-              this.data =res.data.goodInfo
-          }
-      }
+    export default {
+      name:'detail-page',
+      props:{data:{
+          type:Object,
+          default:{}
+      },click:Function,isHermes:Boolean},
+      components:{PageScroller,XButton},
+        data(){
+            return {}
+        },
+        methods: {}
     }
-  }
 </script>
-<style lang="less" scoped>
+<style lang="less">
   @import "~style/base-variables";
   .primeCost{
     text-decoration: line-through;

@@ -17,13 +17,15 @@ import LocalProduct from 'views/home/localProduct.vue'
 import ProductDetail from 'views/home/productDetail.vue'
 import IntroduceList from 'views/business/introduce/list.vue'
 import IntroduceDetail from 'views/business/introduce/detail.vue'
-import SessionDetail from 'views/session/detail.vue'
+import SessionDetail from 'views/home/sessionDetail.vue'
 import FindList from 'views/business/find/list.vue'
 import ConfirmOrder from 'views/common/confirmOrder.vue'
 import ConfirmGoodOrder from 'views/common/confirmGoodOrder.vue'
+import ConfirmPackageOrder from 'views/common/confirmPackageOrder.vue'
 import PayOrder from 'views/common/payOrder.vue'
 import PaySuccess from 'views/common/paySuccess.vue'
 import Snack from 'views/common/snack.vue'
+import PackageDetail from 'views/home/packageDetail.vue'
 
 Vue.use(Router)
 
@@ -35,6 +37,7 @@ export default new Router({
     {path: '/FlashSale', name: 'FlashSale', component: FlashSale},
     {path: '/LocalProduct', name: 'LocalProduct', component: LocalProduct, props: true},
     {path: '/ProductDetail', name: 'ProductDetail', component: ProductDetail, props: true},
+    {path: '/PackageDetail', name: 'PackageDetail', component: PackageDetail, props: true},
     //business
     {path: '/IntroduceList', name: 'IntroduceList', component: IntroduceList},
     {path: '/IntroduceDetail', name: 'IntroduceDetail', component: IntroduceDetail},
@@ -42,6 +45,7 @@ export default new Router({
     //common
     {path: '/ConfirmOrder', name: 'ConfirmOrder', component: ConfirmOrder},
     {path: '/ConfirmGoodOrder', name: 'ConfirmGoodOrder', component: ConfirmGoodOrder,props: true},
+    {path: '/ConfirmPackageOrder', name: 'ConfirmPackageOrder', component: ConfirmPackageOrder,props: true},
     {path: '/Snack', name: 'Snack', component: Snack},
     {path: '/PayOrder', name: 'PayOrder', component: PayOrder},
     {path: '/PaySuccess', name: 'PaySuccess', component: PaySuccess},
