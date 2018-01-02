@@ -32,6 +32,17 @@ function getCinemaOrders(status, page) {
     })
 }
 
+//获取我的影片订单
+function getAllMoiveOrder(status, page, success_cb, fail_cb) {
+    let param = {
+      page: page 
+    }
+    if (status) {
+      param.status = status
+    }
+    return apiHttp.get('/user/getCinemaOrders', param, success_cb, fail_cb);
+  }
+
 /**
  * 获取待取票影票订单
  * @param {*} success_cb 
@@ -197,6 +208,7 @@ export default {
     getOrderStatus: getOrderStatus,
     getCinemaOrders: getCinemaOrders,
     getCinemaOrderStatus: getCinemaOrderStatus,
+    getAllMoiveOrder:getAllMoiveOrder,
     getCinemaOrderInfo: getCinemaOrderInfo,
     getGoodsOrders: getGoodsOrders,
     getGoodsOrderStatus: getGoodsOrderStatus,

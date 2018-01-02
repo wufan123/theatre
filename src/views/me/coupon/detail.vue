@@ -8,7 +8,7 @@
           <label class="rightTitle" slot="left">￥{{coupon.voucherValue}}</label>
         </coupon-item>
         <div class="info">
-            <p class="title bold">优惠券编码：{{coupon.voucherNum}}</p>
+            <p class="title">优惠券编码：{{coupon.voucherNum}}</p>
             <p class="title">使用规则：</p>
             <p>1. 立减券可以在购买剧票时使用；</p>
             <p>2. 特惠场，见面会等特殊场次不可用</p>

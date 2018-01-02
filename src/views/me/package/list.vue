@@ -1,23 +1,21 @@
 <template>
-  <page :headerTitle="`场次票`" >
-    <div slot="contain">
+  <page :headerTitle="`套票`" >
+    <div slot="contain" class="package">
       <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage  usePulldown height='-46' >
-        <div v-for="(item,index) in dataList" class="ticket-card" @click="orderDetail(item)">
-          <list twoLine >
-            <list-item :img="item.filmImg"
-            :contentTitle="item.filmName"   extra=""  >
-            <div slot="contentBrief">
-              <!-- <p>12 月 3 日 10：00</p> -->
-              <p>数量：{{item.seatCount}}张</p>
+        <div v-for="(itemp,index) in dataList"  >
+          <div v-for="item in itemp.data" class="ticket-card" @click="Detail(itemp)">
+            <list twoLine :title="item.name" >
+              <list-item v-for="itemc in item.detail" :img="itemc.img"
+              :contentTitle="itemc.name"   extra=""  >
+              <div slot="contentBrief">
+                <!-- <p>12 月 3 日 10：00</p> -->
+                <p flex="main:justify"> <label>数量：</label> <label>{{itemc.number}}张</label> </p>
+              </div>
+                </list-item>
+            </list>
+            <div class="flexb">
+              <label>总价：{{itemp.price}}元</label>
             </div>
-              </list-item>
-          </list>
-          <div class="flexb">
-            <label>总价：{{item.orderPrice}}元</label>
-            <label v-if="item.status==0">未支付</label>
-            <label v-if="item.status==3">已完成</label>
-            <label v-if="item.status==6">异常订单</label>
-            <label v-if="item.status==9">退票订单</label>
           </div>
         </div>
         </page-scroller>
@@ -38,7 +36,7 @@ export default {
   },
   methods: {
     getDataList(page) {
-      return orderApi.getAllMoiveOrder( '',page).then(
+      return orderApi.getPackageOrders().then(
         success => {
           console.log(success);
           this.dataList = success.data;
@@ -58,9 +56,9 @@ export default {
         }
       );
     },
-    orderDetail(order){
+    Detail(order){
       console.log('order',order)
-      this.$router.push({name:'TicketDetail',query:{id:order.orderCode,ticketing:order.ticketing}})
+      this.$router.push({name:'PackageDetail',query:order})
     },
     fetchData() {
       return this.$refs.scroller.reset();
@@ -69,6 +67,6 @@ export default {
 };
 </script>
 <style lang="less">
-
+.package .am-list .am-list-header{border-bottom:1px dashed #ded5c7;font-size:14px;}
 </style>
 
