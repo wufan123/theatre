@@ -1,4 +1,5 @@
 <template>
+  <a :href="link">
   <div class="find">
     <img class="find-vidio"
          :src="img">
@@ -8,12 +9,13 @@
         {{content}}</p>
     </div>
   </div>
+  </a>
 </template>
 <script>
 
   export default {
     name: "find-item",
-    props: ['img', 'title', 'content'],
+    props: ['img', 'title', 'content','link'],
     data(){
       return {}
     }

@@ -19,7 +19,7 @@ export default {
   },
   methods:{
     fetchData(){
-      this.title = this.$route.query.name
+      this.title = this.$route.query.name;
       console.log('0000',this.$route.query.name)
     },
   }

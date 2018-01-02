@@ -20,18 +20,23 @@
         </div>
       </div>
       <!--介绍-->
-      <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')" v-show="introduceList&&introduceList.length>0">
+      <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')"
+                 v-show="introduceList&&introduceList.length>0">
         <label slot="rightTop" @click="$router.push('IntroduceList')">更多</label>
         <scroll-view slot="main">
-          <div flex="dir:top " v-for="(item,index) in introduceList" class="introduceItem" :key="index"
-               @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})">
-            <div flex="dir:left">
-              <img :src="item.thumbUrl" class="contentImg">
-              <div class="rightBorder"></div>
+
+            <div flex="dir:top " v-for="(item,index) in introduceList" class="introduceItem" :key="index"
+            >
+              <a :href="item.contentUrl">
+              <div flex="dir:left">
+                <img :src="item.thumbUrl" class="contentImg">
+                <div class="rightBorder"></div>
+              </div>
+              <div class="bottomBorder"></div>
+              <label class='contentTxt text-ellipsis-line'>{{item.title}}</label>
+              </a>
             </div>
-            <div class="bottomBorder"></div>
-            <label class='contentTxt text-ellipsis-line'>{{item.title}}</label>
-          </div>
+
         </scroll-view>
       </list-cell>
       <!--场次票-->
@@ -51,25 +56,10 @@
       <!--套票-->
       <list-cell :topImg="require('assets/images/home/title_package.png')" v-show="packageList&&stampsList.length>0">
         <scroll-view slot="main">
-          <div v-for="(item,index) in packageList" :key="index" :style="{backgroundImage:`url(${require('assets/images/home/package_bg.png')})`}" class="ticketItem">
+          <div v-for="(item,index) in packageList" :key="index"
+               :style="{backgroundImage:`url(${require('assets/images/home/package_bg.png')})`}" class="ticketItem">
             <div flex="dir:top" class="info">
               <label class="title ">《{{item.packageName}}》</label>
-              <label class="des f12">{{item.detail}}</label>
-              <label class="price">￥{{item.price}}</label>
-            </div>
-            <router-link :to="`/packageDetail?packageId=${item.hyPackageId}`">
-            <div class="s-button buy">购买</div>
-            </router-link>
-          </div>
-        </scroll-view>
-      </list-cell>
-      <!--通兑券-->
-      <list-cell :topImg="require('assets/images/home/title_stamps.png')" v-show="stampsList&&stampsList.length>0">
-        <scroll-view slot="main">
-          <div v-for="(item,index) in stampsList" :key="index" :style="{backgroundImage:`url(${require('assets/images/home/stamps_bg.png')})`}"
-               class="ticketItem">
-            <div flex="dir:top" class="info">
-              <label class="title">《{{item.packageName}}》</label> 
               <label class="des f12">{{item.detail}}</label>
               <label class="price">￥{{item.price}}</label>
             </div>
@@ -79,21 +69,41 @@
           </div>
         </scroll-view>
       </list-cell>
+      <!--通兑券-->
+      <!--<list-cell :topImg="require('assets/images/home/title_stamps.png')" v-show="stampsList&&stampsList.length>0">
+        <scroll-view slot="main">
+          <div v-for="(item,index) in stampsList" :key="index" :style="{backgroundImage:`url(${require('assets/images/home/stamps_bg.png')})`}"
+               class="ticketItem">
+            <div flex="dir:top" class="info">
+              <label class="title">《{{item.packageName}}》</label>
+              <label class="des f12">{{item.detail}}</label>
+              <label class="price">￥{{item.price}}</label>
+            </div>
+            <router-link :to="`/packageDetail?packageId=${item.hyPackageId}`">
+              <div class="s-button buy">购买</div>
+            </router-link>
+          </div>
+        </scroll-view>
+      </list-cell>-->
       <!--兑换票券-->
       <div flex="dir:left main:center">
-        <img :src="require('assets/images/home/convert.png')" class="convert">
+        <router-link to="/sessionDetail">
+          <img :src="require('assets/images/home/convert.png')" class="convert">
+        </router-link>
       </div>
       <!-- 探索-->
       <list-cell :topImg="require('assets/images/home/title_stamps.png')" v-show="findList&&findList.length>0">
         <div slot="main" style="display: flex;flex-wrap: wrap;padding-left: 15px">
           <div flex="dir:top " v-for="(item,index) in findList" style="margin-top: 20px" class="findItem"
                @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})">
-            <div flex="dir:left" >
+            <router-link :to="'http://'+item.contentUrl">
+            <div flex="dir:left">
               <img :src="item.thumbUrl" class="contentImgSquare">
               <div class="rightBorder"></div>
             </div>
             <div class="bottomBorder"></div>
             <label class='contentTxt'>{{item.title}}</label>
+            </router-link>
           </div>
 
         </div>
@@ -149,9 +159,9 @@
         },
         munuList: munuList,
         introduceList: [],
-        packageList:[],
-        stampsList:[],
-        findList:[],
+        packageList: [],
+        stampsList: [],
+        findList: [],
       }
     },
     methods: {
@@ -165,30 +175,28 @@
         }
       },
       async getIntroduce(){
-          let res = await TheatreApi.getInformationList(20);
-          if(res)
-          {
-              this.introduceList = res.data
-          }
+        let res = await TheatreApi.getInformationList(20);
+        if (res) {
+          this.introduceList = res.data
+        }
       },
       async getFind(){
         let res = await  TheatreApi.getInformationList(30);
-        if(res)
-        {
-          this.findList =res.data;
+        if (res) {
+          this.findList = res.data;
         }
       },
       async getPackage(){
-          let res = await TheatreApi.getPackageList(200)
-          if(res){
-              this.packageList =res.data;
-          }
+        let res = await TheatreApi.getPackageList(200)
+        if (res) {
+          this.packageList = res.data;
+        }
       },
       async getStamps(){
         let res = await TheatreApi.getPackageList(201)
         console.log(res)
-        if(res){
-          this.stampsList =res.data;
+        if (res) {
+          this.stampsList = res.data;
         }
       },
       fetchData(){
@@ -216,10 +224,11 @@
 <style lang="less" scoped>
   @import "~style/base-variables.less";
   @import "~style/style.less";
+
   .homeOut {
     background: repeat;
     background-size: 68px 68px;
-    label{
+    label {
       .text-ellipsis-line();
     }
     .convert {
@@ -234,15 +243,16 @@
         height: 30px;
       }
       .header-r-icon {
-        height: 20px;margin-right: 10px;
+        height: 20px;
+        margin-right: 10px;
         margin-left: 20px;
       }
     }
     .findItem {
-        width: 165px;
+      width: 165px;
       margin-right: 15px;
       text-align: center;
-      .contentImgSquare{
+      .contentImgSquare {
         width: 160px;
         height: 160px;
       }
@@ -306,7 +316,7 @@
       padding: 22px 22px 0px;
       background: url(../../assets/images/home/menu_bg.png) no-repeat;
       background-size: 100% 100%;
-      label{
+      label {
         text-align: center;
         width: 70px;
       }
