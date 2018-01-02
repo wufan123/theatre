@@ -1,38 +1,33 @@
 <template>
   <div>
     <page headerTitle="场次票" flex-box="1">
-      <div v-transfer-dom>
-        <popup v-model="show" height="100%" position="bottom">
-          <div>
-            123456
-          </div>
-        </popup>
-      </div>
       <div slot="contain">
-        <div class="goodPhoto">
-          <img src=""/>
+        <div class="imgOut">
+          <img :src="filmDetail.image"/>
         </div>
-        <div class="mainBody" flex="dir:top cross:center">
-          <div  class="titleBar">
-            <div flex="dir:top">
-              <label class="title">
-                {{filmDetail == null ? '坊巷文化影音秀' : filmDetail.filmName}}</label>
-              <label class='des'>
-                {{filmDetail == null ? '坊巷文化影音秀' : filmDetail.filmName}}场次票</label>
+        <div class="mainOut">
+          <div class="mainBody" flex="dir:top cross:center">
+            <div  class="titleBar">
+              <div flex="dir:top">
+                <label class="title">
+                  {{filmDetail == null ? '坊巷文化影音秀' : filmDetail.filmName}}</label>
+                <label class='des'>
+                  {{filmDetail == null ? '坊巷文化影音秀' : filmDetail.filmName}}场次票</label>
+              </div>
+              <div flex="dir:top ">
+                <label class="price">￥{{filmPrice}}</label>
+                <label class="des">满200立减30元</label>
+              </div>
             </div>
-            <div flex="dir:top ">
-              <label class="price">￥{{filmPrice}}</label>
-              <label class="des">满200立减30元</label>
+            <div flex="main:center cross:center" class="divider">
+              <label class="dividerTitle">
+                剧场介绍
+              </label>
+              <div class="dividerLine"></div>
             </div>
-          </div>
-          <div flex="main:center cross:center" class="divider">
-            <label class="dividerTitle">
-              剧场介绍
-            </label>
-            <div class="dividerLine"></div>
-          </div>
-          <div class="content">
-            {{filmDetail ? filmDetail.introduction : ''}}
+            <div class="content">
+              {{filmDetail ? filmDetail.introduction : ''}}
+            </div>
           </div>
         </div>
         <x-button class="no-radius bottomBtn" type="primary" @click.native="show=true">马上购买</x-button>
@@ -365,9 +360,13 @@ export default {
   bottom: 0;
 }
 
-.goodPhoto {
+.imgOut{
+  width: 100%;
   height: 200px;
-  background-color: gray;
+  img{
+    height: 200px;
+    width: 100%;
+  }
 }
 
 .titleTag {
@@ -377,58 +376,64 @@ export default {
   margin-top: 10px;
 }
 
-.mainBody {
-  background-color: @page_bg2;
-  margin: -20px 20px 80px;
-  padding: 20px;
-  border-radius: 5px;
-  .content {
-    margin-top: 20px;
-    text-indent: 2em;
-    text-align: left;
-    width: 100%;
-  }
-  .divider {
-    position: relative;
-    width: 100%;
-    margin-top: 10px;
-  }
-  .dividerLine {
-    border-bottom: dotted @color-sub 1px;
-    position: absolute;
-    width: 100%;
-    z-index: 2;
-  }
-  .dividerTitle {
-    background: @page_bg2 url(../../assets/images/home/title_bg.png) center
+.mainOut{
+  position: relative;
+  width: 100%;
+  .mainBody {
+    background-color: @page_bg2;
+    margin: -20px 20px 80px;
+    padding: 20px;
+    border-radius: 5px;
+
+    .content {
+      margin-top: 20px;
+      text-indent: 2em;
+      text-align: left;
+      width: 100%;
+    }
+    .divider {
+      position: relative;
+      width: 100%;
+      margin-top: 10px;
+    }
+    .dividerLine {
+      border-bottom: dotted @color-sub 1px;
+      position: absolute;
+      width: 100%;
+      z-index: 2;
+    }
+    .dividerTitle {
+      background: @page_bg2 url(../../assets/images/home/title_bg.png) center
       no-repeat;
-    background-size: 100%100%;
-    z-index: 3;
-    width: 128px;
-    height: 34px;
-    color: @color-sub;
-    text-align: center;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 34px;
-    margin: 10px 0px;
-  }
-  .titleBar {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    .title {
+      background-size: 100%100%;
+      z-index: 3;
+      width: 128px;
+      height: 34px;
+      color: @color-sub;
+      text-align: center;
       font-size: 16px;
       font-weight: bold;
+      line-height: 34px;
+      margin: 10px 0px;
     }
-    .des {
-      font-size: 11px;
-    }
-    .price {
-      line-height: 25px;
-      color: @color-sub;
-      font-size: 21px;
+    .titleBar {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      .title {
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .des {
+        font-size: 11px;
+      }
+      .price {
+        line-height: 25px;
+        color: @color-sub;
+        font-size: 21px;
+      }
     }
   }
 }
+
 </style>
