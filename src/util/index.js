@@ -34,6 +34,16 @@ export function isPlainObject(obj) {
     return isObject(obj) && Object.getPrototypeOf(obj) == Object.prototype;
 }
 
+export function isNumberBy100(ssn) {
+    var re = /^[0-9]*[0-9]$/i;       //校验是否为数字
+    if(re.test(ssn) && ssn%100===0) {
+     return true;
+    }else {
+     return false;
+    }
+}
+
+
 export const assign = Object.assign || _assign;
 
 export function merge(target) {
@@ -106,3 +116,4 @@ Date.prototype.format = function(fmt) { //author: meizz
     if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
   return fmt;
 }
+

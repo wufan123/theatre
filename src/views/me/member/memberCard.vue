@@ -1,8 +1,8 @@
 <template>
   <page white :headerTitle="`剧坊会员卡`" :headerRText="`添加会员卡`" :headerRLink="`AddCard`">
     <div slot="contain">
-      <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-46'>
-       <div class="contain">
+      <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡'  noRecordImage usePulldown height='-46'>
+       <div class="contain" v-if="dataList.length>0">
           <div v-for="(item,index) in dataList" class="card-item">
           <div flex="dir:top" class="info">
             <label class="title text-ellipsis-line">{{item.levelName+item.cardNumber}}</label>
@@ -12,13 +12,13 @@
             </div>
             <label class="validity">有效期：{{item.expireDate}}</label>
           </div>
-          <div class="s-button khaki reCharge" @click="$router.push('Recharge')">充值</div>
-          <label class="delete">—</label>
-        </div>
-        <div class="center no-data">
-          <img :src="require('assets/images/me/no_data.png')">
+          <div class="s-button khaki reCharge" @click="$router.push({name:'Recharge',query:{card:item}})">充值</div>
+          <label class="delete" @click="isdeleteCard(item)" >—</label>
         </div>
        </div>
+       <div class="center no-data" v-else >
+          <img :src="require('assets/images/me/no_data.png')">
+        </div>
       </page-scroller>
     </div>
   </page>
@@ -61,8 +61,28 @@
          return res
          })*/
       },
-      recharge(){
-
+      isdeleteCard(card){
+        var that = this
+        this.$vux.confirm.show({
+          title: '提示',
+          content: '是否解绑该会员卡',
+          onConfirm () {
+            that.deleteCard(card)
+          }
+        })
+      },
+      deleteCard(card){
+        console.log('card',card)
+        return  CardApi.setUserUnbind(card.id,1).then(res=>{
+           this.$vux.toast.text("解绑成功", 'middle');
+           this.getDataList(0)
+        },error=>{
+          if(error.text){
+         this.$vux.toast.text(error.text, 'middle'); 
+        }else{
+          this.$vux.toast.text("解绑失败", 'middle');
+        }
+        })
       },
       fetchData(){
         return this.$refs.scroller.reset()

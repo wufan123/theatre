@@ -32,11 +32,24 @@ export default {
   components: { XInput, Group },
   methods: {
     confirm: function() {
+      if(!this.form.cardNo){
+        this.$vux.toast.text("请输入会员卡号", 'middle');
+        return
+      }
+      if(!this.form.cardPw){
+        this.$vux.toast.text("请输入会员卡密码", 'middle');
+        return
+      }
       CardApi.setUserBind(this.form.cardNo, this.form.cardPw).then(success => {
-        this.$vux.toast.text("添加成功", 'bottom');
+        this.$vux.toast.text("添加成功", 'middle');
         this.$router.go(-1)
       }, error => {
-        this.$vux.toast.text("添加失败", 'bottom');
+        if(error.text){
+         this.$vux.toast.text(error.text, 'middle'); 
+        }else{
+          this.$vux.toast.text("添加失败", 'middle');
+        }
+        
       })
     }
   }
