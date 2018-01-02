@@ -4,7 +4,7 @@
       <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage  usePulldown height='-46' >
         <div v-for="(itemp,index) in dataList" class="ticket-card" @click="orderDetail(itemp)">
           <list twoLine >
-            <list-item v-for="item in itemp.details" :img="item.goodsImg" 
+            <list-item v-for="(item,index) in itemp.details" :key="index" :img="item.goodsImg"
             :contentTitle="item.goodsName"   extra=""  >
             <div slot="contentBrief">
               <!-- <p>12 月 3 日 10：00</p> -->

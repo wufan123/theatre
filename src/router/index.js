@@ -64,13 +64,11 @@ export default new Router({
     {path: '/TicketList', name: 'TicketList', component: TicketList},
     {path: '/TicketDetail', name: 'TicketDetail', component: TicketDetail},
     {path: '/PackageList', name: 'PackageList', component: PackageList},
-    {path: '/PackageDetail', name: 'PackageDetail', component: PackageDetail},
     {path: '/PackageOrderDetail', name: 'PackageOrderDetail', component: PackageOrderDetail},
     {path: '/LocalProductList', name: 'LocalProductList', component: LocalProductList},
     {path: '/LocalProductDetail', name: 'LocalProductDetail', component: LocalProductDetail},
     {path: '/Test', name: 'Test', component: Test},
     {path: '/SessionDetail', name: 'SessionDetail', component: SessionDetail},
     {path: '/Login', name: 'Login', component: Login},
-    {path: '/Test', name: 'Test', component: Test}
   ]
 })

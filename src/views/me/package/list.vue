@@ -2,11 +2,11 @@
   <page :headerTitle="`套票`" >
     <div slot="contain" class="package">
       <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage  usePulldown height='-46' >
-        <div v-for="(itemp,index) in dataList"  >
-          <div v-for="item in itemp.data" class="ticket-card" @click="Detail(itemp)">
+        <div v-for="(itemp,index) in dataList" :key="index" >
+          <div v-for="(item,indexp) in itemp.data" :key="indexp" class="ticket-card" @click="Detail(itemp)" >
             <list twoLine :title="item.name" >
-              <list-item v-for="itemc in item.detail" :img="itemc.img"
-              :contentTitle="itemc.name"   extra=""  >
+              <list-item v-for="(itemc,indexc) in item.detail" :img="itemc.img" :key="indexc"
+              :contentTitle="itemc.name"   extra=""  >优惠券
               <div slot="contentBrief">
                 <!-- <p>12 月 3 日 10：00</p> -->
                 <p flex="main:justify"> <label>数量：</label> <label>{{itemc.number}}张</label> </p>
@@ -58,7 +58,7 @@ export default {
     },
     Detail(order){
       console.log('order',order)
-      this.$router.push({name:'PackageOrderDetail',query:order}) 
+      this.$router.push({name:'PackageOrderDetail',query:order})
     },
     fetchData() {
       return this.$refs.scroller.reset();
