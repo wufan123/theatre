@@ -25,7 +25,7 @@ Vue.use(LoadingPlugin);
 
 Vue.prototype.$util = util //工具类
 /* eslint-disable no-new */
-new Vue({
+window._vue = new Vue({
   router,
   store,
   render: h => h(App)

@@ -2,7 +2,7 @@
   <page :headerTitle="`充值`" >
     <div slot="contain">
       <div class="recharge">
-          <p class="title">金牌导游：888888888</p>
+          <p class="title">{{card.levelName}}：{{card.cardNumber}}</p>
           <div class="recharge-b" flex="main:justify">
             <i class="icon subtract" @click="subtract">-</i>
            <input class="input" type="text" placeholder="请输入会员卡号" v-model="amount" >
@@ -18,7 +18,8 @@
     export default {
     data(){
       return {
-        amount: ''
+        amount: '',
+        card:{}
       }
     },
     methods:{
@@ -39,7 +40,7 @@
           this.$vux.toast.text("请输入整百金额", 'middle');
           return
         }
-        return CardApi.recharge(this.amount,this.$route.query.id,'weixinpay',).then(res=>{
+        return CardApi.recharge(this.amount,this.card.id,'weixinpay',).then(res=>{
           this.$vux.toast.text("充值成功", 'middle');
           this.$router.go(-1)
         },error=>{
@@ -49,6 +50,10 @@
             this.$vux.toast.text("充值失败", 'middle');
           }
         })
+      },
+      fetchData(){
+        console.log('this.$route.query.card',this.$route.query.card)
+        this.card = this.$route.query.card
       }
     }
     }
