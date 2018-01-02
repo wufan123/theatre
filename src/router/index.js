@@ -29,7 +29,6 @@ import ConfirmPackageOrder from 'views/common/confirmPackageOrder.vue'
 import PayOrder from 'views/common/payOrder.vue'
 import PaySuccess from 'views/common/paySuccess.vue'
 import Snack from 'views/common/snack.vue'
-import PackageDetail from 'views/home/packageDetail.vue'
 
 Vue.use(Router)
 
