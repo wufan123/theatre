@@ -5,6 +5,7 @@ import router from './router'
 import { XHeader,XButton } from 'vux'
 import Page from '@/views/components/page.vue'
 import store from './store'
+import * as util from './util'
 import baseMixin from "./util/baseMixin";
 import 'flex.css'
 import  { ToastPlugin,ConfirmPlugin, LoadingPlugin} from 'vux'
@@ -16,10 +17,13 @@ Vue.config.productionTip = false
 Vue.component('x-header',XHeader);
 Vue.component('x-button',XButton);
 Vue.component('page',Page);
+
 Vue.mixin(baseMixin);
 Vue.use(ToastPlugin);
 Vue.use(ConfirmPlugin);
 Vue.use(LoadingPlugin);
+
+Vue.prototype.$util = util //工具类
 /* eslint-disable no-new */
 new Vue({
   router,
