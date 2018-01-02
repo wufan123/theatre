@@ -1,23 +1,25 @@
 <template>
-  <page :headerTitle="`场次票`" >
+  <page :headerTitle="`福州特产`" >
     <div slot="contain">
       <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage  usePulldown height='-46' >
-        <div v-for="(item,index) in dataList" class="ticket-card" @click="orderDetail(item)">
+        <div v-for="(itemp,index) in dataList" class="ticket-card" @click="orderDetail(itemp)">
           <list twoLine >
-            <list-item :img="item.filmImg"
-            :contentTitle="item.filmName"   extra=""  >
+            <list-item v-for="item in itemp.details" :img="item.goodsImg" 
+            :contentTitle="item.goodsName"   extra=""  >
             <div slot="contentBrief">
               <!-- <p>12 月 3 日 10：00</p> -->
-              <p>数量：{{item.seatCount}}张</p>
+              <p flex="main:justify"> <label>数量：</label> <label>{{item.number}}张</label> </p>
             </div>
               </list-item>
           </list>
           <div class="flexb">
-            <label>总价：{{item.orderPrice}}元</label>
-            <label v-if="item.status==0">未支付</label>
-            <label v-if="item.status==3">已完成</label>
-            <label v-if="item.status==6">异常订单</label>
-            <label v-if="item.status==9">退票订单</label>
+            <label>总价：{{itemp.price}}元</label>
+            <label v-if="itemp.status==0">未支付</label>
+            <label v-if="itemp.status==1">已支付</label>
+            <label v-if="itemp.status==3">已退货</label>
+            <label v-if="itemp.status==6">已取消</label>
+            <label v-if="itemp.status==10">已打印</label>
+            <label v-if="itemp.status==11">已验证</label>
           </div>
         </div>
         </page-scroller>
@@ -38,7 +40,7 @@ export default {
   },
   methods: {
     getDataList(page) {
-      return orderApi.getAllMoiveOrder( '',page).then(
+      return orderApi.getGoodsOrders(page).then(
         success => {
           console.log(success);
           this.dataList = success.data;
@@ -60,7 +62,7 @@ export default {
     },
     orderDetail(order){
       console.log('order',order)
-      this.$router.push({name:'TicketDetail',query:{id:order.orderCode,ticketing:order.ticketing}})
+      this.$router.push({name:'LocalProductDetail',query:{id:order.orderNo}})
     },
     fetchData() {
       return this.$refs.scroller.reset();

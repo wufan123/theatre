@@ -1,29 +1,31 @@
 <template>
   <page :headerTitle="`详情`">
     <div slot="contain">
-      <div class="contain" style="background-image:url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514201893800&di=18c5972c1283256906ae1bc527574b88&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F1ad5ad6eddc451dac844bcf9bcfd5266d0163275.jpg')">
+      <div class="contain" :style="{backgroundImage: 'url(' +backgroundStr+ ')'}" >
         <div class="ticket-detail">
           <div class="ticket">
             <div class="info">
-              <p class="f16">{{orderDetail.film.filmName}}</p>
-              <p>{{orderDetail.film.startTime}}</p>
+              <p class="f16">{{film.name}}</p>
             </div>
             <div class="body">
-              <p v-for="item in orderInfo.ticketing" class="mb10 red" >{{item.key}}：{{item.value}}</p>
+              <p class="mb10 red" >取票码：{{orderInfo.convcode}}</p>
               <!-- <p class="mb10">取票码： 999999999</p> -->
-              <qrcode value="https://vux.li?x-page=demo_qrcode" type="canvas" :size='120' ></qrcode>
+              <qrcode :value="orderInfo.convcode" type="canvas" :size='120' ></qrcode>
             </div>
           </div>
-          <div class="cell mb10">
-            <div v-if="orderDetail.goods" class="cell-item">
-                <div  class="flexb" v-for="item in orderDetail.goods.list">
+          <div class="cell">
+            <div  class="cell-item">
+                <div class="flexb mb10" >
+                  <label>订单号:{{orderInfo.orderId}}</label>
+                </div>
+                <div class="flexb" v-for="item in film.detail" >
                   <label>{{item.name}}</label><label>x {{item.number}}</label>
                 </div>
             </div>
             <div class="cell-body">
               <!-- <div class="flexb f12"><label>总价</label><label>￥228.00</label></div> -->
               <!-- <div class="flexb"><label>立减券</label><label>-￥30.00</label></div> -->
-              <div class="flexb f16"><label>实付款</label><label>￥{{orderDetail.film.price}}</label></div>
+              <div class="flexb f16"><label>实付款</label><label>￥{{orderInfo.price}}</label></div>
             </div>
           </div>
           <div class="cell center"><div class="s-button khaki"> 联系客服</div></div>
@@ -42,24 +44,22 @@ import orderApi from "api/orderApi";
 export default {
   data(){
       return{
-        orderDetail:{
-          film:{},
-          goods:{}
-        },
-        orderInfo:{}
+        orderInfo:{},
+        order:[],
+        film:{},
+        backgroundStr:''
       }
   },
   components:{Qrcode},
   methods:{
-      getDataList(){
-        return orderApi.getCinemaOrderInfo(this.orderInfo.id).then(res=>{
-          console.log('res',res.data)
-          this.orderDetail = res.data
-        },error => { console.log(error); })
-      },
       fetchData(){
+        console.log('88888', this.$route.query)
         this.orderInfo = this.$route.query
-        this.getDataList()
+        this.order = this.orderInfo.data
+        console.log('this.order', this.order)
+        this.film = this.orderInfo.data[0]
+        this.backgroundStr = this.film.detail[0].img
+
       }
   }
 }

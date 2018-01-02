@@ -5,25 +5,25 @@
         <div class="ticket-detail">
           <div class="ticket">
             <div class="info">
-              <p class="f16">{{orderDetail.film.filmName}}</p>
-              <p>{{orderDetail.film.startTime}}</p>
+              <p class="f16">{{orderDetail.cinemaName}}</p>
+              <p>{{new Date(orderDetail.downTime*1000).format('yyyy年MM月dd日 hh:mm:ss')}}</p>
             </div>
             <div class="body">
-              <p v-for="item in orderInfo.ticketing" class="mb10 red" >{{item.key}}：{{item.value}}</p>
+              <p v-for="item in orderDetail.ticketing" class="mb10 red" >{{item.key}}：{{item.value}}</p>
               <!-- <p class="mb10">取票码： 999999999</p> -->
-              <qrcode value="https://vux.li?x-page=demo_qrcode" type="canvas" :size='120' ></qrcode>
+              <qrcode :value="orderDetail.qrCode" type="canvas" :size='120' ></qrcode>
             </div>
           </div>
           <div class="cell mb10">
-            <div v-if="orderDetail.goods" class="cell-item">
-                <div  class="flexb" v-for="item in orderDetail.goods.list">
-                  <label>{{item.name}}</label><label>x {{item.number}}</label>
+            <div v-if="orderDetail.details" class="cell-item">
+                <div  class="flexb" v-for="item in orderDetail.details">
+                  <label>{{item.goodsName}}</label><label>x {{item.number}}</label>
                 </div>
             </div>
             <div class="cell-body">
               <!-- <div class="flexb f12"><label>总价</label><label>￥228.00</label></div> -->
               <!-- <div class="flexb"><label>立减券</label><label>-￥30.00</label></div> -->
-              <div class="flexb f16"><label>实付款</label><label>￥{{orderDetail.film.price}}</label></div>
+              <div class="flexb f16"><label>实付款</label><label>￥{{orderDetail.price}}</label></div>
             </div>
           </div>
           <div class="cell center"><div class="s-button khaki"> 联系客服</div></div>
@@ -38,23 +38,21 @@
 </template>
 <script>
 import { Qrcode } from 'vux'
-import orderApi from "api/orderApi";
+import storeApi from "api/storeApi";
 export default {
   data(){
       return{
-        orderDetail:{
-          film:{},
-          goods:{}
-        },
+        orderDetail:{},
         orderInfo:{}
       }
   },
   components:{Qrcode},
   methods:{
       getDataList(){
-        return orderApi.getCinemaOrderInfo(this.orderInfo.id).then(res=>{
+        return storeApi.getGoodsOrderDetail(this.orderInfo.id).then(res=>{
           console.log('res',res.data)
           this.orderDetail = res.data
+          console.log('时间',new Date(this.orderDetail.downTime*1000).format('yyyy年MM月dd日 HH:mm:ss'))
         },error => { console.log(error); })
       },
       fetchData(){

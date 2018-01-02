@@ -48,7 +48,6 @@
               this.$vux.toast.text(error.text, 'bottom');
             });
       }
-
     }
   };
 </script>

@@ -240,7 +240,7 @@
       min-height: 40px;
       padding: 5px 10px;
       .logo {
-        height: 30px;
+        height: 40px;
       }
       .header-r-icon {
         height: 20px;
