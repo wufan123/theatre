@@ -13,7 +13,7 @@
                    :content="item.content" :img="item.thumbUrl" :link="item.contentUrl">
         </find-item>
         <find-item v-for="(item,index) in videoList" :key="index" v-if="currentIndex===1" :title="item.title"
-                   :content="item.content" :img="item.thumbUrl" :link="item.contentUrl"> 
+                   :content="item.content" :img="item.thumbUrl" :link="item.contentUrl">
         </find-item>
         <find-item v-for="(item,index) in attentionList" :key="index" v-if="currentIndex===2" :title="item.title"
                    :content="item.content" :img="item.thumbUrl" :link="item.contentUrl">

@@ -12,7 +12,7 @@ import CouponDetail from '@/views/me/coupon/detail.vue'
 import TicketList from '@/views/me/ticket/list.vue'
 import TicketDetail from '@/views/me/ticket/ticketDetail.vue'
 import PackageList from '@/views/me/package/list.vue'
-import PackageDetail from '@/views/me/package/packageDetail.vue'
+import PackageOrderDetail from '@/views/me/package/packageDetail.vue'
 import LocalProductList from '@/views/me/localProduct/list.vue'
 import LocalProductDetail from '@/views/me/localProduct/localProductDetail.vue'
 import Share from '@/views/me/share/share.vue'
@@ -22,6 +22,7 @@ import ProductDetail from 'views/home/productDetail.vue'
 import IntroduceList from 'views/business/introduce/list.vue'
 import IntroduceDetail from 'views/business/introduce/detail.vue'
 import SessionDetail from 'views/home/sessionDetail.vue'
+import PackageDetail from 'views/home/packageDetail.vue'
 import FindList from 'views/business/find/list.vue'
 import ConfirmOrder from 'views/common/confirmOrder.vue'
 import ConfirmGoodOrder from 'views/common/confirmGoodOrder.vue'
@@ -64,6 +65,7 @@ export default new Router({
     {path: '/TicketDetail', name: 'TicketDetail', component: TicketDetail},
     {path: '/PackageList', name: 'PackageList', component: PackageList},
     {path: '/PackageDetail', name: 'PackageDetail', component: PackageDetail},
+    {path: '/PackageOrderDetail', name: 'PackageOrderDetail', component: PackageOrderDetail},
     {path: '/LocalProductList', name: 'LocalProductList', component: LocalProductList},
     {path: '/LocalProductDetail', name: 'LocalProductDetail', component: LocalProductDetail},
     {path: '/Test', name: 'Test', component: Test},

@@ -58,7 +58,7 @@ export default {
     },
     Detail(order){
       console.log('order',order)
-      this.$router.push({name:'PackageDetail',query:order})
+      this.$router.push({name:'PackageOrderDetail',query:order}) 
     },
     fetchData() {
       return this.$refs.scroller.reset();
