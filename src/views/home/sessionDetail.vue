@@ -3,7 +3,7 @@
     <page headerTitle="场次票" flex-box="1">
       <div slot="contain">
         <div class="imgOut">
-          <img :src="filmDetail.image"/>
+          <img :src="filmDetail?filmDetail.image:null"/>   
         </div>
         <div class="mainOut">
           <div class="mainBody" flex="dir:top cross:center">
@@ -92,7 +92,7 @@ export default {
       filmPrice: "-",
       filmTimeList: [],
       filmPlanList: [],
-      seatList: null // 选中排期座位详情
+      seatList: [] // 选中排期座位详情
     };
   },
   methods: {
