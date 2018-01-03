@@ -22,7 +22,8 @@ import ProductDetail from 'views/home/productDetail.vue'
 import IntroduceList from 'views/business/introduce/list.vue'
 import IntroduceDetail from 'views/business/introduce/detail.vue'
 import SessionDetail from 'views/home/sessionDetail.vue'
-import PackageDetail from 'views/home/packageDetail.vue'
+import HomePackageList from 'views/home/packageList.vue'
+import HomePackageDetail from 'views/home/packageDetail.vue'
 import FindList from 'views/business/find/list.vue'
 import ConfirmOrder from 'views/common/confirmOrder.vue'
 import ConfirmGoodOrder from 'views/common/confirmGoodOrder.vue'
@@ -41,7 +42,8 @@ export default new Router({
     {path: '/FlashSale', name: 'FlashSale', component: FlashSale},
     {path: '/LocalProduct', name: 'LocalProduct', component: LocalProduct, props: true},
     {path: '/ProductDetail', name: 'ProductDetail', component: ProductDetail, props: true},
-    {path: '/PackageDetail', name: 'PackageDetail', component: PackageDetail, props: true},
+    {path: '/HomePackageList', name: 'HomePackageList', component: HomePackageList, props: true},
+    {path: '/HomePackageDetail', name: 'HomePackageDetail', component: HomePackageDetail, props: true},
     //business
     {path: '/IntroduceList', name: 'IntroduceList', component: IntroduceList},
     {path: '/IntroduceDetail', name: 'IntroduceDetail', component: IntroduceDetail},
@@ -64,7 +66,6 @@ export default new Router({
     {path: '/TicketList', name: 'TicketList', component: TicketList},
     {path: '/TicketDetail', name: 'TicketDetail', component: TicketDetail},
     {path: '/PackageList', name: 'PackageList', component: PackageList},
-    {path: '/PackageDetail', name: 'PackageDetail', component: PackageDetail},
     {path: '/PackageOrderDetail', name: 'PackageOrderDetail', component: PackageOrderDetail},
     {path: '/LocalProductList', name: 'LocalProductList', component: LocalProductList},
     {path: '/LocalProductDetail', name: 'LocalProductDetail', component: LocalProductDetail},
