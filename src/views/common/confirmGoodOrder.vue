@@ -121,13 +121,7 @@
 
       }
     },
-    components: {List, ListItem, XInput, Group},
-      beforeRouteEnter (to, from, next) {
-    next(vm=>{
-            console.log('from',from)
-            console.log('from',vm.selectCoupon)})
-
-  }
+    components: {List, ListItem, XInput, Group}
   }
 </script>
 <style lang="less">

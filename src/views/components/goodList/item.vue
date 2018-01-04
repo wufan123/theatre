@@ -27,13 +27,13 @@
   @import "~style/base-variables.less";
   .goodItem{
     height: 100px;
-    margin:10px 15px 10px;
+    margin:10px 15px 10px;position: relative;
     padding: 10px;
     background: url(../../../assets/images/home/sale_bg.png) center no-repeat;
     background-size: 100% 100%;
     .primeCost{color: #878787;text-decoration: line-through}
     .buyBtn{
-      position:absolute;right:30px;bottom:55px;
+      position:absolute;right:20px;bottom:30px;
     }
     .goodImg{
       width: 101px;
