@@ -30,6 +30,8 @@ import ConfirmPackageOrder from 'views/common/confirmPackageOrder.vue'
 import PayOrder from 'views/common/payOrder.vue'
 import PaySuccess from 'views/common/paySuccess.vue'
 import Snack from 'views/common/snack.vue'
+import SelectCoupon from 'views/common/selectCoupon.vue'
+import SelectMember from 'views/common/selectMember.vue'
 
 Vue.use(Router)
 
@@ -53,6 +55,8 @@ export default new Router({
     {path: '/Snack', name: 'Snack', component: Snack},
     {path: '/PayOrder', name: 'PayOrder', component: PayOrder},
     {path: '/PaySuccess', name: 'PaySuccess', component: PaySuccess},
+    {path: '/SelectCoupon', name: 'SelectCoupon', component: SelectCoupon,props:true},
+    {path: '/SelectMember', name: 'SelectMember', component: SelectMember,props:true},
     //me
     {path: '/Me', name: 'Me', component: Me},
     {path: '/Share', name: 'Share', component: Share},

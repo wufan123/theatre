@@ -3,7 +3,7 @@
     <page headerTitle="场次票" flex-box="1">
       <div slot="contain">
         <div class="imgOut">
-          <img :src="filmDetail?filmDetail.image:null"/>   
+          <img :src="filmDetail?filmDetail.image:null"/>
         </div>
         <div class="mainOut">
           <div class="mainBody" flex="dir:top cross:center">
@@ -309,6 +309,8 @@ export default {
             path: "Snack",
             query: { orderId: success.data.planOrderId }
           });
+          this.$store.commit('business/setSelectedCoupon',{});
+          this.$store.commit('business/setSelectedMember',{});
         },
         error => {
           this.$vux.loading.hide();

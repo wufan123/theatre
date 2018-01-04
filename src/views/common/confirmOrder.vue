@@ -14,16 +14,21 @@
         </div>
         <div class="c-info">
           <list>
-            <list-item :content="`优惠券`" extra="4张可用" isLink :link="`CouponList`"></list-item>
+            <list-item :content="`优惠券`" :extra="selectedCoupon.voucherName" isLink  @click.native="$router.push({name:'SelectCoupon',params:{
+                list:orderPayWay.couponList
+            }})"></list-item>
           </list>
         </div>
         <div class="c-info">
           <list>
-            <list-item :content="`会员卡`" extra="未选择" isLink :link="`MemberCard`"></list-item>
+            <list-item :content="`会员卡`" :extra="selectedMember.cardId" isLink @click.native ="$router.push({name:'SelectMember',params:{
+                list:orderPayWay.memberCard
+            }})" ></list-item>
           </list>
         </div>
         <div class="price">
           <div class="flexb"><label>总价</label><label>￥{{orderInfo._price}}</label></div>
+          <div class="flexb" v-for="(item,index) in couponInfo" :key="index"><label>{{item.name}}</label><label>{{item.des}}</label></div>
           <div class="flexb payment"><label >实付款</label><label>￥{{orderInfo._price}}</label></div>
         </div>
       </div>
@@ -42,6 +47,7 @@
   import {XInput, Group} from "vux";
   import OrderApi from 'api/orderApi'
   import StoreApi from 'api/storeApi'
+  import {mapState} from "vuex";
   export default {
     data(){
       return {
@@ -52,7 +58,11 @@
         orderPayWay: {}, // 优惠券信息
         selectCard: null, // 选择的会员卡
         oldPhone: null, // 保存旧手机号，判断是否有修改
+        couponInfo:[]
       }
+    },
+    computed: {
+      ...mapState('business',['selectedCoupon','selectedMember'])
     },
     methods: {
       async fetchData(){
@@ -66,7 +76,7 @@
             console.log(e);
         }
         if(wayRes&&wayRes.data){
-            this.getOrderPayWay = wayRes.data;
+            this.orderPayWay = wayRes.data;
         }
         // 获取订单信息
         let orderRes ;
@@ -94,6 +104,17 @@
         this.orderInfo._price = this.orderInfo.film._price + (parseFloat(this.orderInfo.goods ? this.orderInfo.goods.price : 0))
 
         // TODO 计算优惠券
+        if(this.selectedCoupon&&this.selectedCoupon.voucherName){
+            switch (this.selectedCoupon.ticketType){
+              case 'reduce':
+                  this.orderInfo._price -= this.selectedCoupon.ticketValue;
+                  this.couponInfo.push({
+                    name:this.selectedCoupon.voucherName,
+                    des:`-￥${this.selectedCoupon.ticketValue}`
+                  })
+                  break;
+            }
+        }
 
       },
       // 锁定，跳转到支付页面
@@ -109,14 +130,14 @@
             OrderApi.updateOrderMobile(this.phone)
         }
         // 优惠券信息
-        var couponStr = ''
+        var couponStr = this.selectedCoupon.voucherNum;
         // 会员卡信息
-        var cardId = this.selectCard ? this.selectCard.id : null;
+        var cardId = this.selectedMember.cardId
 
         this.$vux.loading.show();
         let res;
         try {
-          res = await  StoreApi.getOrderPayLock(this.orderId,this.orderType);
+          res = await  StoreApi.getOrderPayLock(this.orderId,this.orderType,cardId,couponStr);
         } catch (err) {
           console.log(err);
         }
