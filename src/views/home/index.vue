@@ -41,50 +41,16 @@
       </list-cell>
       <!--场次票-->
       <list-cell :topImg="require('assets/images/home/title_session.png')">
-        <scroll-view slot="main">
-          <div @click="$router.push('sessionDetail')"
-               :style="{backgroundImage:`url(${require('assets/images/home/session_bg.png')})`}" class="ticketItem">
-            <div flex="dir:top" class="info">
-              <label class="title">《三坊七巷》</label>
-              <label class="des f12">中瑞剧坊，坊巷文化影音秀</label>
-              <label class="price">￥288</label>
-            </div>
-            <div class="s-button buy">购买</div>
-          </div>
-        </scroll-view>
+        <div slot="main" class="center">
+          <img :src="require('assets/images/home/home_ccp.png')" @click="$router.push('sessionDetail')" class="home-cell-img">
+        </div>
       </list-cell>
-      <!--套票-->
-      <list-cell :topImg="require('assets/images/home/title_package.png')" v-show="packageList&&stampsList.length>0">
-        <scroll-view slot="main">
-          <div v-for="(item,index) in packageList" :key="index"
-               :style="{backgroundImage:`url(${require('assets/images/home/package_bg.png')})`}" class="ticketItem">
-            <div flex="dir:top" class="info">
-              <label class="title ">《{{item.packageName}}》</label>
-              <label class="des f12">{{item.detail}}</label>
-              <label class="price">￥{{item.price}}</label>
-            </div>
-            <router-link :to="`/packageDetail?packageId=${item.hyPackageId}`">
-              <div class="s-button buy">购买</div>
-            </router-link>
-          </div>
-        </scroll-view>
+      <!--组合券-->
+      <list-cell :topImg="require('assets/images/home/title_zhq.png')">
+        <div slot="main" class="center">
+          <img :src="require('assets/images/home/home_zhg.png')" @click="$router.push({path:'HomePackageList'})" class="home-cell-img">
+        </div>
       </list-cell>
-      <!--通兑券-->
-      <!--<list-cell :topImg="require('assets/images/home/title_stamps.png')" v-show="stampsList&&stampsList.length>0">
-        <scroll-view slot="main">
-          <div v-for="(item,index) in stampsList" :key="index" :style="{backgroundImage:`url(${require('assets/images/home/stamps_bg.png')})`}"
-               class="ticketItem">
-            <div flex="dir:top" class="info">
-              <label class="title">《{{item.packageName}}》</label>
-              <label class="des f12">{{item.detail}}</label>
-              <label class="price">￥{{item.price}}</label>
-            </div>
-            <router-link :to="`/packageDetail?packageId=${item.hyPackageId}`">
-              <div class="s-button buy">购买</div>
-            </router-link>
-          </div>
-        </scroll-view>
-      </list-cell>-->
       <!--兑换票券-->
       <div flex="dir:left main:center">
         <router-link to="/sessionDetail">
@@ -131,12 +97,12 @@
   }, {
     name: '超级联合日',
     pathName: 'LocalProduct',
-    params: {classType: 101},
+    params: {classType: 102},
     icon: require('assets/images/home/local.png')
   }, {
     name: '福州特产馆',
     pathName: 'LocalProduct',
-    params: {classType: 102},
+    params: {classType: 101},
     icon: require('assets/images/home/hemers.png')
   }];
   export default {
@@ -159,7 +125,6 @@
         },
         munuList: munuList,
         introduceList: [],
-        packageList: [],
         stampsList: [],
         findList: [],
       }
@@ -186,12 +151,6 @@
           this.findList = res.data;
         }
       },
-      async getPackage(){
-        let res = await TheatreApi.getPackageList(200)
-        if (res) {
-          this.packageList = res.data;
-        }
-      },
       async getStamps(){
         let res = await TheatreApi.getPackageList(201)
         console.log(res)
@@ -206,8 +165,6 @@
         this.getIntroduce();
         // 发现列表
         this.getFind();
-        // 套票
-        this.getPackage();
         // 通兑券
         this.getStamps();
 
@@ -313,9 +270,10 @@
     }
     .menuCell {
       height: 100px;
-      padding: 22px 22px 0px;
+      padding: 22px 0 0px;
       background: url(../../assets/images/home/menu_bg.png) no-repeat;
       background-size: 100% 100%;
+      
       label {
         text-align: center;
         width: 70px;
@@ -326,4 +284,5 @@
       width: 55px;
     }
   }
+  .home-cell-img{width:348px;margin:0 auto;}
 </style>

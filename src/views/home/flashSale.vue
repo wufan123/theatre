@@ -5,8 +5,8 @@
                      :height="'-46'">
         <div class="flash">
           <coupon-item v-for="(item,index) in dataList" :key="index" @click.native="listItemClick(item)">
-            <label class="leftTitle" slot="right">￥{{item.price}}</label>
-            <label class="leftInfo" slot="right">{{item.packageName}}</label>
+            <label class="leftTitle text-ellipsis-line" slot="right">{{item.packageName}}</label>
+            <label class="leftInfo text-ellipsis-line" slot="right">{{item.detail}}</label>
             <label class="rightTitle" slot="left">立即抢</label>
             <label class="rightTip" slot="left">剩余{{item.stock}}份</label>
           </coupon-item>

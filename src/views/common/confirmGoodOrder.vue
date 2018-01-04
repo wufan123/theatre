@@ -16,9 +16,10 @@
             <!--</div>-->
           </list>
         </div>
-        <div class="c-info">
+         <!-- -->
+        <div class="c-info" v-if="orderInfo.isShowCoupon==1&&orderInfo.isUseCouponNum!==0"> 
           <list>
-            <list-item :content="`优惠券`" extra="4张可用" isLink :link="`CouponList`"></list-item>
+            <list-item :content="`优惠券`" :extra="`${orderInfo.isUseCouponNum}张可用`" isLink :link="`SelectCoupon`"></list-item>
           </list>
         </div>
         <!--<div class="c-info">-->
@@ -37,7 +38,7 @@
       </group>
       <div class="info">
         <p>温馨提示：</p>
-        <p>手机号用于生成订单，及发送支付短信</p>
+        <p>手机号用于生成{{selectCoupon}}订单，及发送支付短信</p>
       </div>
     </div>
   </page>
@@ -63,7 +64,8 @@
       }
     },
     computed: {
-      ...mapState('common/', ['userInfo'])
+      ...mapState('common/', ['userInfo']),
+      ...mapState('coupon/', ['selectCoupon'])
     },
     methods: {
       async fetchData(){
@@ -72,6 +74,13 @@
         let res = await StoreApi.getGoodsDetail(this.goodsId);
         if (res && res.data) {
           this.orderInfo = res.data.goodInfo
+        }
+        let ress = await StoreApi.getOrderPayWay(this.$route.query.orderId,'goods');
+        if (ress && ress.data) {
+          this.orderInfo.couponList = ress.data.saleCouponList
+          this.$set(this.orderInfo,'isUseCouponNum',this.orderInfo.couponList.length)
+          this.orderInfo.isShowCoupon = ress.data.isShowCoupon
+          this.$store.commit('coupon/setUseCoupon',this.orderInfo.couponList)
         }
       },
       // 锁定，跳转到支付页面
@@ -112,9 +121,18 @@
 
       }
     },
-    components: {List, ListItem, XInput, Group}
+    components: {List, ListItem, XInput, Group},
+      beforeRouteEnter (to, from, next) {
+    next(vm=>{
+            console.log('from',from)
+            console.log('from',vm.selectCoupon)})
+
+  }
   }
 </script>
+<style lang="less">
+ .c-order .am-list-thumb img{border:2px solid #c4a983;box-sizing: border-box;}
+</style>
 <style lang="less" scoped>
   @import "~style/base-variables.less";
 
@@ -124,10 +142,13 @@
     .c-info {
       border-bottom: dashed @border-color 1px;
     }
+    
     .am-list-item {
       padding: 15px 0;
       margin-top: -1px;
+      &.is-link{padding: 0;}
     }
+    
     .price {
       padding: 15px 0;
       font-size: 14px;

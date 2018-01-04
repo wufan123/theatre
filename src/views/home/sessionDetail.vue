@@ -3,7 +3,7 @@
     <page headerTitle="场次票" flex-box="1">
       <div slot="contain">
         <div class="imgOut">
-          <img :src="filmDetail?filmDetail.image:null"/>
+          <img :src="filmDetail&&filmDetail.image"/>
         </div>
         <div class="mainOut">
           <div class="mainBody" flex="dir:top cross:center">

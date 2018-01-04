@@ -1,18 +1,16 @@
 <template>
   <div flex="dir:left cross:center" class="goodItem">
-    <div flex="dir:left" flex-box="3">
       <div flex="dir:left cross:center">
         <img :src="goodsCoverImage" class="goodImg">
       </div>
-      <div flex="dir:top"  flex-box="1" class="content">
-        <label class="title text-ellipsis-line">{{goodsName}}</label>
+      <div flex="dir:top" class="content">
+        <p class="title text-ellipsis-line">{{goodsName}}</p>
         <div class="info">
           <label class="price">￥{{channelFee}}</label>
-          <label class="primeCost" v-if="marketFee>0">￥{{marketFee}}</label>
+          <label class="primeCost " v-if="marketFee>0">￥{{marketFee}}</label>
         </div>
       </div>
       <slot></slot>
-    </div>
   </div>
 </template>
 <script>
@@ -33,22 +31,21 @@
     padding: 10px;
     background: url(../../../assets/images/home/sale_bg.png) center no-repeat;
     background-size: 100% 100%;
+    .primeCost{color: #878787;text-decoration: line-through}
     .buyBtn{
-      margin: 40px 10px 0 0;
+      position:absolute;right:30px;bottom:55px;
     }
     .goodImg{
       width: 101px;
       height: 68px;
       margin-left: 10px;
     }
-    .content{margin-left: 10px;
+    .content{margin-left: 10px;overflow: hidden;
       .title{
         margin-left: 5px;
         font-size: 15px;
         height: 24px;
         color: @font-color;
-        width: 105px;
-        overflow: hidden;
       }
       .info{
         width: 105px;

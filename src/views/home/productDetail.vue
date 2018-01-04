@@ -1,5 +1,5 @@
 <template>
-  <detail-page :data="data" :click="buy">
+  <detail-page :data="data" :click="buy" isHermes>
 
   </detail-page>
 </template>

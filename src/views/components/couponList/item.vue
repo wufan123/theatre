@@ -43,8 +43,10 @@
       color: white;
     }
     .left {
+          overflow: hidden;
+      padding-right: 20px;box-sizing: border-box;
       height: 100%;
-      flex: 1;
+      flex: 1;position:relative;
       background: center no-repeat;
       background-size: 100%100%;
       display: flex;

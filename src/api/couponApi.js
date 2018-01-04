@@ -25,7 +25,19 @@ function addVoucher(voucherNum) {
     });
 }
 
+/**
+ * 获取优惠券详情
+ */
+function userVoucherDetail(voucherNum, success_cb, fail_cb) {
+    return apiHttp.get('/user/userVoucherDetail', {
+      voucherNum: voucherNum,
+      cinemaCode: apiHttp.CINEMA_CODE
+    }, success_cb, fail_cb)
+  }
+
+
 export default {
     addVoucher: addVoucher,
-    userVoucherList: userVoucherList
+    userVoucherList: userVoucherList,
+    userVoucherDetail:userVoucherDetail
 };

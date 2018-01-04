@@ -1,9 +1,9 @@
 <template>
-  <page :headerTitle="classType==101?'超级联合日':'福州特产馆'" flex-box="1" >
+  <page :headerTitle="classType==102?'超级联合日':'福州特产馆'" flex-box="1" >
     <div slot="contain" >
       <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-48' >
         <good-item v-for="(item,index) in dataList" :key="index" :goodsCoverImage="item.goodsCoverImage"  :goodsName="item.goodsName" :channelFee="item.channelFee"
-                   flex="dir:left cross:center" class="couponItem" @click.native="$router.push({path:'ProductDetail',query:{
+               :marketFee="classType==102?item.marketFee:''"    flex="dir:left cross:center" class="couponItem" @click.native="$router.push({path:'ProductDetail',query:{
             hyGoodsId:item.hyGoodsId
         }})">
           <div class="s-button buyBtn khaki" >马上购买</div>
