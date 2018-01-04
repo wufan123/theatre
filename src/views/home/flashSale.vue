@@ -4,7 +4,7 @@
       <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage usePulldown
                      :height="'-46'">
         <div class="flash">
-          <coupon-item v-for="(item,index) in dataList" :key="index" @click.native="listItemClick(item)">
+          <coupon-item v-for="(item,index) in dataList" :key="index" @click.native="listItemClick(item,index)">
             <label class="leftTitle text-ellipsis-line" slot="right">{{item.packageName}}</label>
             <label class="leftInfo text-ellipsis-line" slot="right">{{item.detail}}</label>
             <label class="rightTitle" slot="left">立即抢</label>
@@ -51,10 +51,10 @@
       fetchData() {
         return this.$refs.scroller.reset();
       },
-      listItemClick(item) {
-        this.bindingTicket(item)
+      listItemClick(item,index) {
+        this.bindingTicket(item,index)
       },
-      async bindingTicket(item){
+      async bindingTicket(item,index){
         this.$vux.loading.show();
         let res = await StoreApi.createComboOrder(this.$store.state.common.userInfo.bindmobile, `${item.hyPackageId}:1`);
         if (res && res.data) {
@@ -63,7 +63,7 @@
             let payRes = await StoreApi.payPackage('account', res.data.packageId);
             if (payRes && payRes.status === 0) {
               this.$vux.toast.text("抢购成功", 'bottom');
-
+              this.$set(this.dataList,index,{...item,stock:--item.stock})
             }
           }
         }
