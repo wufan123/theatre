@@ -16,17 +16,16 @@
             <!--</div>-->
           </list>
         </div>
-         <!-- -->
-        <div class="c-info" v-if="orderInfo.isShowCoupon==1&&orderInfo.isUseCouponNum!==0"> 
+        <!--<div class="c-info" v-if="orderInfo.isShowCoupon==1&&orderInfo.isUseCouponNum!==0">
           <list>
             <list-item :content="`优惠券`" :extra="`${orderInfo.isUseCouponNum}张可用`" isLink :link="`SelectCoupon`"></list-item>
           </list>
         </div>
-        <!--<div class="c-info">-->
-        <!--<list>-->
-        <!--<list-item :content="`会员卡`" extra="未选择" isLink :link="`MemberCard`"></list-item>-->
-        <!--</list>-->
-        <!--</div>-->
+        <div class="c-info">
+        <list>
+        <list-item :content="`会员卡`" extra="未选择" isLink :link="`MemberCard`"></list-item>
+        </list>
+        </div>-->
         <div class="price">
           <div class="flexb"><label>总价</label><label>￥{{orderInfo.price}}</label></div>
           <div class="flexb payment"><label>实付款</label><label>￥{{orderInfo.price}}</label></div>
@@ -136,13 +135,13 @@
     .c-info {
       border-bottom: dashed @border-color 1px;
     }
-    
+
     .am-list-item {
       padding: 15px 0;
       margin-top: -1px;
       &.is-link{padding: 0;}
     }
-    
+
     .price {
       padding: 15px 0;
       font-size: 14px;
