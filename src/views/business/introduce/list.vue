@@ -1,7 +1,8 @@
 <template>
   <page white :headerTitle="`剧坊 ● 介绍`">
     <div slot="contain">
-      <find-item   v-for="(item,index) in introduceList" :key="index" :title="item.title" :content="item.content" :img="item.thumbUrl">
+
+      <find-item   v-for="(item,index) in introduceList" :link="item.contentUrl"  :key="index" :title="item.title" :content="item.content" :img="item.thumbUrl">
       </find-item>
     </div>
   </page>

@@ -60,16 +60,17 @@
       <!-- 探索-->
       <list-cell :topImg="require('assets/images/home/title_stamps.png')" v-show="findList&&findList.length>0">
         <div slot="main" style="display: flex;flex-wrap: wrap;padding-left: 15px">
-          <div flex="dir:top " v-for="(item,index) in findList" style="margin-top: 20px" class="findItem"
-               @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})">
-            <router-link :to="'http://'+item.contentUrl">
+          <div flex="dir:top " v-for="(item,index) in findList.slice(0,2)" style="margin-top: 20px" class="findItem"
+               >
+               <!-- @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})" -->
+            <a  :href="'http://'+item.contentUrl">
             <div flex="dir:left">
               <img :src="item.thumbUrl" class="contentImgSquare">
               <div class="rightBorder"></div>
             </div>
             <div class="bottomBorder"></div>
             <label class='contentTxt'>{{item.title}}</label>
-            </router-link>
+            </a>
           </div>
 
         </div>
