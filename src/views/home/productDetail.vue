@@ -26,6 +26,8 @@
           let res = await StoreApi.createGoodsOrder(this.userInfo.bindmobile,`${goodsId}:1`);
           if(res&&res.data){
               let orderId = res.data;
+              // 清空优惠券缓存
+              this.$store.commit("coupon/setGoodsCouponList", null);
               this.$router.push({name:"ConfirmGoodOrder",query:{
                 goodsId,orderId
               }})

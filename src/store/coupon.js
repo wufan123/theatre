@@ -3,7 +3,9 @@ export default {
   state: {
     coupon:{},
     useCoupon:[],
-    selectedCoupon:{}
+    selectedCoupon:{},
+    goodsCouponList: [],
+    ticketCouponList: []
   },
   mutations: {
     setCoupon(state,c){
@@ -14,6 +16,12 @@ export default {
     },
     setSelectedCoupon(state,coupon){
       state.selectedCoupon =coupon;
+    },
+    setGoodsCouponList(state, list) {
+      state.goodsCouponList = list
+    },
+    setTicketCouponList(state, list) {
+      state.ticketCouponList = list
     }
 
   },
