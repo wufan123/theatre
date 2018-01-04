@@ -7,7 +7,7 @@
         <p class="title text-ellipsis-line">{{goodsName}}</p>
         <div class="info">
           <label class="price">￥{{channelFee}}</label>
-          <label class="primeCost" v-if="marketFee>0">￥{{marketFee}}</label>
+          <label class="primeCost " v-if="marketFee>0">￥{{marketFee}}</label>
         </div>
       </div>
       <slot></slot>
@@ -31,6 +31,7 @@
     padding: 10px;
     background: url(../../../assets/images/home/sale_bg.png) center no-repeat;
     background-size: 100% 100%;
+    .primeCost{color: #878787;text-decoration: line-through}
     .buyBtn{
       position:absolute;right:30px;bottom:55px;
     }

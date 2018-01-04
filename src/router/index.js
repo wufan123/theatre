@@ -27,6 +27,7 @@ import HomePackageDetail from 'views/home/packageDetail.vue'
 import FindList from 'views/business/find/list.vue'
 import ConfirmOrder from 'views/common/confirmOrder.vue'
 import ConfirmGoodOrder from 'views/common/confirmGoodOrder.vue'
+import SelectCoupon from 'views/common/selectCoupon.vue'
 import ConfirmPackageOrder from 'views/common/confirmPackageOrder.vue'
 import PayOrder from 'views/common/payOrder.vue'
 import PaySuccess from 'views/common/paySuccess.vue'
@@ -52,6 +53,7 @@ export default new Router({
     {path: '/ConfirmOrder', name: 'ConfirmOrder', component: ConfirmOrder},
     {path: '/ConfirmGoodOrder', name: 'ConfirmGoodOrder', component: ConfirmGoodOrder,props: true},
     {path: '/ConfirmPackageOrder', name: 'ConfirmPackageOrder', component: ConfirmPackageOrder,props: true},
+    {path: '/SelectCoupon', name: 'SelectCoupon', component: SelectCoupon,props: true},
     {path: '/Snack', name: 'Snack', component: Snack},
     {path: '/PayOrder', name: 'PayOrder', component: PayOrder},
     {path: '/PaySuccess', name: 'PaySuccess', component: PaySuccess},

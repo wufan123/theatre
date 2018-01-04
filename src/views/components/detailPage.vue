@@ -6,7 +6,7 @@
       </div>
       <div class="mainOut" >
         <div class="mainBody" flex="dir:top cross:center">
-          <label class="title">
+          <label class="title mb10 bold">
             {{data.goodsName}}</label>
           <label class="price">
             ￥{{data.price}}</label>
