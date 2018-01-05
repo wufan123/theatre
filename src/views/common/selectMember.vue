@@ -37,7 +37,7 @@
     width: 345px;
     margin: 0 15px 15px;
     background-size: 100% 100% !important;
-    background: url(../../assets/images/me/member_card_bg.png);
+    background: url(../../assets/images/me/member_card_bg.jpg);
     position: relative;
     .info {
       margin-left: 90px;
