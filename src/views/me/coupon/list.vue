@@ -22,7 +22,7 @@
               <img v-if="!isSeeExpire"  :src="require('assets/images/me/coupon_lost.png')" class="couponLost">
               <p class="mb20 f16" v-if="isSeeExpire" >已失效的券</p>
             </div>
-            <coupon-item v-if="isSeeExpire" v-for="(item,index) in invalidList" :isShade="item.stock" :key="index" @click.native="gotoCouponDetail(item)">
+            <coupon-item v-if="isSeeExpire" v-for="(item,index) in invalidList" :disabled="item.stock" :key="index" @click.native="gotoCouponDetail(item)">
               <label class="leftTitle" slot="right">{{item.voucherName}}</label>
               <label slot="right" v-if="item.status==3" class="is-tip">已使用</label>
               <label class="leftInfo" slot="right">有效期 {{new Date(item.validData * 1000).format("yyyy-MM-dd")}}</label>

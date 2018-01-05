@@ -16,20 +16,22 @@
             <!--</div>-->
           </list>
         </div>
-         <!-- -->
-        <div class="c-info" v-if="orderInfo.isShowCoupon==1&&orderInfo.isUseCouponNum!==0"> 
+        <div class="c-info" v-if="orderInfo.isShowCoupon==1&&orderInfo.isUseCouponNum!==0">
           <list>
-            <list-item :content="`优惠券`" :extra="`${orderInfo.isUseCouponNum}张可用`" isLink @click.native="selectCouponClick()"></list-item>
+            <list-item :content="`优惠券`"
+                       :extra="selectedCoupon?selectedCoupon.voucherName:`${orderInfo.isUseCouponNum}张可用`" isLink
+                       @click.native="selectCouponClick()"></list-item>
           </list>
         </div>
-        <!--<div class="c-info">-->
-        <!--<list>-->
-        <!--<list-item :content="`会员卡`" extra="未选择" isLink :link="`MemberCard`"></list-item>-->
-        <!--</list>-->
-        <!--</div>-->
+        <!--<div class="c-info">
+        <list>
+        <list-item :content="`会员卡`" extra="未选择" isLink :link="`MemberCard`"></list-item>
+        </list>
+        </div>-->
         <div class="price">
           <div class="flexb"><label>总价</label><label>￥{{orderInfo.price}}</label></div>
-          <div class="flexb" v-for="(item,index) in selectCouponList" :key="index"><label>{{item.name}}</label><label>{{item.value}}</label></div>
+          <div class="flexb" v-for="(item,index) in selectCouponList" :key="index">
+            <label>{{item.name}}</label><label>{{item.value}}</label></div>
           <div class="flexb payment"><label>实付款</label><label>￥{{orderInfo._price}}</label></div>
         </div>
       </div>
@@ -39,7 +41,7 @@
       </group>
       <div class="info">
         <p>温馨提示：</p>
-        <p>手机号用于生成{{selectCoupon}}订单，及发送支付短信</p>
+        <p>手机号用于生成订单，及发送支付短信</p>
       </div>
     </div>
   </page>
@@ -59,15 +61,13 @@
         orderId: this.$route.query.orderId,
         orderType: 'goods',
         orderInfo: {}, // 订单信息
-        orderPayWay: {}, // 优惠券信息
-        selectCard: null, // 选择的会员卡
+        selectedCoupon: undefined,
         oldPhone: null, // 保存旧手机号，判断是否有修改
         selectCouponList: [], // 已选优惠券信息
       }
     },
     computed: {
       ...mapState('common/', ['userInfo']),
-      ...mapState('coupon/', ['selectCoupon'])
     },
     methods: {
       async fetchData(){
@@ -77,25 +77,26 @@
         if (res && res.data) {
           this.orderInfo = res.data.goodInfo
         }
-        let ress = await StoreApi.getOrderPayWay(this.$route.query.orderId,'goods');
+        let ress = await StoreApi.getOrderPayWay(this.$route.query.orderId, 'goods');
         if (ress && ress.data) {
-          this.$set(this.orderInfo,'isUseCouponNum',ress.data.saleCouponList.length)
+          this.$set(this.orderInfo, 'isUseCouponNum', ress.data.saleCouponList.length)
           this.orderInfo.isShowCoupon = ress.data.isShowCoupon
           // 不存在优惠券列表才置入，注：重新创建订单必须清空缓存的优惠券列表
           if (!this.$store.state.coupon.goodsCouponList) {
-            this.$store.commit('coupon/setGoodsCouponList',ress.data.saleCouponList)
+            this.$store.commit('coupon/setGoodsCouponList', ress.data.saleCouponList)
           }
           // 展示已选中的优惠券
           this.selectCouponList = []
           this.orderInfo._price = this.orderInfo.price
           this.$store.state.coupon.goodsCouponList.forEach(item => {
             if (item.checked) {
+              this.selectedCoupon = item;
               let couponValue = parseFloat(item.ticketValue)
               let useValue = this.orderInfo._price < couponValue ? this.orderInfo._price : couponValue
-              this.orderInfo._price -= useValue
+              this.orderInfo._price -= useValue;
               this.selectCouponList.push({
                 name: '卖品优惠',
-                value: '-￥'+useValue,
+                value: '-￥' + useValue,
                 voucherNum: item.voucherNum
               })
             }
@@ -127,7 +128,7 @@
         this.$vux.loading.show();
         let res;
         try {
-          res = await  StoreApi.getOrderPayLock(this.orderId,this.orderType, cardId, couponStr);
+          res = await  StoreApi.getOrderPayLock(this.orderId, this.orderType, cardId, couponStr);
         } catch (err) {
           console.log(err);
         }
@@ -148,16 +149,21 @@
 
       // 选择优惠券
       selectCouponClick() {
-        this.$router.push({name:'SelectCoupon', params: {
-          orderType: this.orderType
-        }})
+        this.$router.push({
+          name: 'SelectCoupon', params: {
+            orderType: this.orderType
+          }
+        })
       }
     },
     components: {List, ListItem, XInput, Group}
   }
 </script>
 <style lang="less">
- .c-order .am-list-thumb img{border:2px solid #c4a983;box-sizing: border-box;}
+  .c-order .am-list-thumb img {
+    border: 2px solid #c4a983;
+    box-sizing: border-box;
+  }
 </style>
 <style lang="less" scoped>
   @import "~style/base-variables.less";
@@ -168,13 +174,15 @@
     .c-info {
       border-bottom: dashed @border-color 1px;
     }
-    
+
     .am-list-item {
       padding: 15px 0;
       margin-top: -1px;
-      &.is-link{padding: 0;}
+      &.is-link {
+        padding: 0;
+      }
     }
-    
+
     .price {
       padding: 15px 0;
       font-size: 14px;

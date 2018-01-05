@@ -5,7 +5,8 @@
         <div class="c-info">
           <list twoLine>
             <div v-if="packageInfo&&packageInfo.detail" class="good-content">
-              <list-item v-for="(item,index) in packageInfo.detail" :key="index" :img="item.goodsImg" :contentTitle="item.goodsName"
+              <list-item v-for="(item,index) in packageInfo.detail" :key="index" :img="item.goodsImg"
+                         :contentTitle="item.goodsName"
                          :extra="`￥${item.goodsFee}`"
                          :contentBrief="`x ${item.goodsFee}`"></list-item>
             </div>
@@ -40,7 +41,7 @@
       return {
         phone: '',
         orderId: this.$route.query.orderId,
-        packageId:this.$route.query.packageId,
+        packageId: this.$route.query.packageId,
         orderType: 'package',
         packageInfo: {},
       }
@@ -52,7 +53,7 @@
       async fetchData(){
         this.phone = this.userInfo.bindmobile;
         this.oldPhone = this.phone;
-        let res = await  ComboApi.getPackageDetail(this.packageId,this.orderType);
+        let res = await  ComboApi.getPackageDetail(this.packageId, this.orderType);
         if (res && res.data) {
           this.packageInfo = res.data;
         }
@@ -63,17 +64,13 @@
           this.$vux.toast.show({
             type: 'cancel',
             text: '手机号不能为空'
-          })
+          });
           return
         }
-        let wayRes = await  StoreApi.getPackageBuyPayway(this.packageId);
-        if(wayRes&&wayRes.status === 0){
-         let payRes = await StoreApi.payPackage('weixinpay', this.orderId);
-          if (payRes && payRes.status === 0) {
-            this.$vux.toast.text("支付成功", 'bottom');
-          }
+        let payRes = await StoreApi.payPackage('weixinpay', this.orderId);
+        if (payRes && payRes.status === 0) {
+          this.$vux.toast.text("支付成功", 'bottom');
         }
-
       }
     },
     components: {List, ListItem, XInput, Group}

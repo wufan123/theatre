@@ -5,35 +5,41 @@
         <div class="c-info">
           <list twoLine>
             <div v-if="orderInfo&&orderInfo.film" class="good-content">
-              <list-item :img="orderInfo.film.image" :contentTitle="orderInfo.film.filmName" :extra="`￥${orderInfo.film.price}`" :contentBrief="`x ${orderInfo.film.seatCount}`"></list-item>
+              <list-item :img="orderInfo.film.image" :contentTitle="orderInfo.film.filmName"
+                         :extra="`￥${orderInfo.film.price}`"
+                         :contentBrief="`x ${orderInfo.film.seatCount}`"></list-item>
             </div>
             <div v-if="orderInfo&&orderInfo.goods&&orderInfo.goods.list">
-              <list-item v-for="item in orderInfo.goods.list" :key="item.name" :img="item.goodsImg" :contentTitle="item.name" :extra="`￥${item.price}`" :contentBrief="`x ${item.number}`"></list-item>
+              <list-item v-for="item in orderInfo.goods.list" :key="item.name" :img="item.goodsImg"
+                         :contentTitle="item.name" :extra="`￥${item.price}`"
+                         :contentBrief="`x ${item.number}`"></list-item>
             </div>
           </list>
         </div>
         <div class="c-info">
           <list>
-            <list-item :content="`优惠券`" :extra="selectedCoupon.voucherName" isLink  @click.native="$router.push({name:'SelectCoupon',params:{
-                list:orderPayWay.couponList
-            }})"></list-item>
+            <list-item :content="`优惠券`" :extra="getCouponExtra()" isLink
+                       @click.native="selectCouponClick"></list-item>
           </list>
         </div>
         <div class="c-info">
           <list>
-            <list-item :content="`会员卡`" :extra="selectedMember.cardId" isLink @click.native ="$router.push({name:'SelectMember',params:{
+            <list-item :content="`会员卡`" :extra="selectedMember.cardId?selectedMember.cardId:'未选择'" isLink
+                       @click.native="$router.push({name:'SelectMember',params:{
                 list:orderPayWay.memberCard
-            }})" ></list-item>
+            }})"></list-item>
           </list>
         </div>
         <div class="price">
           <div class="flexb"><label>总价</label><label>￥{{orderInfo._price}}</label></div>
-          <div class="flexb" v-for="(item,index) in couponInfo" :key="index"><label>{{item.name}}</label><label>{{item.des}}</label></div>
-          <div class="flexb payment"><label >实付款</label><label>￥{{orderInfo._price}}</label></div>
+          <div class="flexb" v-for="(item,index) in couponInfo" :key="index">
+            <label>{{item.name}}</label><label>{{item.des}}</label></div>
+          <div class="flexb payment"><label>实付款</label><label>￥{{orderInfo._price}}</label></div>
         </div>
       </div>
       <group>
-        <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile" v-model="phone"></x-input>
+        <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile"
+                 v-model="phone"></x-input>
       </group>
       <div class="info">
         <p>温馨提示：</p>
@@ -57,39 +63,43 @@
         orderInfo: {}, // 订单信息
         orderPayWay: {}, // 优惠券信息
         selectCard: null, // 选择的会员卡
+        selectedCoupon: null,
         oldPhone: null, // 保存旧手机号，判断是否有修改
-        couponInfo:[]
+        couponInfo: [],
+        selectedCouponList: []
       }
     },
     computed: {
-      ...mapState('business',['selectedCoupon','selectedMember'])
+      ...mapState('business', ['selectedMember']),
+      ...mapState('coupon', ['ticketCouponList'])
     },
     methods: {
       async fetchData(){
-        this.phone = this.$store.state.common.userInfo.bindmobile
-        this.oldPhone = this.phone
+        this.phone = this.$store.state.common.userInfo.bindmobile;
+        this.oldPhone = this.phone;
         // 获取优惠券信息
         let wayRes;
         try {
           wayRes = await StoreApi.getOrderPayWay(this.orderId, this.orderType);
-        }catch (e){
-            console.log(e);
+        } catch (e) {
+          console.log(e);
         }
-        if(wayRes&&wayRes.data){
-            this.orderPayWay = wayRes.data;
+        if (wayRes && wayRes.data) {
+          this.orderPayWay = wayRes.data;
+          if (!this.ticketCouponList || !this.ticketCouponList.length)
+            this.$store.commit('coupon/setTicketCouponList', this.orderPayWay.couponList)
         }
         // 获取订单信息
-        let orderRes ;
+        let orderRes;
         try {
-            orderRes = await OrderApi.getCinemaOrderInfo(this.orderId);
-        }catch (e)
-        {
-            console.log(e);
+          orderRes = await OrderApi.getCinemaOrderInfo(this.orderId);
+        } catch (e) {
+          console.log(e);
         }
-        if(orderRes&&orderRes.data){
+        if (orderRes && orderRes.data) {
 
-            this.orderInfo = orderRes.data;
-            this.caculateCount();
+          this.orderInfo = orderRes.data;
+          this.caculateCount();
         }
       },
       // 计算总价
@@ -104,55 +114,111 @@
         this.orderInfo._price = this.orderInfo.film._price + (parseFloat(this.orderInfo.goods ? this.orderInfo.goods.price : 0))
 
         // TODO 计算优惠券
-        if(this.selectedCoupon&&this.selectedCoupon.voucherName){
-            switch (this.selectedCoupon.ticketType){
-              case 'reduce':
-                  this.orderInfo._price -= this.selectedCoupon.ticketValue;
-                  this.couponInfo.push({
-                    name:this.selectedCoupon.voucherName,
-                    des:`-￥${this.selectedCoupon.ticketValue}`
-                  })
-                  break;
-            }
-        }
-
+        let selectedList = this.ticketCouponList.filter(item => {
+          if (item.checked) {
+            return item;
+          }
+        });
+        selectedList.forEach(item => {
+          switch (item.ticketType) {
+            case 'reduce':
+              this.orderInfo._price -= item.ticketValue;
+              this.couponInfo.push({
+                name: item.voucherName,
+                num: item.voucherNum,
+                des: `-￥${item.ticketValue}`
+              });
+          }
+        });
       },
       // 锁定，跳转到支付页面
       async lockAndPayOrder() {
         if (this.phone === '') {
-            this.$vux.toast.show({
-              type: 'cancel',
-              text: '手机号不能为空'
-            })
-            return
+          this.$vux.toast.show({
+            type: 'cancel',
+            text: '手机号不能为空'
+          })
+          return
         }
         if (this.oldPhone !== this.phone) {
-            OrderApi.updateOrderMobile(this.phone)
+          OrderApi.updateOrderMobile(this.phone)
         }
         // 优惠券信息
-        var couponStr = this.selectedCoupon.voucherNum;
+        var couponStr = this.couponInfo.map(item => {
+          return item.num
+        }).reduce((pre, item) => {
+          let acc = '';
+          if (pre) {
+            acc += `,${item}`
+          } else {
+            acc += item
+          }
+          return acc;
+        })
         // 会员卡信息
-        var cardId = this.selectedMember.cardId
+        let cardId = this.selectedMember.id;
 
         this.$vux.loading.show();
         let res;
         try {
-          res = await  StoreApi.getOrderPayLock(this.orderId,this.orderType,cardId,couponStr);
-        } catch (err) {
-          console.log(err);
+          res = await  StoreApi.getOrderPayLock(this.orderId, this.orderType, cardId, couponStr);
+        } catch (e) {
+          console.log(e);
         }
-        if (res) {
-          this.$store.commit("business/setPayLockInfo",
-            {
-              orderId: this.orderId,
-              orderType: this.orderType,
-              ...res.data
-            });
-          this.$router.push({
-            name: 'PayOrder'
-          })
+        if (res && res.data) {
+          //价格为0时直接支付
+          if (res.data.price == 0) {
+            let payRes;
+            try {
+              payRes = await StoreApi.goodsAndFilmComfirmNewPay(this.orderId, this.orderType, "account", 0, null);
+            } catch (e) {
+              console.log(e);
+            }
+            if (payRes && payRes.status == 0) {
+              this.$router.push({
+                name: 'PaySuccess'
+              })
+            }
+          }
+          else {
+            if (cardId)
+              this.$vux.toast.text("会员卡余额不足", 'bottom');
+            this.$store.commit("business/setPayLockInfo",
+              {
+                orderId: this.orderId,
+                orderType: this.orderType,
+                ...res.data
+              });
+            this.$router.push({
+              name: 'PayOrder'
+            })
+          }
         }
         this.$vux.loading.hide();
+      },
+      // 选择优惠券
+      selectCouponClick() {
+        this.$router.push({
+          name: 'SelectCoupon'
+        })
+      },
+      //显示已选择的优惠券
+      getCouponExtra(){
+        if (this.couponInfo && this.couponInfo.length) {
+          return this.couponInfo.map(item => {
+            return item.name
+          }).reduce((pre, item) => {
+            let acc = '';
+            if (pre) {
+              acc += `,${item}`
+            } else {
+              acc += item;
+            }
+            return acc
+          })
+        } else {
+          return `${this.orderPayWay.canUseCouponNum?this.orderPayWay.canUseCouponNum:0}张可用`
+        }
       }
     },
     components: {List, ListItem, XInput, Group}
@@ -160,7 +226,8 @@
 </script>
 <style lang="less" scoped>
   @import "~style/base-variables.less";
-  .c-order{
+
+  .c-order {
     padding: 0 15px;
     background: @base-bg-color;
     .c-info {
@@ -174,12 +241,12 @@
       padding: 15px 0;
       font-size: 14px;
       color: @font-color-sub;
-      .payment{
-        :first-child{
+      .payment {
+        :first-child {
           color: @font-color;
           font-size: 15px;
         }
-        :nth-child(2){
+        :nth-child(2) {
           font-size: 17px;
           color: @color-primary;
           font-weight: bold;
@@ -187,6 +254,7 @@
       }
     }
   }
+
   .info {
     margin: 15px;
   }
