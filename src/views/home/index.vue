@@ -83,7 +83,7 @@
   import ListCell from 'views/components/home/listCell.vue'
   import TheatreApi from 'api/theatreApi'
   const imgList = [
-    require('assets/images/home/banner_default.png')
+    require('assets/images/home/banner_default.jpg')
   ]
   const banerList = imgList.map((one, index) => ({
     url: 'javascript:',
