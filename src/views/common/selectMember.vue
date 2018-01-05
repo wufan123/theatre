@@ -1,8 +1,8 @@
 <template>
-  <page headerTitle="选择会员卡" >
+  <page headerTitle="选择会员卡">
     <div slot="contain" v-for="(item,index) in list" class="card-item">
       <div flex="dir:top" class="info">
-        <label class="title text-ellipsis-line">{{item.accLevelName+item.cardId}}</label>
+        <label class="title text-ellipsis-line">{{item.accLevelName + item.cardId}}</label>
         <div class="sum" flex="dir:left">
           <label>余额：</label>
           <label class="text-ellipsis-line">￥{{item.accBalance}}</label>
@@ -14,23 +14,24 @@
   </page>
 </template>
 <script>
-    export default {
-        props:['list'],
-        data(){
-            return {
-                item:{}
-            }
-        },
-        methods: {
-          selectMember(item){
-              this.$store.commit("business/setSelectedMember",item);
-            this.$router.go(-1);
-          }
-        }
+  export default {
+    props: ['list'],
+    data(){
+      return {
+        item: {}
+      }
+    },
+    methods: {
+      selectMember(item){
+        this.$store.commit("business/setSelectedMember", item);
+        this.$router.go(-1);
+      }
     }
+  }
 </script>
 <style lang="less" scoped>
   @import "~style/base-variables.less";
+
   .card-item {
     height: 125px;
     width: 345px;
@@ -50,7 +51,7 @@
       }
       .sum {
         margin-top: 15px;
-        :first-child{
+        :first-child {
           line-height: 32px;
           width: 60px;
         }

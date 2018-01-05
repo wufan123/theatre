@@ -68,9 +68,9 @@
           return
         }
         let payRes = await StoreApi.payPackage('weixinpay', this.orderId);
-        if (payRes && payRes.status === 0) {
-          this.$vux.toast.text("支付成功", 'bottom');
-        }
+//        if (payRes && payRes.status === 0) {
+//          this.$vux.toast.text("支付成功", 'bottom');
+//        }
       }
     },
     components: {List, ListItem, XInput, Group}

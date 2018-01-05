@@ -16,13 +16,13 @@
             </div>
           </list>
         </div>
-        <div class="c-info">
+        <div class="c-info" v-if="orderPayWay.couponList&&orderPayWay.couponList.length">
           <list>
             <list-item :content="`优惠券`" :extra="getCouponExtra()" isLink
                        @click.native="selectCouponClick"></list-item>
           </list>
         </div>
-        <div class="c-info">
+        <div class="c-info" v-if="orderPayWay.memberCard&&orderPayWay.memberCard.length">
           <list>
             <list-item :content="`会员卡`" :extra="selectedMember.cardId?selectedMember.cardId:'未选择'" isLink
                        @click.native="$router.push({name:'SelectMember',params:{
@@ -211,7 +211,6 @@
       },
       // 选择优惠券
       selectCouponClick() {
-          console.log('11111111111');
         this.$router.push({
           name: 'SelectCoupon',
           query:{
