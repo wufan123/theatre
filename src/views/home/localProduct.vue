@@ -4,7 +4,7 @@
       <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-48' >
         <good-item v-for="(item,index) in dataList" :key="index" :goodsCoverImage="item.goodsCoverImage"  :goodsName="item.goodsName" :channelFee="item.channelFee"
                :marketFee="classType==102?item.marketFee:''"    flex="dir:left cross:center" class="couponItem" @click.native="$router.push({path:'ProductDetail',query:{
-            hyGoodsId:item.hyGoodsId
+            hyGoodsId:item.hyGoodsId,classType:$route.query.classType
         }})">
           <div class="s-button buyBtn khaki" >马上购买</div>
         </good-item>

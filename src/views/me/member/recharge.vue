@@ -52,8 +52,7 @@
         })
       },
       fetchData(){
-        console.log('this.$route.query.card',this.$route.query.card)
-        this.card = this.$route.query.card
+        this.card = this.$route.query
       }
     }
     }

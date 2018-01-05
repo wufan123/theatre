@@ -3,6 +3,8 @@ export default {
     state: {
         payLockInfo:{},
         selectedMember:{},
+        selectPackageOrder:{},
+        selectTicketOrder:{}
     },
     mutations: {
         setPayLockInfo(state,info){
@@ -10,7 +12,13 @@ export default {
         },
         setSelectedMember(state,member){
           state.selectedMember =member ;
-        }
+        },
+        setSelectedPackageOrder(state,order){
+          state.selectPackageOrder = order ;
+        },
+        setSelectedTicketOrder(state,order){
+          state.selectTicketOrder = order ;
+        },
     },
     actions: {
 

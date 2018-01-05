@@ -4,7 +4,7 @@
         <div class='content'>
           <img :src="require('assets/images/me/bag.png')" class='bag-icon'>
           <p>邀请好友注册，您好友</p>
-          <p class='f20 mb20'>获得 <em class="red">￥30</em> 优惠券</p>
+          <p class='f20 mb20'>获得 <em class="red f24">￥30</em> 优惠券</p>
           <p class='s-button khaki' @click="showDialogStyle = true">立即邀请</p>
         </div>
       <div class='warn'>

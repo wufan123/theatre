@@ -61,7 +61,6 @@ export default {
       );
     },
     orderDetail(order){
-      console.log('order',order)
       this.$router.push({name:'LocalProductDetail',query:{id:order.orderNo}})
     },
     fetchData() {

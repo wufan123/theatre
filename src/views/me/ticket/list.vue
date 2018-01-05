@@ -8,7 +8,7 @@
             :contentTitle="item.filmName"   extra=""  >
             <div slot="contentBrief">
               <!-- <p>12 月 3 日 10：00</p> -->
-              <p>数量：{{item.seatCount}}张</p>
+              <p flex="main:justify" > <label>数量：</label><label>{{item.seatCount}}张</label> </p>
             </div>
               </list-item>
           </list>
@@ -16,8 +16,8 @@
             <label>总价：{{item.orderPrice}}元</label>
             <label v-if="item.status==0">未支付</label>
             <label v-if="item.status==3">已完成</label>
-            <label v-if="item.status==6">异常订单</label>
-            <label v-if="item.status==9">退票订单</label>
+            <label v-if="item.status==6">已取消</label>
+            <label v-if="item.status==9">已退票</label>
           </div>
         </div>
         </page-scroller>
@@ -59,8 +59,9 @@ export default {
       );
     },
     orderDetail(order){
-      console.log('order',order)
-      this.$router.push({name:'TicketDetail',query:{id:order.orderCode,ticketing:order.ticketing}})
+      console.log('setSelectedTicketOrder',order)
+      this.$store.commit('business/setSelectedTicketOrder',order)
+      this.$router.push({name:'TicketDetail',query:{id:order.orderCode,status:order.status}})
     },
     fetchData() {
       return this.$refs.scroller.reset();

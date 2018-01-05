@@ -9,11 +9,11 @@ const reducer = (state, paths) => (
 )
 
 function createPersistedState({
-                                key = 'vuex',
-                                paths = [],
-                                getState = key => JSON.parse(window.localStorage.getItem(key)),
-                                setState = (key, state) => window.localStorage.setItem(key, JSON.stringify(state)),
-                              }) {
+    key = 'vuex',
+    paths = [],
+    getState = key => JSON.parse(window.localStorage.getItem(key)),
+    setState = (key, state) => window.localStorage.setItem(key, JSON.stringify(state)),
+  }) {
   return store => {
     //获取浏览器类型
     let _state = getState(key)
