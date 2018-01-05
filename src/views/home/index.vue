@@ -99,12 +99,12 @@
     name: '超级联合日',
     pathName: 'LocalProduct',
     params: {classType: 102},
-    icon: require('assets/images/home/local.png')
+    icon: require('assets/images/home/hemers.png')
   }, {
     name: '福州特产馆',
     pathName: 'LocalProduct',
     params: {classType: 101},
-    icon: require('assets/images/home/hemers.png')
+    icon: require('assets/images/home/local.png')
   }];
   export default {
     components: {
@@ -274,7 +274,7 @@
       padding: 22px 0 0px;
       background: url(../../assets/images/home/menu_bg.png) no-repeat;
       background-size: 100% 100%;
-      
+
       label {
         text-align: center;
         width: 70px;
