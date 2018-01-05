@@ -1,7 +1,7 @@
 <template>
   <page :headerTitle="`详情`">
     <div slot="contain">
-      <div class="contain" style="background-image:url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514201893800&di=18c5972c1283256906ae1bc527574b88&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F1ad5ad6eddc451dac844bcf9bcfd5266d0163275.jpg')">
+      <div class="contain" style="background-image:url('http://p0bd8izdn.bkt.clouddn.com/ruihua/xcx/images/detail_bg.png')">
         <div class="ticket-detail">
           <div class="ticket">
             <div class="info">
@@ -15,6 +15,7 @@
             </div>
           </div>
           <div class="cell mb10">
+            <div class="cell-body">下单时间：{{new Date(orderDetail.downTime*1000).format('yyyy年MM月dd日 hh:mm:ss')}}</div>
             <div v-if="orderDetail.details" class="cell-item">
                 <div  class="flexb" v-for="item in orderDetail.details">
                   <label>{{item.goodsName}}</label><label>x {{item.number}}</label>
@@ -52,7 +53,6 @@ export default {
         return storeApi.getGoodsOrderDetail(this.orderInfo.id).then(res=>{
           console.log('res',res.data)
           this.orderDetail = res.data
-          console.log('时间',new Date(this.orderDetail.downTime*1000).format('yyyy年MM月dd日 HH:mm:ss'))
         },error => { console.log(error); })
       },
       fetchData(){
@@ -64,17 +64,17 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .contain{background-size: 100% 300px;background-repeat: no-repeat;background-position: top;}
-  .ticket-detail{position: relative;z-index: 1;margin: 75px 30px 0 30px;
+  .contain{background-size: 100% 200px;background-repeat: no-repeat;background-position: top;}
+  .ticket-detail{position: relative;z-index: 1;margin: 50px 30px 0 30px;
     .ticket{
       .info{line-height: 30px; padding: 10px 20px;background-image: url('../../../assets/images/me/ticket_detail_bg.png');background-size: 100% 100%;}
       .body{text-align: center;padding: 30px 0 ;background-image: url('../../../assets/images/me/ticket_detail_bg2.png');background-size: 100% 100%;}
     }
   }
-  .cell{padding: 15px;
+  .cell{padding: 15px 0;
     .s-button{padding: 4px 10px;}
-    .cell-item{padding-bottom: 10px;border-bottom: 1px solid #c6ac88;line-height: 30px;}
-    .cell-body{padding: 10px 0 0;}
+    .cell-item{padding: 8px 0;border-bottom: 1px solid #c6ac88;line-height: 30px;}
+    .cell-body{padding: 10px 0;}
   }
   .warn{margin-bottom: 30px;
     .title{margin: 10px 0;width:100%;height: 46px;background-image: url('../../../assets/images/me/use_sm_title_bg.png');background-size: 100% 100%;background-repeat: no-repeat;}

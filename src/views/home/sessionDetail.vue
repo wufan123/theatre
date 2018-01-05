@@ -310,7 +310,7 @@ export default {
             query: { orderId: success.data.planOrderId }
           });
           this.$store.commit('business/setSelectedCoupon',{});
-          this.$store.commit('business/setSelectedMember',{});
+          this.$store.commit('business/setSelectedPackageOrder',{});
         },
         error => {
           this.$vux.loading.hide();

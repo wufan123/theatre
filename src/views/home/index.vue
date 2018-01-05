@@ -24,9 +24,7 @@
                  v-show="introduceList&&introduceList.length>0">
         <label slot="rightTop" @click="$router.push('IntroduceList')">更多</label>
         <scroll-view slot="main">
-
-            <div flex="dir:top " v-for="(item,index) in introduceList" class="introduceItem" :key="index"
-            >
+            <div flex="dir:top " v-for="(item,index) in introduceList" class="introduceItem" :key="index" >
               <a :href="item.contentUrl">
               <div flex="dir:left">
                 <img :src="item.thumbUrl" class="contentImg">
@@ -201,7 +199,7 @@
         height: 40px;
       }
       .header-r-icon {
-        height: 20px;
+        height: 22px;
         margin-right: 10px;
         margin-left: 20px;
       }

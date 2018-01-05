@@ -1,5 +1,5 @@
 <template>
-  <detail-page :data="data" :click="buy" isHermes>
+  <detail-page :data="data" :click="buy" :isHermes="$route.query.classType==102?true:false">
 
   </detail-page>
 </template>

@@ -6,7 +6,7 @@
           <div v-for="(item,indexp) in itemp.data" :key="indexp" class="ticket-card" @click="Detail(itemp)" >
             <list twoLine :title="item.name" >
               <list-item v-for="(itemc,indexc) in item.detail" :img="itemc.img" :key="indexc"
-              :contentTitle="itemc.name"   extra=""  >优惠券
+              :contentTitle="itemc.name"   extra=""  >
               <div slot="contentBrief">
                 <!-- <p>12 月 3 日 10：00</p> -->
                 <p flex="main:justify"> <label>数量：</label> <label>{{itemc.number}}张</label> </p>
@@ -15,6 +15,11 @@
             </list>
             <div class="flexb">
               <label>总价：{{itemp.price}}元</label>
+              <label v-if="itemp.status==0">未支付</label>
+              <label v-if="itemp.status==1">已支付</label>
+              <label v-if="itemp.status==5">超时</label>
+              <label v-if="itemp.status==6">取消</label>
+              <label v-if="itemp.status==7">订单退货</label>
             </div>
           </div>
         </div>
@@ -57,8 +62,8 @@ export default {
       );
     },
     Detail(order){
-      console.log('order',order)
-      this.$router.push({name:'PackageOrderDetail',query:order})
+      this.$store.commit('business/setSelectedPackageOrder',order)
+      this.$router.push({name:'PackageOrderDetail'})
     },
     fetchData() {
       return this.$refs.scroller.reset();
@@ -67,6 +72,6 @@ export default {
 };
 </script>
 <style lang="less">
-.package .am-list .am-list-header{border-bottom:1px dashed #ded5c7;font-size:14px;}
+.package .am-list .am-list-header{padding:5px 0;border-bottom:1px dashed #ded5c7;font-size:14px;}
 </style>
 

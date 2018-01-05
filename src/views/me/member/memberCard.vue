@@ -12,7 +12,7 @@
             </div>
             <label class="validity">有效期：{{item.expireDate}}</label>
           </div>
-          <div class="s-button khaki reCharge" @click="$router.push({name:'Recharge',query:{card:item}})">充值</div>
+          <div class="s-button khaki reCharge" @click="$router.push({name:'Recharge',query:{id:item.id,levelName:item.levelName,cardNumber:item.cardNumber}})">充值</div>
           <label class="delete" @click="isdeleteCard(item)" >—</label>
         </div>
        </div>
