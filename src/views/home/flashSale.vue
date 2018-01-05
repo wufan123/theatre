@@ -58,14 +58,11 @@
         this.$vux.loading.show();
         let res = await StoreApi.createComboOrder(this.$store.state.common.userInfo.bindmobile, `${item.hyPackageId}:1`);
         if (res && res.data) {
-          let wayRes = await  StoreApi.getPackageBuyPayway(res.data.packageId);
-          if (wayRes && wayRes.status === 0) {
             let payRes = await StoreApi.payPackage('account', res.data.packageId);
             if (payRes && payRes.status === 0) {
               this.$vux.toast.text("抢购成功", 'bottom');
               this.$set(this.dataList,index,{...item,stock:--item.stock})
             }
-          }
         }
         this.$vux.loading.hide();
       }

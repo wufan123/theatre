@@ -217,7 +217,7 @@
             return acc
           })
         } else {
-          return `${this.orderPayWay.canUseCouponNum}张可用`
+          return `${this.orderPayWay.canUseCouponNum?this.orderPayWay.canUseCouponNum:0}张可用`
         }
       }
     },
