@@ -2,7 +2,6 @@ export default {
   namespaced: true,
   state: {
     coupon:{},
-    useCoupon:[],
     selectedCoupon:{},
     goodsCouponList: [],
     ticketCouponList: []
@@ -10,9 +9,6 @@ export default {
   mutations: {
     setCoupon(state,c){
       state.coupon =c;
-    },
-    setUseCoupon(state,list){
-      state.useCoupon =list;
     },
     setSelectedCoupon(state,coupon){
       state.selectedCoupon =coupon;
