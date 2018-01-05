@@ -3,6 +3,7 @@ export default {
     state: {
         userInfo: {},
         login: {},
+        toKen:'',
     },
     mutations: {
         setUserInfo(state, info) {
@@ -10,6 +11,9 @@ export default {
         },
         setLoginInfo(state, info) {
             state.login = info
+        },
+        setToken(state,t){
+          state.token =t;
         }
     },
     actions: {},

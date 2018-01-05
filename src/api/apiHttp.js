@@ -1,12 +1,12 @@
 import axios from 'axios'
 import signUtil from '../util/signUtil'
-
+import store from 'store/index.js'
 let API_BASE_URL = _BASE_URL ? _BASE_URL : '';
 let APP_ACCOUNT = 'zhongruijufang';
 let APP_PASSWORD = 'zrjf1123';
 let API_VERSION = '1.0.0';
 let DEVICE_TYPE = 'wap';
-let token = localStorage.getItem("token")?localStorage.getItem("token"):'0552a7361f6fdfb829f5fc442d92d736a';
+let token = store.state.common.token?store.state.common.token:'0552a7361f6fdfb829f5fc442d92d736a';
 let CINEMA_CODE = 'JC170001';
 const instance = axios.create({
   baseURL: API_BASE_URL,
@@ -31,7 +31,8 @@ async function getToken(config) {
     }, {tryAgain: true})
   if (res && res.data && res.data.tokenId) {
     token = res.data.tokenId
-    localStorage.setItem("token",token);
+    // localStorage.setItem("token",token);
+    store.commit('common/setToken',token)
   }
   if (config) {
     config.params.sign = getSign(config.params, config.dataObj);
