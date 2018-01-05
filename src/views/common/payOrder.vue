@@ -32,11 +32,7 @@
   import StoreApi from 'api/storeApi'
   import WxApi from 'api/wxApi'
   import {mapState} from "vuex";
-  let typeData = [{
-    icon: 'http://p0bd8izdn.bkt.clouddn.com/ruihua/wap/images/member.png',
-    key: '1',
-    value: '会员卡',
-  },
+  let typeData = [
     {
       icon: 'http://p0bd8izdn.bkt.clouddn.com/ruihua/wap/images/wexin.png',
       key: '2',
@@ -65,9 +61,9 @@
       },
       fetchData(){
         console.log(this.payLockInfo);
-        this.$set(this.typeData, 0, {
+       /* this.$set(this.typeData, 0, {
           ...typeData[0], value: `会员卡:余额￥${this.payLockInfo.memberMoney}`
-        })
+        })*/
         if(this.payLockInfo.payTime)
         {
           this.payTime = this.payLockInfo.payTime;

@@ -234,6 +234,7 @@ export default {
             );
           },
           onConfirm() {
+
             context.$router.push({
               path: "/ConfirmOrder?orderId=" + data.hasOrder
             });
@@ -309,7 +310,7 @@ export default {
             path: "Snack",
             query: { orderId: success.data.planOrderId }
           });
-          this.$store.commit('business/setSelectedCoupon',{});
+          this.$store.commit("coupon/setTicketCouponList", null);
           this.$store.commit('business/setSelectedMember',{});
         },
         error => {
