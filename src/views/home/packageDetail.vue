@@ -5,7 +5,7 @@
 </template>
 <script>
   import DetailPage from "views/components/detailPage";
-  import ComboApi from 'api/ComboApi';
+  import ComboApi from 'api/comboApi';
   import {mapState} from "vuex";
   export default {
     components: {
