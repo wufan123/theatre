@@ -40,13 +40,13 @@
       <!--场次票-->
       <list-cell :topImg="require('assets/images/home/title_session.png')">
         <div slot="main" class="center">
-          <img :src="require('assets/images/home/home_ccp.png')" @click="$router.push('sessionDetail')" class="home-cell-img">
+          <img :src="require('assets/images/home/home_ccp.jpg')" @click="$router.push('sessionDetail')" class="home-cell-img">
         </div>
       </list-cell>
       <!--组合券-->
       <list-cell :topImg="require('assets/images/home/title_zhq.png')">
         <div slot="main" class="center">
-          <img :src="require('assets/images/home/home_zhg.png')" @click="$router.push({path:'HomePackageList'})" class="home-cell-img">
+          <img :src="require('assets/images/home/home_zhg.jpg')" @click="$router.push({path:'HomePackageList'})" class="home-cell-img">
         </div>
       </list-cell>
       <!--兑换票券-->
@@ -61,7 +61,7 @@
           <div flex="dir:top " v-for="(item,index) in findList.slice(0,2)" style="margin-top: 20px" class="findItem"
                >
                <!-- @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})" -->
-            <a  :href="'http://'+item.contentUrl">
+            <a  :href="item.contentUrl">
             <div flex="dir:left">
               <img :src="item.thumbUrl" class="contentImgSquare">
               <div class="rightBorder"></div>
