@@ -61,7 +61,7 @@ export default {
 </script>
 <style lang="less" scoped>
 @import "~style/base-variables";
-  .me-top{font-size: 13px;text-align: center;padding:30px 0;line-height: 30px;background-image:url('../../assets/images/me/top_bg.png');background-size: 100% 100%;background-repeat: no-repeat;}
+  .me-top{font-size: 13px;text-align: center;padding:30px 0;line-height: 30px;background-image:url('../../assets/images/me/top_bg.jpg');background-size: 100% 100%;background-repeat: no-repeat;}
     p em{margin: 0 10px;}
   i.member{margin-top:10px; border: 1px solid #1b2a3d; color: @color-sub; display: inline-block;line-height: 20px;padding: 2px 15px;border-radius: 20px;position: relative;
     &:before{ content:'';width: 15px;height: 15px;display: inline-block;background-size:100%;background-repeat: no-repeat;

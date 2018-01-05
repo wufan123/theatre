@@ -32,7 +32,7 @@
   import {List, ListItem} from 'views/components/settingList'
   import {XInput, Group} from "vux";
   import OrderApi from 'api/orderApi'
-  import ComboApi from 'api/ComboApi'
+  import ComboApi from 'api/comboApi'
   import StoreApi from 'api/storeApi'
   import {mapState} from "vuex";
   export default {

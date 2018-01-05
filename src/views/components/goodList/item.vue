@@ -29,7 +29,7 @@
     height: 100px;
     margin:10px 15px 10px;position: relative;
     padding: 10px;
-    background: url(../../../assets/images/home/sale_bg.png) center no-repeat;
+    background: url(../../../assets/images/home/sale_bg.jpg) center no-repeat;
     background-size: 100% 100%;
     .primeCost{color: #878787;text-decoration: line-through}
     .buyBtn{
