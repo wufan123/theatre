@@ -132,7 +132,22 @@
         } catch (err) {
           console.log(err);
         }
-        if (res) {
+        if (res.data.price == 0) {
+          let payRes;
+          try {
+            payRes = await StoreApi.goodsAndFilmComfirmNewPay(this.orderId, this.orderType, "account", 0, null);
+          } catch (e) {
+            this.$vux.toast.text(e.text,"bottom")
+          }
+          if (payRes && payRes.status == 0) {
+            this.$router.push({
+              name: 'PaySuccess',
+              query:{
+                  orderType:'goods'
+              }
+            })
+          }
+        }else{
           this.$store.commit("business/setPayLockInfo",
             {
               orderId: this.orderId,

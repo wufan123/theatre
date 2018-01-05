@@ -157,17 +157,22 @@
           OrderApi.updateOrderMobile(this.phone)
         }
         // 优惠券信息
-        var couponStr = this.couponInfo.map(item => {
-          return item.num
-        }).reduce((pre, item) => {
-          let acc = '';
-          if (pre) {
-            acc += `,${item}`
-          } else {
-            acc += item
-          }
-          return acc;
-        })
+        let couponStr="";
+        if(this.couponInfo&&this.couponInfo.length)
+        {
+          couponStr= this.couponInfo.map(item => {
+            return item.num
+          }).reduce((pre, item) => {
+            let acc = '';
+            if (pre) {
+              acc += `,${item}`
+            } else {
+              acc += item
+            }
+            return acc;
+          })
+        }
+
         // 会员卡信息
         let cardId = this.selectedMember.id;
 
@@ -176,7 +181,7 @@
         try {
           res = await  StoreApi.getOrderPayLock(this.orderId, this.orderType, cardId, couponStr);
         } catch (e) {
-          console.log(e);
+          this.$vux.toast.text(e.text,"bottom")
         }
         if (res && res.data) {
           //价格为0时直接支付
@@ -185,7 +190,7 @@
             try {
               payRes = await StoreApi.goodsAndFilmComfirmNewPay(this.orderId, this.orderType, "account", 0, null);
             } catch (e) {
-              console.log(e);
+              this.$vux.toast.text(e.text,"bottom")
             }
             if (payRes && payRes.status == 0) {
               this.$router.push({
@@ -220,7 +225,6 @@
       },
       //显示已选择的优惠券
       getCouponExtra(){
-        console.log("------", this.couponInfo);
         if (this.couponInfo && this.couponInfo.length) {
           return this.couponInfo.map(item => {
             return item.name

@@ -60,6 +60,11 @@
       },
       // 锁定，跳转到支付页面
       async lockAndPayOrder () {
+        this.$vux.toast.show({
+          type: 'cancel',
+          text: '暂时无法使用第三方支付'
+        });
+        return;
         if (this.phone === '') {
           this.$vux.toast.show({
             type: 'cancel',

@@ -21,7 +21,7 @@
             return {
                 selectCoupon:{},
                 voucherType: null, // 优惠券类型
-                seatCount: 1, // 订单座位数
+                seatCount: this.$route.query.seatCount, // 订单座位数
                 couponList: [],
             }
         },

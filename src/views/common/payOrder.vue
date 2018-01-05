@@ -92,6 +92,11 @@
       },
       // 点击确认支付
       async confirmPay () {
+        this.$vux.toast.show({
+          type: 'cancel',
+          text: '暂时无法使用第三方支付'
+        });
+        return;
         this.$vux.loading.show();
         let res;
         try {

@@ -2,10 +2,26 @@
   <page :headerTitle="`购买成功`">
     <div slot="contain" flex="dir:top cross:center">
       <img :src="require('assets/images/pay/success.png')" class="result"/>
-      <img :src="require('assets/images/pay/check_order.png')" class="resultTip"/>
+      <router-link :to="getLinkPath()">
+        <img :src="require('assets/images/pay/check_order.png')" class="resultTip"/>
+      </router-link>
     </div>
   </page>
 </template>
+<script>
+  export default{
+      methods:{
+          getLinkPath(){
+              switch (this.$route.query.orderType){
+                case 'goods':
+                    return '/LocalProductList';
+                default:
+                    return '/TicketList'
+              }
+          }
+      }
+  }
+</script>
 <style lang="less" scoped>
   .result{
     height: 80px;

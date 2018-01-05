@@ -55,7 +55,7 @@
           </checker>
           </scroll-view>
           <div class="numItem">
-            <x-number title="购买数量" v-model="ticketCount"></x-number>
+            <x-number title="购买数量" :min="1" :max="4" v-model="ticketCount"></x-number>
           </div>
         </div>
         <div class="btn" @click="createOrder">
