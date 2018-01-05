@@ -60,6 +60,11 @@
       },
       // 锁定，跳转到支付页面
       async lockAndPayOrder () {
+        this.$vux.toast.show({
+          type: 'cancel',
+          text: '暂时无法使用第三方支付'
+        });
+        return;
         if (this.phone === '') {
           this.$vux.toast.show({
             type: 'cancel',
@@ -68,9 +73,9 @@
           return
         }
         let payRes = await StoreApi.payPackage('weixinpay', this.orderId);
-        if (payRes && payRes.status === 0) {
-          this.$vux.toast.text("支付成功", 'bottom');
-        }
+//        if (payRes && payRes.status === 0) {
+//          this.$vux.toast.text("支付成功", 'bottom');
+//        }
       }
     },
     components: {List, ListItem, XInput, Group}
