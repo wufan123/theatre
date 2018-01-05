@@ -34,7 +34,7 @@
           <div class="flexb"><label>总价</label><label>￥{{orderInfo._price}}</label></div>
           <div class="flexb" v-for="(item,index) in couponInfo" :key="index">
             <label>{{item.name}}</label><label>{{item.des}}</label></div>
-          <div class="flexb payment"><label>实付款</label><label>￥{{orderInfo._price}}</label></div>
+          <div class="flexb payment"><label>实付款</label><label>￥{{orderInfo.price}}</label></div>
         </div>
       </div>
       <group>
@@ -105,15 +105,15 @@
       // 计算总价
       caculateCount: function () {
         //初始化显示订单价格
-        this.orderInfo.film._price = parseFloat(this.orderInfo.film.price)
+        this.orderInfo.film._price = parseFloat(this.orderInfo.film.price);
         // TODO 如果有使用会员卡
         // if (this.selectCard) {
         //     this.orderInfo.film._price = parseFloat(this.selectCard.settlementPrice) * parseInt(this.orderInfo.film.seatCount)
         // }
         // 原始总价
         this.orderInfo._price = this.orderInfo.film._price + (parseFloat(this.orderInfo.goods ? this.orderInfo.goods.price : 0))
-
-        // TODO 计算优惠券
+        this.orderInfo.price = this.orderInfo._price;
+        // 计算优惠券
         let selectedList = this.ticketCouponList.filter(item => {
           if (item.checked) {
             return item;
@@ -122,12 +122,25 @@
         selectedList.forEach(item => {
           switch (item.ticketType) {
             case 'reduce':
-              this.orderInfo._price -= item.ticketValue;
+              this.orderInfo.price -= item.ticketValue;
               this.couponInfo.push({
                 name: item.voucherName,
                 num: item.voucherNum,
                 des: `-￥${item.ticketValue}`
               });
+              break;
+            case 'exchange':
+              if (this.orderInfo.price > this.orderInfo.film.price) {
+                this.orderInfo.price -= this.orderInfo.film.price
+              } else {
+                this.orderInfo.price = 0;
+              }
+              this.couponInfo.push({
+                name: item.voucherName,
+                num: item.voucherNum,
+                des: '1张票'
+              });
+              break;
           }
         });
       },
@@ -198,26 +211,30 @@
       },
       // 选择优惠券
       selectCouponClick() {
+          console.log('11111111111');
         this.$router.push({
-          name: 'SelectCoupon'
+          name: 'SelectCoupon',
+          query:{
+            seatCount:this.orderInfo.film.seatCount
+          }
         })
       },
       //显示已选择的优惠券
       getCouponExtra(){
+        console.log("------", this.couponInfo);
         if (this.couponInfo && this.couponInfo.length) {
           return this.couponInfo.map(item => {
             return item.name
           }).reduce((pre, item) => {
-            let acc = '';
             if (pre) {
-              acc += `,${item}`
+              pre += `,${item}`
             } else {
-              acc += item;
+              pre += item;
             }
-            return acc
+            return pre
           })
         } else {
-          return `${this.orderPayWay.canUseCouponNum?this.orderPayWay.canUseCouponNum:0}张可用`
+          return `${this.orderPayWay.canUseCouponNum ? this.orderPayWay.canUseCouponNum : 0}张可用`
         }
       }
     },

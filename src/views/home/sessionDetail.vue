@@ -310,7 +310,7 @@ export default {
             path: "Snack",
             query: { orderId: success.data.planOrderId }
           });
-          this.$store.commit("coupon/setTicketCouponList", null);
+          this.$store.commit("coupon/setTicketCouponList", []);
           this.$store.commit('business/setSelectedMember',{});
         },
         error => {

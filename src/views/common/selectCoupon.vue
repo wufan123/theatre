@@ -22,7 +22,7 @@
                 selectCoupon:{},
                 voucherType: null, // 优惠券类型
                 seatCount: 1, // 订单座位数
-                couponList: []
+                couponList: [],
             }
         },
         methods: {
@@ -81,7 +81,7 @@
             if (this.voucherType == 0) {
               this.couponList.forEach(item => {
                 if (item.voucherType == 0) {
-                  let disabled = (this.selectCount >= this.seatCount) && (!item.checked)
+                  let disabled = (selectCount >= this.seatCount) && (!item.checked);
                   this.$set(item,'disabled',disabled)
                 }
               })
