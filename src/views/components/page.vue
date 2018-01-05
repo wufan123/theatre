@@ -64,7 +64,7 @@
   @import "~style/base-variables.less";
   .page {
     display: flex;
-    flex-direction: column;background: url(../../assets/images/page_bg.png) repeat;
+    flex-direction: column;background-image: url(../../assets/images/page_bg.png);background-size:68px 68px;background-repeat:repeat;
   }
   .header {
     flex: 0;

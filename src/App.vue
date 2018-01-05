@@ -34,6 +34,7 @@
   @import "style/common";
   @import "style/style";
   #app {
+    border-bottom:1px solid black;
     height: 100%;
     > div {
       height: 100%;
