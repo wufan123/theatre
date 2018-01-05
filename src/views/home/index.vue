@@ -61,7 +61,7 @@
           <div flex="dir:top " v-for="(item,index) in findList.slice(0,2)" style="margin-top: 20px" class="findItem"
                >
                <!-- @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})" -->
-            <a  :href="'http://'+item.contentUrl">
+            <a  :href="item.contentUrl">
             <div flex="dir:left">
               <img :src="item.thumbUrl" class="contentImgSquare">
               <div class="rightBorder"></div>
