@@ -1,5 +1,5 @@
 <template>
-  <page :headerTitle="`剧坊 ● 发现`" white>
+  <page :headerTitle="`精选 ● 攻略`" white>
     <div slot="contain">
       <div class="tabHeader">
         <tab custom-bar-width="38px">

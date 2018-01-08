@@ -42,9 +42,24 @@ function getPackageList(classType) {
     })
 }
 
+/**
+ * 页面配置信息
+ * @param {*} miscKey 
+ * @param {*} success_cb 
+ * @param {*} fail_cb 
+ */
+function getMiscConfig(miscKey) {
+    let params = {}
+    if (miscKey) {
+        params.miscKey = miscKey
+    }
+    return apiHttp.getTheatre("/miscConfig/list", params)
+}
+
 export default {
     getClassList: getClassList,
     getGoodsList: getGoodsList,
     getPackageList: getPackageList,
-    getInformationList: getInformationList
+    getInformationList: getInformationList,
+    getMiscConfig: getMiscConfig
 }
