@@ -45,7 +45,8 @@ export default {
       try {
           res = await CardApi.setUserBind(this.form.cardNo, this.form.cardPw);
       }catch (e){
-          this.$util.showRequestErro();
+          console.log(e);
+          this.$util.showRequestErro(e);
       }
       if(res&&res.status==0)
       {

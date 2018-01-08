@@ -36,7 +36,7 @@ import SelectMember from 'views/common/selectMember.vue'
 
 Vue.use(Router)
 
-export default new Router({ 
+export default new Router({
   routes: [
     //home
     {path: '*', redirect: '/Home'},
