@@ -246,22 +246,7 @@ export default {
         });
       }
     },
-    createOrder: function() {
-      /*let mobilePhone = this.$store.state.common.userInfo.bindmobile;
-      if (!mobilePhone) {
-        this.$vux.toast.show({
-          type: "cancel",
-          text: "获取用户信息失败"
-        });
-        return;
-      }*/
-      if (this.ticketCount <= 0) {
-        this.$vux.toast.show({
-          type: "cancel",
-          text: "数量必须大于0"
-        });
-        return;
-      }
+    async createOrder() {
       if (!this.seatList || this.seatList.length == 0) {
         this.$vux.toast.show({
           type: "cancel",
@@ -302,29 +287,28 @@ export default {
       this.$vux.loading.show({
         text: "锁座中"
       });
-      OrderApi.setPlanAndGoodsOrder(
-        this.planCheck.featureAppNo,
-        seatIntroduce.join(","),
-        this.userInfo.bindmobile,
-        JSON.stringify(seatInfo)
-      ).then(
-        success => {
-          this.$vux.loading.hide();
-          this.$router.push({
-            path: "Snack",
-            query: { orderId: success.data.planOrderId }
-          });
-          this.$store.commit("coupon/setTicketCouponList", []);
-          this.$store.commit('business/setSelectedMember',{});
-        },
-        error => {
-          this.$vux.loading.hide();
-          this.$vux.toast.show({
-            type: "cancel",
-            text: "锁座失败"
-          });
-        }
-      );
+      let res;
+      try{
+          res = await OrderApi.setPlanAndGoodsOrder(
+            this.planCheck.featureAppNo,
+            seatIntroduce.join(","),
+            this.userInfo.bindmobile,
+            JSON.stringify(seatInfo)
+          )
+      }
+      catch (e)
+      {
+          this.$util.showRequestErro(e);
+      }
+      if(res&&res.data){
+        this.$router.push({
+          path: "Snack",
+          query: { orderId: res.data.planOrderId }
+        });
+        this.$store.commit("coupon/setTicketCouponList", []);
+        this.$store.commit('business/setSelectedMember',{});
+      }
+      this.$vux.loading.hide();
     }
   }
 };

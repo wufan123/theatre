@@ -8,7 +8,7 @@
                      :channelFee="item.showPrice" :goodsCoverImage="item.goodsImg" class="snackItem">
 
             <!--<x-number v-show="item.num>0" :value="item.num" :min="0"   ></x-number>-->
-            <item-number :item="{num:item.num,index:index,stock:item.channelStock}" @onChange="change"></item-number> 
+            <item-number :item="{num:item.num,index:index,stock:item.channelStock}" @onChange="change"></item-number>
           </good-item>
         </page-scroller>
       </div>
@@ -21,6 +21,7 @@
   import GoodItem from 'views/components/goodList/item.vue'
   import StoreApi from 'api/storeApi'
   import ItemNumber from 'views/components/itemNumber.vue'
+  import {mapState} from "vuex";
   export default {
     components: {PageScroller, GoodItem, ItemNumber},
     data(){
@@ -31,6 +32,9 @@
         orderId: this.$route.query.orderId,
         bottomTitle: '不选了，直接下单',
       }
+    },
+    computed:{
+      ...mapState('common',['userInfo'])
     },
     methods: {
       getDataList(page){
@@ -65,7 +69,7 @@
         });
             this.bottomTitle =sum? `下一步（卖品总计 ￥${sum}）`:'不选了，直接下单购票';
       },
-      createOrder() {
+      async createOrder() {
         var goodsStr = "";
         for (var i = 0; i < this.dataList.length; i++) {
           var goods = this.dataList[i];
@@ -80,27 +84,30 @@
           this.$router.push({path: 'ConfirmOrder?orderId=' + this.orderId})
           return;
         }
-        let mobilePhone = this.$store.state.common.userInfo.bindmobile
-        if (!mobilePhone) {
-          this.$vux.toast.show({
-            type: 'cancel',
-            text: '获取用户信息失败'
-          })
-          return;
-        }
         this.$vux.loading.show({
           text: '下单中'
-        })
-        StoreApi.createGoodsFilmOrder(mobilePhone, goodsStr, this.orderId).then(success => {
-          StoreApi.mergeOrder(this.orderId, success.data, mobilePhone).then(success => {
-            this.$vux.loading.hide()
-            this.$router.push({path: 'ConfirmOrder?orderId=' + this.orderId})
-          }, error => {
-            this.$vux.loading.hide()
-          })
-        }, error => {
-          this.$vux.loading.hide()
-        })
+        });
+        let mobile = this.userInfo.bindmobile;
+        let createRes;
+        try{
+            createRes = await StoreApi.createGoodsFilmOrder(mobile, goodsStr, this.orderId);
+        }catch (e)
+        {
+            this.$util.showRequestErro(e);
+        }
+        if(createRes&&createRes.data){
+            let mergeRes;
+            try{
+              mergeRes = await StoreApi.mergeOrder(this.orderId, createRes.data, mobile)
+            }catch (e)
+            {
+                this.$util.showRequestErro(e)
+            }
+            if(mergeRes&&mergeRes.status==0){
+              this.$router.push({path: 'ConfirmOrder?orderId=' + this.orderId})
+            }
+        }
+        this.$vux.loading.hide();
       }
     }
   }

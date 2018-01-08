@@ -142,7 +142,7 @@
             try {
               payRes = await StoreApi.goodsAndFilmComfirmNewPay(this.orderId, this.orderType, "account", 0, null);
             } catch (e) {
-                this.$util.showRequestErro(e); 
+                this.$util.showRequestErro(e);
             }
             if (payRes && payRes.status == 0) {
               this.$router.push({

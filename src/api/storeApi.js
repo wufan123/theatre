@@ -13,7 +13,7 @@ function getGoodsList() {
    * 获取卖品详情
    */
   function getGoodsDetail(goodsId) {
-    return apiHttp.get('/home/getCinemaGoodsDetail', { 
+    return apiHttp.get('/home/getCinemaGoodsDetail', {
       goodsId: goodsId,
     })
   }
@@ -56,7 +56,7 @@ function getGoodsList() {
   }
 
   // 合并影票卖品订单
-  function mergeOrder(filmOrderId, goodsOrderId, mobile) {
+  function mergeOrder(filmOrderId, goodsOrderId, mobile='') {
     return apiHttp.get('/user/mergeOrder', {
       filmOrderId: filmOrderId,
       goodsOrderId: goodsOrderId,
@@ -211,7 +211,7 @@ function getGoodsList() {
    * @param {*} success_cb
    * @param {*} fail_cb
    */
-  function updateGoodsOrder(orderId, phone) {
+  function updateGoodsOrder(orderId, phone='') {
     var params = {
       orderCode: orderId,
       mobile: phone,
