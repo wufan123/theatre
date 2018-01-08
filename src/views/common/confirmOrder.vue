@@ -186,6 +186,9 @@
         if (res && res.data) {
           //价格为0时直接支付
           if (res.data.price == 0) {
+            this.$vux.loading.show({
+              text:'正在支付...'
+            });
             let payRes;
             try {
               payRes = await StoreApi.goodsAndFilmComfirmNewPay(this.orderId, this.orderType, "account", 0, null);

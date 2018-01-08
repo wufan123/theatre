@@ -35,13 +35,20 @@
         }
       },
       async buy(){
-          let res = await  ComboApi.createOrder(`${this.packageId}:1`,this.userInfo.bindmobile);
+          this.$vux.loading.show();
+          let res ;
+          try{
+            res = await  ComboApi.createOrder(`${this.packageId}:1`,this.userInfo.bindmobile);
+          }catch (e){
+              this.$util.showRequestErro(e)
+          }
           if(res&&res.data){
               this.$router.push({name:'ConfirmPackageOrder',query:{
                   orderId:res.data.packageId,
                   packageId:this.packageId
               }})
           }
+          this.$vux.loading.hide();
       }
     }
   }

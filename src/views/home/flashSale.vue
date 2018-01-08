@@ -59,7 +59,9 @@
         this.bindingTicket(item,index)
       },
       async bindingTicket(item,index){
-        this.$vux.loading.show();
+        this.$vux.loading.show({
+          text:'正在抢购'
+        });
         let res;
         try{
            res = await StoreApi.createComboOrder(this.userInfo.bindmobile, `${item.hyPackageId}:1`);
