@@ -130,33 +130,40 @@
         try {
           res = await  StoreApi.getOrderPayLock(this.orderId, this.orderType, cardId, couponStr);
         } catch (err) {
-          console.log(err);
+          this.$util.showRequestErro(err);
         }
-        if (res.data.price == 0) {
-          let payRes;
-          try {
-            payRes = await StoreApi.goodsAndFilmComfirmNewPay(this.orderId, this.orderType, "account", 0, null);
-          } catch (e) {
-            this.$vux.toast.text(e.text,"bottom")
-          }
-          if (payRes && payRes.status == 0) {
-            this.$router.push({
-              name: 'PaySuccess',
-              query:{
+        if(res)
+        {
+          if (res.data.price == 0) {
+            this.$vux.loading.show({
+              text:'正在支付...'
+            })
+            let payRes;
+            try {
+              payRes = await StoreApi.goodsAndFilmComfirmNewPay(this.orderId, this.orderType, "account", 0, null);
+            } catch (e) {
+                this.$util.showRequestErro(e); 
+            }
+            if (payRes && payRes.status == 0) {
+              this.$router.push({
+                name: 'PaySuccess',
+                query:{
                   orderType:'goods'
-              }
+                }
+              })
+            }
+          }
+          else{
+            this.$store.commit("business/setPayLockInfo",
+              {
+                orderId: this.orderId,
+                orderType: this.orderType,
+                ...res.data
+              });
+            this.$router.push({
+              name: 'PayOrder'
             })
           }
-        }else{
-          this.$store.commit("business/setPayLockInfo",
-            {
-              orderId: this.orderId,
-              orderType: this.orderType,
-              ...res.data
-            });
-          this.$router.push({
-            name: 'PayOrder'
-          })
         }
         this.$vux.loading.hide();
 

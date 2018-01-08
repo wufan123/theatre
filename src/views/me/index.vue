@@ -64,10 +64,7 @@ export default {
       try{
           res = await  AuthApi.logout();
       }catch(e) {
-          this.$vux.loading.show({
-            text:e.text,
-            type:'cancel'
-          })
+        this.$util.showRequestErro(e);
       }
       if(res&&res.status==0){
           this.$store.commit('common/setUserInfo',{});

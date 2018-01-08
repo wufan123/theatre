@@ -45,10 +45,7 @@
         try {
           res = await Auth.getValidateCode("firstLogin", this.form.phone)
         } catch (e) {
-          this.$vux.toast.show({
-            text: e.text,
-            type: 'cancel'
-          })
+          this.$util.showRequestErro(e);
         }
         if (res && res.status == 0) {
           this.$vux.toast.text(res.text, 'bottom');
@@ -71,10 +68,7 @@
           res = await Auth.login(this.form.phone, this.form.pw);
         }
         catch (e) {
-          this.$vux.toast.show({
-            text: e.text,
-            type: 'cancel'
-          })
+          this.$util.showRequestErro(e);
         }
         if (res && res.data) {
           this.$vux.toast.text("登录成功", 'bottom');

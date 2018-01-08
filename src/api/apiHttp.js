@@ -112,9 +112,7 @@ instance.interceptors.response.use(response => {
     return Promise.reject(data);
   }
 }, error => {
-  // console.log("error.response", error.response)
   return Promise.reject(error);
-  //CommonAlert.netError("网络异常:"+error.response.status)
 });
 
 

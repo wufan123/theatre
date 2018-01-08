@@ -22,13 +22,14 @@
     },
     methods: {
       async buy(){
+        this.$vux.loading.show();
         let goodsId = this.data.goodsId;
         let res;
         try {
           res = await StoreApi.createGoodsOrder(this.userInfo.bindmobile, `${goodsId}:1`);
         }
         catch (e) {
-            //todo
+          this.$util.showRequestErro(e);
         }
         if (res && res.data) {
           let orderId = res.data;
@@ -40,6 +41,7 @@
             }
           })
         }
+        this.$vux.loading.hide();
       },
       async fetchData(){
         let res = await StoreApi.getGoodsDetail(this.$route.query.hyGoodsId);

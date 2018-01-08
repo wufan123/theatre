@@ -1,13 +1,37 @@
 var debug = false,
-{ slice } = [];
+  {slice} = [];
 
 export const isArray = Array.isArray;
+
+export function showRequestErro(err) {
+  let info;
+  if (err.text) {
+    info = err.text;
+  }
+  else {
+    switch (err.code) {
+      case 'ECONNABORTED':
+        info = "服务器正在开小差哦";
+        break;
+      default:
+        info = "网络错误";
+    }
+  }
+  switch (err.status){
+    case '20001':
+      return;
+  }
+  window._vue.$vux.toast.show({
+    text: info,
+    type: 'cancel'
+  })
+}
 
 export function showLoginConfirm() {
   window._vue.$vux.confirm.show({
     title: '温馨提示',
     content: '您还未登录，请先登录后再进行操作哦',
-    confirmText:"立即登录",
+    confirmText: "立即登录",
     onCancel () {
       window._vue.$router.push("Home")
     },
@@ -18,43 +42,43 @@ export function showLoginConfirm() {
 }
 
 export function isString(val) {
-    return typeof val === 'string';
+  return typeof val === 'string';
 }
 
 export function isDefined(x) {
-    return x === undefined;
+  return x === undefined;
 }
 
 export function isBoolean(val) {
-    return val === true || val === false;
+  return val === true || val === false;
 }
 
 export function isFunction(val) {
-    return typeof val === 'function';
+  return typeof val === 'function';
 }
 
 export function isObject(obj) {
-    return obj !== null && typeof obj === 'object';
+  return obj !== null && typeof obj === 'object';
 }
 
 export function isEmptyObject(e) {
-    var t;
-    for (t in e)
-        return !1;
-    return !0
+  var t;
+  for (t in e)
+    return !1;
+  return !0
 }
 
 export function isPlainObject(obj) {
-    return isObject(obj) && Object.getPrototypeOf(obj) == Object.prototype;
+  return isObject(obj) && Object.getPrototypeOf(obj) == Object.prototype;
 }
 
 export function isNumberBy100(ssn) {
-    var re = /^[0-9]*[0-9]$/i;       //校验是否为数字
-    if(re.test(ssn) && ssn%100===0) {
-     return true;
-    }else {
-     return false;
-    }
+  var re = /^[0-9]*[0-9]$/i;       //校验是否为数字
+  if (re.test(ssn) && ssn % 100 === 0) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 
@@ -62,60 +86,60 @@ export const assign = Object.assign || _assign;
 
 export function merge(target) {
 
-    var args = slice.call(arguments, 1);
+  var args = slice.call(arguments, 1);
 
-    args.forEach((source) => {
-        _merge(target, source, true);
-    });
+  args.forEach((source) => {
+    _merge(target, source, true);
+  });
 
-    return target;
+  return target;
 }
 
 export function defaults(target) {
 
-    var args = slice.call(arguments, 1);
+  var args = slice.call(arguments, 1);
 
-    args.forEach((source) => {
+  args.forEach((source) => {
 
-        for (var key in source) {
-            if (target[key] === undefined) {
-                target[key] = source[key];
-            }
-        }
+    for (var key in source) {
+      if (target[key] === undefined) {
+        target[key] = source[key];
+      }
+    }
 
-    });
+  });
 
-    return target;
+  return target;
 }
 
 function _assign(target) {
 
-    var args = slice.call(arguments, 1);
+  var args = slice.call(arguments, 1);
 
-    args.forEach((source) => {
-        _merge(target, source);
-    });
+  args.forEach((source) => {
+    _merge(target, source);
+  });
 
-    return target;
+  return target;
 }
 
 function _merge(target, source, deep) {
-    for (var key in source) {
-        if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
-            if (isPlainObject(source[key]) && !isPlainObject(target[key])) {
-                target[key] = {};
-            }
-            if (isArray(source[key]) && !isArray(target[key])) {
-                target[key] = [];
-            }
-            _merge(target[key], source[key], deep);
-        } else if (source[key] !== undefined) {
-            target[key] = source[key];
-        }
+  for (var key in source) {
+    if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
+      if (isPlainObject(source[key]) && !isPlainObject(target[key])) {
+        target[key] = {};
+      }
+      if (isArray(source[key]) && !isArray(target[key])) {
+        target[key] = [];
+      }
+      _merge(target[key], source[key], deep);
+    } else if (source[key] !== undefined) {
+      target[key] = source[key];
     }
+  }
 }
 
-Date.prototype.format = function(fmt) { //author: meizz
+Date.prototype.format = function (fmt) { //author: meizz
   var o = {
     "M+": this.getMonth() + 1, //月份
     "d+": this.getDate(), //日
