@@ -60,7 +60,7 @@
             }
           }, 1000);
         }
-        this.$vux.loading.hide(); 
+        this.$vux.loading.hide();
       },
       async login(){
         this.$vux.loading.show({

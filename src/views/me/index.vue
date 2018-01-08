@@ -1,5 +1,5 @@
 <template>
-  <page :footerText="`退出登录`" :footerLink="`Login`" :headerTitle="`我的`">
+  <page :footerText="`退出登录`"  :footerFunc="logOut" :headerTitle="`我的`">
       <div slot="contain" class="me">
           <div class="me-top">
             <span class="bold f16">{{userInfo.userNickname}}</span>
@@ -22,7 +22,7 @@
             <list-item :img="require('assets/images/me/cell_icon_02.png')"
               :contentTitle="`优惠券`"   extra="" isLink  :link="'CouponList'">
             </list-item>
-            <list-item :img="require('assets/images/me/cell_icon_03.png')" 
+            <list-item :img="require('assets/images/me/cell_icon_03.png')"
               :contentTitle="`邀请好友`"   extra="" isLink  :link="`Share`"  >
             </list-item>
             <list-item :img="require('assets/images/me/cell_icon_04.png')"
@@ -55,6 +55,25 @@ export default {
       }, error => {
 
       })
+    },
+    async logOut(){
+      this.$vux.loading.show({
+        text:'正在登出...'
+      })
+      let res;
+      try{
+          res = await  AuthApi.logout();
+      }catch(e) {
+          this.$vux.loading.show({
+            text:e.text,
+            type:'cancel'
+          })
+      }
+      if(res&&res.status==0){
+          this.$store.commit('common/setUserInfo',{});
+          this.$router.push('login')
+      }
+      this.$vux.loading.hide();
     }
   }
 }
