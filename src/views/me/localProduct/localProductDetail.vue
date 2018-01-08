@@ -5,8 +5,8 @@
         <div class="ticket-detail">
           <div class="ticket">
             <div class="info">
-              <p class="f16">{{orderDetail.cinemaName}}</p>
-              <p>{{new Date(orderDetail.downTime*1000).format('yyyy年MM月dd日 hh:mm:ss')}}</p>
+              <p class="f16">{{orderDetail.details[0].goodsName}}</p>
+              <!-- <p>{{new Date(orderDetail.downTime*1000).format('yyyy年MM月dd日 hh:mm:ss')}}</p> -->
             </div>
             <div class="body">
               <p v-for="item in orderDetail.ticketing" class="mb10 red" >{{item.key}}：{{item.value}}</p>
@@ -22,15 +22,15 @@
                 </div>
             </div>
             <div class="cell-body">
-              <!-- <div class="flexb f12"><label>总价</label><label>￥228.00</label></div> -->
-              <!-- <div class="flexb"><label>立减券</label><label>-￥30.00</label></div> -->
-              <div class="flexb f16"><label>实付款</label><label>￥{{orderDetail.price}}</label></div>
+              <div class="flexb f12"><label>总价</label><label>￥{{orderPayInfo.totalPrice}}</label></div>
+              <div class="flexb" v-for="item in orderPayInfo.payInfo"><label>{{item.name}}</label><label>-￥{{item.money}}</label></div>
+              <div class="flexb f16"><label>实付款</label><label>￥{{orderPayInfo.realPrice}}</label></div>
             </div>
           </div>
           <div class="cell center"><div class="s-button khaki"> 联系客服</div></div>
-          <div class="warn">
+          <div class="warn" v-if="ruleConfig">
             <p class="title"></p>
-            <p>本票售出不退，请至少提前30分钟凭此二维码取票入场 12月2日至12月31日，所购每份正价戏票中均包含咖啡一份，领票时即可兑换</p>
+            <p>{{ruleConfig}}</p>
           </div>
         </div>
       </div>
@@ -40,11 +40,15 @@
 <script>
 import { Qrcode } from 'vux'
 import storeApi from "api/storeApi";
+import orderApi from "api/orderApi";
+import theatreApi from "api/theatreApi";
 export default {
   data(){
       return{
         orderDetail:{},
-        orderInfo:{}
+        orderInfo:{},
+        orderPayInfo:{},
+        ruleConfig:null
       }
   },
   components:{Qrcode},
@@ -53,11 +57,25 @@ export default {
         return storeApi.getGoodsOrderDetail(this.orderInfo.id).then(res=>{
           console.log('res',res.data)
           this.orderDetail = res.data
+          this.getPayInfo()
+        },error => { console.log(error); })
+      },
+      getPayInfo(){
+        return orderApi.getOrderPayInfo(this.orderDetail.orderId,2).then(res=>{
+          this.orderPayInfo = res.data
+        },error => { console.log(error); })
+      },
+      getmiscConfig(){
+        return theatreApi.getMiscConfig('goods_order_info').then(res=>{
+          if (res.data && res.data.length > 0) {
+            this.ruleConfig = res.data[0].miscVal
+          }
         },error => { console.log(error); })
       },
       fetchData(){
         this.orderInfo = this.$route.query
         this.getDataList()
+        this.getmiscConfig()
       }
   }
 }

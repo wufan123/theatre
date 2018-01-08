@@ -4,7 +4,7 @@
       <img :src="require('assets/images/logo.png')" class="logo">
       <div class="header-r" flex="cross:center">
         <img :src="require('assets/images/me.png')" class="header-r-icon" @click="$router.push('Me')">
-        <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('FindList')">
+        <!-- <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('FindList')"> -->
       </div>
     </div>
     <!--<scroller height="-40" lock-x scrollbar-y :pulldown-config='pullDownConfig' :usePulldown='true' @on-pulldown-loading='refresh' ref="scroller">-->
@@ -51,12 +51,13 @@
       </list-cell>
       <!--兑换票券-->
       <div flex="dir:left main:center">
-        <router-link to="/sessionDetail">
+        <router-link to="/CouponList">
           <img :src="require('assets/images/home/convert.png')" class="convert">
         </router-link>
       </div>
       <!-- 探索-->
       <list-cell :topImg="require('assets/images/home/title_stamps.png')" v-show="findList&&findList.length>0">
+        <label slot="rightTop" @click="$router.push('FindList')" >更多</label>
         <div slot="main" style="display: flex;flex-wrap: wrap;padding-left: 15px">
           <div flex="dir:top " v-for="(item,index) in findList.slice(0,2)" style="margin-top: 20px" class="findItem"
                >

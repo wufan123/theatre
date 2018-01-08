@@ -28,9 +28,9 @@
             </div>
           </div>
           <div class="cell center"><a href="tel:0147-88469258"><div class="s-button khaki"> 联系客服</div></a></div>
-          <div class="warn">
+          <div class="warn" v-if="ruleConfig">
             <p class="title"></p>
-            <p>本票售出不退，请至少提前30分钟凭此二维码取票入场 12月2日至12月31日，所购每份正价戏票中均包含咖啡一份，领票时即可兑换</p>
+            <p>{{ruleConfig}}</p>
           </div>
         </div>
       </div>
@@ -41,12 +41,14 @@
 import { Qrcode } from 'vux'
   import {mapState} from "vuex";
 import orderApi from "api/orderApi";
+import theatreApi from "api/theatreApi";
 export default {
   data(){
       return{
         orderInfo:{},
         order:[],
         film:{},
+        ruleConfig:{}
       }
   },
   computed: {
@@ -59,7 +61,14 @@ export default {
         this.order = this.orderInfo.data
         console.log('this.order', this.order)
         this.film = this.orderInfo.data[0]
-
+        this.getmiscConfig()
+      },
+      getmiscConfig(){
+        return theatreApi.getMiscConfig('package_order_info').then(res=>{
+          if (res.data && res.data.length > 0) {
+            this.ruleConfig = res.data[0].miscVal
+          }
+        },error => { console.log(error); })
       }
   }
 }
