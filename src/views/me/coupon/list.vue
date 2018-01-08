@@ -24,7 +24,7 @@
             </div>
 
             <coupon-item v-if="isSeeExpire" v-for="(item,index) in invalidList" :key="index" :disabled="item.stock"
-                         @click.native="gotoCouponDetail(item)">  
+                         @click.native="gotoCouponDetail(item)">
               <label class="leftTitle" slot="right">{{item.voucherName}}</label>
               <label slot="right" v-if="item.status==3" class="is-tip">已使用</label>
               <label class="leftInfo" slot="right">有效期 {{new Date(item.validData * 1000).format("yyyy-MM-dd")}}</label>

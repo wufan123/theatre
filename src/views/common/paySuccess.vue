@@ -1,5 +1,5 @@
 <template>
-  <page :headerTitle="`购买成功`">
+  <page :headerTitle="`购买成功`" :backFunc="backHome">
     <div slot="contain" flex="dir:top cross:center">
       <img :src="require('assets/images/pay/success.png')" class="result"/>
       <router-link :to="getLinkPath()">
@@ -10,25 +10,29 @@
 </template>
 <script>
   export default{
-      methods:{
-          getLinkPath(){
-              switch (this.$route.query.orderType){
-                case 'goods':
-                    return '/LocalProductList';
-                default:
-                    return '/TicketList'
-              }
-          }
+    methods: {
+      getLinkPath(){
+        switch (this.$route.query.orderType) {
+          case 'goods':
+            return '/LocalProductList';
+          default:
+            return '/TicketList'
+        }
+      },
+      backHome(){
+        this.$router.push('Home')
       }
+    }
   }
 </script>
 <style lang="less" scoped>
-  .result{
+  .result {
     height: 80px;
     width: 80px;
     margin-top: 45px;
   }
-  .resultTip{
+
+  .resultTip {
     height: 31px;
     width: 175px;
     margin-top: 56px;
