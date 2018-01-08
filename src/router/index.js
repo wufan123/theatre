@@ -36,7 +36,7 @@ import SelectMember from 'views/common/selectMember.vue'
 
 Vue.use(Router)
 
-export default new Router({
+export default new Router({ 
   routes: [
     //home
     {path: '*', redirect: '/Home'},
@@ -58,7 +58,7 @@ export default new Router({
     {path: '/Snack', name: 'Snack', component: Snack},
     {path: '/PayOrder', name: 'PayOrder', component: PayOrder},
     {path: '/PaySuccess', name: 'PaySuccess', component: PaySuccess},
-    {path: '/SelectCoupon', name: 'SelectCoupon', component: SelectCoupon},  
+    {path: '/SelectCoupon', name: 'SelectCoupon', component: SelectCoupon},
     {path: '/SelectMember', name: 'SelectMember', component: SelectMember,props:true},
     //me
     {path: '/Me', name: 'Me', component: Me},

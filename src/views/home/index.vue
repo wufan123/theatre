@@ -153,7 +153,6 @@
       },
       async getStamps(){
         let res = await TheatreApi.getPackageList(201)
-        console.log(res)
         if (res) {
           this.stampsList = res.data;
         }
