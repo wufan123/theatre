@@ -8,13 +8,13 @@
         <div class="mainOut">
           <div class="mainBody" flex="dir:top cross:center">
             <div  class="titleBar">
-              <div flex="dir:top">
-                <label class="title">
+              <div flex="dir:top" flex-box="1">
+                <label class="title text-ellipsis-line">
                   {{filmDetail == null ? '坊巷文化影音秀' : filmDetail.filmName}}</label>
-                <label class='des'>
+                <label class='des text-ellipsis-line'>
                   {{filmDetail == null ? '坊巷文化影音秀' : filmDetail.filmName}}场次票</label>
               </div>
-              <div flex="dir:top ">
+              <div flex="dir:top " flex-box="0">
                 <label class="price">￥{{filmPrice}}</label>
                 <label class="des">满200立减30元</label>
               </div>
@@ -339,7 +339,7 @@ export default {
   background: url(../../assets/images/page_bg.png);
   .title {
     font-size: 16px;
-    margin-top: 23px;
+    margin-top: 15px;
     margin-left: 15px;
   }
   .body {
@@ -351,7 +351,7 @@ export default {
     line-height: 45px;
   }
   .numItem {
-    margin-top: 20px;
+    margin-top:10px;
     border-top: solid @border-color 1px;
     padding-top: 10px;
     font-size: 16px;
@@ -367,7 +367,7 @@ export default {
   width: 100%;
   height: 200px;
   img{
-    height: 200px;
+    height: 211px;
     width: 100%;
   }
 }
@@ -384,12 +384,12 @@ export default {
   width: 100%;
   .mainBody {
     background-color: @page_bg2;
-    margin: -20px 20px 80px;
+    margin: -20px 15px 80px;
     padding: 20px;
     border-radius: 5px;
 
     .content {
-      margin-top: 20px;
+      margin-top: 10px;
       text-indent: 2em;
       text-align: left;
       width: 100%;
@@ -425,10 +425,11 @@ export default {
       width: 100%;
       .title {
         font-size: 16px;
-        font-weight: bold;
       }
       .des {
         font-size: 11px;
+        margin-top:5px;
+        color:@font-color2
       }
       .price {
         line-height: 25px;

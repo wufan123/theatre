@@ -52,7 +52,7 @@
     width: 100%;
     height: 200px;
     img{
-      height: 200px;
+      height: 211px;
       width: 100%;
     }
   }
@@ -63,7 +63,7 @@
       position: absolute;
       z-index: 100;
       background-color: @page_bg2;
-      margin: -20px 20px 80px;
+      margin: -20px 15px 80px;
       padding: 20px;
       border-radius: 5px;
       width: 295px;

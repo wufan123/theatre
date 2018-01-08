@@ -30,7 +30,7 @@
       height: 90px;
       display: inline-flex;
       width: 100%;
-      background: rgba(0,0,0,.5);
+      background: rgba(0,0,0,.25);
     }
     .right {
       height: 100%;

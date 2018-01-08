@@ -28,24 +28,21 @@
   .goodItem{
     height: 100px;
     margin:10px 15px 10px;position: relative;
-    padding: 10px;
     background: url(../../../assets/images/home/sale_bg.jpg) center no-repeat;
     background-size: 100% 100%;
     .primeCost{color: #878787;text-decoration: line-through}
     .buyBtn{
-      position:absolute;right:20px;bottom:30px;
+      position:absolute;right:20px;bottom:20px;
     }
     .goodImg{
       width: 101px;
       height: 68px;
-      margin-left: 10px;
+      margin-left: 15px;
     }
-    .content{margin-left: 10px;overflow: hidden;
+    .content{margin-left: 10px;overflow: hidden;margin-right: 10px;
       .title{
         margin-left: 5px;
         font-size: 15px;
-        height: 24px;
-        color: @font-color;
       }
       .info{
         width: 105px;

@@ -181,6 +181,7 @@
 <style lang="less" scoped>
   @import "~style/base-variables.less";
   @import "~style/style.less";
+    @import "~style/common.less";
 
   .homeOut {
     background: repeat;
@@ -280,9 +281,9 @@
       }
     }
     .menuItem {
-      height: 55px;
-      width: 55px;
+      height: 61px;
+      width: 77px;
     }
   }
-  .home-cell-img{width:348px;margin:0 auto;}
+  .home-cell-img{width:345px;margin:0 auto;}
 </style>

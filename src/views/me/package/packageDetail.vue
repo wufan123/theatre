@@ -27,7 +27,7 @@
               <div class="flexb f16"><label>实付款</label><label>￥{{orderInfo.price}}</label></div>
             </div>
           </div>
-          <div class="cell center"><a href="tel:0147-88469258"><div class="s-button khaki"> 联系客服</div></a></div>
+          <div class="cell center"><div class="s-button khaki" @click="callphone"> 联系客服</div></div>
           <div class="warn" v-if="ruleConfig">
             <p class="title"></p>
             <p>{{ruleConfig}}</p>
@@ -48,7 +48,8 @@ export default {
         orderInfo:{},
         order:[],
         film:{},
-        ruleConfig:{}
+        ruleConfig:{},
+        servicePhone:'4000-125-000'
       }
   },
   computed: {
@@ -56,6 +57,9 @@ export default {
     },
   components:{Qrcode},
   methods:{
+    callphone(){
+      window.location.href ='tel:'+this.servicePhone+'';
+    },
       fetchData(){
         this.orderInfo = JSON.parse(JSON.stringify(this.selectPackageOrder))
         this.order = this.orderInfo.data

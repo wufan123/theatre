@@ -1,6 +1,6 @@
 <template>
   <div flex="dir:left" class="num">
-    <x-number v-show="numberItem.num>0" :value="numberItem.num" :min="0" @on-change="change" :max="numberItem.stock"></x-number>
+    <x-number v-show="numberItem.num>0" :value="numberItem.num" :min="0" @on-change="change" :max="numberItem.stock" ></x-number>
     <a v-show="!numberItem.num" @click="numberItem.num++"
        class="vux-number-selector vux-number-selector-plus">
       <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"

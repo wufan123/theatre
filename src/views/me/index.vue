@@ -25,8 +25,8 @@
             <list-item :img="require('assets/images/me/cell_icon_03.png')" 
               :contentTitle="`邀请好友`"   extra="" isLink  :link="`Share`"  >
             </list-item>
-            <list-item :img="require('assets/images/me/cell_icon_04.png')"
-              :contentTitle="`联系客服`"   extra="" isLink  :link="`/`"  >
+            <list-item :img="require('assets/images/me/cell_icon_04.png')" @click.native="callphone"
+              :contentTitle="`联系客服`"   extra="" isLink   >
             </list-item>
           </list>
       </div>
@@ -43,17 +43,20 @@ export default {
       userInfo: {
         userNickname: '-',
         userMoney: '0.00',
-        integral: '0'
+        integral: '0',
+        servicePhone:'4000-125-000'
       }
     }
   },
   methods:{
+    callphone(){
+      window.location.href ='tel:'+this.userInfo.servicePhone+'';
+    },
     fetchData(){
       AuthApi.getUserInfo().then(success => {
         this.$store.commit('common/setUserInfo', success.data)
         this.userInfo = success.data
       }, error => {
-
       })
     }
   }
@@ -61,7 +64,7 @@ export default {
 </script>
 <style lang="less" scoped>
 @import "~style/base-variables";
-  .me-top{font-size: 13px;text-align: center;padding:30px 0;line-height: 30px;background-image:url('../../assets/images/me/top_bg.jpg');background-size: 100% 100%;background-repeat: no-repeat;}
+  .me-top{font-size: 13px;text-align: center;padding:20px 0;line-height: 30px;background-image:url('../../assets/images/me/top_bg.jpg');background-size: 100% 100%;background-repeat: no-repeat;}
     p em{margin: 0 10px;}
   i.member{margin-top:10px; border: 1px solid #1b2a3d; color: @color-sub; display: inline-block;line-height: 20px;padding: 2px 15px;border-radius: 20px;position: relative;
     &:before{ content:'';width: 15px;height: 15px;display: inline-block;background-size:100%;background-repeat: no-repeat;
@@ -71,7 +74,7 @@ export default {
   .me-order{padding:10px 0;
     .title{margin: 20px 0;width: 375px;height: 42px;background-image: url('../../assets/images/me/me_order_title_bg.png');background-size: 100% 100%;background-repeat: no-repeat;}
     ul{text-align: center;
-      i.icon{width: 31px;height: 55px;display: block;background-size:100%;background-repeat: no-repeat;margin: 0 auto 10px auto;
+      i.icon{width: 31px;height: 55px;display: block;background-size:100%;background-repeat: no-repeat;margin: 0 auto 5px auto;
         &.order{ background-image:url('../../assets/images/me/me_menu_01.png')}
         &.package{ background-image:url('../../assets/images/me/me_menu_02.png')}
         &.lacalProduct{ background-image:url('../../assets/images/me/me_menu_03.png')}
@@ -84,7 +87,7 @@ export default {
 <style lang="less">
 @import "~style/base-variables";
   .me{
-    .am-list .am-list-item{border-top:1px solid @border-color2;padding:7px 15px 11px;
+    .am-list .am-list-item{border-top:1px solid @border-color2;padding:7px 15px 7px;
       &:last-child{border-bottom:1px solid @border-color2;}
     }
     .am-list .am-list-item.twoline .am-list-title{ font-weight: normal; }

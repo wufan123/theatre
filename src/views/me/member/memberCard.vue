@@ -5,7 +5,7 @@
        <div class="contain" v-if="dataList.length>0">
           <div v-for="(item,index) in dataList" class="card-item">
           <div flex="dir:top" class="info">
-            <label class="title text-ellipsis-line">{{item.levelName+item.cardNumber}}</label>
+            <label class="title text-ellipsis-line">{{item.levelName}}：{{item.cardNumber}}</label>
             <div class="sum" flex="dir:left">
               <label>余额：</label>
               <label class="text-ellipsis-line">￥{{item.money}}</label>
@@ -109,7 +109,7 @@
       font-size: 14px;
       width: 200px;
       .title {
-        margin-top: 20px;
+        margin-top: 17px;
         color: @color-sub;
         font-size: 12px;
         height: 19px;
@@ -122,7 +122,7 @@
         }
         :nth-child(2) {
           font-size: 20px;
-          color: @color-primary;
+          color: @color-primary2;
         }
       }
     }
