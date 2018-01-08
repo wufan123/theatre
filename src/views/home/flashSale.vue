@@ -1,7 +1,7 @@
 <template>
   <page :headerTitle="`限时抢`" flex-box="1">
     <div slot="contain" class="contain">
-      <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage usePulldown
+      <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown
                      :height="'-46'">
         <div class="flash">
           <coupon-item v-for="(item,index) in dataList" :key="index" @click.native="listItemClick(item,index)">

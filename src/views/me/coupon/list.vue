@@ -10,7 +10,7 @@
           <div class="s-button khaki" @click="addCoupon">添加</div>
         </div>
         <div flex-box="1">
-          <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage usePulldown
+          <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown
                          height='-110'>
             <coupon-item v-for="(item,index) in canUseList" :key="" @click.native="gotoCouponDetail(item)">
               <label class="leftTitle" slot="right">{{item.voucherName}}</label>

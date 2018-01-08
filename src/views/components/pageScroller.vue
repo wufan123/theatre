@@ -7,7 +7,7 @@
             </div>
             <div class="no-record" v-show='showNoRecord&&noRecordText' flex='dir:top cross:center main:center'>
                 <div class="img" v-if='noRecordImage'></div>
-                <div class="f14 color04 mt10">{{noRecordImage}}---{{noRecordText}}</div>
+                <div class="f14 color04 mt10">{{noRecordText}}</div>
             </div>
         </div>
     </scroller>
