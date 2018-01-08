@@ -20,10 +20,9 @@
   import PageScroller from 'views/components/pageScroller.vue'
   import GoodItem from 'views/components/goodList/item.vue'
   import StoreApi from 'api/storeApi'
-  import {XNumber} from 'vux'
   import ItemNumber from 'views/components/itemNumber.vue'
   export default {
-    components: {PageScroller, XNumber, GoodItem, ItemNumber},
+    components: {PageScroller, GoodItem, ItemNumber},
     data(){
       return {
         value: 0,
@@ -111,19 +110,23 @@
 
   .snackItem {
     position: relative;
-    .vux-number-selector {
+    .vux-number-selector {display:flex;padding:0!important;
       border: solid @color-active 1px !important;
+      width:20px;height:20px;justify-content: center;
+    align-items: center;
     }
     .vux-number-input {
       background: @color-sub !important;
       color: white;
+      height:15px;
     }
+    .vux-number-selector svg{width:13px;height:13px;}
     .num {
       .weui-cell {
         padding: 0 !important;
       }
       position: absolute;
-      bottom: 30px;
+      bottom: 22px;
       right: 10px;
     }
   }

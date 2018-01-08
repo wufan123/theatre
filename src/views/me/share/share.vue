@@ -19,7 +19,7 @@
               <p>扫二维码向朋友分享</p>
               <div class="type">
                 <div class="item"> <i class="wx"></i> <p>微信</p> </div>
-                <div class="item"> <i class="friends"></i> <p>朋友圈</p> </div>
+                <div class="item" @click="friendArea"> <i class="friends"></i> <p>朋友圈</p> </div>
                 <div class="item"> <i class="qq"></i> <p>QQ</p> </div>
                 <div class="item"> <i class="sina"></i> <p>新浪</p> </div>
                 <div class="item"> <i class="link"></i> <p>复制邀请链接</p> </div>
@@ -31,8 +31,6 @@
         </div>
       </x-dialog>
     </div>
-    
-
   </page>
 </template>
 <script>
@@ -44,6 +42,19 @@ export default {
     }
   },
   components:{XDialog},
+  methods:{
+    friendArea(){
+      console.log('1111',wx)
+      wx.onMenuShareTimeline({
+          title: '11111', // 分享标题
+          link: '11111', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+          imgUrl: '', // 分享图标
+          success: function () {
+           console.log('11111')
+          }
+    })
+  }
+}
 }
 </script>
 

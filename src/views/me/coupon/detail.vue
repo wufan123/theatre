@@ -10,7 +10,9 @@
         <div class="info">
             <p class="title">优惠券编码：{{coupon.voucherNum}}</p>
             <p class="title">使用规则：</p>
-            <div>{{couponInfo.useRule}}</div>
+            <textarea class="rule-info">
+{{couponInfo.useRule}}
+</textarea>
         </div>
       </div>
 
@@ -55,6 +57,7 @@ export default {
   }
   .info{margin: 10px 15px;
     .title{margin-bottom: 10px;font-size: 15px;}
+    .rule-info{width:100%;background:none;border:0;height:400px;line-height:22px;}
   }
   .leftTitle {
     margin-bottom: 5px;

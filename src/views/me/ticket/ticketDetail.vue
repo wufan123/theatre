@@ -37,7 +37,7 @@
                 </div>
             </div>
           </div>
-          <div class="cell center"><a href="tel:0147-88469258"><div class="s-button khaki"> 联系客服</div></a></div>
+          <div class="cell center"><div class="s-button khaki" @click="callphone"> 联系客服</div></div>
           <div class="warn" v-if="ruleConfig">
             <p class="title"></p>
             <p>{{ruleConfig}}</p>
@@ -62,7 +62,8 @@ export default {
         orderInfo:{},
         orderPayInfo:{},
         order:{},
-        ruleConfig:{}
+        ruleConfig:{},
+        servicePhone:'4000-125-000'
       }
   },
   computed: {
@@ -71,7 +72,8 @@ export default {
   components:{Qrcode},
   methods:{
     callphone(){
-      window.location.href = "tel:10086";
+      console.log('tel',this.servicePhone)
+      window.location.href ='tel:'+this.servicePhone+'';
     },
       getOrderDetail(){
         return orderApi.getFilmOrderInfo(this.orderInfo.orderCode).then(res=>{

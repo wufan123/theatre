@@ -1,6 +1,6 @@
 import axios from 'axios'
 import signUtil from '../util/signUtil'
-import store from 'store/index.js'
+import store from '../store/index.js'
 let API_BASE_URL = _BASE_URL ? _BASE_URL : '';
 let APP_ACCOUNT = 'zhongruijufang';
 let APP_PASSWORD = 'zrjf1123';

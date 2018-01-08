@@ -27,7 +27,7 @@
               <div class="flexb f16"><label>实付款</label><label>￥{{orderPayInfo.realPrice}}</label></div>
             </div>
           </div>
-          <div class="cell center"><div class="s-button khaki"> 联系客服</div></div>
+         <div class="cell center"><div class="s-button khaki" @click="callphone"> 联系客服</div></div>
           <div class="warn" v-if="ruleConfig">
             <p class="title"></p>
             <p>{{ruleConfig}}</p>
@@ -48,11 +48,15 @@ export default {
         orderDetail:{},
         orderInfo:{},
         orderPayInfo:{},
-        ruleConfig:null
+        ruleConfig:null,
+        servicePhone:'4000-125-000'
       }
   },
   components:{Qrcode},
   methods:{
+    callphone(){
+      window.location.href ='tel:'+this.servicePhone+'';
+    },
       getDataList(){
         return storeApi.getGoodsOrderDetail(this.orderInfo.id).then(res=>{
           console.log('res',res.data)

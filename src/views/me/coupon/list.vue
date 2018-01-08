@@ -12,22 +12,24 @@
         <div flex-box="1">
           <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage usePulldown
                          height='-110'>
-
-            <coupon-item v-for="(item,index) in canUseList" :key="index" @click.native="gotoCouponDetail(item)">
+            <coupon-item v-for="(item,index) in canUseList" :key="" @click.native="gotoCouponDetail(item)">
               <label class="leftTitle" slot="right">{{item.voucherName}}</label>
               <label class="leftInfo" slot="right">有效期 {{new Date(item.validData * 1000).format("yyyy-MM-dd")}}</label>
               <label class="rightTitle" slot="left">￥{{item.voucherValue}}</label>
             </coupon-item>
+
             <div flex="flex:left main:center" @click="seeExpireCoupon">
               <img v-if="!isSeeExpire"  :src="require('assets/images/me/coupon_lost.png')" class="couponLost">
               <p class="mb20 f16" v-if="isSeeExpire" >已失效的券</p>
             </div>
-            <coupon-item v-if="isSeeExpire" v-for="(item,index) in invalidList" :disabled="item.stock" :key="index" @click.native="gotoCouponDetail(item)">
+            
+            <coupon-item v-if="isSeeExpire" v-for="(item,index) in invalidList" :disabled="item.stock" :key="" @click.native="gotoCouponDetail(item)">
               <label class="leftTitle" slot="right">{{item.voucherName}}</label>
               <label slot="right" v-if="item.status==3" class="is-tip">已使用</label>
               <label class="leftInfo" slot="right">有效期 {{new Date(item.validData * 1000).format("yyyy-MM-dd")}}</label>
               <label class="rightTitle" slot="left">￥{{item.voucherValue}}</label>
             </coupon-item>
+            
           </page-scroller>
         </div>
       </div>
@@ -82,6 +84,7 @@
         }
       },
       gotoCouponDetail(item){
+        console.log('gotoCouponDetail',item)
         this.$store.commit("coupon/setCoupon", item);
         this.$router.push({path: 'CouponDetail'});
       },

@@ -57,7 +57,7 @@
         }
         :nth-child(2) {
           font-size: 20px;
-          color: @color-primary;
+          color: @color-primary2;
         }
       }
     }
