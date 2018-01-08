@@ -2,7 +2,7 @@
   <div>
     <page :headerTitle="`来点小吃`" flex-box="1" :white="true">
       <div slot="contain">
-        <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage usePulldown
+        <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown
                        height='-48'>
           <good-item v-for="(item,index) in dataList" :key="item.goodsId" :goodsName="item.goodsName"
                      :channelFee="item.showPrice" :goodsCoverImage="item.goodsImg" class="snackItem">

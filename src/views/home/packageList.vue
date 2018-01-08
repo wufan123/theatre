@@ -1,7 +1,7 @@
 <template>
 <page :headerTitle="`优惠券·组合购`" flex-box="1">
   <div slot="contain" class="packageListH" >
-      <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-48' >
+      <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前无数据' noRecordImage usePulldown height='-48' >
         <good-item v-for="(item,index) in dataList" :key="index" :goodsCoverImage="item.imgs"  :goodsName="item.packageName" :marketFee="item.showPrice" :channelFee="item.price"
                    flex="dir:left cross:center" class="couponItem" @click.native="$router.push({path:'HomePackageDetail',query:{'packageId':item.hyPackageId}})">
 

@@ -1,7 +1,7 @@
 <template>
 <page :footerText="`我是footer`" :footerLink="`/`" :header-title="`剧坊会员卡`">
     <div slot="contain">
-     <page-scroller :api='getDataList' ref='scroller' :init-query='true' noRecordText='当前账户未添加会员卡' noRecordImage  usePulldown height='-92' >
+     <page-scroller :api='getDataList' ref='scroller' :init-query='true' noRecordText='当前无数据' noRecordImage  usePulldown height='-92' >
 
        <list twoLine :title="`我是标题`" >
           <list-item :img="`https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513599973802&di=e0ed1059c34a8eb1d89a8e8bd1c7da11&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F4b90f603738da97726166db6ba51f8198618e376.jpg`"

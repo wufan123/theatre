@@ -1,7 +1,7 @@
 <template>
   <page :headerTitle="`场次票`" >
     <div slot="contain">
-      <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage  usePulldown height='-46' >
+      <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage  usePulldown height='-46' >
         <div v-for="(item,index) in dataList" class="ticket-card" @click="orderDetail(item)">
           <list twoLine >
             <list-item :img="item.filmImg"
