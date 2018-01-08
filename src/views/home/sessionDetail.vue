@@ -72,6 +72,7 @@ import { Popup, Checker, CheckerItem, XNumber } from "vux";
 import FilmApi from "api/filmApi";
 import PlanApi from "api/planApi";
 import OrderApi from "api/orderApi";
+import {mapState} from "vuex";
 export default {
   props: ["isHermes"],
   components: {
@@ -94,6 +95,9 @@ export default {
       filmPlanList: [],
       seatList: [] // 选中排期座位详情
     };
+  },
+  computed:{
+    ...mapState("common",['userInfo'])
   },
   methods: {
     async fetchData() {
@@ -243,14 +247,14 @@ export default {
       }
     },
     createOrder: function() {
-      let mobilePhone = this.$store.state.common.userInfo.bindmobile;
+      /*let mobilePhone = this.$store.state.common.userInfo.bindmobile;
       if (!mobilePhone) {
         this.$vux.toast.show({
           type: "cancel",
           text: "获取用户信息失败"
         });
         return;
-      }
+      }*/
       if (this.ticketCount <= 0) {
         this.$vux.toast.show({
           type: "cancel",
@@ -301,7 +305,7 @@ export default {
       OrderApi.setPlanAndGoodsOrder(
         this.planCheck.featureAppNo,
         seatIntroduce.join(","),
-        mobilePhone,
+        this.userInfo.bindmobile,
         JSON.stringify(seatInfo)
       ).then(
         success => {

@@ -181,7 +181,7 @@
         try {
           res = await  StoreApi.getOrderPayLock(this.orderId, this.orderType, cardId, couponStr);
         } catch (e) {
-          this.$vux.toast.text(e.text,"bottom")
+          this.$util.showRequestErro(e);
         }
         if (res && res.data) {
           //价格为0时直接支付
@@ -190,7 +190,7 @@
             try {
               payRes = await StoreApi.goodsAndFilmComfirmNewPay(this.orderId, this.orderType, "account", 0, null);
             } catch (e) {
-              this.$vux.toast.text(e.text,"bottom")
+              this.$util.showRequestErro(e);
             }
             if (payRes && payRes.status == 0) {
               this.$router.push({

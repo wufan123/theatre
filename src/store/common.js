@@ -1,21 +1,21 @@
 export default {
-    namespaced: true,
-    state: {
-        userInfo: {},
-        login: {},
+  namespaced: true,
+  state: {
+    userInfo: {},
+    toKen: '',
+  },
+  mutations: {
+    setUserInfo(state, info) {
+      state.userInfo = info
     },
-    mutations: {
-        setUserInfo(state, info) {
-            state.userInfo = info
-        },
-        setLoginInfo(state, info) {
-            state.login = info
-        }
-    },
-    actions: {},
-    getters: {
-        uuId(state, getters) {
-            return state.userInfo.uuid
-        }
+    setToken(state, t){
+      state.token = t;
     }
+  },
+  actions: {},
+  getters: {
+    uuId(state, getters) {
+      return state.userInfo.uuid
+    }
+  }
 }

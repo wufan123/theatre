@@ -13,7 +13,7 @@ function getGoodsList() {
    * 获取卖品详情
    */
   function getGoodsDetail(goodsId) {
-    return apiHttp.get('/home/getCinemaGoodsDetail', {
+    return apiHttp.get('/home/getCinemaGoodsDetail', { 
       goodsId: goodsId,
     })
   }
@@ -24,7 +24,7 @@ function getGoodsList() {
    * @param {*} success_cb
    * @param {*} fail_cb
    */
-  function createGoodsOrder(phoneNum, goods) {
+  function createGoodsOrder(phoneNum='', goods) {
     return apiHttp.get('/sale/setCinemaOrder', {
       cinemaCode: apiHttp.CINEMA_CODE,
       mobile: phoneNum,
@@ -46,7 +46,7 @@ function getGoodsList() {
    * @param {*} success_cb
    * @param {*} fail_cb
    */
-  function createGoodsFilmOrder(phoneNum, goods, orderId) {
+  function createGoodsFilmOrder(phoneNum='', goods, orderId) {
     return apiHttp.get('/sale/setCinemaOrder', {
       cinemaCode: apiHttp.CINEMA_CODE,
       mobile: phoneNum,
@@ -72,7 +72,7 @@ function getGoodsList() {
    * @param {*} success_cb
    * @param {*} fail_cb
    */
-  function createComboOrder(phoneNum, packages) {
+  function createComboOrder(phoneNum='', packages) {
     return apiHttp.get('/package/createOrder', {
       cinemaCode: apiHttp.CINEMA_CODE,
       mobile: phoneNum,

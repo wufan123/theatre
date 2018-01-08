@@ -24,12 +24,16 @@
   import CouponItem from 'views/components/couponList/item.vue'
   import StoreApi from 'api/storeApi'
   import TheatreApi from 'api/theatreApi'
+  import {mapState} from "vuex";
   export default {
     components: {PageScroller, CouponItem},
     data(){
       return {
         dataList: []
       }
+    },
+    computed:{
+      ...mapState('common',['userInfo'])
     },
     methods: {
       getDataList(){
@@ -56,7 +60,12 @@
       },
       async bindingTicket(item,index){
         this.$vux.loading.show();
-        let res = await StoreApi.createComboOrder(this.$store.state.common.userInfo.bindmobile, `${item.hyPackageId}:1`);
+        let res;
+        try{
+           res = await StoreApi.createComboOrder(this.userInfo.bindmobile, `${item.hyPackageId}:1`);
+        }catch (e){
+
+        }
         if (res && res.data) {
             let payRes = await StoreApi.payPackage('account', res.data.packageId);
             if (payRes && payRes.status === 0) {
