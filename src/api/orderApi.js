@@ -1,13 +1,13 @@
 import apiHttp from './apiHttp'
 
 /**
- * 
+ *
  * @param {*} featureAppNo 排期号
  * @param {*} seatIntroduce  座位描述
  * @param {*} phone 	手机号
  * @param {*} seatInfo 锁座信息（json格式）[{"seatNo":"098089","seatPieceName":"座区名称","seatPieceNo":"2342332"}]
  */
-function setPlanAndGoodsOrder(featureAppNo, seatIntroduce, mobile, seatInfo) {
+function setPlanAndGoodsOrder(featureAppNo, seatIntroduce, mobile='', seatInfo) {
     let params = {
         cinemaCode: apiHttp.CINEMA_CODE,
         featureAppNo: featureAppNo,
@@ -22,8 +22,8 @@ function setPlanAndGoodsOrder(featureAppNo, seatIntroduce, mobile, seatInfo) {
  * 我的影票订单
  * @param {int} status 对应订单状态 -1所有订单1已完成 2未支付3其他9退款退票
  * @param {int} page 页数
- * @param {function} success_cb 
- * @param {function} fail_cb 
+ * @param {function} success_cb
+ * @param {function} fail_cb
  */
 function getCinemaOrders(status, page) {
     return apiHttp.get('/user/getCinemaOrders', {
@@ -35,7 +35,7 @@ function getCinemaOrders(status, page) {
 //获取我的影片订单
 function getAllMoiveOrder(status, page, success_cb, fail_cb) {
     let param = {
-      page: page 
+      page: page
     }
     if (status) {
       param.status = status
@@ -45,8 +45,8 @@ function getAllMoiveOrder(status, page, success_cb, fail_cb) {
 
 /**
  * 获取待取票影票订单
- * @param {*} success_cb 
- * @param {*} fail_cb 
+ * @param {*} success_cb
+ * @param {*} fail_cb
  */
 function getUnwatchCinemaOrders() {
     return apiHttp.get('/user/getCinemaOrders', {
@@ -58,9 +58,9 @@ function getUnwatchCinemaOrders() {
 
 /**
  * 获取影票订单状态
- * @param {*} orderID 
- * @param {*} success_cb 
- * @param {*} fail_cb 
+ * @param {*} orderID
+ * @param {*} success_cb
+ * @param {*} fail_cb
  */
 function getCinemaOrderStatus(orderID) {
     return apiHttp.get('/user/getOrderStatus', {
@@ -70,9 +70,9 @@ function getCinemaOrderStatus(orderID) {
 
 /**
  * 获取影票订单详情   过期
- * @param {*} orderID 
- * @param {*} success_cb 
- * @param {*} fail_cb 
+ * @param {*} orderID
+ * @param {*} success_cb
+ * @param {*} fail_cb
  */
 function getCinemaOrderInfo(orderID) {
     return apiHttp.get('/user/getOrderInfo', {
@@ -81,10 +81,10 @@ function getCinemaOrderInfo(orderID) {
 }
 
 /**
- * 获取影票订单详情   
- * @param {*} orderID 
- * @param {*} success_cb 
- * @param {*} fail_cb 
+ * 获取影票订单详情
+ * @param {*} orderID
+ * @param {*} success_cb
+ * @param {*} fail_cb
  */
 function getFilmOrderInfo(orderID) {
     return apiHttp.get('/user/getOrderFilmDetail', {
@@ -95,7 +95,7 @@ function getFilmOrderInfo(orderID) {
 /**
  * 修改订单手机
  */
-function updateOrderMobile(mobile) {
+function updateOrderMobile(mobile='') {
     return apiHttp.post('/user/updateOrderFilmMobile', {
         mobile: mobile
     })
@@ -104,8 +104,8 @@ function updateOrderMobile(mobile) {
 
 /**
  * 获取卖品订单列表
- * @param {*} success_cb 
- * @param {*} fail_cb 
+ * @param {*} success_cb
+ * @param {*} fail_cb
  */
 function getGoodsOrders(page) {
     return apiHttp.get('/sale/getMyGoods', {
@@ -117,8 +117,8 @@ function getGoodsOrders(page) {
 /**
  * 获取卖品订单状态
  * @param {str} orderId
- * @param {*} success_cb 
- * @param {*} fail_cb 
+ * @param {*} success_cb
+ * @param {*} fail_cb
  */
 function getGoodsOrderStatus(orderId) {
     return apiHttp.get('/sale/getGoodsStatus', {
@@ -127,11 +127,11 @@ function getGoodsOrderStatus(orderId) {
 }
 
 /**
- * 
- * @param {*} orderId 
+ *
+ * @param {*} orderId
  * @param {int} orderType [0,1,2,3]==>>["goodsAndFilm", "film", "goods", "package"]
- * @param {*} success_cb 
- * @param {*} fail_cb 
+ * @param {*} success_cb
+ * @param {*} fail_cb
  */
 function getOrderPayInfo(orderId, orderType) {
     return apiHttp.get("/user/getOrderPayInfo", {
@@ -142,9 +142,9 @@ function getOrderPayInfo(orderId, orderType) {
 
 /**
  * 删除订单
- * @param {*} orderId 
- * @param {*} success_cb 
- * @param {*} fail_cb 
+ * @param {*} orderId
+ * @param {*} success_cb
+ * @param {*} fail_cb
  */
 function deleteFilmOrderById(orderId) {
     return apiHttp.get("/user/delOrderFilm", {
@@ -154,9 +154,9 @@ function deleteFilmOrderById(orderId) {
 
 /**
  * 删除卖品订单
- * @param {*} orderId 
- * @param {*} success_cb 
- * @param {*} fail_cb 
+ * @param {*} orderId
+ * @param {*} success_cb
+ * @param {*} fail_cb
  */
 function delOrderGoods(orderId) {
     return apiHttp.get("/user/delOrderGoods", {
@@ -166,9 +166,9 @@ function delOrderGoods(orderId) {
 
 /**
  * 删除套票订单
- * @param {*} orderId 
- * @param {*} success_cb 
- * @param {*} fail_cb 
+ * @param {*} orderId
+ * @param {*} success_cb
+ * @param {*} fail_cb
  */
 function delComboOrder(orderId, type) {
     return apiHttp.get("/package/delOrder", {
@@ -180,8 +180,8 @@ function delComboOrder(orderId, type) {
 
 /**
  * 获取套票订单列表
- * @param {*} success_cb 
- * @param {*} fail_cb 
+ * @param {*} success_cb
+ * @param {*} fail_cb
  */
 function getPackageOrders() {
     return apiHttp.get("/package/getMyOrders", {

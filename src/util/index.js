@@ -3,6 +3,20 @@ var debug = false,
 
 export const isArray = Array.isArray;
 
+export function showLoginConfirm() {
+  window._vue.$vux.confirm.show({
+    title: '温馨提示',
+    content: '您还未登录，请先登录后再进行操作哦',
+    confirmText:"立即登录",
+    onCancel () {
+      window._vue.$router.push("Home")
+    },
+    onConfirm () {
+      window._vue.$router.push("Login");
+    }
+  })
+}
+
 export function isString(val) {
     return typeof val === 'string';
 }

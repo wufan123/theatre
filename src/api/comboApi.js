@@ -89,7 +89,7 @@ function getPackageOrderStatus(orderId) {
 /**
  * 创建套票订单
  */
-function createOrder(packages, mobile, cinemaCode) {
+function createOrder(packages, mobile='', cinemaCode) {
     var params = {
         packages: packages,
         mobile: mobile,
