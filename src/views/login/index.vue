@@ -39,7 +39,7 @@
     methods: {
       async getAuthCode(){
         this.$vux.loading.show({
-          text:'获取验证码中...'
+          text:'获取验证码中'
         });
         let res;
         try {
@@ -61,7 +61,7 @@
       },
       async login(){
         this.$vux.loading.show({
-          text: '登录中...'
+          text: '登录中'
         });
         let res;
         try {

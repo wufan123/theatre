@@ -61,7 +61,7 @@ export default {
     },
     async logOut(){
       this.$vux.loading.show({
-        text:'正在登出...'
+        text:'正在登出'
       })
       let res;
       try{

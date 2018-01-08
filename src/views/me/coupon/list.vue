@@ -5,7 +5,7 @@
       <div flex="dir:top">
         <div flex-box="0" flex="dir:left cross:center " class="topBar">
           <div class="inputOut">
-            <x-input v-model="value"></x-input>
+            <x-input v-model="value" placeholder="请输入优惠券码"></x-input>
           </div>
           <div class="s-button khaki" @click="addCoupon">添加</div>
         </div>
@@ -19,17 +19,18 @@
             </coupon-item>
 
             <div flex="flex:left main:center" @click="seeExpireCoupon">
-              <img v-if="!isSeeExpire"  :src="require('assets/images/me/coupon_lost.png')" class="couponLost">
-              <p class="mb20 f16" v-if="isSeeExpire" >已失效的券</p>
+              <img v-if="!isSeeExpire" :src="require('assets/images/me/coupon_lost.png')" class="couponLost">
+              <p class="mb20 f16" v-if="isSeeExpire">已失效的券</p>
             </div>
-            
-            <coupon-item v-if="isSeeExpire" v-for="(item,index) in invalidList" :disabled="item.stock" :key="" @click.native="gotoCouponDetail(item)">
+
+            <coupon-item v-if="isSeeExpire" v-for="(item,index) in invalidList" :disabled="item.stock" :key=""
+                         @click.native="gotoCouponDetail(item)">
               <label class="leftTitle" slot="right">{{item.voucherName}}</label>
               <label slot="right" v-if="item.status==3" class="is-tip">已使用</label>
               <label class="leftInfo" slot="right">有效期 {{new Date(item.validData * 1000).format("yyyy-MM-dd")}}</label>
               <label class="rightTitle" slot="left">￥{{item.voucherValue}}</label>
             </coupon-item>
-            
+
           </page-scroller>
         </div>
       </div>
@@ -46,34 +47,33 @@
     data(){
       return {
         value: '',
-        isSeeExpire:false,
-        canUseList:[],
-        invalidList:[],
+        isSeeExpire: false,
+        canUseList: [],
+        invalidList: [],
         dataList: []
       }
     },
     methods: {
       async  getDataList(page){
-        var that=this
-         page = page==0?1:page
+        var that = this
+        page = page == 0 ? 1 : page
         let res = await  CouponApi.userVoucherList(page, 0);
         if (res && res.data) {
           // page == 1 ? this.dataList= res.data.voucherList : this.dataList= this.dataList.concat(res.data.voucherList)
-
-          res.data.voucherList.forEach(item=>{
-                if (item.bindStatus==1) {
-                    this.dataList.push(item)
-                    if (item.status == 2 && (new Date().getTime()/1000 < item.validData)) {
-                        this.canUseList.push(item)
-                    } else {
-                        item.stock = true
-                        this.invalidList.push(item)
-                    }
-                }
+          res.data.voucherList.forEach(item => {
+            if (item.bindStatus == 1) {
+              this.dataList.push(item)
+              if (item.status == 2 && (new Date().getTime() / 1000 < item.validData)) {
+                this.canUseList.push(item)
+              } else {
+                item.stock = true
+                this.invalidList.push(item)
+              }
+            }
           });
 
-          if(!this.$util.isEmptyObject(res.data.voucherList)){
-            page +=1
+          if (!this.$util.isEmptyObject(res.data.voucherList)) {
+            page += 1
             that.getDataList(page)
           }
         }
@@ -84,7 +84,7 @@
         }
       },
       gotoCouponDetail(item){
-        console.log('gotoCouponDetail',item)
+        console.log('gotoCouponDetail', item)
         this.$store.commit("coupon/setCoupon", item);
         this.$router.push({path: 'CouponDetail'});
       },
@@ -95,10 +95,26 @@
         this.isSeeExpire = !this.isSeeExpire
       },
       async addCoupon(){
-        let res = await CouponApi.addVoucher(this.value);
-        if (res && res.status === 0) {
-          this.$vux.toast.text("绑定成功", 'bottom');
+        if(!this.value){
+            return;
         }
+        this.$vux.loading.show({
+          text: '正在添加'
+        });
+        let res;
+        try{
+           res = await CouponApi.addVoucher(this.value);
+        }catch (e){
+            this.$util.showRequestErro(e)
+        }
+        if (res && res.status === 0) {
+          this.$vux.toast.show({
+            text:'绑定成功',
+            type:'success'
+          });
+          this.fetchData();
+        }
+        this.$vux.loading.hide();
       }
     }
 

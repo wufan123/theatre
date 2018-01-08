@@ -71,18 +71,24 @@
           }
         })
       },
-      deleteCard(card){
-        console.log('card',card)
-        return  CardApi.setUserUnbind(card.id,1).then(res=>{
-           this.$vux.toast.text("解绑成功", 'middle');
-           this.getDataList(0)
-        },error=>{
-          if(error.text){
-         this.$vux.toast.text(error.text, 'middle'); 
-        }else{
-          this.$vux.toast.text("解绑失败", 'middle');
-        }
-        })
+      async deleteCard(card){
+          this.$vux.loading.show({
+            text:'正在解绑'
+          })
+          let res;
+          try{
+              res = await CardApi.setUserUnbind(card.id,1);
+          }catch (e){
+              this.$util.showRequestErro(e);
+          }
+          if(res&&res.status==0){
+              this.$vux.toast.show({
+                text:'解绑成功',
+                type:'success'
+              })
+              this.fetchData();
+          }
+          this.$vux.loading.hide();
       },
       fetchData(){
         return this.$refs.scroller.reset()

@@ -136,7 +136,7 @@
         {
           if (res.data.price == 0) {
             this.$vux.loading.show({
-              text:'正在支付...'
+              text:'正在支付'
             })
             let payRes;
             try {
