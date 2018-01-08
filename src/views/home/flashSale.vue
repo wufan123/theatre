@@ -64,7 +64,7 @@
         try{
            res = await StoreApi.createComboOrder(this.userInfo.bindmobile, `${item.hyPackageId}:1`);
         }catch (e){
-
+          this.$util.showRequestErro(e)
         }
         if (res && res.data) {
             let payRes = await StoreApi.payPackage('account', res.data.packageId);
