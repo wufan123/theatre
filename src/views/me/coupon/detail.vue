@@ -8,9 +8,9 @@
           <label class="rightTitle" slot="left">￥{{coupon.voucherValue}}</label>
         </coupon-item>
         <div class="info">
-          <p class="title">优惠券编码：{{coupon.voucherNum}}</p>
-          <p class="title">使用规则：</p>
-          <textarea class="rule-info">
+            <p class="title">优惠券编码：{{coupon.voucherNum}}</p>
+            <p class="title">使用规则：</p>
+            <textarea class="rule-info" readonly>
 {{couponInfo.useRule}}
 </textarea>
         </div>

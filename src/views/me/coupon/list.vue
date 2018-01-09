@@ -96,6 +96,7 @@
       },
       async addCoupon(){
         if(!this.value){
+          this.$vux.toast.text("请输入优惠券码");
             return;
         }
         this.$vux.loading.show({
