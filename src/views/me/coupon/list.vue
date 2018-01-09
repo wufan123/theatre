@@ -95,6 +95,10 @@
         this.isSeeExpire = !this.isSeeExpire
       },
       async addCoupon(){
+        if(!this.value){
+          this.$vux.toast.text("请输入优惠券码");
+          return;
+        }
         let res = await CouponApi.addVoucher(this.value);
         if (res && res.status === 0) {
           this.$vux.toast.text("绑定成功", 'bottom');
