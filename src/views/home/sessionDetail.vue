@@ -12,11 +12,11 @@
                 <label class="title text-ellipsis-line">
                   {{filmDetail == null ? '坊巷文化影音秀' : filmDetail.filmName}}</label>
                 <label class='des text-ellipsis-line'>
-                  {{filmDetail == null ? '坊巷文化影音秀' : filmDetail.filmName}}场次票</label>
+                  {{filmDetail == null ? '坊巷文化影音秀' : filmDetail.simpleword}}</label>
               </div>
               <div flex="dir:top " flex-box="0">
                 <label class="price">￥{{filmPrice}}</label>
-                <label class="des">满200立减30元</label>
+                <!-- <label class="des">满200立减30元</label> -->
               </div>
             </div>
             <div flex="main:center cross:center" class="divider">
@@ -55,7 +55,7 @@
           </checker>
           </scroll-view>
           <div class="numItem">
-            <x-number title="购买数量" :min="1" :max="4" v-model="ticketCount"></x-number>
+            <x-number title="购买数量" :min="1" :max="maxPurchase" v-model="ticketCount"></x-number>
           </div>
         </div>
         <div class="btn" @click="createOrder">
@@ -72,6 +72,7 @@ import { Popup, Checker, CheckerItem, XNumber } from "vux";
 import FilmApi from "api/filmApi";
 import PlanApi from "api/planApi";
 import OrderApi from "api/orderApi";
+import theatreApi from "api/theatreApi";
 import {mapState} from "vuex";
 export default {
   props: ["isHermes"],
@@ -93,7 +94,8 @@ export default {
       filmPrice: "-",
       filmTimeList: [],
       filmPlanList: [],
-      seatList: [] // 选中排期座位详情
+      seatList: [], // 选中排期座位详情
+      maxPurchase: 4, // 最大购票数量
     };
   },
   computed:{
@@ -102,6 +104,11 @@ export default {
   methods: {
     async fetchData() {
       this.loadFilmTime();
+      theatreApi.getMiscConfig('ticket_max_purchase').then(res=>{
+        if (res.data && res.data.length > 0) {
+          this.maxPurchase = Number(res.data[0].miscVal)
+        }
+      },error => { console.log(error); })
     },
     // 选择日期
     changeTime: function(itemValue, itemDisabled) {
