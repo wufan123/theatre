@@ -23,7 +23,7 @@
               <p class="mb20 f16" v-if="isSeeExpire">已失效的券</p>
             </div>
 
-            <coupon-item v-if="isSeeExpire" v-for="(item,index) in invalidList" :key="index" :disabled="item.stock"
+            <coupon-item v-if="isSeeExpire" v-for="(item,index) in invalidList" :key="index+'valli'" :disabled="item.stock"
                          @click.native="gotoCouponDetail(item)">
               <label class="leftTitle" slot="right">{{item.voucherName}}</label>
               <label slot="right" v-if="item.status==3" class="is-tip">已使用</label>

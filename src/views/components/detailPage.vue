@@ -61,7 +61,7 @@
     width: 100%;
     .mainBody{
       position: absolute;
-      z-index: 100;
+      z-index: 0;
       background-color: @page_bg2;
       margin: -20px 15px 80px;
       padding: 20px;
