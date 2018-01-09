@@ -40,15 +40,19 @@ export default {
     getDataList(page) {
       return orderApi.getAllMoiveOrder( '',page).then(
         success => {
-          console.log(success);
-          this.dataList = success.data;
+          if(page)
+          {
+            this.dataList = this.dataList.concat(success.data);
+          }else {
+            this.dataList = success.data;
+          }
           let res = {
-            data: success.data,
+            data: this.dataList,
             page: {
-              number: 0,
-              size: success.data.length,
-              totalElements: success.data.length,
-              totalPages: 1
+              number: page,
+              size: 10,
+              totalElements: this.dataList.length,
+              totalPages: success.data.length>0?page+3:page+1
             }
           };
           return res;

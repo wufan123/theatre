@@ -13,7 +13,7 @@
             <img slot="label" style="padding-right:10px;display:block;"
                  :src="require('assets/images/me/login_code.png')" width="24" height="24">
             <x-button slot="right" type="primary" mini @click.native="getAuthCode" :disabled="codeGapTime>0">
-              {{codeGapTime ? codeGapTime + 's' : '获取'}}
+              {{codeGapTime ? codeGapTime + 's' : '获取验证码'}}
             </x-button>
           </x-input>
         </group>
