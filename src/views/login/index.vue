@@ -65,20 +65,35 @@
         this.$vux.loading.hide();
       },
       async login(){
+        if (!this.form.phone) {
+          this.$vux.toast.show({
+            text: '电话号码不能为空',
+            type: 'warn'
+          })
+          return;
+        }
+        if (!this.form.pw) {
+          this.$vux.toast.show({
+            text: '验证码不能为空',
+            type: 'warn'
+          })
+          return;
+        }
+
         this.$vux.loading.show({
           text: '登录中'
         });
         let res;
         try {
-          res = await Auth.login(this.form.phone, this.form.pw);
+          res = await Auth.smsLogin(this.form.phone, this.form.pw);
         }
         catch (e) {
           this.$util.showRequestErro(e);
         }
         if (res && res.data) {
-            //更新推广信息
+          //更新推广信息
           if (!this.$util.isEmptyObject(this.promotion))
-            TheatreApi.scanCode({...this.promotion,toer:res.data.bindmobile});
+            TheatreApi.scanCode({...this.promotion, toer: res.data.bindmobile});
           this.$vux.toast.text("登录成功", 'bottom');
           this.$store.commit('common/setUserInfo', res.data);
           this.$router.go(-1);

@@ -138,7 +138,7 @@
           this.banerList = res.data.map((data) => {
             let url = data.contentUrl;
             ;
-            switch (parseInt(data.redirectType)) {       
+            switch (parseInt(data.redirectType)) {
               case 4:
                 url = `/ProductDetail?hyGoodsId=${data.redirectId}`;
                 break;
