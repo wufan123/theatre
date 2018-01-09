@@ -33,6 +33,7 @@
   import WxApi from 'api/wxApi'
   import {mapState} from "vuex";
   import OrderApi from "api/orderApi";
+  import TheatreApi from "../../api/theatreApi";
   let typeData = [
     {
       icon: 'http://p0bd8izdn.bkt.clouddn.com/ruihua/wap/images/wexin.png',
@@ -117,6 +118,10 @@
         catch (e) {
 
         }
+        /*TheatreApi.finishPromotion({
+          ...this.promotion,
+          sn:this.orderId
+        });*/
         this.$vux.loading.hide();
         /*.then(success => {
          if (success.status == 0) {

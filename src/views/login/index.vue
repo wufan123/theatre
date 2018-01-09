@@ -24,7 +24,9 @@
 </template>
 <script>
   import Auth from 'api/authApi'
+  import TheatreApi from 'api/theatreApi'
   import {XInput, Group} from "vux";
+  import {mapState} from "vuex";
   export default {
     data(){
       return {
@@ -36,10 +38,13 @@
       }
     },
     components: {XInput, Group},
+    computed: {
+      ...mapState("common", ['promotion'])
+    },
     methods: {
       async getAuthCode(){
         this.$vux.loading.show({
-          text:'获取验证码中'
+          text: '获取验证码中'
         });
         let res;
         try {
@@ -65,12 +70,15 @@
         });
         let res;
         try {
-          res = await Auth.smsLogin(this.form.phone, this.form.pw);
+          res = await Auth.login(this.form.phone, this.form.pw);
         }
         catch (e) {
           this.$util.showRequestErro(e);
         }
         if (res && res.data) {
+            //更新推广信息
+          if (!this.$util.isEmptyObject(this.promotion))
+            TheatreApi.scanCode({...this.promotion,toer:res.data.bindmobile});
           this.$vux.toast.text("登录成功", 'bottom');
           this.$store.commit('common/setUserInfo', res.data);
           this.$router.go(-1);

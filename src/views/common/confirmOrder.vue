@@ -53,6 +53,7 @@
   import {XInput, Group} from "vux";
   import OrderApi from 'api/orderApi'
   import StoreApi from 'api/storeApi'
+  import TheatreApi from 'api/theatreApi'
   import {mapState} from "vuex";
   export default {
     data(){
@@ -71,7 +72,8 @@
     },
     computed: {
       ...mapState('business', ['selectedMember']),
-      ...mapState('coupon', ['ticketCouponList'])
+      ...mapState('coupon', ['ticketCouponList']),
+      ...mapState('common', ['promotion','userInfo'])
     },
     methods: {
       async fetchData(){
@@ -196,6 +198,11 @@
               this.$util.showRequestErro(e);
             }
             if (payRes && payRes.status == 0) {
+              TheatreApi.finishPromotion({
+                sn:this.orderId,
+                type:this.promotion.type,
+                toer:this.userInfo.bindmobile
+              });
               this.$router.push({
                 name: 'PaySuccess'
               })

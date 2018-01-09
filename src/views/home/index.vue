@@ -157,7 +157,16 @@
           this.stampsList = res.data;
         }
       },
+      storePromotion(){
+           if(this.$route.query.promoter){
+              this.$store.commit('common/setPromotion',{
+                promoter:this.$route.query.promoter,
+                type:this.$route.query.type
+              })
+           }
+      },
       fetchData(){
+        this.storePromotion();
         // banner
         this.getBanner();
         // 介绍
