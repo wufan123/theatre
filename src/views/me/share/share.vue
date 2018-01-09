@@ -3,13 +3,13 @@
     <div slot="contain">
         <div class='content'>
           <img :src="require('assets/images/me/bag.png')" class='bag-icon'>
-          <p>邀请好友注册，您好友</p>
-          <p class='f20 mb20'>获得 <em class="red f24">￥30</em> 优惠券</p>
-          <p class='s-button khaki' @click="showDialogStyle = true">立即邀请</p>
+          <p v-if="titleConfig">{{titleConfig}}</p>
+          <p v-if="subtitleConfig" class='f20'>{{subtitleConfig}}</p>
+          <p class='s-button khaki mt20' @click="showDialogStyle = true">立即邀请</p>
         </div>
-      <div class='warn'>
+      <div class='warn' v-if="ruleConfig">
         <div class='title'></div>
-        <div class='body'>通过您分享的链接,或扫描您分享二维码而进行注册的用户，即可获得30元观剧优惠券，使用优惠券可以抵等值的购票款（特价票除外）。</div>
+        <div class='body'>{{ruleConfig}}</div>
       </div>
 
       <x-dialog v-model="showDialogStyle" hide-on-blur :dialog-style="{'max-width': '100%', width: '100%', height: 'auto', 'background-color': 'transparent'}">
@@ -35,14 +35,35 @@
 </template>
 <script>
 import { XDialog } from 'vux'
+import theatreApi from "api/theatreApi";
 export default {
   data(){
     return{
       showDialogStyle: false,
+      titleConfig: '',
+      subtitleConfig: '',
+      ruleConfig: ''
     }
   },
   components:{XDialog},
   methods:{
+    fetchData(){
+      theatreApi.getMiscConfig('invite_reg_title').then(res=>{
+          if (res.data && res.data.length > 0) {
+            this.titleConfig = res.data[0].miscVal
+          }
+        },error => { console.log(error); })
+      theatreApi.getMiscConfig('invite_reg_subtitle').then(res=>{
+          if (res.data && res.data.length > 0) {
+            this.subtitleConfig = res.data[0].miscVal
+          }
+        },error => { console.log(error); })
+      theatreApi.getMiscConfig('invite_reg_rule').then(res=>{
+          if (res.data && res.data.length > 0) {
+            this.ruleConfig = res.data[0].miscVal
+          }
+        },error => { console.log(error); })
+    },
     friendArea(){
       console.log('1111',wx)
       wx.onMenuShareTimeline({
@@ -61,7 +82,7 @@ export default {
 
   
 <style lang="less" scoped>
-.content{margin: 75px 3px; text-align: center;font-size: 16px;
+.content{margin: 75px 3px;display: flex;flex-direction: column;align-items: center; text-align: center;font-size: 16px;
   .s-button{padding: 4px 10px;}
 }
 .bag-icon{width: 64px;height: 100px;margin-bottom:10px;}
