@@ -60,7 +60,9 @@
         goodsId: this.$route.query.goodsId,
         orderId: this.$route.query.orderId,
         orderType: 'goods',
-        orderInfo: {}, // 订单信息
+        orderInfo: {
+          price:0
+        }, // 订单信息
         selectedCoupon: undefined,
         oldPhone: null, // 保存旧手机号，判断是否有修改
         selectCouponList: [], // 已选优惠券信息
@@ -136,7 +138,7 @@
         {
           if (res.data.price == 0) {
             this.$vux.loading.show({
-              text:'正在支付...'
+              text:'正在支付'
             })
             let payRes;
             try {

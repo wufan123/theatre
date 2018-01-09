@@ -71,7 +71,10 @@
         if (res && res.data) {
             let payRes = await StoreApi.payPackage('account', res.data.packageId);
             if (payRes && payRes.status === 0) {
-              this.$vux.toast.text("抢购成功", 'bottom');
+              this.$vux.toast.show({
+                text:'抢购成功',
+                type:'success'
+              });
               this.$set(this.dataList,index,{...item,stock:--item.stock})
             }
         }

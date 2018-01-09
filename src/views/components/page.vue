@@ -2,7 +2,7 @@
   <div class="page">
     <div>
       <div v-if="headerTitle">
-        <x-header class="header" :left-options="{backText: ''}">{{headerTitle}}
+        <x-header class="header" :left-options="{backText: '',preventGoBack:!!backFunc}"  @on-click-back="onClickL">{{headerTitle}}
           <a slot="right" v-if="headerRText" @click="onClickR">{{headerRText}}</a>
           <slot slot="right" name="rightTop"></slot>
         </x-header>
@@ -34,6 +34,9 @@
       footerFunc: {
         type: Function
       },
+      backFunc: {
+        type: Function,
+      },
       contain: String,
     },
     methods: {
@@ -42,6 +45,11 @@
           go(this.footerLink, this.$router)
         } else if (this.footerFunc) {
           this.footerFunc()
+        }
+      },
+      onClickL(){
+        if(this.backFunc) {
+            this.backFunc();
         }
       },
       onClickR () {
@@ -74,7 +82,7 @@
   .contain {
     overflow: auto;
     flex: 1;
-    
+
     background-size: 68px 68px;
   }
 

@@ -2,8 +2,8 @@ import apiHttp from './apiHttp'
 
 /**
  * 获取票券列表
- * @param {*} success_cb 
- * @param {*} fail_cb 
+ * @param {*} success_cb
+ * @param {*} fail_cb
  */
 function userVoucherList(page, couponStatus) {
     var params = {
@@ -15,11 +15,11 @@ function userVoucherList(page, couponStatus) {
 
 /**
  * 添加票券
- * @param {*} voucherNum 
- * @param {*} success_cb 
- * @param {*} fail_cb 
+ * @param {*} voucherNum
+ * @param {*} success_cb
+ * @param {*} fail_cb
  */
-function addVoucher(voucherNum) {
+function addVoucher(voucherNum='') {
     return apiHttp.get('/user/addVoucher', {
         voucherNum: voucherNum
     });

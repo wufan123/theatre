@@ -31,26 +31,32 @@ export default {
   },
   components: { XInput, Group },
   methods: {
-    confirm: function() {
+    async confirm() {
       if(!this.form.cardNo){
-        this.$vux.toast.text("请输入会员卡号", 'middle');
+//        this.$vux.toast.text("请输入会员卡号", 'middle');
         return
       }
       if(!this.form.cardPw){
-        this.$vux.toast.text("请输入会员卡密码", 'middle');
+//        this.$vux.toast.text("请输入会员卡密码", 'middle');
         return
       }
-      CardApi.setUserBind(this.form.cardNo, this.form.cardPw).then(success => {
-        this.$vux.toast.text("添加成功", 'middle');
+      this.$vux.loading.show({text:'正在添加'});
+      let res ;
+      try {
+          res = await CardApi.setUserBind(this.form.cardNo, this.form.cardPw);
+      }catch (e){
+          console.log(e);
+          this.$util.showRequestErro(e);
+      }
+      if(res&&res.status==0)
+      {
+        this.$vux.toast.show({
+          text:'添加成功',
+          type:'success'
+        });
         this.$router.go(-1)
-      }, error => {
-        if(error.text){
-         this.$vux.toast.text(error.text, 'middle'); 
-        }else{
-          this.$vux.toast.text("添加失败", 'middle');
-        }
-        
-      })
+      }
+      this.$vux.loading.hide();
     }
   }
 };

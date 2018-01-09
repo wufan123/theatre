@@ -32,6 +32,7 @@
   import StoreApi from 'api/storeApi'
   import WxApi from 'api/wxApi'
   import {mapState} from "vuex";
+  import OrderApi from "api/orderApi";
   let typeData = [
     {
       icon: 'http://p0bd8izdn.bkt.clouddn.com/ruihua/wap/images/wexin.png',
@@ -59,17 +60,28 @@
         h = parseInt(this.payTime / 3600);
         return `${h<10?'0'+h:h}:${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
       },
+      async cancelOrder(){
+          this.$vux.toast.show({
+            text:'支付订单超时',
+            type:'cancel'
+          });
+          let res ;
+          try{
+              res = await OrderApi.cancelOrder(data.hasOrder);
+          }catch(e){
+              //todo
+          }
+          this.$router.push('Home')
+      },
       fetchData(){
-        console.log(this.payLockInfo);
-       /* this.$set(this.typeData, 0, {
-          ...typeData[0], value: `会员卡:余额￥${this.payLockInfo.memberMoney}`
-        })*/
         if(this.payLockInfo.payTime)
         {
           this.payTime = this.payLockInfo.payTime;
-          this.timer = setInterval(() => {
+          let ct =this;
+          ct.timer = setInterval(() => {
             if (--this.payTime <= 0) {
-              clearInterval(this.timer)
+              clearInterval(ct.timer);
+              ct.cancelOrder();
             }
           }, 1000)
         }
