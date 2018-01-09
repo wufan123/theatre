@@ -41,7 +41,7 @@
           <checker v-model="timeCheck" default-item-class="check-item"  selected-item-class="check-item-selected"
                    class="checker" radio-required>
             <checker-item :value="filmTime" v-for="(filmTime, index) in filmTimeList" :key="index"
-                          @on-item-click="changeTime">{{filmTime.dtime}}
+                          @on-item-click="changeTime">{{timeFormat(filmTime)}}
             </checker-item>
           </checker>
           </scroll-view>
@@ -121,6 +121,9 @@ export default {
       if (itemValue.featureAppNo != this.planCheck.featureAppNo) {
         this.loadSeat(itemValue.featureAppNo);
       }
+    },
+    timeFormat(time) {
+      return time.instr + " " + new Date(time.startTime * 1000).format("MM.dd")
     },
     // 加载失败提示
     toastLoadFilmError(msg) {
