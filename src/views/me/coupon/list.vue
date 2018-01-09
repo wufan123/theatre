@@ -1,6 +1,6 @@
 <template>
   <page :headerTitle="`优惠券`" flex-box="1" :white="true">
-    <img src="../../../assets/images/scan.png" slot="rightTop" class="icon"/>
+    <!--<img src="../../../assets/images/scan.png" slot="rightTop" class="icon"/>-->
     <div slot="contain">
       <div flex="dir:top">
         <div flex-box="0" flex="dir:left cross:center " class="topBar">
