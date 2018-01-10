@@ -10,7 +10,7 @@
             <div class="title"></div>
             <ul flex="box:mean">
               <li @click="$router.push('TicketList')"><i class="icon order"></i><a href="#">场次票</a> </li>
-              <li @click="$router.push('PackageList')"><i class="icon package"></i><a href="#">套票</a> </li>
+              <li @click="$router.push('PackageList')"><i class="icon package"></i><a href="#">组合购</a> </li>
               <li @click="$router.push('LocalProductList')"><i class="icon lacalProduct"></i><a href="#">福州特产</a> </li>
               <!-- <li><i class="icon ticket"></i><a href="#">通兑券</a> </li> -->
             </ul>
