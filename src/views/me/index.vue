@@ -36,17 +36,15 @@
 import AuthApi from 'api/authApi'
 import {List,ListItem} from '@/views/components/settingList'
 import {XButton} from 'vux'
+import {mapState} from "vuex";
 export default {
   components: {List,ListItem,XButton},
   data(){
     return {
-      userInfo: {
-        userNickname: '-',
-        userMoney: '0.00',
-        integral: '0',
-        servicePhone:'4000-125-000'
-      }
     }
+  },
+  computed:{
+    ...mapState('common',['userInfo'])
   },
   methods:{
     callphone(){
@@ -55,7 +53,7 @@ export default {
     fetchData(){
       AuthApi.getUserInfo().then(success => {
         this.$store.commit('common/setUserInfo', success.data)
-        this.userInfo = success.data
+        this.$set(this.userInfo,success.data);
       }, error => {
       })
     },
