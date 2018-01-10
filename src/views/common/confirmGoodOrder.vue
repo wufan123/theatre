@@ -81,7 +81,7 @@
         }
         let ress = await StoreApi.getOrderPayWay(this.$route.query.orderId, 'goods');
         if (ress && ress.data) {
-          this.$set(this.orderInfo, 'isUseCouponNum', ress.data.saleCouponList.length)
+          this.$set(this.orderInfo, 'isUseCouponNum', ress.data.saleCouponList.length);
           this.orderInfo.isShowCoupon = ress.data.isShowCoupon
           // 不存在优惠券列表才置入，注：重新创建订单必须清空缓存的优惠券列表
           if (!this.$store.state.coupon.goodsCouponList) {
@@ -134,7 +134,7 @@
         } catch (err) {
           this.$util.showRequestErro(err);
         }
-        if(res)
+        if(res&&!this.$util.isEmptyObject(res.data))
         {
           if (res.data.price == 0) {
             this.$vux.loading.show({

@@ -185,7 +185,7 @@
         } catch (e) {
           this.$util.showRequestErro(e);
         }
-        if (res && res.data) {
+        if(res&&!this.$util.isEmptyObject(res.data)) {
           //价格为0时直接支付
           if (res.data.price == 0) {
             this.$vux.loading.show({

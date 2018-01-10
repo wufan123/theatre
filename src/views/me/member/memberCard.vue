@@ -1,7 +1,7 @@
 <template>
   <page white :headerTitle="`剧坊会员卡`" :headerRText="`添加会员卡`" :headerRLink="`AddCard`">
     <div slot="contain">
-      <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡'  noRecordImage usePulldown height='-46'>
+      <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡'  noRecordImage usePulldown height='-46' :usePullup='false'>
        <div class="contain" v-if="dataList.length>0">
           <div v-for="(item,index) in dataList" class="card-item">
           <div flex="dir:top" class="info">
