@@ -5,7 +5,7 @@
           <img :src="require('assets/images/me/bag.png')" class='bag-icon'>
           <p v-if="titleConfig">{{titleConfig}}</p>
           <p v-if="subtitleConfig" class='f20'>{{subtitleConfig}}</p>
-          <p class='s-button khaki mt20' @click="showDialogStyle = true">立即邀请</p>
+          <p class='s-button khaki mt20' @click="ShareQQ">立即邀请</p>
         </div>
       <div class='warn' v-if="ruleConfig">
         <div class='title'></div>
