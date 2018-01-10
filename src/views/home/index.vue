@@ -85,6 +85,7 @@
   import ScrollView from 'views/components/simpleScrollView.vue'
   import ListCell from 'views/components/home/listCell.vue'
   import TheatreApi from 'api/theatreApi'
+  import {mapState} from "vuex";
   const imgList = [
     require('assets/images/home/banner_default.jpg')
   ]
@@ -130,6 +131,9 @@
         stampsList: [],
         findList: [],
       }
+    },
+    computed:{
+      ...mapState('common',['userInfo'])
     },
     methods: {
       async getBanner(){
@@ -177,10 +181,14 @@
       },
       storePromotion(){
         if (this.$route.query.promoter) {
-          this.$store.commit('common/setPromotion', {
-            promoter: this.$route.query.promoter,
-            type: this.$route.query.type
-          })
+            let promotion = {
+              promoter: this.$route.query.promoter,
+              type: this.$route.query.type
+            }
+          this.$store.commit('common/setPromotion',promotion );
+          if(!this.$util.isEmptyObject(this.userInfo)){
+            TheatreApi.scanCode({...promotion, toer: this.userInfo.bindmobile});
+          }
         }
       },
       fetchData(){
