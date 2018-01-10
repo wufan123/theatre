@@ -66,6 +66,7 @@ export default {
     },
     friendArea(){
       alert('分享')
+      console.log('wx',wx);
       wx.onMenuShareAppMessage({
         title: '这是一个测试的标题',
         desc: '这个是分享奥朋友圈的描述信息',
@@ -85,7 +86,7 @@ export default {
           alert(JSON.stringify(res));
         }
       });
-      alert('已注册获取“发送给朋友”状态事件');
+      // alert('已注册获取“发送给朋友”状态事件');
     }
   }
 }
