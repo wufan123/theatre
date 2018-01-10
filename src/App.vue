@@ -19,6 +19,7 @@
           jsApiList: [
             'chooseWXPay',
             'onMenuShareQQ',
+            'showMenuItems',
             'onMenuShareAppMessage',
             'onMenuShareQZone',
             'onMenuShareTimeline',
