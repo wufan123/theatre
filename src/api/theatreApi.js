@@ -64,6 +64,12 @@ function finishPromotion({toer,sn,type}) {
   return apiHttp.getTheatre('/promotion/finishPromotion',{toer,sn,type})
 }
 
+function getPromotionList(promoter) {
+    return apiHttp.getTheatre('/promotion/list',{
+        promoter: promoter
+    })
+}
+
 export default {
     getClassList: getClassList,
     getGoodsList: getGoodsList,
@@ -71,5 +77,6 @@ export default {
     getInformationList: getInformationList,
     getMiscConfig: getMiscConfig,
     scanCode,
-  finishPromotion
+    finishPromotion,
+    getPromotionList
 }
