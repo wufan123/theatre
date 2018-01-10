@@ -61,37 +61,20 @@ export default {
             });
       },
     ShareFriend(){
-      wx.showMenuItems({
-            menuList: [
-                "menuItem:copyUrl",
-                'menuItem:share:appMessage',
-                'menuItem:share:timeline',
-                "menuItem:share:qq",
-                "menuItem:favorite",
-                'menuItem:share:QZone',
-                "menuItem:profile"
-            ], 
-            success:function () {
-                alert('分享成功');
-            },
-            fail:function (res) {
-                alert('你没有分享');
-            }
-        });
-      // wx.onMenuShareAppMessage({
-      //   title: '这是一个测试的标题', // 分享标题
-      //   desc: '这个是分享QQ的描述信息', // 分享描述
-      //   link: 'http://jufang.zmaxfilm.com/#/Home', // 分享链接
-      //   imgUrl: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享图标
-      //   success: function () {
-      //   // 用户确认分享后执行的回调函数
-      //   alert('分享成功');
-      //   },
-      //   cancel: function () {
-      //     alert('你没有分享');
-      //   // 用户取消分享后执行的回调函数
-      //   }
-      // });
+      wx.onMenuShareAppMessage({
+        title: '这是一个测试的标题', // 分享标题
+        desc: '这个是分享QQ的描述信息', // 分享描述
+        link: 'http://jufang.zmaxfilm.com/#/Home', // 分享链接
+        imgUrl: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享图标
+        success: function () {
+        // 用户确认分享后执行的回调函数
+        alert('分享成功');
+        },
+        cancel: function () {
+          alert('你没有分享');
+        // 用户取消分享后执行的回调函数
+        }
+      });
     },
     fetchData(){
       theatreApi.getMiscConfig('invite_reg_title').then(res=>{

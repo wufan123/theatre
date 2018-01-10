@@ -19,12 +19,9 @@
           jsApiList: [
             'chooseWXPay',
             'onMenuShareQQ',
-            'onMenuShareQZone',
-            'checkJsApi',
-            'showMenuItems',
-            'onMenuShareTimeline',
             'onMenuShareAppMessage',
-            'showAllNonBaseMenuItem',
+            'onMenuShareQZone',
+            'onMenuShareTimeline',
             'scanQRCode'
           ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         })
