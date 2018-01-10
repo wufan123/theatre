@@ -14,6 +14,7 @@ import PackageList from '@/views/me/package/list.vue'
 import PackageOrderDetail from '@/views/me/package/packageDetail.vue'
 import LocalProductList from '@/views/me/localProduct/list.vue'
 import LocalProductDetail from '@/views/me/localProduct/localProductDetail.vue'
+import promotionList from '@/views/me/promotion/list.vue'
 import Share from '@/views/me/share/share.vue'
 import FlashSale from 'views/home/flashSale.vue'
 import LocalProduct from 'views/home/localProduct.vue'
@@ -73,6 +74,7 @@ export default new Router({
     {path: '/PackageOrderDetail', name: 'PackageOrderDetail', component: PackageOrderDetail},
     {path: '/LocalProductList', name: 'LocalProductList', component: LocalProductList},
     {path: '/LocalProductDetail', name: 'LocalProductDetail', component: LocalProductDetail},
+    {path: '/promotionList', name: 'promotionList', component: promotionList},
     {path: '/SessionDetail', name: 'SessionDetail', component: SessionDetail},
     {path: '/Login', name: 'Login', component: Login},
   ]
