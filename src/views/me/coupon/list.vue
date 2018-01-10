@@ -135,6 +135,7 @@
           this.$util.showRequestErro(e)
         }
         if (res && res.status === 0) {
+          this.value = ''
           this.$vux.toast.show({
             text: '绑定成功',
             type: 'success'

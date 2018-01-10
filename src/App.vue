@@ -19,12 +19,7 @@
           jsApiList: [
             'chooseWXPay',
             'onMenuShareTimeline',
-            'translateVoice',
-            'checkJsApi', 
-            'startRecord', 
-            'stopRecord',
-            'scanQRCode',
-            'openCard'
+            'scanQRCode'
           ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         })
       }, error => {

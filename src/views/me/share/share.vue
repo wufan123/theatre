@@ -65,17 +65,29 @@ export default {
         },error => { console.log(error); })
     },
     friendArea(){
-      console.log('1111',wx)
-      wx.onMenuShareTimeline({
-          title: '11111', // 分享标题
-          link: '11111', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-          imgUrl: '', // 分享图标
-          success: function () {
-           console.log('11111')
-          }
-    })
+      alert('分享')
+      wx.onMenuShareAppMessage({
+        title: '这是一个测试的标题',
+        desc: '这个是分享奥朋友圈的描述信息',
+        link: 'http://www.baidu.com',
+        imgUrl: 'https://www.baidu.com/img/bd_logo1.png',
+        trigger: function (res) {
+          // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+          // alert('用户点击发送给朋友');
+        },
+        success: function (res) {
+            alert('分享成功');
+        },
+        cancel: function (res) {
+          alert('你没有分享');
+        },
+        fail: function (res) {
+          alert(JSON.stringify(res));
+        }
+      });
+      alert('已注册获取“发送给朋友”状态事件');
+    }
   }
-}
 }
 </script>
 
