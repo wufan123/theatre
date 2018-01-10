@@ -15,14 +15,15 @@
       <x-dialog v-model="showDialogStyle" hide-on-blur :dialog-style="{'max-width': '100%', width: '100%', height: 'auto', 'background-color': 'transparent'}">
         <div class="dialog">
             <div class="bg body">
-              <img class="code" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514203011952&di=f382d7d2131f6277edb1cb8ef7b58ee5&imgtype=0&src=http%3A%2F%2Fsrc.house.sina.com.cn%2Fimp%2Fimp%2Fdeal%2F86%2F68%2F4%2Fe51eac8a98c2bd65c6b68bae86c_p1_mk1_wm35.gif">
+              <qrcode value="http://jufang.zmaxfilm.com/#/Home" type="canvas" :size='100' ></qrcode>
+              <!-- <img class="code" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514203011952&di=f382d7d2131f6277edb1cb8ef7b58ee5&imgtype=0&src=http%3A%2F%2Fsrc.house.sina.com.cn%2Fimp%2Fimp%2Fdeal%2F86%2F68%2F4%2Fe51eac8a98c2bd65c6b68bae86c_p1_mk1_wm35.gif"> -->
               <p>扫二维码向朋友分享</p>
               <div class="type">
-                <div class="item"> <i class="wx"></i> <p>微信</p> </div>
-                <div class="item" @click="friendArea"> <i class="friends"></i> <p>朋友圈</p> </div>
-                <div class="item"> <i class="qq"></i> <p>QQ</p> </div>
-                <div class="item"> <i class="sina"></i> <p>新浪</p> </div>
-                <div class="item"> <i class="link"></i> <p>复制邀请链接</p> </div>
+                <div class="item"> <i class="wx" @click="ShareFriend"></i> <p>微信</p> </div>
+                <div class="item"> <i class="friends" @click="friendArea"></i> <p>朋友圈</p> </div>
+                <div class="item"> <i class="qq" @click="ShareQQ"></i> <p>QQ</p> </div>
+                <div class="item"> <i class="sina" @click="ShareSina"></i> <p>QQ空间</p> </div>
+                <!-- <div class="item"> <i class="link"></i> <p>复制邀请链接</p> </div> -->
               </div>
             </div>
             <div class="bg foot">
@@ -34,7 +35,7 @@
   </page>
 </template>
 <script>
-import { XDialog } from 'vux'
+import { XDialog,Qrcode } from 'vux'
 import theatreApi from "api/theatreApi";
 export default {
   data(){
@@ -45,8 +46,24 @@ export default {
       ruleConfig: ''
     }
   },
-  components:{XDialog},
+  components:{XDialog,Qrcode},
   methods:{
+    ShareFriend(){
+      wx.onMenuShareAppMessage({
+        title: '这是一个测试的标题', // 分享标题
+        desc: '这个是分享QQ的描述信息', // 分享描述
+        link: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享链接
+        imgUrl: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享图标
+        success: function () {
+        // 用户确认分享后执行的回调函数
+        alert('分享成功');
+        },
+        cancel: function () {
+          alert('你没有分享');
+        // 用户取消分享后执行的回调函数
+        }
+      });
+    },
     fetchData(){
       theatreApi.getMiscConfig('invite_reg_title').then(res=>{
           if (res.data && res.data.length > 0) {
@@ -64,29 +81,54 @@ export default {
           }
         },error => { console.log(error); })
     },
-    friendArea(){
-      alert('分享')
-      console.log('wx',wx);
-      wx.onMenuShareAppMessage({
-        title: '这是一个测试的标题',
-        desc: '这个是分享奥朋友圈的描述信息',
-        link: 'http://www.baidu.com',
-        imgUrl: 'https://www.baidu.com/img/bd_logo1.png',
-        trigger: function (res) {
-          // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
-          // alert('用户点击发送给朋友');
+    ShareQQ(){
+      wx.onMenuShareQQ({
+        title: '这是一个测试的标题', // 分享标题
+        desc: '这个是分享QQ的描述信息', // 分享描述
+        link: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享链接
+        imgUrl: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享图标
+        success: function () {
+        // 用户确认分享后执行的回调函数
+        alert('分享成功');
         },
-        success: function (res) {
-            alert('分享成功');
-        },
-        cancel: function (res) {
+        cancel: function () {
           alert('你没有分享');
-        },
-        fail: function (res) {
-          alert(JSON.stringify(res));
+        // 用户取消分享后执行的回调函数
         }
       });
-      // alert('已注册获取“发送给朋友”状态事件');
+    },
+    
+    friendArea(){
+      wx.onMenuShareTimeline({
+        title: '这是一个测试的标题', // 分享标题
+        desc: '这个是分享QQ的描述信息', // 分享描述
+        link: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享链接
+        imgUrl: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享图标
+        success: function () {
+        // 用户确认分享后执行的回调函数
+        alert('分享成功');
+        },
+        cancel: function () {
+          alert('你没有分享');
+        // 用户取消分享后执行的回调函数
+        }
+      });
+    },
+    ShareSina(){
+        wx.onMenuShareQZone({
+        title: '这是一个测试的标题', // 分享标题
+        desc: '这个是分享空间的描述信息', // 分享描述
+        link: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享链接
+        imgUrl: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享图标
+        success: function () {
+        // 用户确认分享后执行的回调函数
+        alert('分享成功');
+        },
+        cancel: function () {
+          alert('你没有分享');
+        // 用户取消分享后执行的回调函数
+        }
+      });
     }
   }
 }
