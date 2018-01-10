@@ -66,31 +66,20 @@ export default {
         },error => { console.log(error); })
     },
     ShareQQ(){
-      wx.scanQRCode({   
-          needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
-          scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
-          success: function (res) {
-          var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
-              // _this.value = result;
-              // _this.addCoupon()
-              //其它网页调用二维码扫描结果： 
-              //var result=sessionStorage.getItem('saomiao_result');
-          }
+      wx.onMenuShareQQ({
+        title: '这是一个测试的标题', // 分享标题
+        desc: '这个是分享QQ的描述信息', // 分享描述
+        link: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享链接
+        imgUrl: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享图标
+        success: function () {
+        // 用户确认分享后执行的回调函数
+        alert('分享成功');
+        },
+        cancel: function () {
+          alert('你没有分享');
+        // 用户取消分享后执行的回调函数
+        }
       });
-      // wx.onMenuShareQQ({
-      //   title: '这是一个测试的标题', // 分享标题
-      //   desc: '这个是分享QQ的描述信息', // 分享描述
-      //   link: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享链接
-      //   imgUrl: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享图标
-      //   success: function () {
-      //   // 用户确认分享后执行的回调函数
-      //   alert('分享成功');
-      //   },
-      //   cancel: function () {
-      //     alert('你没有分享');
-      //   // 用户取消分享后执行的回调函数
-      //   }
-      // });
     },
     ShareFriend(){
       wx.onMenuShareAppMessage({
