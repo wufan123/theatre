@@ -63,7 +63,13 @@ export default {
     ShareFriend(){
       wx.showMenuItems({
             menuList: [
+                "menuItem:copyUrl",
                 'menuItem:share:appMessage',
+                'menuItem:share:timeline',
+                "menuItem:share:qq",
+                "menuItem:favorite",
+                'menuItem:share:QZone',
+                "menuItem:profile"
             ], 
             success:function () {
                 alert('分享成功');
