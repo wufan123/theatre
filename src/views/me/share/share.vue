@@ -65,7 +65,8 @@ export default {
         },error => { console.log(error); })
     },
     ShareQQ(){
-      wx.ready(function () { 
+      alert('QQ')
+      setTimeout(function () { 
         wx.onMenuShareQQ({
           title: '这是一个测试的标题', // 分享标题
           desc: '这个是分享QQ的描述信息', // 分享描述
@@ -80,7 +81,7 @@ export default {
           // 用户取消分享后执行的回调函数
           }
         });
-      });
+      },2000);
     },
     ShareFriend(){
       wx.onMenuShareAppMessage({
