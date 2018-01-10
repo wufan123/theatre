@@ -5,7 +5,7 @@
           <img :src="require('assets/images/me/bag.png')" class='bag-icon'>
           <p v-if="titleConfig">{{titleConfig}}</p>
           <p v-if="subtitleConfig" class='f20'>{{subtitleConfig}}</p>
-          <p class='s-button khaki mt20' @click="ShareQQ">立即邀请</p>
+          <p class='s-button khaki mt20' @click="showDialogStyle = true">立即邀请</p>
         </div>
       <div class='warn' v-if="ruleConfig">
         <div class='title'></div>
@@ -66,21 +66,19 @@ export default {
         },error => { console.log(error); })
     },
     ShareQQ(){
-      wx.ready(function(){ 
-        wx.onMenuShareQQ({
-          title: '这是一个测试的标题', // 分享标题
-          desc: '这个是分享QQ的描述信息', // 分享描述
-          link: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享链接
-          imgUrl: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享图标
-          success: function () {
-          // 用户确认分享后执行的回调函数
-          alert('分享成功');
-          },
-          cancel: function () {
-            alert('你没有分享');
-          // 用户取消分享后执行的回调函数
-          }
-        });
+      wx.onMenuShareQQ({
+        title: '这是一个测试的标题', // 分享标题
+        desc: '这个是分享QQ的描述信息', // 分享描述
+        link: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享链接
+        imgUrl: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享图标
+        success: function () {
+        // 用户确认分享后执行的回调函数
+        alert('分享成功');
+        },
+        cancel: function () {
+          alert('你没有分享');
+        // 用户取消分享后执行的回调函数
+        }
       });
     },
     ShareFriend(){
