@@ -99,7 +99,7 @@ instance.interceptors.request.use(config => {
 instance.interceptors.response.use(response => {
   // console.log('resp-----------------------onse', response)
   let data = response.data
-  if (data.status == 0) {
+  if (data.status == 0||data.indexOf('<html')===0) { 
     return data
   } else {
     // console.log("response error", data)
