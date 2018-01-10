@@ -15,7 +15,8 @@
       <x-dialog v-model="showDialogStyle" hide-on-blur :dialog-style="{'max-width': '100%', width: '100%', height: 'auto', 'background-color': 'transparent'}">
         <div class="dialog">
             <div class="bg body">
-              <img class="code" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514203011952&di=f382d7d2131f6277edb1cb8ef7b58ee5&imgtype=0&src=http%3A%2F%2Fsrc.house.sina.com.cn%2Fimp%2Fimp%2Fdeal%2F86%2F68%2F4%2Fe51eac8a98c2bd65c6b68bae86c_p1_mk1_wm35.gif">
+              <qrcode value="http://jufang.zmaxfilm.com/#/Home" type="canvas" :size='100' ></qrcode>
+              <!-- <img class="code" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514203011952&di=f382d7d2131f6277edb1cb8ef7b58ee5&imgtype=0&src=http%3A%2F%2Fsrc.house.sina.com.cn%2Fimp%2Fimp%2Fdeal%2F86%2F68%2F4%2Fe51eac8a98c2bd65c6b68bae86c_p1_mk1_wm35.gif"> -->
               <p>扫二维码向朋友分享</p>
               <div class="type">
                 <div class="item" @click="ShareFriend"> <i class="wx"></i> <p>微信</p> </div>
@@ -34,7 +35,7 @@
   </page>
 </template>
 <script>
-import { XDialog } from 'vux'
+import { XDialog,Qrcode } from 'vux'
 import theatreApi from "api/theatreApi";
 export default {
   data(){
@@ -45,7 +46,7 @@ export default {
       ruleConfig: ''
     }
   },
-  components:{XDialog},
+  components:{XDialog,Qrcode},
   methods:{
     fetchData(){
       theatreApi.getMiscConfig('invite_reg_title').then(res=>{
