@@ -70,8 +70,8 @@ export default {
       wx.onMenuShareQQ({
         title: '这是一个测试的标题', // 分享标题
         desc: '这个是分享奥朋友圈的描述信息', // 分享描述
-        link: 'http://www.baidu.com', // 分享链接
-        imgUrl: 'https://www.baidu.com/img/bd_logo1.png', // 分享图标
+        link: 'http://jufang.zmaxfilm.com/#/Home', // 分享链接
+        imgUrl: '', // 分享图标
         success: function () {
         // 用户确认分享后执行的回调函数
         alert('分享成功');
