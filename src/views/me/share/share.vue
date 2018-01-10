@@ -52,8 +52,8 @@ export default {
       wx.onMenuShareAppMessage({
         title: '这是一个测试的标题', // 分享标题
         desc: '这个是分享QQ的描述信息', // 分享描述
-        link: '', // 分享链接
-        imgUrl: '', // 分享图标
+        link: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享链接
+        imgUrl: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享图标
         success: function () {
         // 用户确认分享后执行的回调函数
         alert('分享成功');
