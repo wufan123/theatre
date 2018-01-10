@@ -18,9 +18,9 @@
               <img class="code" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514203011952&di=f382d7d2131f6277edb1cb8ef7b58ee5&imgtype=0&src=http%3A%2F%2Fsrc.house.sina.com.cn%2Fimp%2Fimp%2Fdeal%2F86%2F68%2F4%2Fe51eac8a98c2bd65c6b68bae86c_p1_mk1_wm35.gif">
               <p>扫二维码向朋友分享</p>
               <div class="type">
-                <div class="item" @click="ShareQQ"> <i class="wx"></i> <p>微信</p> </div>
+                <div class="item"> <i class="wx"></i> <p>微信</p> </div>
                 <div class="item" @click="friendArea"> <i class="friends"></i> <p>朋友圈</p> </div>
-                <div class="item"> <i class="qq"></i> <p>QQ</p> </div>
+                <div class="item" @click="ShareQQ"> <i class="qq"></i> <p>QQ</p> </div>
                 <div class="item"> <i class="sina"></i> <p>新浪</p> </div>
                 <div class="item"> <i class="link"></i> <p>复制邀请链接</p> </div>
               </div>
@@ -65,7 +65,8 @@ export default {
         },error => { console.log(error); })
     },
     ShareQQ(){
-      alert('分享QQ')
+      alert('分享QQ',wx.onMenuShareQQ)
+      console.log('分享QQ',wx.onMenuShareQQ)
       wx.onMenuShareQQ({
         title: '这是一个测试的标题', // 分享标题
         desc: '这个是分享奥朋友圈的描述信息', // 分享描述
@@ -83,6 +84,7 @@ export default {
     },
     friendArea(){
       alert('分享朋友圈')
+      console.log('分享朋友圈',wx.onMenuShareAppMessage)
       wx.onMenuShareAppMessage({
         title: '这是一个测试的标题',
         desc: '这个是分享奥朋友圈的描述信息',
