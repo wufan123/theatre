@@ -14,7 +14,7 @@
   import http from 'api/apiHttp'
   export default {
     data(){
-      let url='';
+      let url = '';
       switch (parseInt(this.$route.query.redirectType)) {
         case 4:
           url = `/ProductDetail?hyGoodsId=${this.$route.query.redirectId}`;
@@ -28,12 +28,18 @@
       }
       return {
         html: '',
-        url:url
+        url: url
       }
     },
     methods: {
       async fetchData(){
-        this.html = await  http.instance.get('https://' + this.$route.query.contentUrl)
+        try {
+          this.html = await  http.instance.get('https://' + this.$route.query.contentUrl)
+        }
+        catch (e) {
+            this.html =e    
+        }
+
       },
     }
   }
