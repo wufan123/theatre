@@ -21,7 +21,7 @@
                 <div class="item" @click="ShareFriend"> <i class="wx"></i> <p>微信</p> </div>
                 <div class="item" @click="friendArea"> <i class="friends"></i> <p>朋友圈</p> </div>
                 <div class="item" @click="ShareQQ"> <i class="qq"></i> <p>QQ</p> </div>
-                <div class="item" @click="ShareSina"> <i class="sina"></i> <p>新浪</p> </div>
+                <div class="item" @click="ShareSina"> <i class="sina"></i> <p>QQ空间</p> </div>
                 <!-- <div class="item"> <i class="link"></i> <p>复制邀请链接</p> </div> -->
               </div>
             </div>
@@ -113,8 +113,6 @@ export default {
       });
     },
     ShareSina(){
-      alert('SINA')
-      setTimeout(function() {
         wx.onMenuShareQZone({
         title: '这是一个测试的标题', // 分享标题
         desc: '这个是分享空间的描述信息', // 分享描述
@@ -129,7 +127,6 @@ export default {
         // 用户取消分享后执行的回调函数
         }
       });
-      }, 2000);
     }
   }
 }
