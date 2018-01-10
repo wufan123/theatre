@@ -27,6 +27,12 @@ export function showRequestErro(err) {
   })
 }
 
+export function getAsUriParameters(data){
+  return Object.keys(data).map(function(k) {
+    return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
+  }).join('&')
+}
+
 export function showLoginConfirm() {
   window._vue.$vux.confirm.show({
     title: '温馨提示',

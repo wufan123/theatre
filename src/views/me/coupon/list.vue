@@ -1,6 +1,6 @@
 <template>
   <page :headerTitle="`优惠券`" flex-box="1" :white="true">
-    <!--<img src="../../../assets/images/scan.png" slot="rightTop" class="icon"/>-->
+    <img src="../../../assets/images/scan.png" @click="Scan" slot="rightTop" class="icon"/>
     <div slot="contain">
       <div flex="dir:top">
         <div flex-box="0" flex="dir:left cross:center " class="topBar">
@@ -55,6 +55,20 @@
       }
     },
     methods: {
+      Scan(){
+        var _this = this;
+            wx.scanQRCode({   
+                needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                success: function (res) {
+                var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+                    _this.value = result;
+                    _this.addCoupon()
+                    //其它网页调用二维码扫描结果： 
+                    //var result=sessionStorage.getItem('saomiao_result');
+                }
+            });
+      },
       async  getDataList(page){
         var that = this
         page = page == 0 ? 1 : page;
@@ -120,6 +134,7 @@
           this.$util.showRequestErro(e)
         }
         if (res && res.status === 0) {
+          this.value = ''
           this.$vux.toast.show({
             text: '绑定成功',
             type: 'success'
