@@ -25,14 +25,14 @@
         <label slot="rightTop" @click="$router.push('IntroduceList')">更多</label>
         <scroll-view slot="main">
           <div flex="dir:top " v-for="(item,index) in introduceList" class="introduceItem" :key="index">
-            <a :href="item.contentUrl">
+            <router-link :to="item.contentUrl">
               <div flex="dir:left">
                 <img :src="item.thumbUrl" class="contentImg">
                 <div class="rightBorder"></div>
               </div>
               <div class="bottomBorder"></div>
               <label class='contentTxt text-ellipsis-line'>{{item.title}}</label>
-            </a>
+            </router-link>
           </div>
 
         </scroll-view>
@@ -64,14 +64,14 @@
           <div flex="dir:top " v-for="(item,index) in findList.slice(0,2)" style="margin-top: 20px" class="findItem"
           >
             <!-- @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})" -->
-            <a :href="item.contentUrl">
+            <router-link :to="item.contentUrl">
               <div flex="dir:left">
                 <img :src="item.thumbUrl" class="contentImgSquare">
                 <div class="rightBorder"></div>
               </div>
               <div class="bottomBorder"></div>
               <label class='contentTxt'>{{item.title}}</label>
-            </a>
+            </router-link>
           </div>
 
         </div>
@@ -132,30 +132,38 @@
         findList: [],
       }
     },
-    computed:{
-      ...mapState('common',['userInfo'])
+    computed: {
+      ...mapState('common', ['userInfo'])
     },
     methods: {
+      mapIntroduceData(data){
+        data.contentUrl = data.contentUrl.replace('https://', '');
+        data.contentUrl = data.contentUrl.replace('http://', '');
+        data.contentUrl = `/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
+        return data;
+      },
       async getBanner(){
         let res = await TheatreApi.getInformationList(10);
         if (res) {
           this.banerList = res.data.map((data) => {
-            let url = data.contentUrl;
-            ;
             switch (parseInt(data.redirectType)) {
+              case 1:
+              case 2:
+              case 3:
+                data = this.mapIntroduceData(data);
+                break;
               case 4:
-                url = `/ProductDetail?hyGoodsId=${data.redirectId}`;
+                data.contentUrl = `/ProductDetail?hyGoodsId=${data.redirectId}`;
                 break;
               case 5:
-                url = '/SessionDetail';
+                data.contentUrl = '/SessionDetail';
                 break;
               case 6:
-                url = `HomePackageDetail?packageId=${data.redirectId}`;
+                data.contentUrl = `HomePackageDetail?packageId=${data.redirectId}`;
                 break;
             }
-            console.log('-----', url)
             return {
-              url,
+              url: data.contentUrl,
               img: data.thumbUrl
             }
           })
@@ -164,13 +172,17 @@
       async getIntroduce(){
         let res = await TheatreApi.getInformationList(20);
         if (res) {
-          this.introduceList = res.data
+          this.introduceList = res.data.map((data) => {
+            return this.mapIntroduceData(data);
+          })
         }
       },
       async getFind(){
         let res = await  TheatreApi.getInformationList(30);
         if (res) {
-          this.findList = res.data;
+          this.findList = res.data.map((data) => {
+            return this.mapIntroduceData(data);
+          })
         }
       },
       async getStamps(){
@@ -181,12 +193,12 @@
       },
       storePromotion(){
         if (this.$route.query.promoter) {
-            let promotion = {
-              promoter: this.$route.query.promoter,
-              type: this.$route.query.type
-            }
-          this.$store.commit('common/setPromotion',promotion );
-          if(!this.$util.isEmptyObject(this.userInfo)){
+          let promotion = {
+            promoter: this.$route.query.promoter,
+            type: this.$route.query.type
+          }
+          this.$store.commit('common/setPromotion', promotion);
+          if (!this.$util.isEmptyObject(this.userInfo)) {
             TheatreApi.scanCode({...promotion, toer: this.userInfo.bindmobile});
           }
         }

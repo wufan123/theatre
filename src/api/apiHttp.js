@@ -124,6 +124,7 @@ function post(url, params) {
   return instance.post('/huoying'+url, params)
 }
 
+
 function getTheatre(url, params) {
   return instance.get('/theatre'+url, {params: params})
 }
