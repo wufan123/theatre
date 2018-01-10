@@ -19,10 +19,10 @@
               <!-- <img class="code" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514203011952&di=f382d7d2131f6277edb1cb8ef7b58ee5&imgtype=0&src=http%3A%2F%2Fsrc.house.sina.com.cn%2Fimp%2Fimp%2Fdeal%2F86%2F68%2F4%2Fe51eac8a98c2bd65c6b68bae86c_p1_mk1_wm35.gif"> -->
               <p>扫二维码向朋友分享</p>
               <div class="type">
-                <div class="item"> <i class="wx" @click="ShareFriend"></i> <p>微信</p> </div>
-                <div class="item"> <i class="friends" @click="friendArea"></i> <p>朋友圈</p> </div>
-                <div class="item"> <i class="qq" @click="ShareQQ"></i> <p>QQ</p> </div>
-                <div class="item"> <i class="sina" @click="ShareSina"></i> <p>QQ空间</p> </div>
+                <div class="item" @click="ShareFriend"> <i class="wx"></i> <p>微信</p> </div>
+                <div class="item" @click="friendArea"> <i class="friends"></i> <p>朋友圈</p> </div>
+                <div class="item" @click="ShareQQ"> <i class="qq"></i> <p>QQ</p> </div>
+                <div class="item" @click="ShareSina"> <i class="sina"></i> <p>QQ空间</p> </div>
                 <!-- <div class="item"> <i class="link"></i> <p>复制邀请链接</p> </div> -->
               </div>
             </div>
@@ -48,11 +48,23 @@ export default {
   },
   components:{XDialog,Qrcode},
   methods:{
+    Scan(){
+        var _this = this;
+            wx.scanQRCode({   
+                needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+                scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+                success: function (res) {
+                var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+                    //其它网页调用二维码扫描结果： 
+                    //var result=sessionStorage.getItem('saomiao_result');
+                }
+            });
+      },
     ShareFriend(){
       wx.onMenuShareAppMessage({
         title: '这是一个测试的标题', // 分享标题
         desc: '这个是分享QQ的描述信息', // 分享描述
-        link: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享链接
+        link: 'http://jufang.zmaxfilm.com/#/Home', // 分享链接
         imgUrl: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享图标
         success: function () {
         // 用户确认分享后执行的回调函数
@@ -85,7 +97,7 @@ export default {
       wx.onMenuShareQQ({
         title: '这是一个测试的标题', // 分享标题
         desc: '这个是分享QQ的描述信息', // 分享描述
-        link: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享链接
+        link: 'http://jufang.zmaxfilm.com/#/Home', // 分享链接
         imgUrl: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享图标
         success: function () {
         // 用户确认分享后执行的回调函数
@@ -102,7 +114,7 @@ export default {
       wx.onMenuShareTimeline({
         title: '这是一个测试的标题', // 分享标题
         desc: '这个是分享QQ的描述信息', // 分享描述
-        link: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享链接
+        link: 'http://jufang.zmaxfilm.com/#/Home', // 分享链接
         imgUrl: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享图标
         success: function () {
         // 用户确认分享后执行的回调函数
@@ -118,7 +130,7 @@ export default {
         wx.onMenuShareQZone({
         title: '这是一个测试的标题', // 分享标题
         desc: '这个是分享空间的描述信息', // 分享描述
-        link: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享链接
+        link: 'http://jufang.zmaxfilm.com/#/Home', // 分享链接
         imgUrl: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享图标
         success: function () {
         // 用户确认分享后执行的回调函数
