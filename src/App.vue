@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+      <router-view></router-view>
   </div>
 </template>
 
@@ -40,8 +40,9 @@
   @import "style/reset-vux";
   @import "style/common";
   @import "style/style";
+
   #app {
-    border-bottom:1px solid black;
+    border-bottom: 1px solid black;
     height: 100%;
     > div {
       height: 100%;

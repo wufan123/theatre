@@ -5,8 +5,8 @@
           <p class="title">{{card.levelName}}：{{card.cardNumber}}</p>
           <div class="recharge-b" flex="main:justify">
             <i class="icon subtract" @click="subtract">-</i>
-           <input class="input" type="text" placeholder="请输入会员卡号" v-model="amount" >
-            <i class="icon add" @click="add">+</i>  
+           <input class="input" type="text" placeholder="请输入100的整倍数" v-model="amount" >
+            <i class="icon add" @click="add">+</i>
           </div>
           <img :src="require('assets/images/me/comfirm_btn.png')" @click="confirm" class="comfirm-btn">
       </div>
@@ -40,12 +40,17 @@
           this.$vux.toast.text("请输入整百金额", 'middle');
           return
         }
+        this.$vux.toast.show({
+          text:'暂时无法使用第三方支付',
+          type:'cancel'
+        });
+        return;
         return CardApi.recharge(this.amount,this.card.id,'weixinpay',).then(res=>{
           this.$vux.toast.text("充值成功", 'middle');
           this.$router.go(-1)
         },error=>{
           if(error.text){
-           this.$vux.toast.text(error.text, 'middle'); 
+           this.$vux.toast.text(error.text, 'middle');
           }else{
             this.$vux.toast.text("充值失败", 'middle');
           }

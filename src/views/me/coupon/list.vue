@@ -11,6 +11,7 @@
         </div>
         <div flex-box="1">
           <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown
+                         :usePullup="false"
                          height='-110'>
             <coupon-item v-for="(item,index) in canUseList" :key="index" @click.native="gotoCouponDetail(item)">
               <label class="leftTitle" slot="right">{{item.voucherName}}</label>
@@ -22,8 +23,8 @@
               <img v-if="!isSeeExpire" :src="require('assets/images/me/coupon_lost.png')" class="couponLost">
               <p class="mb20 f16" v-if="isSeeExpire">已失效的券</p>
             </div>
-
-            <coupon-item v-if="isSeeExpire" v-for="(item,index) in invalidList" :key="index" :disabled="item.stock"
+            <coupon-item v-if="isSeeExpire" v-for="(item,index) in invalidList" :key="index+'valli'"
+                         :disabled="item.stock"
                          @click.native="gotoCouponDetail(item)">
               <label class="leftTitle" slot="right">{{item.voucherName}}</label>
               <label slot="right" v-if="item.status==3" class="is-tip">已使用</label>
@@ -71,8 +72,13 @@
       },
       async  getDataList(page){
         var that = this
-        page = page == 0 ? 1 : page
-        let res = await  CouponApi.userVoucherList(page, 0);
+        page = page == 0 ? 1 : page;
+        let res;
+        try{
+          res = await  CouponApi.userVoucherList(page, 0);
+        }catch (e){
+          this.$util.showRequestErro(e);
+        }
         if (res && res.data) {
           // page == 1 ? this.dataList= res.data.voucherList : this.dataList= this.dataList.concat(res.data.voucherList)
           res.data.voucherList.forEach(item => {
@@ -92,6 +98,7 @@
             that.getDataList(page)
           }
         }
+        this.$vux.loading.hide();
         return {
           page: {
             number: res.data.voucherNumber, size: 100, totalElements: res.data.totalNum, totalPages: 1
@@ -99,34 +106,38 @@
         }
       },
       gotoCouponDetail(item){
-        console.log('gotoCouponDetail', item)
         this.$store.commit("coupon/setCoupon", item);
         this.$router.push({path: 'CouponDetail'});
       },
       fetchData(){
+        this.$vux.loading.show();
+        let ct =this;
+        setTimeout(()=>{//优化体验，查看列表时超过3秒隐藏loading
+          ct.$vux.loading.hide();
+        },3000);
         return this.$refs.scroller.reset()
       },
       seeExpireCoupon(){
         this.isSeeExpire = !this.isSeeExpire
       },
       async addCoupon(){
-        if(!this.value){
+        if (!this.value) {
           this.$vux.toast.text("请输入优惠券码");
-            return;
+          return;
         }
         this.$vux.loading.show({
           text: '正在添加'
         });
         let res;
-        try{
-           res = await CouponApi.addVoucher(this.value);
-        }catch (e){
-            this.$util.showRequestErro(e)
+        try {
+          res = await CouponApi.addVoucher(this.value);
+        } catch (e) {
+          this.$util.showRequestErro(e)
         }
         if (res && res.status === 0) {
           this.$vux.toast.show({
-            text:'绑定成功',
-            type:'success'
+            text: '绑定成功',
+            type: 'success'
           });
           this.fetchData();
         }

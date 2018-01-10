@@ -22,7 +22,7 @@
 <style lang="less" scoped>
   .couponItem {
     height: 90px;
-    margin: 0px 15px 15px;
+    margin: 10px 15px;
     border-radius: 5px;
     position: relative;
     .shadow{

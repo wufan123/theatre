@@ -1,7 +1,7 @@
 <template>
   <page :headerTitle="classType==102?'超级联合日':'福州特产馆'" flex-box="1" >
     <div slot="contain" >
-      <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前无数据' noRecordImage usePulldown height='-48' >
+      <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前无数据' noRecordImage usePulldown height='-48'  :usePullup="false">
         <good-item v-for="(item,index) in dataList" :key="index" :goodsCoverImage="item.goodsCoverImage"  :goodsName="item.goodsName" :channelFee="item.channelFee"
                :marketFee="classType==102?item.marketFee:''"    flex="dir:left cross:center" class="couponItem" @click.native="$router.push({path:'ProductDetail',query:{
             hyGoodsId:item.hyGoodsId,classType:$route.query.classType
@@ -22,7 +22,6 @@
     components:{PageScroller,XButton,GoodItem},
     data(){
       return {
-        value:'11111',
         dataList:[],
         classType: this.$route.query.classType
       }

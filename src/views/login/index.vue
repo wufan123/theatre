@@ -13,7 +13,7 @@
             <img slot="label" style="padding-right:10px;display:block;"
                  :src="require('assets/images/me/login_code.png')" width="24" height="24">
             <x-button slot="right" type="primary" mini @click.native="getAuthCode" :disabled="codeGapTime>0">
-              {{codeGapTime ? codeGapTime + 's' : '获取'}}
+              {{codeGapTime ? codeGapTime + 's' : '获取验证码'}}
             </x-button>
           </x-input>
         </group>
@@ -24,22 +24,27 @@
 </template>
 <script>
   import Auth from 'api/authApi'
+  import TheatreApi from 'api/theatreApi'
   import {XInput, Group} from "vux";
+  import {mapState} from "vuex";
   export default {
     data(){
       return {
         form: {
-          phone: '18046053906',
-          pw: '123456',
+          phone: '',
+          pw: '',
         },
         codeGapTime: 0
       }
     },
     components: {XInput, Group},
+    computed: {
+      ...mapState("common", ['promotion'])
+    },
     methods: {
       async getAuthCode(){
         this.$vux.loading.show({
-          text:'获取验证码中'
+          text: '获取验证码中'
         });
         let res;
         try {
@@ -60,17 +65,35 @@
         this.$vux.loading.hide();
       },
       async login(){
+        if (!this.form.phone) {
+          this.$vux.toast.show({
+            text: '电话号码不能为空',
+            type: 'warn'
+          })
+          return;
+        }
+        if (!this.form.pw) {
+          this.$vux.toast.show({
+            text: '验证码不能为空',
+            type: 'warn'
+          })
+          return;
+        }
+
         this.$vux.loading.show({
           text: '登录中'
         });
         let res;
         try {
-          res = await Auth.login(this.form.phone, this.form.pw);
+          res = await Auth.smsLogin(this.form.phone, this.form.pw);
         }
         catch (e) {
           this.$util.showRequestErro(e);
         }
         if (res && res.data) {
+          //更新推广信息
+          if (!this.$util.isEmptyObject(this.promotion))
+            TheatreApi.scanCode({...this.promotion, toer: res.data.bindmobile});
           this.$vux.toast.text("登录成功", 'bottom');
           this.$store.commit('common/setUserInfo', res.data);
           this.$router.go(-1);

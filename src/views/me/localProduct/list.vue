@@ -1,16 +1,16 @@
 <template>
-  <page :headerTitle="`福州特产`" >
+  <page :headerTitle="`福州特产`">
     <div slot="contain">
-      <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage  usePulldown height='-46' >
+      <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown height='-46'>
         <div v-for="(itemp,index) in dataList" class="ticket-card" @click="orderDetail(itemp)">
-          <list twoLine >
+          <list twoLine>
             <list-item v-for="(item,index) in itemp.details" :key="index" :img="item.goodsImg"
-            :contentTitle="item.goodsName"   extra=""  >
-            <div slot="contentBrief">
-              <!-- <p>12 月 3 日 10：00</p> -->
-              <p flex="main:justify"> <label>数量</label> <label>{{item.number}}张</label> </p>
-            </div>
-              </list-item>
+                       :contentTitle="item.goodsName" extra="">
+              <div slot="contentBrief">
+                <!-- <p>12 月 3 日 10：00</p> -->
+                <p flex="main:justify"><label>数量</label> <label>{{item.number}}张</label></p>
+              </div>
+            </list-item>
           </list>
           <div class="flexb">
             <label>总价：{{itemp.price}}元</label>
@@ -22,52 +22,63 @@
             <label v-if="itemp.status==11">已验证</label>
           </div>
         </div>
-        </page-scroller>
+      </page-scroller>
     </div>
   </page>
 </template>
 <script>
-import PageScroller from "views/components/pageScroller.vue";
-import orderApi from "api/orderApi";
-import { List, ListItem } from "views/components/settingList";
+  import PageScroller from "views/components/pageScroller.vue";
+  import orderApi from "api/orderApi";
+  import {List, ListItem} from "views/components/settingList";
 
-export default {
-  components: { PageScroller, List, ListItem },
-  data() {
-    return {
-      dataList: []
-    };
-  },
-  methods: {
-    getDataList(page) {
-      return orderApi.getGoodsOrders(page).then(
-        success => {
-          console.log(success);
-          this.dataList = success.data;
-          let res = {
-            data: success.data,
+  export default {
+    components: {PageScroller, List, ListItem},
+    data() {
+      return {
+        dataList: []
+      };
+    },
+    methods: {
+      async getDataList(page) {
+        let res;
+        try{
+            res = await orderApi.getGoodsOrders(page);
+        }catch (e){
+            this.$util.showRequestErro(e)
+        }
+        if(res&&res.data){
+          if (page) {
+            this.dataList = this.dataList.concat(res.data);
+          } else {
+            this.dataList = res.data;
+          }
+          res = {
+            data: this.dataList,
             page: {
-              number: 0,
-              size: success.data.length,
-              totalElements: success.data.length,
-              totalPages: 1
+              number: page,
+              size: 10,
+              totalElements: this.dataList.length,
+              totalPages: res.data.length > 0 ? page + 3 : page + 1
             }
           };
-          return res;
-        },
-        error => {
-          console.log(success);
         }
-      );
-    },
-    orderDetail(order){
-      this.$router.push({name:'LocalProductDetail',query:{id:order.orderNo}})
-    },
-    fetchData() {
-      return this.$refs.scroller.reset();
+        this.$vux.loading.hide();
+        return res;
+
+      },
+      orderDetail(order){
+        this.$router.push({name: 'LocalProductDetail', query: {id: order.orderNo}})
+      },
+      fetchData() {
+        this.$vux.loading.show();
+        let ct =this;
+        setTimeout(()=>{//优化体验，查看列表时超过3秒隐藏loading
+          ct.$vux.loading.hide();
+        },3000);
+        return this.$refs.scroller.reset();
+      }
     }
-  }
-};
+  };
 </script>
 <style lang="less">
 

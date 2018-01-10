@@ -53,6 +53,7 @@
   import {XInput, Group} from "vux";
   import OrderApi from 'api/orderApi'
   import StoreApi from 'api/storeApi'
+  import TheatreApi from 'api/theatreApi'
   import {mapState} from "vuex";
   export default {
     data(){
@@ -71,7 +72,8 @@
     },
     computed: {
       ...mapState('business', ['selectedMember']),
-      ...mapState('coupon', ['ticketCouponList'])
+      ...mapState('coupon', ['ticketCouponList']),
+      ...mapState('common', ['promotion','userInfo'])
     },
     methods: {
       async fetchData(){
@@ -183,7 +185,7 @@
         } catch (e) {
           this.$util.showRequestErro(e);
         }
-        if (res && res.data) {
+        if(res&&!this.$util.isEmptyObject(res.data)) {
           //价格为0时直接支付
           if (res.data.price == 0) {
             this.$vux.loading.show({
@@ -196,6 +198,11 @@
               this.$util.showRequestErro(e);
             }
             if (payRes && payRes.status == 0) {
+              TheatreApi.finishPromotion({
+                sn:this.orderId,
+                type:this.promotion.type,
+                toer:this.userInfo.bindmobile
+              });
               this.$router.push({
                 name: 'PaySuccess'
               })

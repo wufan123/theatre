@@ -1,17 +1,17 @@
 <template>
-  <page :headerTitle="`套票`" >
+  <page :headerTitle="`套票`">
     <div slot="contain" class="package">
-      <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage  usePulldown height='-46' >
-        <div v-for="(itemp,index) in dataList" :key="index" >
-          <div v-for="(item,indexp) in itemp.data" :key="indexp" class="ticket-card" @click="Detail(itemp)" >
-            <list twoLine :title="item.name" >
+      <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown height='-46' :usePullup="false">
+        <div v-for="(itemp,index) in dataList" :key="index">
+          <div v-for="(item,indexp) in itemp.data" :key="indexp" class="ticket-card" @click="Detail(itemp)">
+            <list twoLine :title="item.name">
               <list-item v-for="(itemc,indexc) in item.detail" :img="itemc.img" :key="indexc"
-              :contentTitle="itemc.name"   extra=""  >
-              <div slot="contentBrief">
-                <!-- <p>12 月 3 日 10：00</p> -->
-                <p flex="main:justify"> <label>数量</label> <label>{{itemc.number}}张</label> </p>
-              </div>
-                </list-item>
+                         :contentTitle="itemc.name" extra="">
+                <div slot="contentBrief">
+                  <!-- <p>12 月 3 日 10：00</p> -->
+                  <p flex="main:justify"><label>数量</label> <label>{{itemc.number}}张</label></p>
+                </div>
+              </list-item>
             </list>
             <div class="flexb">
               <label>总价：{{itemp.price}}元</label>
@@ -23,55 +23,66 @@
             </div>
           </div>
         </div>
-        </page-scroller>
+      </page-scroller>
     </div>
   </page>
 </template>
 <script>
-import PageScroller from "views/components/pageScroller.vue";
-import orderApi from "api/orderApi";
-import { List, ListItem } from "views/components/settingList";
+  import PageScroller from "views/components/pageScroller.vue";
+  import orderApi from "api/orderApi";
+  import {List, ListItem} from "views/components/settingList";
 
-export default {
-  components: { PageScroller, List, ListItem },
-  data() {
-    return {
-      dataList: []
-    };
-  },
-  methods: {
-    getDataList(page) {
-      return orderApi.getPackageOrders().then(
-        success => {
-          console.log(success);
-          this.dataList = success.data;
-          let res = {
-            data: success.data,
+  export default {
+    components: {PageScroller, List, ListItem},
+    data() {
+      return {
+        dataList: []
+      };
+    },
+    methods: {
+      async getDataList(page) {
+        let res;
+        try {
+          res = await orderApi.getPackageOrders()
+        } catch (e) {
+          this.$util.showRequestErro(e)
+        }
+        if (res && res.data) {
+          this.dataList = res.data;
+          res = {
+            data: res.data,
             page: {
               number: 0,
-              size: success.data.length,
-              totalElements: success.data.length,
+              size: res.data.length,
+              totalElements: res.data.length,
               totalPages: 1
             }
-          };
-          return res;
-        },
-        error => {
-          console.log(success);
+          }
         }
-      );
-    },
-    Detail(order){
-      this.$store.commit('business/setSelectedPackageOrder',order)
-      this.$router.push({name:'PackageOrderDetail'})
-    },
-    fetchData() {
-      return this.$refs.scroller.reset();
+        this.$vux.loading.hide();
+        return res;
+
+      },
+      Detail(order){
+        this.$store.commit('business/setSelectedPackageOrder', order)
+        this.$router.push({name: 'PackageOrderDetail'})
+      },
+      fetchData() {
+        this.$vux.loading.show();
+        let ct =this;
+        setTimeout(()=>{//优化体验，查看列表时超过3秒隐藏loading
+          ct.$vux.loading.hide();
+        },3000);
+        return this.$refs.scroller.reset();
+      }
     }
-  }
-};
+  };
 </script>
 <style lang="less">
-.package .am-list .am-list-header{padding:5px 0;border-bottom:1px dashed #ded5c7;font-size:14px;}
+  .package .am-list .am-list-header {
+    padding: 5px 0;
+    border-bottom: 1px dashed #ded5c7;
+    font-size: 14px;
+  }
 </style>
 

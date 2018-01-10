@@ -5,7 +5,7 @@
         <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown
                        height='-48'>
           <good-item v-for="(item,index) in dataList" :key="item.goodsId" :goodsName="item.goodsName"
-                     :channelFee="item.showPrice" :goodsCoverImage="item.goodsImg" class="snackItem">
+                     :channelFee="item.price" :goodsCoverImage="item.goodsImg" class="snackItem">
 
             <!--<x-number v-show="item.num>0" :value="item.num" :min="0"   ></x-number>-->
             <item-number :item="{num:item.num,index:index,stock:item.channelStock}" @onChange="change"></item-number>
@@ -61,7 +61,7 @@
         let newItem = {...this.dataList[item.index],num:item.num};
         this.$set(this.dataList, item.index, newItem);
         let sum =this.dataList.map((i)=>{
-            return i.num*i.showPrice
+            return i.num*i.price
         })
           .reduce((acc,i)=>{
             acc+=i;

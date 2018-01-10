@@ -24,29 +24,31 @@
                  v-show="introduceList&&introduceList.length>0">
         <label slot="rightTop" @click="$router.push('IntroduceList')">更多</label>
         <scroll-view slot="main">
-            <div flex="dir:top " v-for="(item,index) in introduceList" class="introduceItem" :key="index" >
-              <a :href="item.contentUrl">
+          <div flex="dir:top " v-for="(item,index) in introduceList" class="introduceItem" :key="index">
+            <a :href="item.contentUrl">
               <div flex="dir:left">
                 <img :src="item.thumbUrl" class="contentImg">
                 <div class="rightBorder"></div>
               </div>
               <div class="bottomBorder"></div>
               <label class='contentTxt text-ellipsis-line'>{{item.title}}</label>
-              </a>
-            </div>
+            </a>
+          </div>
 
         </scroll-view>
       </list-cell>
       <!--场次票-->
       <list-cell :topImg="require('assets/images/home/title_session.png')">
         <div slot="main" class="center">
-          <img :src="require('assets/images/home/home_ccp.jpg')" @click="$router.push('sessionDetail')" class="home-cell-img">
+          <img :src="require('assets/images/home/home_ccp.jpg')" @click="$router.push('sessionDetail')"
+               class="home-cell-img">
         </div>
       </list-cell>
       <!--组合券-->
       <list-cell :topImg="require('assets/images/home/title_zhq.png')">
         <div slot="main" class="center">
-          <img :src="require('assets/images/home/home_zhg.jpg')" @click="$router.push({path:'HomePackageList'})" class="home-cell-img">
+          <img :src="require('assets/images/home/home_zhg.jpg')" @click="$router.push({path:'HomePackageList'})"
+               class="home-cell-img">
         </div>
       </list-cell>
       <!--兑换票券-->
@@ -57,18 +59,18 @@
       </div>
       <!-- 探索-->
       <list-cell :topImg="require('assets/images/home/title_stamps.png')" v-show="findList&&findList.length>0">
-        <label slot="rightTop" @click="$router.push('FindList')" >更多</label>
+        <label slot="rightTop" @click="$router.push('FindList')">更多</label>
         <div slot="main" style="display: flex;flex-wrap: wrap;padding-left: 15px">
           <div flex="dir:top " v-for="(item,index) in findList.slice(0,2)" style="margin-top: 20px" class="findItem"
-               >
-               <!-- @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})" -->
-            <a  :href="item.contentUrl">
-            <div flex="dir:left">
-              <img :src="item.thumbUrl" class="contentImgSquare">
-              <div class="rightBorder"></div>
-            </div>
-            <div class="bottomBorder"></div>
-            <label class='contentTxt'>{{item.title}}</label>
+          >
+            <!-- @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})" -->
+            <a :href="item.contentUrl">
+              <div flex="dir:left">
+                <img :src="item.thumbUrl" class="contentImgSquare">
+                <div class="rightBorder"></div>
+              </div>
+              <div class="bottomBorder"></div>
+              <label class='contentTxt'>{{item.title}}</label>
             </a>
           </div>
 
@@ -83,6 +85,7 @@
   import ScrollView from 'views/components/simpleScrollView.vue'
   import ListCell from 'views/components/home/listCell.vue'
   import TheatreApi from 'api/theatreApi'
+  import {mapState} from "vuex";
   const imgList = [
     require('assets/images/home/banner_default.jpg')
   ]
@@ -91,11 +94,11 @@
     img: one
   }));
   const munuList = [{
-    name: '限时抢',
+    name: '限时抢券',
     pathName: 'FlashSale',
     icon: require('assets/images/home/flash_sale.png')
   }, {
-    name: '超级联合日',
+    name: '超级特卖',
     pathName: 'LocalProduct',
     params: {classType: 102},
     icon: require('assets/images/home/hemers.png')
@@ -129,14 +132,33 @@
         findList: [],
       }
     },
+    computed:{
+      ...mapState('common',['userInfo'])
+    },
     methods: {
       async getBanner(){
         let res = await TheatreApi.getInformationList(10);
         if (res) {
-          this.banerList = res.data.map((data) => ({
-            url: data.contentUrl,
-            img: data.thumbUrl
-          }))
+          this.banerList = res.data.map((data) => {
+            let url = data.contentUrl;
+            ;
+            switch (parseInt(data.redirectType)) {
+              case 4:
+                url = `/ProductDetail?hyGoodsId=${data.redirectId}`;
+                break;
+              case 5:
+                url = '/SessionDetail';
+                break;
+              case 6:
+                url = `HomePackageDetail?packageId=${data.redirectId}`;
+                break;
+            }
+            console.log('-----', url)
+            return {
+              url,
+              img: data.thumbUrl
+            }
+          })
         }
       },
       async getIntroduce(){
@@ -157,7 +179,20 @@
           this.stampsList = res.data;
         }
       },
+      storePromotion(){
+        if (this.$route.query.promoter) {
+            let promotion = {
+              promoter: this.$route.query.promoter,
+              type: this.$route.query.type
+            }
+          this.$store.commit('common/setPromotion',promotion );
+          if(!this.$util.isEmptyObject(this.userInfo)){
+            TheatreApi.scanCode({...promotion, toer: this.userInfo.bindmobile});
+          }
+        }
+      },
       fetchData(){
+        this.storePromotion();
         // banner
         this.getBanner();
         // 介绍
@@ -180,7 +215,7 @@
 <style lang="less" scoped>
   @import "~style/base-variables.less";
   @import "~style/style.less";
-    @import "~style/common.less";
+  @import "~style/common.less";
 
   .homeOut {
     background: repeat;
@@ -284,5 +319,9 @@
       width: 77px;
     }
   }
-  .home-cell-img{width:345px;margin:0 auto;}
+
+  .home-cell-img {
+    width: 345px;
+    margin: 0 auto;
+  }
 </style>

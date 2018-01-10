@@ -10,7 +10,7 @@
             <div class="title"></div>
             <ul flex="box:mean">
               <li @click="$router.push('TicketList')"><i class="icon order"></i><a href="#">场次票</a> </li>
-              <li @click="$router.push('PackageList')"><i class="icon package"></i><a href="#">套票</a> </li>
+              <li @click="$router.push('PackageList')"><i class="icon package"></i><a href="#">组合购</a> </li>
               <li @click="$router.push('LocalProductList')"><i class="icon lacalProduct"></i><a href="#">福州特产</a> </li>
               <!-- <li><i class="icon ticket"></i><a href="#">通兑券</a> </li> -->
             </ul>
@@ -36,17 +36,15 @@
 import AuthApi from 'api/authApi'
 import {List,ListItem} from '@/views/components/settingList'
 import {XButton} from 'vux'
+import {mapState} from "vuex";
 export default {
   components: {List,ListItem,XButton},
   data(){
     return {
-      userInfo: {
-        userNickname: '-',
-        userMoney: '0.00',
-        integral: '0',
-        servicePhone:'4000-125-000'
-      }
     }
+  },
+  computed:{
+    ...mapState('common',['userInfo'])
   },
   methods:{
     callphone(){
@@ -55,7 +53,7 @@ export default {
     fetchData(){
       AuthApi.getUserInfo().then(success => {
         this.$store.commit('common/setUserInfo', success.data)
-        this.userInfo = success.data
+        this.$set(this.userInfo,success.data);
       }, error => {
       })
     },

@@ -1,23 +1,24 @@
 <template>
   <page white :headerTitle="`剧坊会员卡`" :headerRText="`添加会员卡`" :headerRLink="`AddCard`">
     <div slot="contain">
-      <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡'  noRecordImage usePulldown height='-46'>
-       <div class="contain" v-if="dataList.length>0">
+      <page-scroller :api='getDataList' ref='scroller' noRecordText='当前账户未添加会员卡' noRecordImage usePulldown height='-46'
+                     :usePullup='false'>
+        <div class="contain">
           <div v-for="(item,index) in dataList" class="card-item">
-          <div flex="dir:top" class="info">
-            <label class="title text-ellipsis-line">{{item.levelName}}：{{item.cardNumber}}</label>
-            <div class="sum" flex="dir:left">
-              <label>余额：</label>
-              <label class="text-ellipsis-line">￥{{item.money}}</label>
+            <div flex="dir:top" class="info">
+              <label class="title text-ellipsis-line">{{item.levelName}}：{{item.cardNumber}}</label>
+              <div class="sum" flex="dir:left">
+                <label>余额：</label>
+                <label class="text-ellipsis-line">￥{{item.money}}</label>
+              </div>
+              <label class="validity">有效期：{{item.expireDate}}</label>
             </div>
-            <label class="validity">有效期：{{item.expireDate}}</label>
+            <div class="s-button khaki reCharge"
+                 @click="$router.push({name:'Recharge',query:{id:item.id,levelName:item.levelName,cardNumber:item.cardNumber}})">
+              充值
+            </div>
+            <label class="delete" @click="isdeleteCard(item)">—</label>
           </div>
-          <div class="s-button khaki reCharge" @click="$router.push({name:'Recharge',query:{id:item.id,levelName:item.levelName,cardNumber:item.cardNumber}})">充值</div>
-          <label class="delete" @click="isdeleteCard(item)" >—</label>
-        </div>
-       </div>
-       <div class="center no-data" v-else >
-          <img :src="require('assets/images/me/no_data.png')">
         </div>
       </page-scroller>
     </div>
@@ -37,18 +38,29 @@
     },
     methods: {
       async getDataList(page){
-        let res = await CardApi.getCardInfo();
-        res.data = res.data.map(item=>{
+        let res;
+        try {
+          res = await CardApi.getCardInfo();
+        }
+        catch (e) {
+          this.$util.showRequestErro(e);
+        }
+        if(res&&res.data){
+          res.data = res.data.map(item => {
             console.log(item.expireDate);
-            item.expireDate =new Date(item.expireDate*1000).format("yyyy-MM-dd");
+            item.expireDate = new Date(item.expireDate * 1000).format("yyyy-MM-dd");
             return item;
-        })
-        page === 0 ? this.dataList = res.data : this.dataList = this.dataList.concat(res.data);
-        return {
+          })
+          page === 0 ? this.dataList = res.data : this.dataList = this.dataList.concat(res.data);
+
+        }
+        this.$vux.loading.hide();
+        res ={
           ...res, page: {
             number: 0, size: 10, totalElements: 3, totalPages: 0
           }
-        }
+        };
+        return res;
         /*return  CardApi.getCardInfo().then(res => {
          res = {
          data: [{name: '1111', id: '111111'}, {name: '2222', id: '22222'}, {name: '3333', id: '3333'}],
@@ -72,25 +84,30 @@
         })
       },
       async deleteCard(card){
-          this.$vux.loading.show({
-            text:'正在解绑'
+        this.$vux.loading.show({
+          text: '正在解绑'
+        })
+        let res;
+        try {
+          res = await CardApi.setUserUnbind(card.id, 1);
+        } catch (e) {
+          this.$util.showRequestErro(e);
+        }
+        if (res && res.status == 0) {
+          this.$vux.toast.show({
+            text: '解绑成功',
+            type: 'success'
           })
-          let res;
-          try{
-              res = await CardApi.setUserUnbind(card.id,1);
-          }catch (e){
-              this.$util.showRequestErro(e);
-          }
-          if(res&&res.status==0){
-              this.$vux.toast.show({
-                text:'解绑成功',
-                type:'success'
-              })
-              this.fetchData();
-          }
-          this.$vux.loading.hide();
+          this.fetchData();
+        }
+        this.$vux.loading.hide();
       },
       fetchData(){
+        this.$vux.loading.show();
+        let ct =this;
+        setTimeout(()=>{//优化体验，查看列表时超过3秒隐藏loading
+          ct.$vux.loading.hide();
+        },3000);
         return this.$refs.scroller.reset()
       }
     }
@@ -99,10 +116,19 @@
 
 <style lang="less" scoped>
   @import "~style/base-variables.less";
-  .contain{padding-top: 15px;}
-  .no-data{
-    img{width: 150px;margin-top: 160px;margin-bottom: 10px;}
+
+  .contain {
+    padding-top: 15px;
   }
+
+  .no-data {
+    img {
+      width: 150px;
+      margin-top: 160px;
+      margin-bottom: 10px;
+    }
+  }
+
   .card-item {
     height: 125px;
     width: 345px;
@@ -122,7 +148,7 @@
       }
       .sum {
         margin-top: 15px;
-        :first-child{
+        :first-child {
           line-height: 32px;
           width: 60px;
         }

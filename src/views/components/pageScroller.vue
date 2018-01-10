@@ -57,15 +57,15 @@ export default {
                 pulldownStatus: ''
             },
             showNoMore: false,
-            showNoRecord: false,
+            showNoRecord: true,
             page: {
                 number: 0,
                 totalPages: 0,
-                totalElements: -1,
+                totalElements:0,
                 size: 10
             },
             pullUpConfig: {
-                content: '上拉可以刷新',
+                content: '',
                 pullUpHeight: 60,
                 height: 40,
                 autoRefresh: false,
@@ -89,7 +89,7 @@ export default {
     watch: {
         page: {
             handler: function (val, oldVal) {
-                this.showNoRecord = val.totalElements <= 0
+                this.showNoRecord = val.totalElements <= 0;
                 if (val.number >= val.totalPages - 1) {
                     this.usePullup && (this.status.pullupStatus = 'disabled')
                 } else {
@@ -115,7 +115,7 @@ export default {
         reset() {
             this.page.number = 0
             this.page.totalPages = 0
-            this.page.totalElements = -1
+            this.page.totalElements = 0
             this.$refs.scroller && this.$refs.scroller._xscroll && this.$refs.scroller.reset({
                 top: 0
             })
