@@ -18,7 +18,7 @@
               <img class="code" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1514203011952&di=f382d7d2131f6277edb1cb8ef7b58ee5&imgtype=0&src=http%3A%2F%2Fsrc.house.sina.com.cn%2Fimp%2Fimp%2Fdeal%2F86%2F68%2F4%2Fe51eac8a98c2bd65c6b68bae86c_p1_mk1_wm35.gif">
               <p>扫二维码向朋友分享</p>
               <div class="type">
-                <div class="item"> <i class="wx"></i> <p>微信</p> </div>
+                <div class="item" @click="ShareQQ"> <i class="wx"></i> <p>微信</p> </div>
                 <div class="item" @click="friendArea"> <i class="friends"></i> <p>朋友圈</p> </div>
                 <div class="item"> <i class="qq"></i> <p>QQ</p> </div>
                 <div class="item"> <i class="sina"></i> <p>新浪</p> </div>
@@ -64,9 +64,8 @@ export default {
           }
         },error => { console.log(error); })
     },
-    friendArea(){
-      alert('分享')
-      console.log('wx',wx);
+    ShareQQ(){
+      alert('分享QQ')
       wx.onMenuShareQQ({
         title: '这是一个测试的标题', // 分享标题
         desc: '这个是分享奥朋友圈的描述信息', // 分享描述
@@ -81,25 +80,28 @@ export default {
         // 用户取消分享后执行的回调函数
         }
       });
-      // wx.onMenuShareQQ({
-      //   title: '这是一个测试的标题',
-      //   desc: '这个是分享奥朋友圈的描述信息',
-      //   link: 'http://www.baidu.com',
-      //   imgUrl: 'https://www.baidu.com/img/bd_logo1.png',
-      //   trigger: function (res) {
-      //     // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
-      //     // alert('用户点击发送给朋友');
-      //   },
-      //   success: function (res) {
-      //       alert('分享成功');
-      //   },
-      //   cancel: function (res) {
-      //     alert('你没有分享');
-      //   },
-      //   fail: function (res) {
-      //     alert(JSON.stringify(res));
-      //   }
-      // });
+    },
+    friendArea(){
+      alert('分享朋友圈')
+      wx.onMenuShareAppMessage({
+        title: '这是一个测试的标题',
+        desc: '这个是分享奥朋友圈的描述信息',
+        link: 'http://www.baidu.com',
+        imgUrl: 'https://www.baidu.com/img/bd_logo1.png',
+        trigger: function (res) {
+          // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+          // alert('用户点击发送给朋友');
+        },
+        success: function (res) {
+            alert('分享成功');
+        },
+        cancel: function (res) {
+          alert('你没有分享');
+        },
+        fail: function (res) {
+          alert(JSON.stringify(res));
+        }
+      });
       // alert('已注册获取“发送给朋友”状态事件');
     }
   }
