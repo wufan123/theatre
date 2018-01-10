@@ -33,11 +33,11 @@ export default {
   methods: {
     async confirm() {
       if(!this.form.cardNo){
-//        this.$vux.toast.text("请输入会员卡号", 'middle');
+       this.$vux.toast.text("请输入会员卡号");
         return
       }
       if(!this.form.cardPw){
-//        this.$vux.toast.text("请输入会员卡密码", 'middle');
+       this.$vux.toast.text("请输入会员卡密码");
         return
       }
       this.$vux.loading.show({text:'正在添加'});

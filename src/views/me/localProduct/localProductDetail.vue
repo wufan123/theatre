@@ -5,7 +5,7 @@
         <div class="ticket-detail">
           <div class="ticket">
             <div class="info">
-              <p class="f16">{{orderDetail.details[0].goodsName}}</p>
+              <p class="f16">{{!$util.isEmptyObject(orderDetail)&&orderDetail.details[0].goodsName}}</p>
               <!-- <p>{{new Date(orderDetail.downTime*1000).format('yyyy年MM月dd日 hh:mm:ss')}}</p> -->
             </div>
             <div class="body">
