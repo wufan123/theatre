@@ -35,12 +35,7 @@ import SelectMember from 'views/common/selectMember.vue'
 
 Vue.use(Router)
 
-export default new Router({
-  mode: 'history',
-  scrollBehavior (to, from, savedPosition) {
-    console.log(savedPosition);
-    return { x: 0, y: 0 }
-  },
+export default new Router({  
   routes: [
     //home
     {path: '*', redirect: '/Home'},
