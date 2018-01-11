@@ -37,6 +37,7 @@
 <script>
 import { XDialog,Qrcode } from 'vux'
 import theatreApi from "api/theatreApi";
+import AuthApi from "../../../api/authApi";
 export default {
   data(){
     return{
@@ -50,21 +51,22 @@ export default {
   methods:{
     Scan(){
         var _this = this;
-            wx.scanQRCode({   
+            wx.scanQRCode({
                 needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
                 scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
                 success: function (res) {
                 var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
-                    //其它网页调用二维码扫描结果： 
+                    //其它网页调用二维码扫描结果：
                     //var result=sessionStorage.getItem('saomiao_result');
                 }
             });
       },
     ShareFriend(){
+        console.log('1111')
       wx.onMenuShareAppMessage({
         title: '这是一个测试的标题', // 分享标题
         desc: '这个是分享QQ的描述信息', // 分享描述
-        link: 'http://jufang.zmaxfilm.com/#/Home', // 分享链接
+        link: 'https://jufang.zmaxfilm.com', // 分享链接
         imgUrl: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享图标
         success: function () {
         // 用户确认分享后执行的回调函数
@@ -73,7 +75,11 @@ export default {
         cancel: function () {
           alert('你没有分享');
         // 用户取消分享后执行的回调函数
-        }
+        },
+          fail: function (res) {
+            console.log('failres',res)
+             alert(JSON.stringify(res));
+          }
       });
     },
     fetchData(){
@@ -92,12 +98,46 @@ export default {
             this.ruleConfig = res.data[0].miscVal
           }
         },error => { console.log(error); })
+      AuthApi.getWeixinConfig().then(success => {
+        wx.config({
+          debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+          appId: success.data.appId, // 必填，公众号的唯一标识
+          timestamp: success.data.timestamp, // 必填，生成签名的时间戳
+          nonceStr: success.data.noncestr, // 必填，生成签名的随机串
+          signature: success.data.signature,// 必填，签名，见附录1
+          jsApiList: [
+            'chooseWXPay',
+            'onMenuShareQQ',
+            'onMenuShareAppMessage',
+            'onMenuShareQZone',
+            'onMenuShareTimeline',
+            'scanQRCode'
+          ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        })
+        wx.checkJsApi({
+          jsApiList: [
+            'chooseWXPay',
+            'onMenuShareQQ',
+            'onMenuShareAppMessage',
+            'onMenuShareQZone',
+            'onMenuShareTimeline',
+            'scanQRCode'
+          ], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+          success: function(res) {
+            // 以键值对的形式返回，可用的api值true，不可用为false
+            // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+          }
+        });  
+      }, error => {
+
+      })
+
     },
     ShareQQ(){
       wx.onMenuShareQQ({
         title: '这是一个测试的标题', // 分享标题
         desc: '这个是分享QQ的描述信息', // 分享描述
-        link: 'http://jufang.zmaxfilm.com/#/Home', // 分享链接
+        link: 'https://jufang.zmaxfilm.com', // 分享链接
         imgUrl: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享图标
         success: function () {
         // 用户确认分享后执行的回调函数
@@ -109,12 +149,12 @@ export default {
         }
       });
     },
-    
+
     friendArea(){
       wx.onMenuShareTimeline({
         title: '这是一个测试的标题', // 分享标题
         desc: '这个是分享QQ的描述信息', // 分享描述
-        link: 'http://jufang.zmaxfilm.com/#/Home', // 分享链接
+        link: 'https://jufang.zmaxfilm.com', // 分享链接
         imgUrl: 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700', // 分享图标
         success: function () {
         // 用户确认分享后执行的回调函数
@@ -147,7 +187,7 @@ export default {
 </script>
 
 
-  
+
 <style lang="less" scoped>
 .content{margin: 75px 3px;display: flex;flex-direction: column;align-items: center; text-align: center;font-size: 16px;
   .s-button{padding: 4px 10px;}
@@ -162,7 +202,7 @@ export default {
     .code{width: 100px;height: 100px;}
     .type{display: flex;flex-wrap: wrap;padding: 20px 20px 0;    width: -webkit-fill-available;
       .item{width: 33%;text-align: center;margin-bottom: 10px;
-        i{width:44px;height: 44px;display: inline-block;background-size: 100%100%; 
+        i{width:44px;height: 44px;display: inline-block;background-size: 100%100%;
           &.wx{background-image: url('../../../assets/images/me/wx.png');}
           &.friends{background-image: url('../../../assets/images/me/friends.png');}
           &.qq{background-image: url('../../../assets/images/me/qq.png');}
