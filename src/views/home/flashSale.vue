@@ -1,5 +1,5 @@
 <template>
-  <page :headerTitle="`限时抢`" flex-box="1">
+  <page headerTitle="限时抢券" flex-box="1">
     <div slot="contain" class="contain">
       <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown :usePullup="false"
                      :height="'-46'">
