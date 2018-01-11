@@ -21,11 +21,19 @@ export default {
     fetchData(){
       this.getIntroduce();
     },
+    mapIntroduceData(data){
+      data.contentUrl = data.contentUrl.replace('https://', '');
+      data.contentUrl = data.contentUrl.replace('http://', '');
+      data.contentUrl = `/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
+      return data;
+    },
     async getIntroduce(){
       let res = await TheatreApi.getInformationList(20);
       if(res)
       {
-        this.introduceList = res.data
+        this.introduceList = res.data.map(item=>{
+            return this.mapIntroduceData(item);
+        })
       }
     }
   }

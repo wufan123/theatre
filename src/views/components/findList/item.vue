@@ -1,5 +1,5 @@
 <template>
-  <a :href="link">
+  <router-link :to="link">
   <div class="find">
     <img class="find-vidio"
          :src="img">
@@ -8,8 +8,9 @@
       <p class="content text-ellipsis">
         {{content}}</p>
     </div>
+    <!--<img :src='require("assets/images/home/video_play.png")'  class="playIcon"/>-->
   </div>
-  </a>
+  </router-link>
 </template>
 <script>
 
@@ -26,6 +27,13 @@
   @import "~style/base-variables.less";
 
   .find {
+    position: relative;
+    .playIcon{
+      position: absolute;
+      width: 60px;
+      top: 75px;
+      left: 155px;
+    }
     .find-vidio {
       width: 345px;
       height: 194px;
