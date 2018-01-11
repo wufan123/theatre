@@ -51,7 +51,6 @@
   import theatreApi from "api/theatreApi";
   import {mapState} from "vuex";
   import {List, ListItem} from "views/components/settingList";
-import {mapState} from "vuex";
   export default {
     components: {PageScroller, List, ListItem},
     data() {
