@@ -73,7 +73,11 @@ export default {
         cancel: function () {
           alert('你没有分享');
         // 用户取消分享后执行的回调函数
-        }
+        },
+          fail: function (res) {
+            console.log('failres',res)
+             alert(JSON.stringify(res));
+          }
       });
     },
     fetchData(){
