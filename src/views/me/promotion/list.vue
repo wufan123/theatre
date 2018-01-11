@@ -47,7 +47,9 @@
 </template>
 <script>
   import PageScroller from "views/components/pageScroller.vue";
+  import AuthApi from 'api/authApi'
   import theatreApi from "api/theatreApi";
+  import {mapState} from "vuex";
   import {List, ListItem} from "views/components/settingList";
 import {mapState} from "vuex";
   export default {
@@ -62,8 +64,8 @@ import {mapState} from "vuex";
       };
     },
     computed:{
-    ...mapState('common',['userInfo'])
-  },
+      ...mapState('common',['userInfo'])
+    },
     methods: {
       preDate(){
         if(this.curDateTime.month==1){
@@ -84,7 +86,13 @@ import {mapState} from "vuex";
       async getDataList(page) {
         let res;
         try {
-          res = await theatreApi.getPromotionList('13645017650');
+          await AuthApi.getUserInfo().then(success => {
+            this.$store.commit('common/setUserInfo', success.data)
+            this.$set(this.userInfo,success.data);
+          }, error => {
+          });
+          var promoterPhone = this.userInfo.bindmobile
+          res = await theatreApi.getPromotionList(promoterPhone);
         } catch (e) {
             this.$util.showRequestErro(e)
         }
