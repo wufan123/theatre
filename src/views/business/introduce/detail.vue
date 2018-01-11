@@ -37,7 +37,15 @@
           this.html = await  http.instance.get('https://' + this.$route.query.contentUrl)
         }
         catch (e) {
-            this.html =e    
+
+          if (e.toString().indexOf('<html') == 0){
+            this.html = e
+          }else{
+            this.$util.showRequestErro({
+              text:'资源错误'
+            })
+          }
+
         }
 
       },
