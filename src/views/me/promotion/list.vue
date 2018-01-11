@@ -11,9 +11,9 @@
       <div class="time" flex="main:justify cross:center">
         <label>本月</label>
         <div class="select-data">
-          <i class="pre" @click="preDate"><</i>
+          <i class="icon pre" @click="preDate"><</i>
           <label>{{curDateTime.year}}.{{curDateTime.month}}</label>
-          <i class="next" @click="nextDate">></i>
+          <i class="icon next" @click="nextDate">></i>
         </div>
       </div>
       <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown height='-220'>
@@ -138,9 +138,35 @@
         img{border-radius: 50%;width: 60px;height: 60px;}
       }
     }
-    .time{padding: 10px 10px 0;
+    .time{padding: 10px 10px ;
       .select-data{display: flex;align-items: center;justify-content: center;
-        i{font-size: 15px;padding: 0 15px;font-weight: bolder;}
+      i.icon{
+      display: block;
+      padding:0 10px;
+      width: 12px;
+      height: 12px;
+      overflow: hidden;
+      &:before{
+        content: "";
+        display: block;
+        width: 6px;
+        height: 6px;
+        margin-left: 0;
+        border: 2px solid #c6ac88;
+        border-top: 0 none;
+        border-left: 0 none
+      }
+      &.pre:before{
+        margin-top: 2px;
+        margin-left: 2px;
+        -webkit-transform: rotate(135deg)
+      }
+      &.next:before{
+        margin-top: 2px;
+        -webkit-transform: rotate(315deg)
+      }
+      }
+        // i{font-size: 15px;padding: 0 15px;font-weight: bolder;}
       }
     }
     .promotion-list{background: rgba(255, 251, 244, 0.5);
