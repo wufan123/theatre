@@ -33,6 +33,11 @@ export function getAsUriParameters(data){
   }).join('&')
 }
 
+export function mGetDate(year, month){
+  var d = new Date(year, month, 0);
+  return d.getDate();
+}
+
 export function showLoginConfirm() {
   window._vue.$vux.confirm.show({
     title: '温馨提示',

@@ -64,9 +64,11 @@ function finishPromotion({toer,sn,type}) {
   return apiHttp.getTheatre('/promotion/finishPromotion',{toer,sn,type})
 }
 
-function getPromotionList(promoter) {
+function getPromotionList(promoter,startSuccessTime,endSuccessTime) {
     return apiHttp.getTheatre('/promotion/list',{
-        promoter: promoter
+        promoter: promoter,
+        startSuccessTime:startSuccessTime,
+        endSuccessTime:endSuccessTime
     })
 }
 

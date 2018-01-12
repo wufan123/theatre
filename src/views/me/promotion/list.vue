@@ -1,22 +1,25 @@
 <template>
-  <page :headerTitle="`推广记录`">
+  <page :headerTitle="`推广记录`" isShowBack>
     <div slot="contain" class="promotion">
       <div class="me-top">
         <div class="advert">
           <i class="level" flex="main:center cross:center">V1</i>
-          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1515651331691&di=bb9609a2b962acb00530ea5a31a3275d&imgtype=0&src=http%3A%2F%2Fwww.qqzhi.com%2Fuploadpic%2F2015-01-07%2F014622445.jpg">
+          <img :src="require('assets/images/me/advert.png')">
         </div>
         <span class="bold f16">{{userInfo.userNickname}}</span>
       </div>
       <div class="time" flex="main:justify cross:center">
-        <label>本月</label>
+        <label>本{{curDateTime}}月</label>
         <div class="select-data">
-          <i class="icon pre" @click="preDate"><</i>
-          <label>{{curDateTime.year}}.{{curDateTime.month}}</label>
-          <i class="icon next" @click="nextDate">></i>
+          <i class="icon pre" ><</i>
+          <datetime format="YYYY-MM" v-model="curDateTime" @on-change="confirmDate" ></datetime>
+            <i class="icon next">></i>
+          <!-- 
+          <label @click="showPopup=true">{{curDateTime.year}}.{{curDateTime.month}}</label>
+          <i class="icon next" @click="nextDate">></i> -->
         </div>
       </div>
-      <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown height='-220'>
+      <page-scroller :api='getDataList' ref='scroller' :initQuery="false" noRecordText='当前无数据' noRecordImage usePulldown height='-220'>
         <div  class="promotion-list">
           <list title="销售额（12000）元">
             <list-item  extra=" " v-for="(item,index) in dataList"  @click="orderDetail(item)">
@@ -41,6 +44,7 @@
             <label v-if="item.status==3">推广成功</label>
           </div> -->
         </div>
+        
       </page-scroller>
     </div>
   </page>
@@ -49,76 +53,65 @@
   import PageScroller from "views/components/pageScroller.vue";
   import AuthApi from 'api/authApi'
   import theatreApi from "api/theatreApi";
+  import { Datetime,Popup } from 'vux'
   import {mapState} from "vuex";
   import {List, ListItem} from "views/components/settingList";
   export default {
-    components: {PageScroller, List, ListItem},
+    components: {PageScroller, List, ListItem,Popup,Datetime},
     data() {
       return {
+        showPopup:false,
         dataList: [],
-        curDateTime:{
-          year:2018,
-          month:1
-        }
+        value1:'2018-01',
+        curDateTime:'2018-01',
       };
     },
     computed:{
       ...mapState('common',['userInfo'])
     },
     methods: {
-      preDate(){
-        if(this.curDateTime.month==1){
-          this.curDateTime.month=12
-          this.curDateTime.year--
-          return;
-        }
-        this.curDateTime.month--
+      confirmDate(){
+        console.log('curDateTime',this.curDateTime)
+        this.getDataList(1)
       },
-      nextDate(){
-        if(this.curDateTime.month==12){
-          this.curDateTime.month=1
-          this.curDateTime.year++
-          return;
-        }
-        this.curDateTime.month++
+      getUserInfo(){
+        return AuthApi.getUserInfo().then(success => {
+          this.$store.commit('common/setUserInfo', success.data)
+          this.$set(this.userInfo,success.data);
+          this.getDataList(1)
+        }, error => {})
       },
-      async getDataList(page) {
-        let res;
-        try {
-          await AuthApi.getUserInfo().then(success => {
-            this.$store.commit('common/setUserInfo', success.data)
-            this.$set(this.userInfo,success.data);
-          }, error => {
-          });
-          var promoterPhone = this.userInfo.bindmobile
-          res = await theatreApi.getPromotionList(promoterPhone);
-        } catch (e) {
-            this.$util.showRequestErro(e)
-        }
-        if (res && res.data.content) {
-          if (page) {
-            this.dataList = this.dataList.concat(res.data.content);
-          } else {
-            this.dataList = res.data.content;
+      getDataList(page) {
+        var days = this.$util.mGetDate(new Date(this.curDateTime).getFullYear(),new Date(this.curDateTime).getMonth()+1)
+        var promoterPhone = this.userInfo.bindmobile
+        var startTime =`${this.curDateTime}-01 00:00:00`//       '2018-01-01 00:00:00'  // `${this.curDateTime.year}-${this.curDateTime.month}-01 00:00:00`
+        var endTime =`${this.curDateTime}-${days} 23:59:59`// '2018-01-31 23:59:59' //`${this.curDateTime.year}-${this.curDateTime.month}-30 23:59:59`
+        return theatreApi.getPromotionList(promoterPhone,startTime,endTime).then(res=>{
+            if (res && res.data.content) {
+              if (page>1) {
+                this.dataList = this.dataList.concat(res.data.content);
+              } else {
+                this.dataList = res.data.content;
+              }
+              res = {
+                data: this.dataList,
+                page: {
+                  number: page,
+                  totalElements: this.dataList.length,
+                }
+              }
           }
-          res = {
-            data: this.dataList,
-            page: {
-              number: page,
-              size: 10,
-              totalElements: this.dataList.length,
-              totalPages: res.data.content.length > 0 ? page + 3 : page + 1
-            }
-          }
-        }
-        this.$vux.loading.hide();
-        return res;
+          this.$vux.loading.hide();
+          return res;
+        },e=>{this.$util.showRequestErro(e)})
       },
       orderDetail(order){
         this.$store.commit('business/setSelectedTicketOrder', order)
         this.$router.push({name: 'TicketDetail', query: {id: order.orderCode, status: order.status}})
       },
       fetchData() {
+        this.curDateTime = new Date().format('yyyy-MM')
+        this.getUserInfo()
         this.$vux.loading.show();
         let ct =this;
         setTimeout(()=>{//优化体验，查看列表时超过3秒隐藏loading

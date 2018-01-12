@@ -127,7 +127,7 @@ export default {
             return this.getDataByPage(1)
         },
         getDataByPage(page) {
-            page = (page >=0 ? page : this.page.number);
+            page = (page >=1 ? page : this.page.number);
             let api =this.api(page);
             return api?api.then(res => {
                 var allElementss = 0
