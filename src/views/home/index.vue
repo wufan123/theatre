@@ -163,10 +163,10 @@
               case 4:
                 data.contentUrl = `/ProductDetail?hyGoodsId=${data.redirectId}`;
                 break;
-              case 5:
+              case 6:
                 data.contentUrl = '/SessionDetail';
                 break;
-              case 6:
+              case 5:
                 data.contentUrl = `HomePackageDetail?packageId=${data.redirectId}`;
                 break;
             }

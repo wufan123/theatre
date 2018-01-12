@@ -1,7 +1,7 @@
 <template>
   <page :headerTitle="' '">
     <div slot="contain" flex="dir:top cross:center">
-      <div v-html="html">
+      <div v-html="html" style="max-width: 100%">
       </div>
       <router-link :to="url">
         <img v-if="$route.query.redirectType>3" class="goToBuy" :src='require("assets/images/go_to_buy.png")'>
@@ -20,10 +20,10 @@
           url = `/ProductDetail?hyGoodsId=${this.$route.query.redirectId}`;
           break;
         case 5:
-          url = '/SessionDetail';
+          url = `HomePackageDetail?packageId=${this.$route.query.redirectId}`;
           break;
         case 6:
-          url = `HomePackageDetail?packageId=${this.$route.query.redirectId}`;
+          url = '/SessionDetail';
           break;
       }
       return {
