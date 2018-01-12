@@ -23,7 +23,12 @@
     },
     methods: {
       async fetchData(){
-        let res = await  ComboApi.getPackageDetail(this.packageId, this.type);
+        let res ;
+        try{
+          res = await  ComboApi.getPackageDetail(this.packageId, this.type);
+          }catch (e){
+              this.$util.showRequestErro(e)
+          }
         if (res && res.data) {
             let rd =res.data;
              this.data ={

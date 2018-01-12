@@ -39,10 +39,10 @@
       </div>
       <group>
         <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile"
-                 v-model="phone"></x-input>
+             ref="phone"   v-model="phone"></x-input>
       </group>
       <div class="info">
-        <p>温馨提示：</p>
+        <p>温馨提{{phone}}示：</p>
         <p>手机号用于生成订单，及发送支付短信</p>
       </div>
     </div>
@@ -148,6 +148,14 @@
       },
       // 锁定，跳转到支付页面
       async lockAndPayOrder() {
+        console.log('this.$refs.input01.valid',)
+        if(!this.$refs.phone.valid){
+          this.$vux.toast.show({
+            type: 'cancel',
+            text: '请输入正确的手机号'
+          })
+          return
+        }
         if (this.phone === '') {
           this.$vux.toast.show({
             type: 'cancel',
