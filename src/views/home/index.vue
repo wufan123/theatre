@@ -26,9 +26,12 @@
         <scroll-view slot="main">
           <div flex="dir:top " v-for="(item,index) in introduceList" class="introduceItem" :key="index">
             <router-link :to="item.contentUrl">
-              <div flex="dir:left">
+              <div flex="dir:left" class="introduceContent">
                 <img :src="item.thumbUrl" class="contentImg">
                 <div class="rightBorder"></div>
+                <div class="introducePlayIcon" flex="dir:top main:center cross:center" v-if="item.redirectType==3">
+                  <img :src='require("assets/images/home/video_play.png")'/>
+                </div>
               </div>
               <div class="bottomBorder"></div>
               <label class='contentTxt text-ellipsis-line'>{{item.title}}</label>
@@ -65,9 +68,12 @@
           >
             <!-- @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})" -->
             <router-link :to="item.contentUrl">
-              <div flex="dir:left">
+              <div flex="dir:left" class="findContent">
                 <img :src="item.thumbUrl" class="contentImgSquare">
                 <div class="rightBorder"></div>
+                <div class="findPlayIcon" flex="dir:top main:center cross:center" v-if="item.redirectType==3">
+                  <img :src='require("assets/images/home/video_play.png")'/>
+                </div>
               </div>
               <div class="bottomBorder"></div>
               <label class='contentTxt'>{{item.title}}</label>
@@ -97,12 +103,14 @@
     name: '限时抢券',
     pathName: 'FlashSale',
     icon: require('assets/images/home/flash_sale.png')
-  }, {
+  },
+    {
     name: '超级特卖',
     pathName: 'LocalProduct',
     params: {classType: 102},
     icon: require('assets/images/home/hemers.png')
-  }, {
+  },
+    {
     name: '福州特产馆',
     pathName: 'LocalProduct',
     params: {classType: 101},
@@ -261,7 +269,6 @@
         height: 160px;
       }
     }
-
     .bottomBorder {
       background: @color-primary;
       height: 5px;
@@ -329,6 +336,32 @@
     .menuItem {
       height: 61px;
       width: 77px;
+    }
+    .introduceContent{
+      position: relative;
+      .introducePlayIcon{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 166px;
+        width: 250px;
+        img{
+          width: 60px;
+        }
+      }
+    }
+    .findContent{
+      position: relative;
+      .findPlayIcon{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 160px;
+        width: 160px;
+        img{
+          width: 60px;
+        }
+      }
     }
   }
 

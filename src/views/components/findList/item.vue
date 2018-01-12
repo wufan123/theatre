@@ -8,7 +8,9 @@
       <p class="content text-ellipsis">
         {{content}}</p>
     </div>
-    <!--<img :src='require("assets/images/home/video_play.png")'  class="playIcon"/>-->
+    <div class="playIcon" flex="dir:top main:center cross:center" v-if="type==3">
+      <img :src='require("assets/images/home/video_play.png")'/>
+    </div>
   </div>
   </router-link>
 </template>
@@ -16,7 +18,7 @@
 
   export default {
     name: "find-item",
-    props: ['img', 'title', 'content','link'],
+    props: ['img', 'title', 'content','link','type'],
     data(){
       return {}
     }
@@ -30,9 +32,13 @@
     position: relative;
     .playIcon{
       position: absolute;
-      width: 60px;
-      top: 75px;
-      left: 155px;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 240px;
+      img{
+        width: 60px;
+      }
     }
     .find-vidio {
       width: 345px;

@@ -10,13 +10,13 @@
       </div>
       <div style="margin-top:46px;">
         <find-item v-for="(item,index) in strategyList" :key="index" v-if="currentIndex===0" :title="item.title"
-                   :content="item.content" :img="item.thumbUrl" :link="item.contentUrl">
+                   :content="item.content" :img="item.thumbUrl" :link="item.contentUrl" :type="item.redirectType">
         </find-item>
         <find-item v-for="(item,index) in videoList" :key="index" v-if="currentIndex===1" :title="item.title"
-                   :content="item.content" :img="item.thumbUrl" :link="item.contentUrl">
+                   :content="item.content" :img="item.thumbUrl" :link="item.contentUrl" :type="item.redirectType">
         </find-item>
         <find-item v-for="(item,index) in attentionList" :key="index" v-if="currentIndex===2" :title="item.title"
-                   :content="item.content" :img="item.thumbUrl" :link="item.contentUrl">
+                   :content="item.content" :img="item.thumbUrl" :link="item.contentUrl" :type="item.redirectType">
         </find-item>
       </div>
     </div>
