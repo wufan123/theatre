@@ -39,7 +39,7 @@ export function showLoginConfirm() {
     content: '您还未登录，请先登录后再进行操作哦',
     confirmText: "立即登录",
     onCancel () {
-      window._vue.$router.push("Home")
+      // window._vue.$router.push("Home")
     },
     onConfirm () {
       window._vue.$router.push("Login");
