@@ -1,7 +1,7 @@
 <template>
   <page :headerTitle="' '">
     <div slot="contain" flex="dir:top cross:center">
-      <div v-html="html" style="max-width: 100%">
+      <div v-html="html" style="max-width: 100%;overflow: hidden">
       </div>
       <router-link :to="url">
         <img v-if="$route.query.redirectType>3" class="goToBuy" :src='require("assets/images/go_to_buy.png")'>
