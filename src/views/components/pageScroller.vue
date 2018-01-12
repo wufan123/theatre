@@ -59,10 +59,9 @@ export default {
             showNoMore: false,
             showNoRecord: true,
             page: {
-                number: 0,
-                totalPages: 0,
+                number: 1,
                 totalElements:0,
-                size: 10
+                allElements:0
             },
             pullUpConfig: {
                 content: '',
@@ -89,11 +88,11 @@ export default {
     watch: {
         page: {
             handler: function (val, oldVal) {
-                this.showNoRecord = val.totalElements <= 0;
-                if (val.number >= val.totalPages - 1) {
-                    this.usePullup && (this.status.pullupStatus = 'disabled')
+                this.showNoRecord = val.allElements <= 0;
+                if (val.totalElements>0) {
+                    this.usePullup && (this.status.pullupStatus = 'enabled')
                 } else {
-                    this.usePullup && (this.status.pullupStatus = 'default')
+                    this.usePullup && (this.status.pullupStatus = 'disabled')
                 }
                 this.showNoMore = this.status.pullupStatus == 'disabled' && !this.showNoRecord
                 this.usePulldown && (this.status.pulldownStatus = 'default')
@@ -113,8 +112,7 @@ export default {
             this.page = page
         },
         reset() {
-            this.page.number = 0
-            this.page.totalPages = 0
+            this.page.number = 1
             this.page.totalElements = 0
             this.$refs.scroller && this.$refs.scroller._xscroll && this.$refs.scroller.reset({
                 top: 0
@@ -125,13 +123,24 @@ export default {
             this.getDataByPage(++this.page.number)
         },
         refresh() {
-
-            return this.getDataByPage(0)
+            this.page.allElements = 0
+            return this.getDataByPage(1)
         },
         getDataByPage(page) {
             page = (page >=0 ? page : this.page.number);
-            let api =this.api(page, this.page.size);
+            let api =this.api(page);
             return api?api.then(res => {
+                var allElementss = 0
+                if(page==1){
+                    allElementss = res.data.length
+                }else{
+                    allElementss=this.page.allElements+res.data.length
+                }
+                res.page={
+                    number : page,
+                    totalElements : res.data.length,
+                    allElements : allElementss
+                }
                 this.renderPage(res.page)
             }):null;
         }
