@@ -62,7 +62,7 @@
   }
 
   .goToBuy {
-    width: 60px;
+    width: 80px;
   }
 </style>
 
