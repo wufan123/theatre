@@ -89,10 +89,10 @@ export default {
         page: {
             handler: function (val, oldVal) {
                 this.showNoRecord = val.allElements <= 0;
-                if (val.totalElements>0) {
-                    this.usePullup && (this.status.pullupStatus = 'enabled')
-                } else {
+                if (val.totalElements<10) {
                     this.usePullup && (this.status.pullupStatus = 'disabled')
+                } else {
+                    this.usePullup && (this.status.pullupStatus = 'default')
                 }
                 this.showNoMore = this.status.pullupStatus == 'disabled' && !this.showNoRecord
                 this.usePulldown && (this.status.pulldownStatus = 'default')
@@ -120,6 +120,7 @@ export default {
             return this.getDataByPage(this.page.number)
         },
         getMore() {
+            console.log('会走几次')
             this.getDataByPage(++this.page.number)
         },
         refresh() {
