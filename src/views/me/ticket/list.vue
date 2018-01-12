@@ -45,7 +45,7 @@
             this.$util.showRequestErro(e)
         }
         if (res && res.data) {
-          if (page) {
+          if (page>1) {
             this.dataList = this.dataList.concat(res.data);
           } else {
             this.dataList = res.data;
@@ -54,9 +54,7 @@
             data: this.dataList,
             page: {
               number: page,
-              size: 10,
-              totalElements: this.dataList.length,
-              totalPages: res.data.length > 0 ? page + 3 : page + 1
+              totalElements: this.dataList.length
             }
           }
         }
