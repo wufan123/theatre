@@ -60,8 +60,8 @@ function scanCode(params) {
   return apiHttp.getTheatre("/promotion/scanCode",params)
 }
 
-function finishPromotion({toer,sn,type}) {
-  return apiHttp.getTheatre('/promotion/finishPromotion',{toer,sn,type})
+function finishPromotion({toer,sn,type,price}) {
+  return apiHttp.getTheatre('/promotion/finishPromotion',{toer,sn,type,price})
 }
 
 function getPromotionList(promoter,startSuccessTime,endSuccessTime) {

@@ -194,6 +194,13 @@
           this.$util.showRequestErro(e);
         }
         if(res&&!this.$util.isEmptyObject(res.data)) {
+            //推广完成
+          TheatreApi.finishPromotion({
+            sn:this.orderId,
+            type:this.promotion.type,
+            toer:this.userInfo.bindmobile,
+            price:res.data.price
+          });
           //价格为0时直接支付
           if (res.data.price == 0) {
             this.$vux.loading.show({
@@ -206,11 +213,6 @@
               this.$util.showRequestErro(e);
             }
             if (payRes && payRes.status == 0) {
-              TheatreApi.finishPromotion({
-                sn:this.orderId,
-                type:this.promotion.type,
-                toer:this.userInfo.bindmobile
-              });
               this.$router.push({
                 name: 'PaySuccess'
               })
