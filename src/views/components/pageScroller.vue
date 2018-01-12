@@ -120,7 +120,6 @@ export default {
             return this.getDataByPage(this.page.number)
         },
         getMore() {
-            console.log('会走几次')
             this.getDataByPage(++this.page.number)
         },
         refresh() {
