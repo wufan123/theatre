@@ -120,7 +120,8 @@
         }
         /*TheatreApi.finishPromotion({
           ...this.promotion,
-          sn:this.orderId
+          sn:this.orderId,
+          price:
         });*/
         this.$vux.loading.hide();
         /*.then(success => {
