@@ -185,7 +185,7 @@
 </script>
 <style lang="less">
   .c-order .am-list-thumb img {
-    border: 2px solid #c4a983;
+    border: 1px solid #c4a983;
     box-sizing: border-box;
   }
 </style>

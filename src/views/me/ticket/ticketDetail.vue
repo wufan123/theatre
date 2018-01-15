@@ -18,7 +18,7 @@
              <div class="cell-body">订单号： {{orderInfo.orderCode}}</div>
             <div class="cell-body">下单时间： {{new Date(order.orderTime*1000).format('yyyy年MM月dd日 hh:mm:ss')}}</div>
             <div class="cell-item flexb"><label>{{orderDetail.film.filmName}}</label><label>x {{orderDetail.film.seatCount}}</label></div>
-          
+
             <div v-if="orderDetail.goods" class="cell-item">
                 <div  class="flexb" v-for="item in orderDetail.goods.list">
                   <label>{{item.name}}</label><label>x {{item.number}}</label>
@@ -26,7 +26,7 @@
             </div>
             <div class="cell-body">
               <div class="flexb f12"><label>总价</label><label>￥{{orderPayInfo.totalPrice}}</label></div>
-              <div class="flexb" v-for="item in orderPayInfo.payInfo"><label>{{item.name}}</label><label>-￥{{item.money}}</label></div>
+              <!--<div class="flexb" v-for="item in orderPayInfo.payInfo"><label>{{item.name}}</label><label>-￥{{item.money}}</label></div>-->
               <div class="flexb f16 ">
                 <label class="red" v-if="orderInfo.status==0||orderInfo.status==6||orderInfo.status==26">未支付</label>
                 <!-- <label class="red" v-if="orderInfo.status==6||order.status==26">已取消</label> -->

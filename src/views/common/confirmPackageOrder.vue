@@ -7,8 +7,7 @@
             <div v-if="packageInfo&&packageInfo.detail" class="good-content">
               <list-item v-for="(item,index) in packageInfo.detail" :key="index" :img="item.goodsImg"
                          :contentTitle="item.goodsName"
-                         :extra="`￥${item.goodsFee}`"
-                         :contentBrief="`x ${item.goodsFee}`"></list-item>
+                         :contentBrief="`x ${item.goodsNums}`"></list-item>
             </div>
           </list>
         </div>

@@ -60,9 +60,8 @@ export default {
             showNoRecord: true,
             page: {
                 number: 1,
-                totalPages: 0,
                 totalElements:0,
-                size: 10
+                allElements:0
             },
             pullUpConfig: {
                 content: '',
@@ -89,9 +88,8 @@ export default {
     watch: {
         page: {
             handler: function (val, oldVal) {
-                console.log('page',val)
-                this.showNoRecord = val.totalElements <= 0;
-                if (val.number >= val.totalPages - 1) {
+                this.showNoRecord = val.allElements <= 0;
+                if (val.totalElements<10) {
                     this.usePullup && (this.status.pullupStatus = 'disabled')
                 } else {
                     this.usePullup && (this.status.pullupStatus = 'default')
@@ -114,7 +112,6 @@ export default {
         },
         reset() {
             this.page.number = 1
-            this.page.totalPages = 0
             this.page.totalElements = 0
             this.$refs.scroller && this.$refs.scroller._xscroll && this.$refs.scroller.reset({
                 top: 0
@@ -125,17 +122,23 @@ export default {
             this.getDataByPage(++this.page.number)
         },
         refresh() {
-            return this.getDataByPage(0)
+            this.page.allElements = 0
+            return this.getDataByPage(1)
         },
         getDataByPage(page) {
             page = (page >=1 ? page : this.page.number);
-            let api =this.api(page, this.page.size);
+            let api =this.api(page);
             return api?api.then(res => {
+                var allElementss = 0
+                if(page==1){
+                    allElementss = res.data.length
+                }else{
+                    allElementss=this.page.allElements+res.data.length
+                }
                 res.page={
-                    number: page,
-                    size: 10,
-                    totalElements: this.dataList.length,
-                    totalPages: res.data.length > 0 ? page + 3 : page + 1
+                    number : page,
+                    totalElements : res.data.length,
+                    allElements : allElementss
                 }
                 this.renderPage(res.page)
             }):null;

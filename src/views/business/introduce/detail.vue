@@ -1,7 +1,7 @@
 <template>
   <page :headerTitle="' '">
     <div slot="contain" flex="dir:top cross:center">
-      <div v-html="html">
+      <div v-html="html" style="max-width: 100%;overflow: hidden">
       </div>
       <router-link :to="url">
         <img v-if="$route.query.redirectType>3" class="goToBuy" :src='require("assets/images/go_to_buy.png")'>
@@ -20,10 +20,10 @@
           url = `/ProductDetail?hyGoodsId=${this.$route.query.redirectId}`;
           break;
         case 5:
-          url = '/SessionDetail';
+          url = `HomePackageDetail?packageId=${this.$route.query.redirectId}`;
           break;
         case 6:
-          url = `HomePackageDetail?packageId=${this.$route.query.redirectId}`;
+          url = '/SessionDetail';
           break;
       }
       return {
@@ -37,7 +37,15 @@
           this.html = await  http.instance.get('https://' + this.$route.query.contentUrl)
         }
         catch (e) {
-            this.html =e    
+
+          if (e.toString().indexOf('<html') == 0){
+            this.html = e
+          }else{
+            this.$util.showRequestErro({
+              text:'资源错误'
+            })
+          }
+
         }
 
       },
@@ -54,7 +62,7 @@
   }
 
   .goToBuy {
-    width: 60px;
+    width: 80px;
   }
 </style>
 
