@@ -40,12 +40,14 @@ function utf16to8(str) {
     return out;
 }
 function getSign(params) {
-    // console.log("params", params)
+     console.log("params", params)
     let str = sortParams(params);
-    // console.log("cur str=============", str)
+     console.log("cur str=============", str)
     let sha1 = sha1Util.hex_sha1(utf16to8(str));
     let md5 = md5Util.hexMD5(sha1);
-    // console.log("cur res=============", md5.toLowerCase().substr(8, 16))
+    console.log('sha1',sha1)
+    console.log('md5',md5)
+    console.log("cur res=============", md5.toLowerCase().substr(8, 16))
     // if (true) {
     //     let testStr = 'appAccountzmaxfilmappPasswdadflkjlsdaappVersion1.0.0deviceNumberdeviceTypeweixin-xct1513757406519tokenId433c4ffad4f8cfe798e89e6fcbb5e53c'
     //     let testSha1 = sha1Util.hex_sha1(utf16to8(testStr))
