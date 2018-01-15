@@ -2,7 +2,7 @@
   <div class="page">
     <div>
       <div v-if="headerTitle">
-        <x-header class="header" :left-options="{backText: '',preventGoBack:!!backFunc}"  @on-click-back="onClickL">{{headerTitle}}
+        <x-header class="header" :left-options="{showBack:!isShowBack, backText: '',preventGoBack:!!backFunc}"  @on-click-back="onClickL">{{headerTitle}}
           <a slot="right" v-if="headerRText" @click="onClickR">{{headerRText}}</a>
           <slot slot="right" name="rightTop"></slot>
         </x-header>
@@ -25,6 +25,10 @@
       footerText: String,
       white: Boolean,
       headerRText: String,
+      isShowBack:{
+        type:Boolean,
+        default:false
+      },
       headerRLink: {
         type: [String, Object]
       },

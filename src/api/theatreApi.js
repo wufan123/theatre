@@ -64,9 +64,11 @@ function finishPromotion(params) {
   return apiHttp.getTheatre('/promotion/finishPromotion',params)
 }
 
-function getPromotionList(promoter) {
+function getPromotionList(promoter,startSuccessTime,endSuccessTime) {
     return apiHttp.getTheatre('/promotion/list',{
-        promoter: promoter
+        promoter: promoter,
+        startSuccessTime:startSuccessTime,
+        endSuccessTime:endSuccessTime
     })
 }
 

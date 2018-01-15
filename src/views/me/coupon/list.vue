@@ -10,7 +10,7 @@
           <div class="s-button khaki" @click="addCoupon">添加</div>
         </div>
         <div flex-box="1">
-          <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown
+          <page-scroller  :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown
                          :usePullup="false"
                          height='-110'>
             <coupon-item v-for="(item,index) in canUseList" :key="index" @click.native="gotoCouponDetail(item)">
@@ -79,7 +79,8 @@
           this.$util.showRequestErro(e);
         }
         if (res && res.data) {
-          // page == 1 ? this.dataList= res.data.voucherList : this.dataList= this.dataList.concat(res.data.voucherList)
+          // console.log('res',res)
+          page == 1 ? this.dataList= res.data.voucherList : this.dataList= this.dataList.concat(res.data.voucherList)
           res.data.voucherList.forEach(item => {
             if (item.bindStatus == 1) {
               this.dataList.push(item)
@@ -91,18 +92,17 @@
               }
             }
           });
-
-          if (!this.$util.isEmptyObject(res.data.voucherList)) {
-            page += 1
-            that.getDataList(page)
+          res.page={
+            number: page, size: 100, totalElements: res.data.totalNum, allElementss: res.data.voucherNumber
           }
+
+          // if (!this.$util.isEmptyObject(res.data.voucherList)) {
+          //   page += 1
+          //   that.getDataList(page)
+          // }
         }
         this.$vux.loading.hide();
-        return {
-          page: {
-            number: res.data.voucherNumber, size: 100, totalElements: res.data.totalNum, totalPages: 1
-          }
-        }
+        return res
       },
       gotoCouponDetail(item){
         this.$store.commit("coupon/setCoupon", item);

@@ -98,7 +98,6 @@ export default {
                 this.usePulldown && (this.status.pulldownStatus = 'default')
                 this.resize()
             },
-
             deep: true
         }
     },
@@ -127,15 +126,24 @@ export default {
             return this.getDataByPage(1)
         },
         getDataByPage(page) {
-            page = (page >=0 ? page : this.page.number);
+            page = (page >=1 ? page : this.page.number);
             let api =this.api(page);
             return api?api.then(res => {
                 var allElementss = 0
-                if(page==1){
-                    allElementss = res.data.length
+                if(this.$util.isArray(res.data.voucherList)){
+                    if(page==1){
+                        allElementss = res.data.voucherList.length
+                    }else{
+                        allElementss=this.page.allElements+res.data.voucherList.length
+                    }
                 }else{
-                    allElementss=this.page.allElements+res.data.length
+                    if(page==1){
+                        allElementss = res.data.length
+                    }else{
+                        allElementss=this.page.allElements+res.data.length
+                    }
                 }
+                
                 res.page={
                     number : page,
                     totalElements : res.data.length,
