@@ -194,11 +194,13 @@
           this.$util.showRequestErro(e);
         }
         if(res&&!this.$util.isEmptyObject(res.data)) {
+          console.log('res.data',res.data)
           var params ={ }
           params.type = this.promotion.type?this.promotion.type:2;
           params.sn = this.orderId;
           params.toer = this.userInfo.bindmobile;
           params.price = res.data.price;
+          params.ticketsCnt = this.orderInfo.film.seatCount
             //推广完成
           TheatreApi.finishPromotion(params);
           //价格为0时直接支付
