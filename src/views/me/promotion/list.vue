@@ -21,11 +21,11 @@
       </div>
       <page-scroller :api='getDataList' ref='scroller' :initQuery="false" noRecordText='当前无数据' noRecordImage usePulldown height='-220'>
         <div  class="promotion-list">
-          <list title="销售额（12000）元">
+          <list title="">
             <list-item  extra=" " v-for="(item,index) in dataList"  @click="orderDetail(item)">
               <div slot="subContent">{{item.toer}} </div>
               <div slot="content" class="gray f12"> {{item.successTime}}</div>
-              <div slot="extra">  <p>+228.00 </p> <p>已返现</p> </div>
+              <div slot="extra">  <p>{{item.price}} </p> <p>{{item.orderStatusDesp}}</p> </div>
             </list-item>
           </list>
           <!-- <list twoLine>
