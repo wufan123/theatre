@@ -9,11 +9,11 @@
         <span class="bold f16">{{userInfo.userNickname}}</span>
       </div>
       <div class="time" flex="main:justify cross:center">
-        <label>本{{curDateTime}}月</label>
+        <!-- <label>本月</label> -->
         <div class="select-data">
-          <i class="icon pre" ><</i>
+          <i class="icon pre" @click="preDate" ><</i>
           <datetime format="YYYY-MM" v-model="curDateTime" @on-change="confirmDate" ></datetime>
-            <i class="icon next">></i>
+            <i class="icon next" @click="nextDate" >></i>
           <!-- 
           <label @click="showPopup=true">{{curDateTime.year}}.{{curDateTime.month}}</label>
           <i class="icon next" @click="nextDate">></i> -->
@@ -24,25 +24,10 @@
           <list title="">
             <list-item  extra=" " v-for="(item,index) in dataList"  @click="orderDetail(item)">
               <div slot="subContent">{{item.toer}} </div>
-              <div slot="content" class="gray f12"> {{item.successTime}}</div>
-              <div slot="extra">  <p>{{item.price}} </p> <p>{{item.orderStatusDesp}}</p> </div>
+              <div slot="content" class="gray f12"> {{new Date(item.successTime).format('yyyy-MM-dd hh:mm:ss')}}</div>
+              <div slot="extra">  <p class="red">￥{{item.price}} </p> <p class="f12">{{item.orderStatusDesp}}</p> </div>
             </list-item>
           </list>
-          <!-- <list twoLine>
-            <list-item :contentTitle="item.toer" extra="">
-              <div slot="contentBrief">
-                <p>12 月 3 日 10：00</p>
-                <p flex="main:justify"><label>时间</label><label>{{item.successTime}}</label></p>
-              </div>
-            </list-item>
-          </list> -->
-          <!-- <div class="flexb">
-            <label>编码：{{item.sn}}</label>
-            <label v-if="item.status==0"></label>
-            <label v-if="item.status==1">创建推广</label>
-            <label v-if="item.status==2">推广完成</label>
-            <label v-if="item.status==3">推广成功</label>
-          </div> -->
         </div>
         
       </page-scroller>
@@ -70,8 +55,35 @@
       ...mapState('common',['userInfo'])
     },
     methods: {
+      preDate(){
+          var curDate = this.curDateTime.split("-")
+          var year =curDate[0]
+          var month = curDate[1]
+          month--;
+          if(month<1){
+            year--
+            month = '12'
+          }
+          if(month<10){
+            month = `0${month}`
+          }
+        this.curDateTime = `${year}-${month}`
+      },
+      nextDate(){
+        var curDate = this.curDateTime.split("-")
+          var year =curDate[0]
+          var month = curDate[1]
+          month++;
+          if(month>12){
+            year++
+            month = '1'
+          }
+          if(month<10){
+            month = `0${month}`
+          }
+        this.curDateTime = `${year}-${month}`
+      },
       confirmDate(){
-        console.log('curDateTime',this.curDateTime)
         this.getDataList(1)
       },
       getUserInfo(){
@@ -131,7 +143,7 @@
         img{border-radius: 50%;width: 60px;height: 60px;}
       }
     }
-    .time{padding: 10px 10px ;
+    .time{padding: 10px 10px ;justify-content: flex-end;
       .select-data{display: flex;align-items: center;justify-content: center;
       i.icon{
       display: block;
