@@ -59,7 +59,7 @@ export default {
             showNoMore: false,
             showNoRecord: true,
             page: {
-                number: 0,
+                number: 1,
                 totalPages: 0,
                 totalElements:0,
                 size: 10
@@ -89,6 +89,7 @@ export default {
     watch: {
         page: {
             handler: function (val, oldVal) {
+                console.log('page',val)
                 this.showNoRecord = val.totalElements <= 0;
                 if (val.number >= val.totalPages - 1) {
                     this.usePullup && (this.status.pullupStatus = 'disabled')
@@ -99,7 +100,6 @@ export default {
                 this.usePulldown && (this.status.pulldownStatus = 'default')
                 this.resize()
             },
-
             deep: true
         }
     },
@@ -113,7 +113,7 @@ export default {
             this.page = page
         },
         reset() {
-            this.page.number = 0
+            this.page.number = 1
             this.page.totalPages = 0
             this.page.totalElements = 0
             this.$refs.scroller && this.$refs.scroller._xscroll && this.$refs.scroller.reset({
@@ -125,13 +125,18 @@ export default {
             this.getDataByPage(++this.page.number)
         },
         refresh() {
-
             return this.getDataByPage(0)
         },
         getDataByPage(page) {
-            page = (page >=0 ? page : this.page.number);
+            page = (page >=1 ? page : this.page.number);
             let api =this.api(page, this.page.size);
             return api?api.then(res => {
+                res.page={
+                    number: page,
+                    size: 10,
+                    totalElements: this.dataList.length,
+                    totalPages: res.data.length > 0 ? page + 3 : page + 1
+                }
                 this.renderPage(res.page)
             }):null;
         }

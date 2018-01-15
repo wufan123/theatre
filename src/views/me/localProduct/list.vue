@@ -47,7 +47,7 @@
             this.$util.showRequestErro(e)
         }
         if(res&&res.data){
-          if (page) {
+          if (page>1) {
             this.dataList = this.dataList.concat(res.data);
           } else {
             this.dataList = res.data;
