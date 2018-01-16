@@ -1,5 +1,5 @@
 <template>
-  <page :footerText="`退出登录`"  :footerFunc="logOut" :headerTitle="`我的`">
+  <page :footerText="$util.isEmptyObject(userInfo)?`退出登录`:''"  :footerFunc="logOut" :headerTitle="`我的`">  
       <div slot="contain" class="me">
           <div class="me-top">
             <span class="bold f16">{{userInfo.userNickname}}</span>

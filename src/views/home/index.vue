@@ -105,7 +105,7 @@
     icon: require('assets/images/home/flash_sale.png')
   },
     {
-      name: '超级特卖',
+      name: '超级特价',
       pathName: 'LocalProduct',
       params: {classType: 102},
       icon: require('assets/images/home/hemers.png')
