@@ -21,8 +21,8 @@
       </div>
       <page-scroller :api='getDataList' ref='scroller' :initQuery="false" noRecordText='当前无数据' noRecordImage usePulldown height='-220'>
         <div  class="promotion-list">
-          <list title="">
-            <list-item  extra=" " v-for="(item,index) in dataList"  @click="orderDetail(item)">
+          <list title="" v-for="(item,index) in dataList" >
+            <list-item  extra=" "  @click="orderDetail(item)">
               <div slot="subContent">{{item.toer}} </div>
               <div slot="content" class="gray f12"> {{new Date(item.successTime).format('yyyy-MM-dd hh:mm:ss')}}</div>
               <div slot="extra">  <p class="red">￥{{item.price}} </p> <p class="f12">{{item.orderStatusDesp}}</p> </div>
