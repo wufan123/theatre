@@ -79,11 +79,17 @@
           this.$util.showRequestErro(e);
         }
         if (res && res.data) {
-          // console.log('res',res)
-          page == 1 ? this.dataList= res.data.voucherList : this.dataList= this.dataList.concat(res.data.voucherList)
+           console.log('res', page == 1, page)
+           if(page==1){
+             this.dataList= res.data.voucherList
+             this.canUseList=[]
+             this.invalidList=[]
+           }else{
+             this.dataList= this.dataList.concat(res.data.voucherList)
+           }
           res.data.voucherList.forEach(item => {
             if (item.bindStatus == 1) {
-              this.dataList.push(item)
+              // this.dataList.push(item)
               if (item.status == 2 && (new Date().getTime() / 1000 < item.validData)) {
                 this.canUseList.push(item)
               } else {

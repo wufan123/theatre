@@ -1,5 +1,5 @@
 <template>
-  <page :headerTitle="`详情`">
+  <page :headerTitle="`详情`"  :footerText="`解除绑定`" :footerFunc="relieveBind">
     <div slot="contain">
       <div class="detail">
         <coupon-item>
@@ -34,6 +34,17 @@
       }
     },
     methods: {
+      relieveBind(){
+        var _this = this;
+        this.$vux.confirm.show({
+          content:"是否解除该优惠券?",
+          onConfirm () {
+            CouponApi.userVoucherDelete(_this.coupon.voucherNum).then(res=>{
+              _this.$router.back(-1)
+            })
+          }
+        })
+      },
       getData(){
         CouponApi.userVoucherDetail(this.coupon.voucherNum).then(res => {
           this.couponInfo = res.data
