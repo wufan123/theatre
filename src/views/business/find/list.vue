@@ -38,8 +38,6 @@
     components: {Tab, TabItem, findItem},
     methods: {
       mapIntroduceData(data){
-        data.contentUrl = data.contentUrl.replace('https://', '');
-        data.contentUrl = data.contentUrl.replace('http://', '');
         data.contentUrl = `/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
         return data;
       },

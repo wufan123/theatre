@@ -105,17 +105,17 @@
     icon: require('assets/images/home/flash_sale.png')
   },
     {
-    name: '超级特卖',
-    pathName: 'LocalProduct',
-    params: {classType: 102},
-    icon: require('assets/images/home/hemers.png')
-  },
+      name: '超级特卖',
+      pathName: 'LocalProduct',
+      params: {classType: 102},
+      icon: require('assets/images/home/hemers.png')
+    },
     {
-    name: '福州特产馆',
-    pathName: 'LocalProduct',
-    params: {classType: 101},
-    icon: require('assets/images/home/local.png')
-  }];
+      name: '福州特产馆',
+      pathName: 'LocalProduct',
+      params: {classType: 101},
+      icon: require('assets/images/home/local.png')
+    }];
   export default {
     components: {
       Scroller,
@@ -145,8 +145,6 @@
     },
     methods: {
       mapIntroduceData(data){
-        data.contentUrl = data.contentUrl.replace('https://', '');
-        data.contentUrl = data.contentUrl.replace('http://', '');
         data.contentUrl = `/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
         return data;
       },
@@ -337,28 +335,28 @@
       height: 61px;
       width: 77px;
     }
-    .introduceContent{
+    .introduceContent {
       position: relative;
-      .introducePlayIcon{
+      .introducePlayIcon {
         position: absolute;
         top: 0;
         left: 0;
         height: 166px;
         width: 250px;
-        img{
+        img {
           width: 60px;
         }
       }
     }
-    .findContent{
+    .findContent {
       position: relative;
-      .findPlayIcon{
+      .findPlayIcon {
         position: absolute;
         top: 0;
         left: 0;
         height: 160px;
         width: 160px;
-        img{
+        img {
           width: 60px;
         }
       }
