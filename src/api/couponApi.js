@@ -35,9 +35,22 @@ function userVoucherDetail(voucherNum, success_cb, fail_cb) {
     }, success_cb, fail_cb)
   }
 
+  /**
+ * 解绑票券
+ * @param {*} voucherNum 
+ * @param {*} success_cb 
+ * @param {*} fail_cb 
+ */
+function userVoucherDelete(voucherNum, success_cb, fail_cb) {
+    return apiHttp.get('/user/delvoucher', {
+      voucherNum: voucherNum
+    }, success_cb, fail_cb)
+  }
+
 
 export default {
     addVoucher: addVoucher,
     userVoucherList: userVoucherList,
-    userVoucherDetail:userVoucherDetail
+    userVoucherDetail:userVoucherDetail,
+    userVoucherDelete:userVoucherDelete
 };

@@ -57,7 +57,7 @@
         this.$vux.loading.hide();
         res ={
           ...res, page: {
-            number: 0, size: 10, totalElements: 3, totalPages: 0
+            number: page, size: 10, totalElements: this.dataList.length, totalPages: 0
           }
         };
         return res;
@@ -98,6 +98,7 @@
             text: '解绑成功',
             type: 'success'
           })
+          this.getDataList(0)
           this.fetchData();
         }
         this.$vux.loading.hide();

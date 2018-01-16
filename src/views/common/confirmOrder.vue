@@ -194,13 +194,15 @@
           this.$util.showRequestErro(e);
         }
         if(res&&!this.$util.isEmptyObject(res.data)) {
+          console.log('res.data',res.data)
+          var params ={ }
+          params.type = this.promotion.type?this.promotion.type:2;
+          params.sn = this.orderId;
+          params.toer = this.userInfo.bindmobile;
+          params.price = res.data.price;
+          params.ticketsCnt = this.orderInfo.film.seatCount
             //推广完成
-          TheatreApi.finishPromotion({
-            sn:this.orderId,
-            type:this.promotion.type,
-            toer:this.userInfo.bindmobile,
-            price:res.data.price
-          });
+          TheatreApi.finishPromotion(params);
           //价格为0时直接支付
           if (res.data.price == 0) {
             this.$vux.loading.show({
