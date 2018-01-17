@@ -395,7 +395,6 @@ export default {
     }
     .divider {
       overflow: hidden;
-      border: 1px solid red;
       position: relative;
       width: 100%;
       margin-top: 10px;

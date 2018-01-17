@@ -86,6 +86,7 @@
         width: 100%;
       }
       .divider {
+        overflow: hidden;
         position: relative;
         width: 100%;
       }
@@ -102,6 +103,7 @@
         width: 128px;
         height: 34px;
         color: @color-sub;
+        position: relative;
         text-align: center;
         font-size: 16px;
         font-weight: bold;

@@ -79,6 +79,7 @@
         background: @page_bg2 url(../../assets/images/home/title_bg.png) center no-repeat;
         background-size: 100%100%;z-index: 3;
         width: 128px;
+        position: relative;
         height: 34px;
         color: @color-sub;
         text-align: center;
