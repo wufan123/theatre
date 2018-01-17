@@ -20,9 +20,7 @@
               </div>
             </div>
             <div flex="main:center cross:center" class="divider">
-              <label class="dividerTitle">
-                剧场介绍
-              </label>
+              <!-- <label class="dividerTitle"></label> --> 剧场介绍
               <!-- <div class="dividerLine"></div> -->
             </div>
             <div class="content">
@@ -393,7 +391,7 @@ export default {
       text-align: left;
       width: 100%;
     }
-    .divider {
+    .divider {min-height:34px;
       overflow: hidden;
       position: relative;
       width: 100%;
