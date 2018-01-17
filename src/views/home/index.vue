@@ -154,8 +154,6 @@
           this.banerList = res.data.map((data) => {
             switch (parseInt(data.redirectType)) {
               case 1:
-                data.contentUrl = `${data.contentUrl}`;
-                break;
               case 2:
               case 3:
                 data = this.mapIntroduceData(data);
