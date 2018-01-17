@@ -316,6 +316,7 @@ export default {
           query: { orderId: res.data.planOrderId }
         });
         this.$store.commit("coupon/setTicketCouponList", []);
+        this.$store.commit("coupon/setGoodsCouponList", []);
         this.$store.commit('business/setSelectedMember',{});
       }
       this.$vux.loading.hide();

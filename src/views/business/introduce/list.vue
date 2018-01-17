@@ -22,7 +22,7 @@ export default {
       this.getIntroduce();
     },
     mapIntroduceData(data){
-      data.contentUrl = `/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
+      data.contentUrl = `#/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
       return data;
     },
     async getIntroduce(){

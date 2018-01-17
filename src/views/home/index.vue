@@ -145,7 +145,7 @@
     },
     methods: {
       mapIntroduceData(data){
-        data.contentUrl = `/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
+        data.contentUrl = `#/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
         return data;
       },
       async getBanner(){
@@ -159,13 +159,13 @@
                 data = this.mapIntroduceData(data);
                 break;
               case 4:
-                data.contentUrl = `/ProductDetail?hyGoodsId=${data.redirectId}`;
+                data.contentUrl = `#/ProductDetail?hyGoodsId=${data.redirectId}`;
                 break;
               case 6:
-                data.contentUrl = '/SessionDetail';
+                data.contentUrl = '#/SessionDetail';
                 break;
               case 5:
-                data.contentUrl = `HomePackageDetail?packageId=${data.redirectId}`;
+                data.contentUrl = `#/HomePackageDetail?packageId=${data.redirectId}`;
                 break;
             }
             return {

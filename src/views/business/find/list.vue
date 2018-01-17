@@ -38,7 +38,7 @@
     components: {Tab, TabItem, findItem},
     methods: {
       mapIntroduceData(data){
-        data.contentUrl = `/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
+        data.contentUrl = `#/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
         return data;
       },
       onItemClick (index) {

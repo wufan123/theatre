@@ -195,16 +195,19 @@
         // 优惠券信息
         let couponStr = "";
         let couponArr = this.couponInfo.concat(this.saleCouponInfo);
-        couponStr = couponArr.map(item => {
-          return item.num
-        }).reduce((acc, item) => {
-          if (acc) {
-            acc += `,${item}`
-          } else {
-            acc += item
-          }
-          return acc;
-        })
+        if(!this.$util.isEmptyObject(couponArr)){
+          couponStr = couponArr.map(item => {
+            return item.num
+          }).
+          reduce((acc, item) => {
+            if (acc) {
+              acc += `,${item}`
+            } else {
+              acc += item
+            }
+            return acc;
+          })
+        }
 
         // 会员卡信息
         let cardId = this.selectedMember.id;
