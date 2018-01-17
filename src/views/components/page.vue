@@ -1,13 +1,11 @@
 <template>
   <div class="page">
-    <div>
       <div v-if="headerTitle">
         <x-header class="header" :left-options="{showBack:!isShowBack, backText: '',preventGoBack:!!backFunc}"  @on-click-back="onClickL">{{headerTitle}}
           <a slot="right" v-if="headerRText" @click="onClickR">{{headerRText}}</a>
           <slot slot="right" name="rightTop"></slot>
         </x-header>
       </div>
-    </div>
     <div class="contain" ref="contain">
       <slot name="contain"></slot>
     </div>
@@ -75,7 +73,7 @@
 <style lang="less">
   @import "~style/base-variables.less";
   .page {border:1px solid blue;
-    display: flex;
+    display: flex;overflow: hidden;
     flex-direction: column;background-image: url(../../assets/images/page_bg.png);background-size:68px 68px;background-repeat:repeat;
   }
   .header {border:1px solid blue;
