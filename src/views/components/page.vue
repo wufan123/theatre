@@ -7,7 +7,7 @@
       </x-header>
     </div>
     <div class="contain" ref="contain">
-      <!-- <slot name="contain"></slot> -->
+      <slot name="contain"></slot>
     </div>
     <div class="footer">
       <!-- <x-button type="primary no-radius" action-type="button">{{footerText}} </x-button> -->
@@ -82,6 +82,7 @@
   }
   .contain {
     flex: 1;
+    overflow-y: auto;
   }
 
   .footer {
