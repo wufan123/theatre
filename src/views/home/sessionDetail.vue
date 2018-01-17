@@ -410,6 +410,7 @@ export default {
       background: @page_bg2 url(../../assets/images/home/title_bg.png) center
       no-repeat;
       background-size: 100%100%;
+      position: relative;
       z-index: 3;
       width: 128px;
       height: 34px;
