@@ -70,7 +70,7 @@
       .content{margin-top: 20px;
         text-indent: 2em;text-align:left;width: 100%;
       }
-      .divider{position: relative;width: 100%;}
+      .divider{position: relative;width: 100%;overflow: hidden;}
       .dividerLine{
         border-bottom: dotted @color-sub 1px;
         position: absolute;width: 100%;z-index: 2;

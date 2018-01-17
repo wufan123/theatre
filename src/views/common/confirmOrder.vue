@@ -50,7 +50,7 @@
                  ref="phone" v-model="phone"></x-input>
       </group>
       <div class="info">
-        <p>温馨提{{phone}}示：</p>
+        <p>温馨提示：</p>
         <p>手机号用于生成订单，及发送支付短信</p>
       </div>
     </div>
