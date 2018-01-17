@@ -1,13 +1,13 @@
 <template>
   <div class="page">
-      <div v-if="headerTitle">
-        <x-header class="header" :left-options="{showBack:!isShowBack, backText: '',preventGoBack:!!backFunc}"  @on-click-back="onClickL">{{headerTitle}}
-          <a slot="right" v-if="headerRText" @click="onClickR">{{headerRText}}</a>
-          <slot slot="right" name="rightTop"></slot>
-        </x-header>
-      </div>
+    <div v-if="headerTitle">
+      <x-header class="header" :left-options="{showBack:!isShowBack, backText: '',preventGoBack:!!backFunc}"  @on-click-back="onClickL">{{headerTitle}}
+        <a slot="right" v-if="headerRText" @click="onClickR">{{headerRText}}</a>
+        <slot slot="right" name="rightTop"></slot>
+      </x-header>
+    </div>
     <div class="contain" ref="contain">
-      <slot name="contain"></slot>
+      <!-- <slot name="contain"></slot> -->
     </div>
     <div class="footer">
       <!-- <x-button type="primary no-radius" action-type="button">{{footerText}} </x-button> -->
@@ -78,7 +78,6 @@
   }
   .header {
     height: 46px;
-    flex: 0;
     background: @color-sub !important;
   }
   .contain {
@@ -87,7 +86,6 @@
 
   .footer {
     height:42px ;
-    flex: 0;
     .btn{
       width: 100%;height: 42px;
     }
