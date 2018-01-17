@@ -18,8 +18,14 @@
         </div>
         <div class="c-info" v-if="orderPayWay.couponList&&orderPayWay.couponList.length">
           <list>
-            <list-item :content="`优惠券`" :extra="getCouponExtra()" isLink
+            <list-item content="影票优惠券" :extra="getCouponExtra()" isLink
                        @click.native="selectCouponClick"></list-item>
+          </list>
+        </div>
+        <div class="c-info" v-if="orderPayWay.saleCouponList&&orderPayWay.saleCouponList.length">
+          <list>
+            <list-item content="卖品优惠券" :extra="getSaleCouponExtra()" isLink
+                       @click.native="selectSaleCouponClick"></list-item>
           </list>
         </div>
         <div class="c-info" v-if="orderPayWay.memberCard&&orderPayWay.memberCard.length">
@@ -34,12 +40,14 @@
           <div class="flexb"><label>总价</label><label>￥{{orderInfo._price}}</label></div>
           <div class="flexb" v-for="(item,index) in couponInfo" :key="index">
             <label>{{item.name}}</label><label>{{item.des}}</label></div>
+          <div class="flexb" v-for="(item,index) in saleCouponInfo" :key="'sale'+index">
+            <label>{{item.name}}</label><label>{{item.des}}</label></div>
           <div class="flexb payment"><label>实付款</label><label>￥{{orderInfo.price}}</label></div>
         </div>
       </div>
       <group>
         <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile"
-             ref="phone"   v-model="phone"></x-input>
+                 ref="phone" v-model="phone"></x-input>
       </group>
       <div class="info">
         <p>温馨提{{phone}}示：</p>
@@ -64,16 +72,15 @@
         orderInfo: {}, // 订单信息
         orderPayWay: {}, // 优惠券信息
         selectCard: null, // 选择的会员卡
-        selectedCoupon: null,
         oldPhone: null, // 保存旧手机号，判断是否有修改
         couponInfo: [],
-        selectedCouponList: []
+        saleCouponInfo: []
       }
     },
     computed: {
       ...mapState('business', ['selectedMember']),
-      ...mapState('coupon', ['ticketCouponList']),
-      ...mapState('common', ['promotion','userInfo'])
+      ...mapState('coupon', ['ticketCouponList', 'goodsCouponList']),
+      ...mapState('common', ['promotion', 'userInfo'])
     },
     methods: {
       async fetchData(){
@@ -89,7 +96,9 @@
         if (wayRes && wayRes.data) {
           this.orderPayWay = wayRes.data;
           if (!this.ticketCouponList || !this.ticketCouponList.length)
-            this.$store.commit('coupon/setTicketCouponList', this.orderPayWay.couponList)
+            this.$store.commit('coupon/setTicketCouponList', this.orderPayWay.couponList);
+          if (!this.goodsCouponList || !this.goodsCouponList.length)
+            this.$store.commit('coupon/setGoodsCouponList', this.orderPayWay.saleCouponList)
         }
         // 获取订单信息
         let orderRes;
@@ -145,11 +154,28 @@
               break;
           }
         });
+        let selectedSaleList = this.goodsCouponList.filter(item => {
+          if (item.checked) {
+            return item;
+          }
+        });
+        selectedSaleList.forEach(item => {
+          switch (item.ticketType) {
+            case 'sale':
+              this.orderInfo.price -= item.ticketValue;
+              this.saleCouponInfo.push({
+                name: item.voucherName,
+                num: item.voucherNum,
+                des: `-￥${item.ticketValue}`
+              });
+              break;
+          }
+        });
+
       },
       // 锁定，跳转到支付页面
       async lockAndPayOrder() {
-        console.log('this.$refs.input01.valid',)
-        if(!this.$refs.phone.valid){
+        if (!this.$refs.phone.valid) {
           this.$vux.toast.show({
             type: 'cancel',
             text: '请输入正确的手机号'
@@ -167,21 +193,18 @@
           OrderApi.updateOrderMobile(this.phone)
         }
         // 优惠券信息
-        let couponStr="";
-        if(this.couponInfo&&this.couponInfo.length)
-        {
-          couponStr= this.couponInfo.map(item => {
-            return item.num
-          }).reduce((pre, item) => {
-            let acc = '';
-            if (pre) {
-              acc += `,${item}`
-            } else {
-              acc += item
-            }
-            return acc;
-          })
-        }
+        let couponStr = "";
+        let couponArr = this.couponInfo.concat(this.saleCouponInfo);
+        couponStr = couponArr.map(item => {
+          return item.num
+        }).reduce((acc, item) => {
+          if (acc) {
+            acc += `,${item}`
+          } else {
+            acc += item
+          }
+          return acc;
+        })
 
         // 会员卡信息
         let cardId = this.selectedMember.id;
@@ -193,20 +216,20 @@
         } catch (e) {
           this.$util.showRequestErro(e);
         }
-        if(res&&!this.$util.isEmptyObject(res.data)) {
-          console.log('res.data',res.data)
-          var params ={ }
-          params.type = this.promotion.type?this.promotion.type:2;
+        if (res && !this.$util.isEmptyObject(res.data)) {
+          console.log('res.data', res.data)
+          var params = {}
+          params.type = this.promotion.type ? this.promotion.type : 2;
           params.sn = this.orderId;
           params.toer = this.userInfo.bindmobile;
           params.price = res.data.price;
           params.ticketsCnt = this.orderInfo.film.seatCount
-            //推广完成
+          //推广完成
           TheatreApi.finishPromotion(params);
           //价格为0时直接支付
           if (res.data.price == 0) {
             this.$vux.loading.show({
-              text:'正在支付'
+              text: '正在支付'
             });
             let payRes;
             try {
@@ -240,8 +263,16 @@
       selectCouponClick() {
         this.$router.push({
           name: 'SelectCoupon',
-          query:{
-            seatCount:this.orderInfo.film.seatCount
+          query: {
+            seatCount: this.orderInfo.film.seatCount
+          }
+        })
+      },
+      selectSaleCouponClick() {
+        this.$router.push({
+          name: 'SelectCoupon',
+          query: {
+            orderType: "goods"
           }
         })
       },
@@ -260,6 +291,22 @@
           })
         } else {
           return `${this.orderPayWay.canUseCouponNum ? this.orderPayWay.canUseCouponNum : 0}张可用`
+        }
+      },
+      getSaleCouponExtra(){
+        if (this.saleCouponInfo && this.saleCouponInfo.length) {
+          return this.saleCouponInfo.map(item => {
+            return item.name
+          }).reduce((pre, item) => {
+            if (pre) {
+              pre += `,${item}`
+            } else {
+              pre += item;
+            }
+            return pre
+          })
+        } else {
+          return `${this.orderPayWay.saleCouponList ? this.orderPayWay.saleCouponList.length : 0}张可用`
         }
       }
     },
