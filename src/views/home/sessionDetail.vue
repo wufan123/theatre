@@ -20,8 +20,10 @@
               </div>
             </div>
             <div flex="main:center cross:center" class="divider">
-              <!-- <label class="dividerTitle"></label> --> 剧场介绍
-              <!-- <div class="dividerLine"></div> -->
+              <label class="dividerTitle">
+                剧场介绍
+              </label>
+              <div class="dividerLine"></div>
             </div>
             <div class="content">
               {{filmDetail ? filmDetail.introduction : ''}}
@@ -391,24 +393,18 @@ export default {
       text-align: left;
       width: 100%;
     }
-    .divider {min-height:34px;
+    .divider {
       overflow: hidden;
       position: relative;
       width: 100%;
       margin-top: 10px;
-        &::before{content:'';top: 27px;left: 0;
+    }
+    .dividerLine {top: 27px;left: 0;
       border-bottom: dotted @color-sub 1px;
       position: absolute;
       width: 100%;
-      z-index: 2;}
-      
+      z-index: 2;
     }
-    // .dividerLine {top: 27px;left: 0;
-    //   border-bottom: dotted @color-sub 1px;
-    //   position: absolute;
-    //   width: 100%;
-    //   z-index: 2;
-    // }
     .dividerTitle {
       background: @page_bg2 url(../../assets/images/home/title_bg.png) center
       no-repeat;
