@@ -1,7 +1,6 @@
 <template>
   <page :headerTitle="`确认套票订单`" :footerText="`支付`" :footerFunc="lockAndPayOrder">
     <div slot="contain">
-        <div class="b-con">
           <div class="c-order">
         <div class="c-info">
           <list twoLine>
@@ -24,7 +23,6 @@
         <p>温馨提示：</p>
         <p>手机号用于生成订单，及发送支付短信</p>
       </div>
-        </div>
     </div>
   </page>
 </template>

@@ -79,18 +79,17 @@
     flex-direction: column;background-image: url(../../assets/images/page_bg.png);background-size:68px 68px;background-repeat:repeat;
   }
   .header {
+    height: 46px;
     flex: 0;
     background: @color-sub !important;
   }
-
   .contain {
     overflow: auto;
     flex: 1;
-
-    background-size: 68px 68px;
   }
 
   .footer {
+    height:42px ;
     flex: 0;
   }
 </style>
