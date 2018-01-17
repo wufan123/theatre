@@ -401,21 +401,21 @@ export default {
       background: @page_bg2 url(../../assets/images/home/divider_line.png) center repeat-x;
       background-size: 18px 34px;
     }
-    // .dividerTitle {
-    //   background: @page_bg2 url(../../assets/images/home/title_bg.png) center
-    //   no-repeat;
-    //   background-size: 100%100%;
-    //   position: relative;
-    //   z-index: 3;
-    //   width: 128px;
-    //   height: 34px;
-    //   color: @color-sub;
-    //   text-align: center;
-    //   font-size: 16px;
-    //   font-weight: bold;
-    //   line-height: 34px;
-    //   margin: 10px 0px;
-    // }
+    .dividerTitle {
+      background: @page_bg2 url(../../assets/images/home/title_bg.png) center
+      no-repeat;
+      background-size: 100%100%;
+      position: relative;
+      z-index: 3;
+      width: 128px;
+      height: 34px;
+      color: @color-sub;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 34px;
+      margin: 10px 0px;
+    }
     .titleBar {
       display: flex;
       justify-content: space-between;
