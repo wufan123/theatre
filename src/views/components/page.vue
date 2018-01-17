@@ -74,21 +74,21 @@
 
 <style lang="less">
   @import "~style/base-variables.less";
-  .page {
+  .page {border:1px solid blue;
     display: flex;
     flex-direction: column;background-image: url(../../assets/images/page_bg.png);background-size:68px 68px;background-repeat:repeat;
   }
-  .header {
+  .header {border:1px solid blue;
     height: 46px;
     flex: 0;
     background: @color-sub !important;
   }
-  .contain {
+  .contain {border:1px solid blue;
     overflow: auto;
     flex: 1;
   }
 
-  .footer {
+  .footer {border:1px solid blue;
     height:42px ;
     flex: 0;
   }
