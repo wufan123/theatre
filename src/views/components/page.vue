@@ -10,7 +10,7 @@
       <slot name="contain"></slot>
     </div>
     <div class="footer">
-      <x-button v-if="footerText" flex-box="0" type="primary no-radius" action-type="button" @click.native="onClick">{{footerText}}
+      <x-button v-if="footerText" type="primary no-radius" action-type="button" @click.native="onClick">{{footerText}}
       </x-button>
       <slot name="footer"></slot>
     </div>
@@ -86,7 +86,7 @@
     flex: 1;
   }
 
-  .footer {border:1px solid blue;
+  .footer {border:1px solid blue;position: relative;
     height:42px ;
     flex: 0;
   }
