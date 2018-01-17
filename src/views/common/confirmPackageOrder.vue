@@ -19,7 +19,7 @@
       <group>
         <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile" v-model="phone"></x-input>
       </group>
-      <div class="info" style="height:2000px;">
+      <div class="info">
         <p>温馨提示：</p>
         <p>手机号用于生成订单，及发送支付短信</p>
       </div>
@@ -81,7 +81,6 @@ export default {
 </script>
 <style lang="less" scoped>
 @import "~style/base-variables.less";
-.b-con{height: 100%;overflow: auto;border:1px solid red;box-sizing: border-box;}
 .c-order {
   padding: 0 15px;
   background: @base-bg-color;
