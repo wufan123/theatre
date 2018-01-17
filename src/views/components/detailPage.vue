@@ -72,7 +72,7 @@
       }
       .divider{position: relative;width: 100%;overflow: hidden;}
       .dividerLine{
-        border-bottom: dotted @color-sub 1px;
+        border-bottom: dotted @color-sub 1px;top: 27px;left: 0;
         position: absolute;width: 100%;z-index: 2;
       }
       .dividerTitle{

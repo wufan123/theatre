@@ -89,7 +89,7 @@
         position: relative;
         width: 100%;
       }
-      .dividerLine {
+      .dividerLine {top: 27px;left: 0;
         border-bottom: dotted @color-sub 1px;
         position: absolute;
         width: 100%;
