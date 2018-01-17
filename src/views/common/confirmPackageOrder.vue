@@ -1,6 +1,6 @@
 <template>
   <page :headerTitle="`确认套票订单`" :footerText="`支付`" :footerFunc="lockAndPayOrder">
-    <div slot="contain">
+    <div slot="contain" style="border:1px solid red">
           <div class="c-order">
         <div class="c-info">
           <list twoLine>
