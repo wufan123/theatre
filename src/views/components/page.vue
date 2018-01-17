@@ -10,8 +10,8 @@
       <slot name="contain"></slot>
     </div>
     <div class="footer">
-      <x-button v-if="footerText" type="primary no-radius" action-type="button" @click.native="onClick">{{footerText}}
-      </x-button>
+      <!-- <x-button type="primary no-radius" action-type="button">{{footerText}} </x-button> -->
+      <button  v-if="footerText"  class="btn" @click.native="onClick">{{footerText}}</button>
       <slot name="footer"></slot>
     </div>
   </div>
@@ -72,23 +72,25 @@
 
 <style lang="less">
   @import "~style/base-variables.less";
-  .page {border:1px solid blue;
+  .page {
     display: flex;overflow: hidden;
     flex-direction: column;background-image: url(../../assets/images/page_bg.png);background-size:68px 68px;background-repeat:repeat;
   }
-  .header {border:1px solid blue;
+  .header {
     height: 46px;
     flex: 0;
     background: @color-sub !important;
   }
-  .contain {border:1px solid blue;
-    overflow: auto;
+  .contain {
     flex: 1;
   }
 
-  .footer {border:1px solid blue;position: relative;
+  .footer {
     height:42px ;
     flex: 0;
+    .btn{
+      width: 100%;height: 42px;
+    }
   }
 </style>
 
