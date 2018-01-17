@@ -1,6 +1,6 @@
 <template>
   <page :headerTitle="`确认套票订单`" :footerText="`支付`" :footerFunc="lockAndPayOrder">
-    <div slot="contain" style="border:1px solid red">
+    <div slot="contain">
           <div class="c-order">
         <div class="c-info">
           <list twoLine>
@@ -19,7 +19,7 @@
       <group>
         <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile" v-model="phone"></x-input>
       </group>
-      <div class="info">
+      <div class="info" style="height:2000px;">
         <p>温馨提示：</p>
         <p>手机号用于生成订单，及发送支付短信</p>
       </div>

@@ -10,8 +10,8 @@
       <slot name="contain"></slot>
     </div>
     <div class="footer">
-      <!-- <x-button type="primary no-radius" action-type="button">{{footerText}} </x-button> -->
-      <button  v-if="footerText"  class="btn" @click.native="onClick">{{footerText}}</button>
+      <x-button v-if="footerText"  type="primary no-radius" action-type="button">{{footerText}} </x-button>
+      <!-- <button  class="btn" @click.native="onClick">{{footerText}}</button> -->
       <slot name="footer"></slot>
     </div>
   </div>
