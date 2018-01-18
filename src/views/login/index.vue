@@ -112,7 +112,7 @@
       background-image: url('../../assets/images/me/login_bg.jpg');
       background-size: 100% 100%;
       height: 100%;
-      position: absolute;
+      // position: absolute;
     }
     .form {
       padding: 110px 30px;
