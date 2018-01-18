@@ -99,6 +99,13 @@ function smsLogin(userMobile, validateCode, cinemaCode) {
     })
 }
 
+function getOpenId(code) {
+  return apiHttp.get('/user/getWeixinOpenId',{
+    code:code,
+    cinemaCode:apiHttp.CINEMA_CODE
+  })
+}
+
 /**
  * 注册信息配置
  */
@@ -138,5 +145,6 @@ export default {
     getValidateCode: getValidateCode,
     smsLogin: smsLogin,
     registeredConfig: registeredConfig,
-    getWeixinConfig: getWeixinConfig
+    getWeixinConfig: getWeixinConfig,
+  getOpenId
 }

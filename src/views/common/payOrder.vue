@@ -52,7 +52,8 @@
     },
     components: {List, ListItem, Group, Radio},
     computed: {
-      ...mapState("business", ['payLockInfo'])
+      ...mapState("business", ['payLockInfo']),
+      ...mapState('common', ['openId'])
     },
     methods: {
       getPayTime(){
@@ -106,25 +107,28 @@
       // 点击确认支付
       async confirmPay () {
         this.$vux.loading.show({
-          name:'请稍后'
+            name: '请稍后'
           }
         );
-        let conRes;
+//        let conRes;
+//        try {
+//          conRes = await  AuthApi.getWeixinConfig();
+//        } catch (e) {
+//          this.$util.showRequestErro(e)
+//        }
+//        if (conRes && conRes.data) {
+        let res;
         try {
-          conRes = await  AuthApi.getWeixinConfig();
-        } catch (e) {
+          res = await StoreApi.goodsAndFilmComfirmNewPay(this.payLockInfo.orderId, this.payLockInfo.orderType, "weixinpay", 0, this.openId)
+        }
+        catch (e) {
           this.$util.showRequestErro(e)
         }
-        if (conRes && conRes.data) {
-          let res;
-          try {
-            res = await StoreApi.goodsAndFilmComfirmNewPay(this.payLockInfo.orderId, this.payLockInfo.orderType, "weixinpay",0,null)
-          }
-          catch (e) {
-            this.$util.showRequestErro(e)
-          }
-          if (res && res.data && res.data.weixinpay) {
-            let wxpay = res.data.weixinpay;
+        if (res && res.data && res.data.weixinpay) {
+          let wxpay = res.data.weixinpay;
+          let ctx =this;
+          if(WeixinJSBridge)
+          {
             WeixinJSBridge.invoke(
               'getBrandWCPayRequest', {
                 "appId": wxpay.appId,     //公众号名称，由商户传入
@@ -138,16 +142,22 @@
                 if (res.err_msg == "get_brand_wcpay_request:ok") {
                   // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
                   this.$router.push({name: 'paySuccess'})
+                } else {
+                  ctx.$util.showRequestErro({text:res.errMsg}); 
                 }
               }
             );
           }
+          else{
+
+          }
         }
+//        }
         this.$vux.loading.hide();
 
       },
       change(val){
-        console.log('change', val)
+
       }
     }
   }

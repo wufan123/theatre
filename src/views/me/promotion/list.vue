@@ -14,14 +14,14 @@
           <i class="icon pre" @click="preDate" ><</i>
           <datetime format="YYYY-MM" v-model="curDateTime" @on-change="confirmDate" ></datetime>
             <i class="icon next" @click="nextDate" >></i>
-          <!-- 
+          <!--
           <label @click="showPopup=true">{{curDateTime.year}}.{{curDateTime.month}}</label>
           <i class="icon next" @click="nextDate">></i> -->
         </div>
       </div>
       <page-scroller :api='getDataList' ref='scroller' :initQuery="false" noRecordText='当前无数据' noRecordImage usePulldown height='-220'>
         <div  class="promotion-list">
-          <list title="" v-for="(item,index) in dataList" >
+          <list title="" v-for="(item,index) in dataList"  :key="index">
             <list-item  extra=" "  @click="orderDetail(item)">
               <div slot="subContent">{{item.toer}} </div>
               <div slot="content" class="gray f12"> {{new Date(item.successTime).format('yyyy-MM-dd hh:mm:ss')}}</div>
@@ -29,7 +29,7 @@
             </list-item>
           </list>
         </div>
-        
+
       </page-scroller>
     </div>
   </page>

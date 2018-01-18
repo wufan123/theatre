@@ -212,6 +212,8 @@
         }
       },
       fetchData(){
+
+        console.log(this.$route.query)
         this.storePromotion();
         // banner
         this.getBanner();

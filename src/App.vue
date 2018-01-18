@@ -7,10 +7,15 @@
 <script>
   import AuthApi from 'api/authApi'
   import HttpApi from 'api/apiHttp'
+  import {mapState} from "vuex";
+  import authApi from "./api/authApi";
   export default {
     name: 'app',
     mounted() {
       this.initWx();
+    },
+    computed: {
+      ...mapState('common', ['openId'])
     },
     methods: {
       async initWx(){
@@ -21,6 +26,24 @@
 
         }
         if (configRes && configRes.data) {
+          //获取openid
+          if (!this.openId) {
+            let code = this.$route.query.code;
+            if (!code) {
+              window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${configRes.data.appId}&redirect_uri=https://jufang.zmaxfilm.com&response_type=code&scope=snsapi_base#wechat_redirect`
+            } else {
+              let res;
+              try {
+                res = await authApi.getOpenId(code);
+              } catch (e) {
+
+              }
+              if (res && res.data) {
+                this.$store.commit("common/setOpenId", res.data.openId);
+              }
+            }
+          }
+          //初始化微信 js sdk
           wx.config(
             {
               debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -38,15 +61,6 @@
               ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             }
           )
-          HttpApi.instance.get('https://open.weixin.qq.com/connect/oauth2/authorize', {
-            params: {
-              appid: configRes.data.appId,
-              redirect_uri: 'https://jufang.zmaxfilm.com/#/payOrder',
-              response_type: 'code',
-              scope: 'snsapi_base',
-              state: 'STATE#wechat_redirect'
-            }
-          })
         }
       }
     }
