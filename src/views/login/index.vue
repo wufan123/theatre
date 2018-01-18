@@ -8,6 +8,7 @@
                  :src="require('assets/images/me/login_phone.png')" width="24" height="24">
           </x-input>
         </group>
+        <img :src="require('assets/images/me/login_bg.jpg')" width="124" height="124" >
         <group class="form-item">
           <x-input class="weui-vcode" type="number" placeholder="请输入验证码" v-model="form.pw">
             <img slot="label" style="padding-right:10px;display:block;"
@@ -112,8 +113,7 @@
       background-image: url('../../assets/images/me/login_bg.jpg');
       background-size: 100% 100%;
       height: 100%;
-      // position: absolute;
-      background:red;
+      position: absolute;
     }
     .form {
       padding: 110px 30px;
