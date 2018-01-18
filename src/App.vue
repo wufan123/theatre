@@ -18,6 +18,13 @@
       ...mapState('common', ['openId'])
     },
     methods: {
+      getQueryString(name)
+      {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null)return unescape(r[2]);
+        return null;
+      },
       async initWx(){
         let configRes;
         try {
@@ -28,7 +35,7 @@
         if (configRes && configRes.data) {
           //获取openid
           if (!this.openId) {
-            let code = this.$route.query.code;
+            let code = this.getQueryString('code');//vue-router的query获取会有问题
             let reUrl = 'https://jufang.zmaxfilm.com/preJufang/';
             if (!code) {
               window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${configRes.data.appId}&redirect_uri=${reUrl}&response_type=code&scope=snsapi_base#wechat_redirect`
