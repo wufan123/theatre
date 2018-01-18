@@ -9,7 +9,7 @@
           </x-input>
         </group>
         <group class="form-item">
-          <x-input class="weui-vcode" placeholder="请输入验证码" v-model="form.pw">
+          <x-input class="weui-vcode" type="number" placeholder="请输入验证码" v-model="form.pw">
             <img slot="label" style="padding-right:10px;display:block;"
                  :src="require('assets/images/me/login_code.png')" width="24" height="24">
             <x-button slot="right" type="primary" mini @click.native="getAuthCode" :disabled="codeGapTime>0">
@@ -112,6 +112,7 @@
       background-image: url('../../assets/images/me/login_bg.jpg');
       background-size: 100% 100%;
       height: 100%;
+      position: absolute;
     }
     .form {
       padding: 110px 30px;

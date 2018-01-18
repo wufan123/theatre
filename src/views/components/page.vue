@@ -80,6 +80,7 @@
     background: @color-sub !important;
   }
   .contain {
+    position: relative;
     flex: 1;
     overflow-y: auto;
   }
