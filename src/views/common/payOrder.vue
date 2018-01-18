@@ -62,9 +62,8 @@
         return `${h<10?'0'+h:h}:${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
       },
       async cancelOrder(){
-          this.$vux.toast.show({
-            text:'支付订单超时',
-            type:'cancel'
+          this.$vux.loading.show({
+            text:'支付订单超时,正在取消订单'
           });
           let res ;
           try{
@@ -72,6 +71,7 @@
           }catch(e){
               //todo
           }
+          this.$vux.loading.hide();
           this.$router.push('Home')
       },
       fetchData(){
