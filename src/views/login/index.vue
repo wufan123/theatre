@@ -3,7 +3,7 @@
     <div slot="contain" class="contain login">
       <div class="form">
         <group class="form-item">
-          <x-input name="mobile" placeholder="请输入手机号码" v-model="form.phone" keyboard="number" is-type="china-mobile">
+          <x-input name="mobile" type="number" placeholder="请输入手机号码" v-model="form.phone" keyboard="number" is-type="china-mobile">
             <img slot="label" style="padding-right:10px;display:block;"
                  :src="require('assets/images/me/login_phone.png')" width="24" height="24">
           </x-input>
