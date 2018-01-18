@@ -1,4 +1,4 @@
-<template> 
+<template>
   <page :footerText="!$util.isEmptyObject(userInfo)?`退出登录`:''"  :footerFunc="logOut" :headerTitle="`我的`">
       <div slot="contain" class="me">
           <div class="me-top">

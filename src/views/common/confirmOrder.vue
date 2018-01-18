@@ -186,6 +186,7 @@
         if (this.oldPhone !== this.phone) {
           OrderApi.updateOrderMobile(this.phone)
         }
+        this.$vux.loading.show();
         // 优惠券信息
         let couponStr = "";
         let couponArr = this.couponInfo.concat(this.saleCouponInfo);
@@ -205,8 +206,6 @@
 
         // 会员卡信息
         let cardId = this.selectedMember.id;
-
-        this.$vux.loading.show();
         let res;
         try {
           res = await  StoreApi.getOrderPayLock(this.orderId, this.orderType, cardId, couponStr);
@@ -214,7 +213,6 @@
           this.$util.showRequestErro(e);
         }
         if (res && !this.$util.isEmptyObject(res.data)) {
-          console.log('res.data', res.data)
           var params = {}
           params.type = this.promotion.type ? this.promotion.type : 2;
           params.sn = this.orderId;
