@@ -46,13 +46,7 @@
           this.$util.showRequestErro(e);
         }
         if(res&&res.data){
-          res.data = res.data.map(item => {
-            console.log(item.expireDate);
-            item.expireDate = new Date(item.expireDate * 1000).format("yyyy-MM-dd");
-            return item;
-          })
-          page === 0 ? this.dataList = res.data : this.dataList = this.dataList.concat(res.data);
-
+          this.dataList = page === 1 ? res.data : this.dataList.concat(res.data);
         }
         this.$vux.loading.hide();
         res ={

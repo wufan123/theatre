@@ -1,5 +1,5 @@
 <template>
-  <page :headerTitle="`套票`">
+  <page :headerTitle="`组合购`">
     <div slot="contain" class="package">
       <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown height='-46' :usePullup="false">
         <div v-for="(itemp,index) in dataList" :key="index">

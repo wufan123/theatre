@@ -37,7 +37,7 @@
           </list>
         </div>
         <div class="price">
-          <div class="flexb"><label>总价</label><label>￥{{orderInfo._price}}</label></div>
+          <div class="flexb"><label>总价 <label class="tip" v-if="selectedMember.cardId">会员卡优惠</label> </label><label>￥{{orderInfo._price}}</label></div>
           <div class="flexb" v-for="(item,index) in couponInfo" :key="index">
             <label>{{item.name}}</label><label>{{item.des}}</label></div>
           <div class="flexb" v-for="(item,index) in saleCouponInfo" :key="'sale'+index">
@@ -45,14 +45,8 @@
           <div class="flexb payment"><label>实付款</label><label>￥{{orderInfo.price}}</label></div>
         </div>
       </div>
-      <group>
-        <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile"
-                 ref="phone" v-model="phone"></x-input>
-      </group>
-      <div class="info">
-        <p>温馨提示：</p>
-        <p>手机号用于生成订单，及发送支付短信</p>
-      </div>
+      <group> <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile" ref="phone" v-model="phone"></x-input></group>
+      <div class="info"> <p>温馨提示：</p> <p>手机号用于生成订单，及发送支付短信</p> </div>
     </div>
   </page>
 </template>
@@ -318,7 +312,7 @@
 </script>
 <style lang="less" scoped>
   @import "~style/base-variables.less";
-
+  .tip{font-size: 12px;color: @color-active;border: 1px solid @color-active;}
   .c-order {
     padding: 0 15px;
     background: @base-bg-color;
