@@ -64,17 +64,17 @@
         return `${h < 10 ? '0' + h : h}:${m < 10 ? '0' + m : m}:${s < 10 ? '0' + s : s}`;
       },
       async cancelOrder(){
-        this.$vux.toast.show({
-          text: '支付订单超时',
-          type: 'cancel'
-        });
-        let res;
-        try {
-          res = await OrderApi.cancelOrder(data.hasOrder);
-        } catch (e) {
-          //todo
-        }
-        this.$router.push('Home')
+          this.$vux.loading.show({
+            text:'支付订单超时,正在取消订单'
+          });
+          let res ;
+          try{
+              res = await OrderApi.cancelOrder(data.hasOrder);
+          }catch(e){
+              //todo
+          }
+          this.$vux.loading.hide(); 
+          this.$router.push('Home')
       },
       fetchData(){
         if (this.payLockInfo.payTime) {
@@ -143,7 +143,7 @@
                   // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
                   this.$router.push({name: 'paySuccess'})
                 } else {
-                  ctx.$util.showRequestErro({text:res.errMsg}); 
+                  ctx.$util.showRequestErro({text:res.errMsg});
                 }
               }
             );
