@@ -29,8 +29,9 @@
           //获取openid
           if (!this.openId) {
             let code = this.$route.query.code;
+            let reUrl = 'https://jufang.zmaxfilm.com/preJufang/index.html';
             if (!code) {
-              window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${configRes.data.appId}&redirect_uri=https://jufang.zmaxfilm.com/preWxauth&response_type=code&scope=snsapi_base#wechat_redirect`
+              window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${configRes.data.appId}&redirect_uri=${reUrl}&response_type=code&scope=snsapi_base#wechat_redirect`
             } else {
               let res;
               try {
