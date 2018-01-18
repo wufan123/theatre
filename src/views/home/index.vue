@@ -144,10 +144,6 @@
       ...mapState('common', ['userInfo'])
     },
     methods: {
-      mapIntroduceData(data){
-        data.contentUrl = `#/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
-        return data;
-      },
       async getBanner(){
         let res = await TheatreApi.getInformationList(10);
         if (res) {
@@ -157,16 +153,17 @@
               case 1:
               case 2:
               case 3:
-                data = this.mapIntroduceData(data);
+                  //此处需特殊处理，加#
+                data.contentUrl = `#/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
                 break;
               case 4:
-                data.contentUrl = `#/ProductDetail?hyGoodsId=${data.redirectId}`;
+                data.contentUrl = `/ProductDetail?hyGoodsId=${data.redirectId}`;
                 break;
               case 6:
-                data.contentUrl = '#/SessionDetail';
+                data.contentUrl = '/SessionDetail';
                 break;
               case 5:
-                data.contentUrl = `#/HomePackageDetail?packageId=${data.redirectId}`;
+                data.contentUrl = `/HomePackageDetail?packageId=${data.redirectId}`;
                 break;
             }
             if(!data.redirectType){
@@ -183,7 +180,7 @@
         let res = await TheatreApi.getInformationList(20);
         if (res) {
           this.introduceList = res.data.map((data) => {
-            return this.mapIntroduceData(data);
+            return this.$util.mapIntroduceData(data);
           })
         }
       },
@@ -191,7 +188,7 @@
         let res = await  TheatreApi.getInformationList(30);
         if (res) {
           this.findList = res.data.map((data) => {
-            return this.mapIntroduceData(data);
+            return this.$util.mapIntroduceData(data);
           })
         }
       },

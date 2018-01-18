@@ -3,6 +3,11 @@ var debug = false,
 
 export const isArray = Array.isArray;
 
+export  function mapIntroduceData(data){
+  data.contentUrl = `/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
+  return data;
+}
+
 export function showRequestErro(err) {
   let info;
   if (err.text) {
