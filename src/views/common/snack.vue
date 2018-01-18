@@ -40,6 +40,9 @@
       getDataList(page){
         return StoreApi.getGoodsList().then(success => {
           this.dataList = success.data
+          if(this.dataList.length<=0){
+            this.createOrder()
+          }
           this.dataList.forEach(data => {
             data.num = 0;
           })
