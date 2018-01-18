@@ -1,5 +1,5 @@
 <template>
-  <page :footerText="!$util.isEmptyObject(userInfo)?`退出登录`:''"  :footerFunc="logOut" :headerTitle="`我的`">
+  <page :footerText="!$util.isEmptyObject(userInfo)?`退出登录`:'登录'"  :footerFunc="!$util.isEmptyObject(userInfo)?logOut:$router.push('Login')" :headerTitle="`我的`">
       <div slot="contain" class="me">
           <div class="me-top">
             <span class="bold f16">{{userInfo.userNickname}}</span>
@@ -7,7 +7,7 @@
                <em v-if="userInfo.memberCardBalance" >会员卡余额：￥{{userInfo.memberCardBalance.accBalance}}</em>
               丨  <em>积分：{{userInfo.integral}}</em></p>
 
-            <i class="member f12" v-if="userInfo.userNickname">剧坊会员</i>
+            <i class="member f12" v-if="!$util.isEmptyObject(userInfo)">剧坊会员</i>
           </div>
           <div class="me-order">
             <div class="title"></div>
@@ -32,10 +32,6 @@
               :contentTitle="`联系客服`"   extra="" isLink   >
             </list-item>
           </list>
-      </div>
-      <div slot="footer">
-          <x-button v-if="userInfo.userNickname" flex-box="0" type="primary no-radius" action-type="button" @click.native="logOut">退出登录</x-button>
-          <x-button v-if="!userInfo.userNickname" flex-box="0" type="primary no-radius" action-type="button" @click.native="$router.push('login')">登录</x-button>
       </div>
   </page>
 </template>

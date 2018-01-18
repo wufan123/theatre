@@ -9,12 +9,13 @@
             </div>
             <div class="body">
               <p class="mb10 red" >取票码：{{orderInfo.convcode}}</p>
-              <!-- <p class="mb10">取票码： 999999999</p> 
+              <p class="mb10">取票码： 999999999</p> 
               <qrcode :value="orderInfo.convcode" type="canvas" :size='120' ></qrcode>
             </div>
           </div> -->
           <div class="cell">
             <div class="cell-body" >订单号：{{orderInfo.orderId}}</div>
+            <div class="cell-body" v-if="orderInfo.convcode" >取票码：{{orderInfo.convcode}}</div>
             <div class="cell-body" >下单时间：{{ new Date(orderInfo.downTime*1000).format('yyyy年MM月dd日 hh:mm:ss') }}</div>
             <div  class="cell-item" v-for="item in film.detail">
                 <div class="flexb" >
