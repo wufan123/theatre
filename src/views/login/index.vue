@@ -111,7 +111,7 @@
     &.contain {
       background-image: url('../../assets/images/me/login_bg.jpg');
       background-size: 100% 100%;
-      height: 100%;border:1px solid red;
+      height: 100%;
       position: absolute;
     }
     .form {
