@@ -64,8 +64,8 @@ module.exports = {
         index: path.resolve(__dirname, '../dist/index.html'),
 
         // Paths
-        assetsRoot: path.resolve(__dirname, '../dist'),
-        assetsSubDirectory: '/preJufang/static',
+        assetsRoot: path.resolve(__dirname, '../dist/preJufang'),
+        assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         baseUrl:'/preapi',
 
