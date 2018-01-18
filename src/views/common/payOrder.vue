@@ -73,7 +73,7 @@
           }catch(e){
               //todo
           }
-          this.$vux.loading.hide(); 
+          this.$vux.loading.hide();
           this.$router.push('Home')
       },
       fetchData(){

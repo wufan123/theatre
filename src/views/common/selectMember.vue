@@ -7,7 +7,7 @@
           <label>余额：</label>
           <label class="text-ellipsis-line">￥{{item.accBalance}}</label>
         </div>
-        <label class="validity">有效期：{{item.expirationTime}}</label>
+        <label class="validity">有效期：{{new Date(item.expirationTime*1000).format('yyyy年MM月dd日 hh:mm:ss')}}</label>
       </div>
       <div class="s-button khaki reCharge" @click="selectMember(item)">选择</div>
     </div>

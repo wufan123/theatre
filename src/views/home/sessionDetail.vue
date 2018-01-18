@@ -23,7 +23,7 @@
               <label class="dividerTitle">
                 剧场介绍
               </label>
-              <div class="dividerLine"></div>
+              <!-- <div class="dividerLine"></div> -->
             </div>
             <div class="content">
               {{filmDetail ? filmDetail.introduction : ''}}
@@ -394,20 +394,18 @@ export default {
       width: 100%;
     }
     .divider {
+      overflow: hidden;
       position: relative;
       width: 100%;
       margin-top: 10px;
-    }
-    .dividerLine {
-      border-bottom: dotted @color-sub 1px;
-      position: absolute;
-      width: 100%;
-      z-index: 2;
+      background: @page_bg2 url(../../assets/images/home/divider_line.png) center repeat-x;
+      background-size: 18px 34px;
     }
     .dividerTitle {
       background: @page_bg2 url(../../assets/images/home/title_bg.png) center
       no-repeat;
       background-size: 100%100%;
+      position: relative;
       z-index: 3;
       width: 128px;
       height: 34px;

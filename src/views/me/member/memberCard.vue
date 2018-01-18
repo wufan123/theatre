@@ -11,7 +11,7 @@
                 <label>余额：</label>
                 <label class="text-ellipsis-line">￥{{item.money}}</label>
               </div>
-              <label class="validity">有效期：{{item.expireDate}}</label>
+              <label class="validity">有效期：{{new Date(item.expireDate*1000).format('yyyy年MM月dd日 hh:mm:ss')}}</label>
             </div>
             <div class="s-button khaki reCharge"
                  @click="$router.push({name:'Recharge',query:{id:item.id,levelName:item.levelName,cardNumber:item.cardNumber}})">
@@ -46,13 +46,7 @@
           this.$util.showRequestErro(e);
         }
         if(res&&res.data){
-          res.data = res.data.map(item => {
-            console.log(item.expireDate);
-            item.expireDate = new Date(item.expireDate * 1000).format("yyyy-MM-dd");
-            return item;
-          })
-          page === 0 ? this.dataList = res.data : this.dataList = this.dataList.concat(res.data);
-
+          this.dataList = page === 1 ? res.data : this.dataList.concat(res.data);
         }
         this.$vux.loading.hide();
         res ={
