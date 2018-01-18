@@ -15,11 +15,12 @@
           <div class="flexb">
             <label>总价：{{itemp.price}}元</label>
             <label v-if="itemp.status==0">未支付</label>
-            <label v-if="itemp.status==1">已支付</label>
-            <label v-if="itemp.status==3">已退货</label>
-            <label v-if="itemp.status==6">已取消</label>
-            <label v-if="itemp.status==10">已打印</label>
-            <label v-if="itemp.status==11">已验证</label>
+            <label v-else-if="itemp.status==1">已支付</label>
+            <label v-else-if="itemp.status==3">已退货</label>
+            <label v-else-if="itemp.status==6">已取消</label>
+            <label v-else-if="itemp.status==10">已打印</label>
+            <label v-else-if="itemp.status==11">已验证</label>
+            <label  v-else>{{item.exstatus==1?'已兑换':`兑换期限至: ${new Date(item.endTime*1000).format('yyyy年MM月dd日 hh:mm:ss')}`}}</label>
           </div>
         </div>
       </page-scroller>
