@@ -113,6 +113,7 @@
       background-size: 100% 100%;
       height: 100%;
       // position: absolute;
+      background:red;
     }
     .form {
       padding: 110px 30px;
