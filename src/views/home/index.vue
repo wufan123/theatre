@@ -107,13 +107,13 @@
     {
       name: '超级特价',
       pathName: 'LocalProduct',
-      params: {classType: 102},
+      params: {classType: 101},
       icon: require('assets/images/home/hemers.png')
     },
     {
       name: '福州特产馆',
       pathName: 'LocalProduct',
-      params: {classType: 101},
+      params: {classType: 102},
       icon: require('assets/images/home/local.png')
     }];
   export default {
@@ -151,6 +151,7 @@
       async getBanner(){
         let res = await TheatreApi.getInformationList(10);
         if (res) {
+
           this.banerList = res.data.map((data) => {
             switch (parseInt(data.redirectType)) {
               case 1:
@@ -167,6 +168,9 @@
               case 5:
                 data.contentUrl = `#/HomePackageDetail?packageId=${data.redirectId}`;
                 break;
+            }
+            if(!data.redirectType){
+              data.contentUrl = 'www.baidu.com'
             }
             return {
               url: data.contentUrl,
