@@ -4,10 +4,10 @@
       <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown :usePullup="false"
                      :height="'-46'">
         <div class="flash">
-          <coupon-item v-for="(item,index) in dataList" :key="index" @click.native="listItemClick(item,index)">
+          <coupon-item v-for="(item,index) in dataList" :key="index" @click.native="listItemClick(item,index)" :type="item.stock?false:true"  >
             <label class="leftTitle text-ellipsis-line" slot="right">{{item.packageName}}</label>
             <label class="leftInfo text-ellipsis-line" slot="right">{{item.converKnows}}</label>
-            <label class="rightTitle" slot="left">立即抢</label>
+            <label class="rightTitle" slot="left"> {{item.stock?'立即抢':'已抢完'}} </label>
             <label class="rightTip" slot="left">剩余{{item.stock}}份</label>
           </coupon-item>
         </div>
@@ -56,6 +56,10 @@
         return this.$refs.scroller.reset();
       },
       listItemClick(item,index) {
+        if(!item.stock){
+          this.$vux.loading.show({ text:'已抢完' });
+          return;
+        }
         this.bindingTicket(item,index)
       },
       async bindingTicket(item,index){
