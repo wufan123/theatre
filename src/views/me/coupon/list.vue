@@ -15,7 +15,7 @@
                          height='-110'>
             <coupon-item v-for="(item,index) in canUseList" :key="index" @click.native="gotoCouponDetail(item)">
               <label class="leftTitle" slot="right">{{item.voucherName}}</label>
-              <label class="leftInfo" slot="right">有效期 {{new Date(item.validData * 1000).format("yyyy-MM-dd")}}</label>
+              <label class="leftInfo" slot="right">有效期:{{new Date(item.startTime * 1000).format("yyyy-MM-dd")}}至{{new Date(item.validData * 1000).format("yyyy-MM-dd")}}</label>
               <label class="rightTitle" slot="left">￥{{item.voucherValue}}</label>
             </coupon-item>
 
@@ -57,14 +57,14 @@
     methods: {
       Scan(){
         var _this = this;
-            wx.scanQRCode({   
+            wx.scanQRCode({
                 needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
                 scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
                 success: function (res) {
                 var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
                     _this.value = result;
                     _this.addCoupon()
-                    //其它网页调用二维码扫描结果： 
+                    //其它网页调用二维码扫描结果：
                     //var result=sessionStorage.getItem('saomiao_result');
                 }
             });
@@ -79,11 +79,17 @@
           this.$util.showRequestErro(e);
         }
         if (res && res.data) {
-          // console.log('res',res)
-          page == 1 ? this.dataList= res.data.voucherList : this.dataList= this.dataList.concat(res.data.voucherList)
+           console.log('res', page == 1, page)
+           if(page==1){
+             this.dataList= res.data.voucherList
+             this.canUseList=[]
+             this.invalidList=[]
+           }else{
+             this.dataList= this.dataList.concat(res.data.voucherList)
+           }
           res.data.voucherList.forEach(item => {
             if (item.bindStatus == 1) {
-              this.dataList.push(item)
+              // this.dataList.push(item)
               if (item.status == 2 && (new Date().getTime() / 1000 < item.validData)) {
                 this.canUseList.push(item)
               } else {
@@ -95,11 +101,10 @@
           res.page={
             number: page, size: 100, totalElements: res.data.totalNum, allElementss: res.data.voucherNumber
           }
-
-          // if (!this.$util.isEmptyObject(res.data.voucherList)) {
-          //   page += 1
-          //   that.getDataList(page)
-          // }
+           if (!this.$util.isEmptyObject(res.data.voucherList)) {
+             page += 1
+             that.getDataList(page)
+           }
         }
         this.$vux.loading.hide();
         return res

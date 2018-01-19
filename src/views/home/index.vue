@@ -56,7 +56,7 @@
       </list-cell>
       <!--兑换票券-->
       <div flex="dir:left main:center">
-        <router-link to="/CouponList">
+        <router-link to="/SessionDetail">
           <img :src="require('assets/images/home/convert.png')" class="convert">
         </router-link>
       </div>
@@ -105,17 +105,17 @@
     icon: require('assets/images/home/flash_sale.png')
   },
     {
-    name: '超级特卖',
-    pathName: 'LocalProduct',
-    params: {classType: 102},
-    icon: require('assets/images/home/hemers.png')
-  },
+      name: '超级特价',
+      pathName: 'LocalProduct',
+      params: {classType: 101},
+      icon: require('assets/images/home/hemers.png')
+    },
     {
-    name: '福州特产馆',
-    pathName: 'LocalProduct',
-    params: {classType: 101},
-    icon: require('assets/images/home/local.png')
-  }];
+      name: '福州特产馆',
+      pathName: 'LocalProduct',
+      params: {classType: 102},
+      icon: require('assets/images/home/local.png')
+    }];
   export default {
     components: {
       Scroller,
@@ -144,21 +144,17 @@
       ...mapState('common', ['userInfo'])
     },
     methods: {
-      mapIntroduceData(data){
-        data.contentUrl = data.contentUrl.replace('https://', '');
-        data.contentUrl = data.contentUrl.replace('http://', '');
-        data.contentUrl = `/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
-        return data;
-      },
       async getBanner(){
         let res = await TheatreApi.getInformationList(10);
         if (res) {
+
           this.banerList = res.data.map((data) => {
             switch (parseInt(data.redirectType)) {
               case 1:
               case 2:
               case 3:
-                data = this.mapIntroduceData(data);
+                  //此处需特殊处理，加#
+                data.contentUrl = `#/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
                 break;
               case 4:
                 data.contentUrl = `/ProductDetail?hyGoodsId=${data.redirectId}`;
@@ -167,8 +163,11 @@
                 data.contentUrl = '/SessionDetail';
                 break;
               case 5:
-                data.contentUrl = `HomePackageDetail?packageId=${data.redirectId}`;
+                data.contentUrl = `/HomePackageDetail?packageId=${data.redirectId}`;
                 break;
+            }
+            if(!data.redirectType){
+              data.contentUrl = 'www.baidu.com'
             }
             return {
               url: data.contentUrl,
@@ -181,7 +180,7 @@
         let res = await TheatreApi.getInformationList(20);
         if (res) {
           this.introduceList = res.data.map((data) => {
-            return this.mapIntroduceData(data);
+            return this.$util.mapIntroduceData(data);
           })
         }
       },
@@ -189,7 +188,7 @@
         let res = await  TheatreApi.getInformationList(30);
         if (res) {
           this.findList = res.data.map((data) => {
-            return this.mapIntroduceData(data);
+            return this.$util.mapIntroduceData(data);
           })
         }
       },
@@ -212,6 +211,8 @@
         }
       },
       fetchData(){
+
+        console.log(this.$route.query)
         this.storePromotion();
         // banner
         this.getBanner();
@@ -337,28 +338,28 @@
       height: 61px;
       width: 77px;
     }
-    .introduceContent{
+    .introduceContent {
       position: relative;
-      .introducePlayIcon{
+      .introducePlayIcon {
         position: absolute;
         top: 0;
         left: 0;
         height: 166px;
         width: 250px;
-        img{
+        img {
           width: 60px;
         }
       }
     }
-    .findContent{
+    .findContent {
       position: relative;
-      .findPlayIcon{
+      .findPlayIcon {
         position: absolute;
         top: 0;
         left: 0;
         height: 160px;
         width: 160px;
-        img{
+        img {
           width: 60px;
         }
       }

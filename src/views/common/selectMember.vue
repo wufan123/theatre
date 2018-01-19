@@ -7,13 +7,16 @@
           <label>余额：</label>
           <label class="text-ellipsis-line">￥{{item.accBalance}}</label>
         </div>
-        <label class="validity">有效期：{{item.expirationTime}}</label>
+        <label class="validity">有效期：{{new Date(item.expirationTime*1000).format('yyyy年MM月dd日')}}</label>
       </div>
-      <div class="s-button khaki reCharge" @click="selectMember(item)">选择</div>
+      <div v-if="!$util.isEmptyObject(selectedMember)" class="s-button khaki reCharge" @click="calncalSelect(item)">取消</div>
+      <div class="s-button khaki reCharge" @click="selectMember(item)" v-else>选择</div>
+
     </div>
   </page>
 </template>
 <script>
+  import {mapState} from "vuex";
   export default {
     props: ['list'],
     data(){
@@ -21,10 +24,17 @@
         item: {}
       }
     },
+    computed: {
+      ...mapState('business', ['selectedMember'])
+    },
     methods: {
       selectMember(item){
         this.$store.commit("business/setSelectedMember", item);
         this.$router.go(-1);
+      },
+      calncalSelect(item){
+          this.$store.commit("business/setSelectedMember", {});
+          this.$router.go(-1);
       }
     }
   }
@@ -35,7 +45,7 @@
   .card-item {
     height: 125px;
     width: 345px;
-    margin: 0 15px 15px;
+    margin:15px 15px 0px;
     background-size: 100% 100% !important;
     background: url(../../assets/images/me/member_card_bg.jpg);
     position: relative;

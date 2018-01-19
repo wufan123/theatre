@@ -3,7 +3,8 @@ export default {
   state: {
     userInfo: {},
     toKen: '',
-    promotion:{}
+    promotion:{},
+    openId:''
   },
   mutations: {
     setUserInfo(state, info) {
@@ -14,6 +15,9 @@ export default {
     },
     setPromotion(state,p){
       state.promotion = p;
+    },
+    setOpenId(state,openId){
+      state.openId = openId;
     }
   },
   actions: {},

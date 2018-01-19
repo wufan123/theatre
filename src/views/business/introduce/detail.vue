@@ -34,7 +34,7 @@
     methods: {
       async fetchData(){
         try {
-          this.html = await  http.instance.get('https://' + this.$route.query.contentUrl)
+          this.html = await  http.instance.get(this.$route.query.contentUrl)
         }
         catch (e) {
 

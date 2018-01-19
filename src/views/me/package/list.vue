@@ -1,5 +1,5 @@
 <template>
-  <page :headerTitle="`套票`">
+  <page :headerTitle="`组合购`">
     <div slot="contain" class="package">
       <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown height='-46' :usePullup="false">
         <div v-for="(itemp,index) in dataList" :key="index">
@@ -9,17 +9,19 @@
                          :contentTitle="itemc.name" extra="">
                 <div slot="contentBrief">
                   <!-- <p>12 月 3 日 10：00</p> -->
-                  <p flex="main:justify"><label>数量</label> <label>{{itemc.number}}张</label></p>
+                  <p flex="main:justify"><label>数量</label> <label>{{itemc.number}}份</label></p>
+                  <!-- <p>{{itemc.exstatus==1?'已兑换':`兑换期限至: ${new Date(itemc.endTime*1000).format('yyyy-MM-dd hh:mm:ss')}`}}</p> -->
                 </div>
               </list-item>
             </list>
             <div class="flexb">
               <label>总价：{{itemp.price}}元</label>
               <label v-if="itemp.status==0">未支付</label>
-              <label v-if="itemp.status==1">已支付</label>
-              <label v-if="itemp.status==5">超时</label>
-              <label v-if="itemp.status==6">取消</label>
-              <label v-if="itemp.status==7">订单退货</label>
+              <label v-else-if="itemp.status==1">已支付</label>
+              <label v-else-if="itemp.status==5">超时</label>
+              <label v-else-if="itemp.status==6">取消</label>
+              <label v-else-if="itemp.status==7">订单退货</label>
+              <label  v-else></label>
             </div>
           </div>
         </div>

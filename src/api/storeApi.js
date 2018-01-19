@@ -165,24 +165,25 @@ function getGoodsList() {
   }
 
 
-  /**
-   * 支付接口
-   * @param {*} orderId
-   * @param {*} orderType
-   * @param {*} payType
-   * @param {*} integralNum
-   */
+/**
+ * 支付接口
+ * @param {*} orderId
+ * @param {*} orderType
+ * @param {*} payType
+ * @param {*} integralNum
+ * @param openId
+ */
   function goodsAndFilmComfirmNewPay(orderId, orderType, payType, integralNum, openId) {
+    console.log(openId);
     var params = {
       orderId: orderId,
       orderType: orderType,
-      payType: payType
+      payType: payType,
     }
     if (openId)
       params.openId = openId
     if (integralNum && integralNum > 0)
       params.integralNum = integralNum
-
     return apiHttp.get('/user/goodsAndFilmComfirmNewPay', params)
   }
 

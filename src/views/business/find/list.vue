@@ -37,12 +37,6 @@
     },
     components: {Tab, TabItem, findItem},
     methods: {
-      mapIntroduceData(data){
-        data.contentUrl = data.contentUrl.replace('https://', '');
-        data.contentUrl = data.contentUrl.replace('http://', '');
-        data.contentUrl = `/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
-        return data;
-      },
       onItemClick (index) {
         this.currentIndex = index
         console.log('on item click:', index)
@@ -51,7 +45,7 @@
         let res = await  TheatreApi.getInformationList(31);
         if (res&&res.data) {
           this.strategyList = res.data.map(item=>{
-              return this.mapIntroduceData(item)
+              return this.$util.mapIntroduceData(item)
           });
         }
       },
@@ -59,7 +53,7 @@
         let res = await TheatreApi.getInformationList(32);
         if (res&&res.data) {
           this.videoList = res.data.map(item=>{
-            return this.mapIntroduceData(item)
+            return this.$util.mapIntroduceData(item)
           });
         }
       },
@@ -67,7 +61,7 @@
         let res = await TheatreApi.getInformationList(33);
         if (res&&res.data) {
           this.attentionList = res.data.map(item=>{
-            return this.mapIntroduceData(item)
+            return this.$util.mapIntroduceData(item)
           });
         }
       },

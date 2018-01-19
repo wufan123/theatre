@@ -1,19 +1,16 @@
 <template>
   <div class="page">
-    <div>
-      <div v-if="headerTitle">
-        <x-header class="header" :left-options="{showBack:!isShowBack, backText: '',preventGoBack:!!backFunc}"  @on-click-back="onClickL">{{headerTitle}}
-          <a slot="right" v-if="headerRText" @click="onClickR">{{headerRText}}</a>
-          <slot slot="right" name="rightTop"></slot>
-        </x-header>
-      </div>
+    <div v-if="headerTitle">
+      <x-header class="header" :left-options="{showBack:!isShowBack, backText: '',preventGoBack:!!backFunc}"  @on-click-back="onClickL">{{headerTitle}}
+        <a slot="right" v-if="headerRText" @click="onClickR">{{headerRText}}</a>
+        <slot slot="right" name="rightTop"></slot>
+      </x-header>
     </div>
     <div class="contain" ref="contain">
       <slot name="contain"></slot>
     </div>
     <div class="footer">
-      <x-button v-if="footerText" flex-box="0" type="primary no-radius" action-type="button" @click.native="onClick">{{footerText}}
-      </x-button>
+      <x-button v-if="footerText"  type="primary no-radius" action-type="button" @click.native="onClick">{{footerText}} </x-button>
       <slot name="footer"></slot>
     </div>
   </div>
@@ -75,23 +72,24 @@
 <style lang="less">
   @import "~style/base-variables.less";
   .page {
-    display: flex;
+    display: flex;overflow: hidden;
     flex-direction: column;background-image: url(../../assets/images/page_bg.png);background-size:68px 68px;background-repeat:repeat;
   }
   .header {
     flex: 0;
     background: @color-sub !important;
   }
-
   .contain {
-    overflow: auto;
+    position: relative;
     flex: 1;
-
-    background-size: 68px 68px;
+    overflow-y: auto;
   }
 
   .footer {
     flex: 0;
+    .btn{
+      width: 100%;height: 42px;
+    }
   }
 </style>
 

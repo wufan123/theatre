@@ -1,12 +1,13 @@
 <template>
   <page :headerTitle="`支付订单`" :footerText="`确认支付`" :footerFunc="confirmPay">
     <div slot="contain" class="payInfo">
-      <div class="center last-time">支付剩余时间：{{getPayTime()}}</div>
+      <div class="center last-time" v-if="this.payLockInfo.orderType=='goodsAndFilm'">支付剩余时间：{{getPayTime()}}</div>
       <div class="flexb payment"><label>实付款</label><label>￥{{payLockInfo.price}}</label></div>
       <div class="c-pay">
         <group title="选择支付方式">
-          <radio title="title" :options="typeData" v-model="value"     disabled></radio>
+          <radio title="title" :options="typeData" v-model="value" disabled></radio>
         </group>
+
         <!--<div >
          <label>选择支付方式</label>
          <div class="payItem">
@@ -22,7 +23,9 @@
       </div>
       <div class="tip">
         <p>温馨提示：</p>
-        <p>订单一旦完成购买，不退不换</p></div>
+        <p>订单一旦完成购买，不退不换</p>
+        {{erroInfo}}
+      </div>
     </div>
   </page>
 </template>
@@ -34,6 +37,8 @@
   import {mapState} from "vuex";
   import OrderApi from "api/orderApi";
   import TheatreApi from "../../api/theatreApi";
+  import AuthApi from "../../api/authApi";
+  import {AlertModule} from "vux";
   let typeData = [
     {
       icon: 'http://p0bd8izdn.bkt.clouddn.com/ruihua/wap/images/wexin.png',
@@ -46,12 +51,14 @@
         telphone: '13800138000',
         value: '2',
         typeData: typeData,
-        payTime: 0
+        payTime: 0,
+        erroInfo: ''
       }
     },
     components: {List, ListItem, Group, Radio},
     computed: {
-      ...mapState("business", ['payLockInfo'])
+      ...mapState("business", ['payLockInfo']),
+      ...mapState('common', ['openId'])
     },
     methods: {
       getPayTime(){
@@ -59,26 +66,28 @@
         s = this.payTime % 60;
         m = parseInt((this.payTime / 60)) % 60;
         h = parseInt(this.payTime / 3600);
-        return `${h<10?'0'+h:h}:${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
+        return `${h < 10 ? '0' + h : h}:${m < 10 ? '0' + m : m}:${s < 10 ? '0' + s : s}`;
       },
       async cancelOrder(){
-          this.$vux.loading.show({
-            text:'支付订单超时,正在取消订单'
-          });
-          let res ;
-          try{
-              res = await OrderApi.cancelOrder(data.hasOrder);
-          }catch(e){
-              //todo
+        let res;
+        try {
+          res = await OrderApi.cancelOrder(data.hasOrder);
+        } catch (e) {
+          //todo
+        }
+        let ctx =this;
+        AlertModule.show({
+          title: '提示',
+          content: '支付超时，订单已取消，请重新购买',
+          onHide () {
+            ctx.$router.push('Home')
           }
-          this.$vux.loading.hide();
-          this.$router.push('Home')
+        })
       },
       fetchData(){
-        if(this.payLockInfo.payTime)
-        {
+        if (this.payLockInfo.payTime) {
           this.payTime = this.payLockInfo.payTime;
-          let ct =this;
+          let ct = this;
           ct.timer = setInterval(() => {
             if (--this.payTime <= 0) {
               clearInterval(ct.timer);
@@ -105,47 +114,58 @@
       },
       // 点击确认支付
       async confirmPay () {
-        this.$vux.toast.show({
-          type: 'cancel',
-          text: '暂时无法使用第三方支付'
-        });
-        return;
-        this.$vux.loading.show();
+        this.$vux.loading.show({
+            name: '请稍后'
+          }
+        );
+//        let conRes;
+//        try {
+//          conRes = await  AuthApi.getWeixinConfig();
+//        } catch (e) {
+//          this.$util.showRequestErro(e)
+//        }
+//        if (conRes && conRes.data) {
         let res;
         try {
-          res = await StoreApi.goodsAndFilmComfirmNewPay(this.payLockInfo.orderId, this.payLockInfo.orderType, "account", 0, null)
+          res = await StoreApi.goodsAndFilmComfirmNewPay(this.payLockInfo.orderId, this.payLockInfo.orderType, "weixinpay", 0, this.openId)
         }
         catch (e) {
-
+          this.$util.showRequestErro(e)
         }
-        /*TheatreApi.finishPromotion({
-          ...this.promotion,
-          sn:this.orderId,
-          price:
-        });*/
+        if (res && res.data && res.data.weixinpay) {
+          let wxpay = res.data.weixinpay;
+          let ctx = this;
+          if (WeixinJSBridge) {
+            WeixinJSBridge.invoke(
+              'getBrandWCPayRequest', {
+                "appId": wxpay.appId,     //公众号名称，由商户传入
+                "timeStamp": wxpay.timeStamp,//时间戳，自1970年以来的秒数
+                "nonceStr": wxpay.nonceStr, //随机串
+                "package": wxpay.package,
+                "signType": wxpay.signType,//微信签名方式
+                "paySign": wxpay.paySign//微信签名
+              },
+              function (res) {
+                if (res.err_msg == "get_brand_wcpay_request:ok") {
+                  // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+                  this.$router.push({name: 'PaySuccess'})
+                } else {
+                  ctx.$util.showRequestErro({text: res.des});
+//                  ctx.erroInfo = res;
+                }
+              }
+            );
+          }
+          else {
+
+          }
+        }
+//        }
         this.$vux.loading.hide();
-        /*.then(success => {
-         if (success.status == 0) {
-         let payInfo = success.data.weixinpay
-         WxApi.wxPay(payInfo, success => {
 
-         }, error => {
-
-         })
-         }
-         modalUtils.hideLoadingToast()
-         if (this.data.payCount == 0) {
-         pageUtil.gotoPaySuccess(this.data.orderId, this.data.orderType)
-         }
-         else {//启动微信支付
-         this.requestWxPay(res.weixinpay)
-         }
-         }, error => {
-
-         })*/
       },
       change(val){
-        console.log('change', val)
+
       }
     }
   }

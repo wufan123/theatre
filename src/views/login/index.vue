@@ -3,13 +3,13 @@
     <div slot="contain" class="contain login">
       <div class="form">
         <group class="form-item">
-          <x-input name="mobile" placeholder="请输入手机号码" v-model="form.phone" keyboard="number" is-type="china-mobile">
+          <x-input name="mobile" type="number" placeholder="请输入手机号码" v-model="form.phone" keyboard="number" is-type="china-mobile">
             <img slot="label" style="padding-right:10px;display:block;"
                  :src="require('assets/images/me/login_phone.png')" width="24" height="24">
           </x-input>
         </group>
         <group class="form-item">
-          <x-input class="weui-vcode" placeholder="请输入验证码" v-model="form.pw">
+          <x-input class="weui-vcode" type="number" placeholder="请输入验证码" v-model="form.pw">
             <img slot="label" style="padding-right:10px;display:block;"
                  :src="require('assets/images/me/login_code.png')" width="24" height="24">
             <x-button slot="right" type="primary" mini @click.native="getAuthCode" :disabled="codeGapTime>0">
@@ -17,7 +17,8 @@
             </x-button>
           </x-input>
         </group>
-        <div class="s-button khaki" @click="login">登录</div>
+        <div class="s-button khaki mb20" @click="login">登录</div>
+        <div class="red f12" @click="$router.push('Protocol')">登录即为同意 《瑞华剧坊用户协议》</div>
       </div>
     </div>
   </page>
@@ -43,6 +44,13 @@
     },
     methods: {
       async getAuthCode(){
+        if (!this.form.phone) {
+          this.$vux.toast.show({
+            text: '电话号码不能为空',
+            type: 'warn'
+          })
+          return;
+        }
         this.$vux.loading.show({
           text: '获取验证码中'
         });
@@ -112,6 +120,7 @@
       background-image: url('../../assets/images/me/login_bg.jpg');
       background-size: 100% 100%;
       height: 100%;
+      position: absolute;
     }
     .form {
       padding: 110px 30px;

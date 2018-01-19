@@ -1,10 +1,13 @@
 <template>
-  <page :footerText="`退出登录`"  :footerFunc="logOut" :headerTitle="`我的`">
+  <page :footerText="!$util.isEmptyObject(userInfo)?`退出登录`:'登录'"  :footerFunc="!$util.isEmptyObject(userInfo)?logOut:$router.push('Login')" :headerTitle="`我的`">
       <div slot="contain" class="me">
           <div class="me-top">
             <span class="bold f16">{{userInfo.userNickname}}</span>
-            <p><em>余额：￥{{userInfo.userMoney}}</em>  丨  <em>积分：{{userInfo.integral}}</em></p>
-            <i class="member f12">剧坊会员</i>
+            <p><em v-if="!userInfo.memberCardBalance" >余额：￥{{userInfo.userMoney}}</em>
+               <em v-if="userInfo.memberCardBalance" >会员卡余额：￥{{userInfo.memberCardBalance.accBalance}}</em>
+              丨  <em>积分：{{userInfo.integral}}</em></p>
+
+            <i class="member f12" v-if="!$util.isEmptyObject(userInfo)">剧坊会员</i>
           </div>
           <div class="me-order">
             <div class="title"></div>
@@ -78,7 +81,7 @@ export default {
 </script>
 <style lang="less" scoped>
 @import "~style/base-variables";
-  .me-top{font-size: 13px;text-align: center;padding:20px 0;line-height: 30px;background-image:url('../../assets/images/me/top_bg.jpg');background-size: 100% 100%;background-repeat: no-repeat;}
+  .me-top{font-size: 13px;text-align: center;min-height: 105px; padding:20px 0;line-height: 30px;background-image:url('../../assets/images/me/top_bg.jpg');background-size: 100% 100%;background-repeat: no-repeat;}
     p em{margin: 0 10px;}
   i.member{margin-top:10px; border: 1px solid #1b2a3d; color: @color-sub; display: inline-block;line-height: 20px;padding: 2px 15px;border-radius: 20px;position: relative;
     &:before{ content:'';width: 15px;height: 15px;display: inline-block;background-size:100%;background-repeat: no-repeat;

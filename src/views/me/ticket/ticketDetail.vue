@@ -5,8 +5,8 @@
         <div class="ticket-detail" :style="`margin-top:`+(orderInfo.status!=3?`200px`:`50px`)">
           <div class="ticket" v-if="orderInfo.status==3">
             <div class="info">
-              <p class="f16">{{orderDetail.film.filmName}}--{{orderInfo.status}}</p>
-              <p>{{orderDetail.film.startTime}}</p>
+              <p class="f16">{{orderDetail.film.filmName}}</p>
+              <p>{{new Date(orderDetail.film.startTime*1000).format('yyyy年MM月dd日 hh:mm:ss')}}</p>
             </div>
             <div class="body">
               <p v-for="item in orderInfo.ticketing" class="mb10 red" >{{item.key}}：{{item.value}}</p>
