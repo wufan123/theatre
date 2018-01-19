@@ -84,7 +84,7 @@
         })
       },
       fetchData(){
-        if (this.payLockInfo.payTime) {
+        if (this.payLockInfo.payTime>0) {
           this.payTime = this.payLockInfo.payTime;
           let ct = this;
           ct.timer = setInterval(() => {
@@ -145,7 +145,7 @@
                 "paySign": wxpay.paySign//微信签名
               },
               function (res) {
-                ctx.erroInfo = res;
+//                ctx.erroInfo = res;
                 try {
                   res = JSON.parse(res);
                 } catch (e) {
