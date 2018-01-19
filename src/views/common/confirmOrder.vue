@@ -52,7 +52,7 @@
           </list>
         </div>
         <div class="price">
-          <div class="flexb"><label>总价 <label class="tip" v-if="selectedMember.cardId">会员卡优惠</label>
+          <div class="flexb"><label>总价 <label class="tip" v-if="isUseCard">会员卡优惠</label>
           </label><label>￥{{orderInfo._price}}</label></div>
           <div class="flexb" v-for="(item,index) in couponInfo" :key="index">
             <label>{{item.name}}</label><label>{{item.des}}</label></div>
@@ -89,6 +89,7 @@
         selectCard: null, // 选择的会员卡
         oldPhone: null, // 保存旧手机号，判断是否有修改
         couponInfo: [],
+        isUseCard: false,
         saleCouponInfo: []
       }
     },
@@ -99,6 +100,8 @@
     },
     methods: {
       async fetchData(){
+        this.isUseCard = this.$util.isEmptyObject(this.selectedMember)?false:true;
+        this.selectCard = this.selectedMember
         this.phone = this.$store.state.common.userInfo.bindmobile;
         this.oldPhone = this.phone;
         // 获取优惠券信息
@@ -135,10 +138,14 @@
       caculateCount: function () {
         //初始化显示订单价格
         this.orderInfo.film._price = parseFloat(this.orderInfo.film.price);
-        // TODO 如果有使用会员卡
-        // if (this.selectCard) {
-        //     this.orderInfo.film._price = parseFloat(this.selectCard.settlementPrice) * parseInt(this.orderInfo.film.seatCount)
-        // }
+        // 如果有使用会员卡
+        if (this.isUseCard) {
+          if (this.selectCard.totalSettlementPrice) {
+            this.orderInfo.film._price = parseFloat(this.selectCard.totalSettlementPrice)
+          } else {//旧版接口兼容
+            this.orderInfo.film._price = parseFloat(this.selectCard.settlementPrice) * parseInt(this.orderInfo.film.seatCount)
+          }
+        }
         // 原始总价
         this.orderInfo._price = this.orderInfo.film._price + (parseFloat(this.orderInfo.goods ? this.orderInfo.goods.price : 0))
         this.orderInfo.price = this.orderInfo._price;
