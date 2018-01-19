@@ -86,7 +86,7 @@
   }
 
   .footer {
-    flex: 0;
+    flex: 0;border:1px solid blue;height:42px;
     .btn{
       width: 100%;height: 42px;
     }
