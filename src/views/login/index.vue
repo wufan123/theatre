@@ -17,7 +17,8 @@
             </x-button>
           </x-input>
         </group>
-        <div class="s-button khaki" @click="login">登录</div>
+        <div class="s-button khaki mb20" @click="login">登录</div>
+        <div class="red f12" @click="$router.push('Protocol')">登录即为同意 《瑞华剧坊用户协议》</div>
       </div>
     </div>
   </page>
@@ -43,6 +44,13 @@
     },
     methods: {
       async getAuthCode(){
+        if (!this.form.phone) {
+          this.$vux.toast.show({
+            text: '电话号码不能为空',
+            type: 'warn'
+          })
+          return;
+        }
         this.$vux.loading.show({
           text: '获取验证码中'
         });
@@ -85,7 +93,7 @@
         });
         let res;
         try {
-          res = await Auth.smsLogin(this.form.phone, this.form.pw); //smsLogin
+          res = await Auth.login(this.form.phone, this.form.pw); //smsLogin
         }
         catch (e) {
           this.$util.showRequestErro(e);

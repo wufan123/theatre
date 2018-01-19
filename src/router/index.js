@@ -6,6 +6,7 @@ import MemberCard from '@/views/me/member/memberCard.vue'
 import AddCard from '@/views/me/member/addCard.vue'
 import Recharge from '@/views/me/member/recharge.vue'
 import Login from '@/views/login/index.vue'
+import Protocol from '@/views/login/protocol.vue'
 import CouponList from '@/views/me/coupon/list.vue'
 import CouponDetail from '@/views/me/coupon/detail.vue'
 import TicketList from '@/views/me/ticket/list.vue'
@@ -77,6 +78,8 @@ export default new Router({
     {path: '/LocalProductDetail', name: 'LocalProductDetail', component: LocalProductDetail},
     {path: '/promotionList', name: 'promotionList', component: promotionList},
     {path: '/SessionDetail', name: 'SessionDetail', component: SessionDetail},
+    
+    {path: '/Protocol', name: 'Protocol', component: Protocol},
     {path: '/Login', name: 'Login', component: Login},
   ]
 })
