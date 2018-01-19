@@ -47,7 +47,7 @@
       };
     },
     computed: {
-      ...mapState("common/", ["userInfo"])
+      ...mapState("common/", ["userInfo",'openId'])
     },
     methods: {
       async fetchData() {
@@ -72,7 +72,7 @@
         }
         let res;
         try {
-          res = await StoreApi.payPackage("weixinpay", this.orderId);
+          res = await StoreApi.payPackage("weixinpay", this.orderId,this.openId);
         }
         catch (e) {
           this.$util.showRequestErro(e);
@@ -89,14 +89,20 @@
                 "package": wxpay.package,
                 "signType": wxpay.signType,//微信签名方式
                 "paySign": wxpay.paySign//微信签名
-              },
+              }, 
               function (res) {
                 ctx.erroInfo = res;
+                try {
+                  res = JSON.parse(res);
+                } catch (e) {
+
+                }
                 if (res.err_msg == "get_brand_wcpay_request:ok") {//cancel
-                  // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
-                  this.$router.push({name: 'PaySuccess'})
+                  ctx.erroInfo.type='gotoPaySuccess';
+                  ctx.$router.push({name: 'PaySuccess'})
                 } else {
-                  ctx.$util.showRequestErro({text: res.des});
+                  if (res.err_desc)
+                    ctx.$util.showRequestErro({text: res.err_desc});
                 }
               }
             );

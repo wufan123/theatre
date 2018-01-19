@@ -155,8 +155,8 @@
                   ctx.erroInfo.type='gotoPaySuccess';
                   ctx.$router.push({name: 'PaySuccess'})
                 } else {
-                  if (res.des)
-                    ctx.$util.showRequestErro({text: res.des});
+                  if (res.err_desc)
+                    ctx.$util.showRequestErro({text: res.err_desc});
                 }
               }
             );
