@@ -97,6 +97,7 @@ instance.interceptors.request.use(config => {
 });
 
 instance.interceptors.response.use(response => {
+
   // console.log('resp-----------------------onse', response)
   let data = response.data
   if (data.status == 0) {
