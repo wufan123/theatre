@@ -6,28 +6,28 @@
           <list twoLine>
             <div v-if="orderInfo&&orderInfo.film" class="good-content">
               <list-item :img="orderInfo.film.image" extra="">
-                     <div slot="contentTitle" flex="main:justify" >
-                       <label class="text-ellipsis-line"  >{{orderInfo.film.filmName}}</label>
-                       <label class="o-price">￥{{orderInfo.film.price}}</label>
-                       </div>
-                       <div slot="contentBrief" flex="main:justify">
-                       <label class="f12">{{new Date(orderInfo.film.startTime*1000).format('MM-dd hh:mm')}} 场</label>
-                       <label class="f14">x {{orderInfo.film.seatCount}}</label>
-                       </div>
-                         </list-item>
+                <div slot="contentTitle" flex="main:justify">
+                  <label class="text-ellipsis-line">{{orderInfo.film.filmName}}</label>
+                  <label class="o-price">￥{{orderInfo.film.price}}</label>
+                </div>
+                <div slot="contentBrief" flex="main:justify">
+                  <label class="f12">{{new Date(orderInfo.film.startTime * 1000).format('MM-dd hh:mm')}} 场</label>
+                  <label class="f14">x {{orderInfo.film.seatCount}}</label>
+                </div>
+              </list-item>
             </div>
             <div v-if="orderInfo&&orderInfo.goods&&orderInfo.goods.list">
               <list-item v-for="item in orderInfo.goods.list" :key="item.name" :img="item.goodsImg" extra="">
-                        <div slot="contentTitle" flex="main:justify" >
-                          <label class="text-ellipsis-line" >{{item.name}}</label>
-                          <label class="o-price">￥{{item.price}}</label>
-                        </div>
-                        <div slot="contentBrief" flex="main:justify">
-                          <label></label>
-                          <label class="f14">x {{item.number}}</label>
-                        </div>
+                <div slot="contentTitle" flex="main:justify">
+                  <label class="text-ellipsis-line">{{item.name}}</label>
+                  <label class="o-price">￥{{item.price}}</label>
+                </div>
+                <div slot="contentBrief" flex="main:justify">
+                  <label></label>
+                  <label class="f14">x {{item.number}}</label>
+                </div>
 
-                         </list-item>
+              </list-item>
             </div>
           </list>
         </div>
@@ -58,7 +58,8 @@
             <label>{{item.name}}</label><label>{{item.des}}</label></div>
           <div class="flexb" v-for="(item,index) in saleCouponInfo" :key="'sale'+index">
             <label>{{item.name}}</label><label>{{item.des}}</label></div>
-          <div class="flexb payment"><label>实付款</label><label>￥{{orderInfo.price?orderInfo.price.toFixed(2):0}}</label></div>
+          <div class="flexb payment">
+            <label>实付款</label><label>￥{{orderInfo.price ? orderInfo.price.toFixed(2) : 0}}</label></div>
         </div>
       </div>
       <group>
@@ -333,9 +334,13 @@
 </script>
 <style lang="less" scoped>
   @import "~style/base-variables.less";
-  .o-price{    font-size: 17px;
+
+  .o-price {
+    font-size: 17px;
     color: #c4a983;
-    font-weight: bold;}
+    font-weight: bold;
+  }
+
   .tip {
     font-size: 12px;
     color: @color-active;
