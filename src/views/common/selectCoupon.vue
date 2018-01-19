@@ -90,6 +90,16 @@
         }
       },
       confirmCoupon(){
+        if (this.voucherType == 0) {
+          let list = this.couponList.filter(item => {
+            return item.checked
+          });
+          console.log(list.length,parseFloat(this.seatCount));
+          if (list.length < parseFloat(this.seatCount)) {
+            this.$vux.toast.text(`还需要${this.seatCount - list.length}张兑换券`);
+            return;
+          }
+        }
         if (this.orderType == 'goods') {
           this.$store.commit("coupon/setGoodsCouponList", this.couponList);
         } else {

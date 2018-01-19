@@ -43,7 +43,7 @@
             <label>{{item.name}}</label><label>{{item.des}}</label></div>
           <div class="flexb" v-for="(item,index) in saleCouponInfo" :key="'sale'+index">
             <label>{{item.name}}</label><label>{{item.des}}</label></div>
-          <div class="flexb payment"><label>实付款</label><label>￥{{orderInfo.price}}</label></div>
+          <div class="flexb payment"><label>实付款</label><label>￥{{orderInfo.price.toFixed(2)}}</label></div>
         </div>
       </div>
       <group>
@@ -131,9 +131,10 @@
             return item;
           }
         });
+        let exChange = false;
         selectedList.forEach(item => {
           switch (item.ticketType) {
-            case 'reduce':
+            case 'reduce'://立减券
               this.orderInfo.price -= parseFloat(item.ticketValue);
               this.couponInfo.push({
                 name: item.voucherName,
@@ -141,11 +142,10 @@
                 des: `-￥${item.ticketValue}`
               });
               break;
-            case 'exchange':
-              if (this.orderInfo.price > this.orderInfo.film.price) {
+            case 'exchange'://兑换券
+              if (!exChange) {
                 this.orderInfo.price -= this.orderInfo.film.price;
-              } else {
-                this.orderInfo.price = 0;
+                exChange = true;//使用兑换券需要全部兑换，只减一次
               }
               this.orderInfo.price += parseFloat(item.ticketValue);
               this.couponInfo.push({

@@ -1,7 +1,7 @@
 <template>
   <page :headerTitle="`支付订单`" :footerText="`确认支付`" :footerFunc="confirmPay">
     <div slot="contain" class="payInfo">
-      <div class="center last-time">支付剩余时间：{{getPayTime()}}</div>
+      <div class="center last-time" v-if="this.payLockInfo.orderType=='goodsAndFilm'">支付剩余时间：{{getPayTime()}}</div>
       <div class="flexb payment"><label>实付款</label><label>￥{{payLockInfo.price}}</label></div>
       <div class="c-pay">
         <group title="选择支付方式">
@@ -68,17 +68,12 @@
         return `${h < 10 ? '0' + h : h}:${m < 10 ? '0' + m : m}:${s < 10 ? '0' + s : s}`;
       },
       async cancelOrder(){
-        this.$vux.loading.show({
-          text: '支付订单超时,正在取消订单'
-        });
         let res;
         try {
           res = await OrderApi.cancelOrder(data.hasOrder);
         } catch (e) {
           //todo
         }
-        this.$vux.loading.hide();
-        this.$router.push('Home')
       },
       fetchData(){
         if (this.payLockInfo.payTime) {
