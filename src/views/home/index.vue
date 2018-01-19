@@ -154,7 +154,7 @@
               case 2:
               case 3:
                   //此处需特殊处理，加#
-                data.contentUrl = `#/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
+                data.contentUrl = `#/IntroduceDetail?contentUrl=${data.contentUrl}&title=${data.title}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
                 break;
               case 4:
                 data.contentUrl = `/ProductDetail?hyGoodsId=${data.redirectId}`;
