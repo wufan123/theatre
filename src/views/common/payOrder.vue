@@ -153,7 +153,7 @@
                 }
                 if (res.err_msg == "get_brand_wcpay_request:ok") {//cancel
                   ctx.erroInfo.type='gotoPaySuccess';
-                  this.$router.push({name: 'PaySuccess'})
+                  ctx.$router.push({name: 'PaySuccess'})
                 } else {
                   if (res.des)
                     ctx.$util.showRequestErro({text: res.des});
