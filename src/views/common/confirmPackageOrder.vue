@@ -47,7 +47,7 @@
       };
     },
     computed: {
-      ...mapState("common/", ["userInfo"])
+      ...mapState("common/", ["userInfo",'openId'])
     },
     methods: {
       async fetchData() {
@@ -72,7 +72,7 @@
         }
         let res;
         try {
-          res = await StoreApi.payPackage("weixinpay", this.orderId);
+          res = await StoreApi.payPackage("weixinpay", this.orderId,this.openId);
         }
         catch (e) {
           this.$util.showRequestErro(e);

@@ -131,9 +131,9 @@ function getGoodsList() {
   }
 
 
-  function payPackage(payType,orderId) {
+  function payPackage(payType,orderId,openId) {
     let param = {
-      payType,orderId
+      payType,orderId,openId 
     }
     return apiHttp.get('/pay/packagePay',param);
   }
