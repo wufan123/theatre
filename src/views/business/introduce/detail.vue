@@ -72,7 +72,7 @@
     height:100%;
   }
 
-  .goToBuy {
+  .goToBuy {margin-top: 10px;
     width: 80px;
   }
 </style>
