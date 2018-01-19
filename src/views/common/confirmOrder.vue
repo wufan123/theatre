@@ -135,10 +135,14 @@
       caculateCount: function () {
         //初始化显示订单价格
         this.orderInfo.film._price = parseFloat(this.orderInfo.film.price);
-        // TODO 如果有使用会员卡
-        // if (this.selectCard) {
-        //     this.orderInfo.film._price = parseFloat(this.selectCard.settlementPrice) * parseInt(this.orderInfo.film.seatCount)
-        // }
+        // 如果有使用会员卡
+        if (this.selectCard) {
+          if (this.selectCard.totalSettlementPrice) {
+            this.orderInfo.film._price = parseFloat(this.selectCard.totalSettlementPrice)
+          } else {//旧版接口兼容
+            this.orderInfo.film._price = parseFloat(this.selectCard.settlementPrice) * parseInt(this.orderInfo.film.seatCount)
+          }
+        }
         // 原始总价
         this.orderInfo._price = this.orderInfo.film._price + (parseFloat(this.orderInfo.goods ? this.orderInfo.goods.price : 0))
         this.orderInfo.price = this.orderInfo._price;
