@@ -100,7 +100,7 @@
     },
     methods: {
       async fetchData(){
-        this.isUseCard = this.$util.isEmptyObject(this.selectedMember)?false:true;
+        this.isUseCard = this.$util.isEmptyObject(this.selectedMember) ? false : true;
         this.selectCard = this.selectedMember
         this.phone = this.$store.state.common.userInfo.bindmobile;
         this.oldPhone = this.phone;
@@ -264,9 +264,24 @@
               this.$util.showRequestErro(e);
             }
             if (payRes && payRes.status == 0) {
-              this.$router.push({
-                name: 'PaySuccess'
-              })
+              this.$vux.loading.show({
+                text:'正在出票'
+              });
+              let statusRes;
+              try {
+                statusRes = await  StoreApi.getOrderStatus(this.orderId);
+              }catch (e){
+                  this.$util.showRequestErro(e)
+              }
+              if (statusRes && statusRes.data && statusRes.data.orderInfo && statusRes.data.orderInfo && statusRes.data.orderInfo.orderStatus == '3'){
+                this.$router.push({
+                  name: 'PaySuccess'
+                })
+              }else{
+                  this.$util.showRequestErro({text:'出票失败'})
+                this.$router.push({name:'TicketList'})
+              }
+
             }
           }
           else {
