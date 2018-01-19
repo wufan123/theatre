@@ -13,7 +13,7 @@
                        <div slot="contentBrief" flex="main:justify">
                        <label class="f12">{{new Date(orderInfo.film.startTime*1000).format('MM-dd hh:mm')}} 场</label>
                        <label class="f14">x {{orderInfo.film.seatCount}}</label>
-                       </div>    
+                       </div>
                          </list-item>
             </div>
             <div v-if="orderInfo&&orderInfo.goods&&orderInfo.goods.list">
@@ -25,8 +25,8 @@
                         <div slot="contentBrief" flex="main:justify">
                           <label></label>
                           <label class="f14">x {{item.number}}</label>
-                        </div> 
-                         
+                        </div>
+
                          </list-item>
             </div>
           </list>
@@ -58,11 +58,7 @@
             <label>{{item.name}}</label><label>{{item.des}}</label></div>
           <div class="flexb" v-for="(item,index) in saleCouponInfo" :key="'sale'+index">
             <label>{{item.name}}</label><label>{{item.des}}</label></div>
-<<<<<<< HEAD
-          <div class="flexb payment"><label>实付款</label><label>￥{{orderInfo.price&&orderInfo.price.toFixed(2)}}</label></div>
-=======
           <div class="flexb payment"><label>实付款</label><label>￥{{orderInfo.price?orderInfo.price.toFixed(2):0}}</label></div>
->>>>>>> 3933728d13d037ac503b10ee36b752ed4c707364
         </div>
       </div>
       <group>

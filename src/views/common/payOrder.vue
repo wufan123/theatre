@@ -151,7 +151,7 @@
                   this.$router.push({name: 'PaySuccess'})
                 } else {
                   ctx.$util.showRequestErro({text: res.des});
-//                  ctx.erroInfo = res;
+                  ctx.erroInfo = res;
                 }
               }
             );
