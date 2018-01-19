@@ -84,7 +84,7 @@
         })
       },
       fetchData(){
-        if (this.payLockInfo.payTime>0) {
+        if (this.payLockInfo.payTime>0&&this.payLockInfo.orderType=='goodsAndFilm') {
           this.payTime = this.payLockInfo.payTime;
           let ct = this;
           ct.timer = setInterval(() => {
