@@ -83,13 +83,13 @@
           if (WeixinJSBridge) {
             WeixinJSBridge.invoke(
               'getBrandWCPayRequest', {
-                "appId": wxpay.appid,     //公众号名称，由商户传入
-                "timeStamp": wxpay.timestamp,//时间戳，自1970年以来的秒数
-                "nonceStr": wxpay.noncestr, //随机串
+                "appId": wxpay.appId,     //公众号名称，由商户传入
+                "timeStamp": wxpay.timeStamp,//时间戳，自1970年以来的秒数
+                "nonceStr": wxpay.nonceStr, //随机串
                 "package": wxpay.package,
-                "signType": 'MD5',//微信签名方式
-                "paySign": wxpay.sign//微信签名
-              },
+                "signType": wxpay.signType,//微信签名方式
+                "paySign": wxpay.paySign//微信签名
+              }, 
               function (res) {
                 ctx.erroInfo = res;
                 try {
