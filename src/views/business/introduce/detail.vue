@@ -1,13 +1,18 @@
 <template>
   <page :headerTitle="' '">
-    <div slot="contain" flex="dir:top cross:center">
-      <div v-html="html" style="max-width: 100%;overflow: hidden">
+    <div slot="contain" flex="dir:top" style="height: 100%;" >
+      <!-- <div v-html="html" style="max-width: 100%;overflow: hidden">
+      </div> -->
+      <div flex-box="1" ref="bodyHeight" :style="{height:iframeHeight+''}">
+        <iframe :src="html" class="content" frameborder="0"></iframe>
       </div>
-      <router-link :to="url">
-        <img v-if="$route.query.redirectType>3" class="goToBuy" :src='require("assets/images/go_to_buy.png")'>
+      <div flex-box="0" class="center">
+          <router-link :to="url">
+        <img v-if="$route.query.redirectType>3"  class="goToBuy" :src='require("assets/images/go_to_buy.png")'>
       </router-link>
+      </div>
+      
     </div>
-
   </page>
 </template>
 <script>
@@ -28,24 +33,29 @@
       }
       return {
         html: '',
-        url: url
+        url: url,
+        iframeHeight:0
       }
     },
     methods: {
       async fetchData(){
-        try {
-          this.html = await  http.instance.get(this.$route.query.contentUrl)
-        }
-        catch (e) {
-          if (e.toString().indexOf('<html') == 0){
-            this.html = e
-          }else{
-            this.$util.showRequestErro({
-              text:'资源错误'
-            })
-          }
+        console.log('this.bodyHeight.outerHeight()',)
+        this.iframeHeight = this.$refs.bodyHeight.offsetHeight
+        this.html = this.$route.query.contentUrl
+        // try {
+        //   this.html = await  http.instance.get(this.$route.query.contentUrl)
+        // }
+        // catch (e) {
 
-        }
+        //   if (e.toString().indexOf('<html') == 0){
+        //     this.html = e
+        //   }else{
+        //     this.$util.showRequestErro({
+        //       text:'资源错误'
+        //     })
+        //   }
+
+        // }
 
       },
     }
@@ -56,8 +66,10 @@
     width: 100%;
   }
 
+
   .content {
-    margin: 10px 15px;
+    width:100%;
+    height:100%;
   }
 
   .goToBuy {
