@@ -37,7 +37,6 @@
           this.html = await  http.instance.get(this.$route.query.contentUrl)
         }
         catch (e) {
-
           if (e.toString().indexOf('<html') == 0){
             this.html = e
           }else{

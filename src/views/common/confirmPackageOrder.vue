@@ -89,7 +89,7 @@
                 "package": wxpay.package,
                 "signType": wxpay.signType,//微信签名方式
                 "paySign": wxpay.paySign//微信签名
-              }, 
+              },
               function (res) {
                 ctx.erroInfo = res;
                 try {
@@ -99,7 +99,9 @@
                 }
                 if (res.err_msg == "get_brand_wcpay_request:ok") {//cancel
                   ctx.erroInfo.type='gotoPaySuccess';
-                  ctx.$router.push({name: 'PaySuccess'})
+                  ctx.$router.push({name: 'PaySuccess',query:{
+                      orderType:'package'
+                  }})
                 } else {
                   if (res.err_desc)
                     ctx.$util.showRequestErro({text: res.err_desc});

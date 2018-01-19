@@ -15,6 +15,8 @@
         switch (this.$route.query.orderType) {
           case 'goods':
             return '/LocalProductList';
+          case 'package':
+              return '/PackageList';
           default:
             return '/TicketList'
         }

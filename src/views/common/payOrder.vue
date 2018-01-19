@@ -38,6 +38,7 @@
   import TheatreApi from "../../api/theatreApi";
   import AuthApi from "../../api/authApi";
   import {AlertModule} from "vux";
+  import orderApi from "../../api/orderApi";
   let typeData = [
     {
       icon: 'http://p0bd8izdn.bkt.clouddn.com/ruihua/wap/images/wexin.png',
@@ -84,7 +85,7 @@
         })
       },
       fetchData(){
-        if (this.payLockInfo.payTime>0&&this.payLockInfo.orderType=='goodsAndFilm') {
+        if (this.payLockInfo.payTime > 0 && this.payLockInfo.orderType == 'goodsAndFilm') {
           this.payTime = this.payLockInfo.payTime;
           let ct = this;
           ct.timer = setInterval(() => {
@@ -95,6 +96,7 @@
           }, 1000)
         }
       },
+
       // 获取支付方式
       getPayType: function () {
         var payType = ""
@@ -110,6 +112,35 @@
           payType += "weixinpay"
         }
         return payType
+      },
+      async confirmOrderStatus(){
+        if (this.payLockInfo.orderType == 'goods') {
+          this.$router.push({
+            name: 'PaySuccess', query: {
+              orderType: 'goods'
+            }
+          })
+        } else {
+          this.$vux.loading.show({
+            text: '正在出票...'
+          });
+          let res;
+          try {
+            res = await orderApi.getCinemaOrderStatus(this.payLockInfo.orderId);
+          } catch (e) {
+            this.$util.showRequestErro(e);
+          }
+          //3 为订单完成
+          if (res && res.data && res.data.orderInfo && res.data.orderInfo && res.data.orderInfo.orderStatus == '3') {
+            this.$router.push({
+              name: 'PaySuccess'
+            })//场次票为默认订单类型，套票支付不走此页面，在确认套票订单
+          }else{
+              this.$util.showRequestErro({text:'出票失败'})
+              this.$router.push({name:'TicketList'});
+          }
+          this.$vux.loading.hide();
+        }
       },
       // 点击确认支付
       async confirmPay () {
@@ -152,8 +183,8 @@
 
                 }
                 if (res.err_msg == "get_brand_wcpay_request:ok") {//cancel
-                  ctx.erroInfo.type='gotoPaySuccess';
-                  ctx.$router.push({name: 'PaySuccess'})
+//                  ctx.erroInfo.type='gotoPaySuccess';
+                  ctx.confirmOrderStatus()
                 } else {
                   if (res.err_desc)
                     ctx.$util.showRequestErro({text: res.err_desc});
