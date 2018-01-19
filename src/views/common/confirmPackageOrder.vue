@@ -87,16 +87,22 @@
                 "timeStamp": wxpay.timeStamp,//时间戳，自1970年以来的秒数
                 "nonceStr": wxpay.nonceStr, //随机串
                 "package": wxpay.package,
-                "signType": wxpay.signType,//微信签名方式
-                "paySign": wxpay.paySign//微信签名
+                "signType": 'MD5',//微信签名方式
+                "paySign": wxpay.sign//微信签名
               },
               function (res) {
                 ctx.erroInfo = res;
+                try {
+                  res = JSON.parse(res);
+                } catch (e) {
+
+                }
                 if (res.err_msg == "get_brand_wcpay_request:ok") {//cancel
-                  // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
-                  this.$router.push({name: 'PaySuccess'})
+                  ctx.erroInfo.type='gotoPaySuccess';
+                  ctx.$router.push({name: 'PaySuccess'})
                 } else {
-                  ctx.$util.showRequestErro({text: res});  
+                  if (res.err_desc)
+                    ctx.$util.showRequestErro({text: res.err_desc});
                 }
               }
             );
