@@ -58,7 +58,11 @@
             <label>{{item.name}}</label><label>{{item.des}}</label></div>
           <div class="flexb" v-for="(item,index) in saleCouponInfo" :key="'sale'+index">
             <label>{{item.name}}</label><label>{{item.des}}</label></div>
+<<<<<<< HEAD
+          <div class="flexb payment"><label>实付款</label><label>￥{{orderInfo.price&&orderInfo.price.toFixed(2)}}</label></div>
+=======
           <div class="flexb payment"><label>实付款</label><label>￥{{orderInfo.price?orderInfo.price.toFixed(2):0}}</label></div>
+>>>>>>> 3933728d13d037ac503b10ee36b752ed4c707364
         </div>
       </div>
       <group>
