@@ -56,7 +56,7 @@
       </list-cell>
       <!--兑换票券-->
       <div flex="dir:left main:center">
-        <router-link to="/CouponList">
+        <router-link to="/SessionDetail">
           <img :src="require('assets/images/home/convert.png')" class="convert">
         </router-link>
       </div>

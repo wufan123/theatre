@@ -1,7 +1,7 @@
 <template>
   <page headerTitle="选择优惠券" flex-box="1" footerText="确认" :footerFunc="confirmCoupon">
     <coupon-item slot="contain" v-for="(item,index) in couponList" :key="index" @click.native="select(item)"
-                 :disabled="item.disabled">
+                 :disabled="item.disabled||item.status==2">
       <div slot="right" flex="cross:center">
         <label flex-box="0" flex="main:center cross:center" :class="item.checked?'select active':'select'"></label>
         <div style="overflow: hidden;" flex="dir:top" flex-box="1">

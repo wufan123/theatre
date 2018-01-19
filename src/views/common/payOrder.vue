@@ -38,6 +38,7 @@
   import OrderApi from "api/orderApi";
   import TheatreApi from "../../api/theatreApi";
   import AuthApi from "../../api/authApi";
+  import {AlertModule} from "vux";
   let typeData = [
     {
       icon: 'http://p0bd8izdn.bkt.clouddn.com/ruihua/wap/images/wexin.png',
@@ -74,6 +75,14 @@
         } catch (e) {
           //todo
         }
+        let ctx =this;
+        AlertModule.show({
+          title: '提示',
+          content: '支付超时，订单已取消，请重新购买',
+          onHide () {
+            ctx.$router.push('Home')
+          }
+        })
       },
       fetchData(){
         if (this.payLockInfo.payTime) {
