@@ -43,7 +43,7 @@
             <label>{{item.name}}</label><label>{{item.des}}</label></div>
           <div class="flexb" v-for="(item,index) in saleCouponInfo" :key="'sale'+index">
             <label>{{item.name}}</label><label>{{item.des}}</label></div>
-          <div class="flexb payment"><label>实付款</label><label>￥{{orderInfo.price.toFixed(2)}}</label></div>
+          <div class="flexb payment"><label>实付款</label><label>￥{{orderInfo.price?orderInfo.price.toFixed(2):0}}</label></div>
         </div>
       </div>
       <group>
@@ -91,7 +91,7 @@
         try {
           wayRes = await StoreApi.getOrderPayWay(this.orderId, this.orderType);
         } catch (e) {
-          this.$util.showRequestErro(e);
+          this.$vux.toast.text(e.text);
         }
         if (wayRes && wayRes.data) {
           this.orderPayWay = wayRes.data;
@@ -105,7 +105,8 @@
         try {
           orderRes = await OrderApi.getCinemaOrderInfo(this.orderId);
         } catch (e) {
-          this.$util.showRequestErro(e);
+//          this.$util.showRequestErro(e);
+          this.$vux.toast.text(e.text);
         }
         if (orderRes && orderRes.data) {
 
