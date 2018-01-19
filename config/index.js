@@ -65,7 +65,7 @@ module.exports = {
 
         // Paths
         assetsRoot: path.resolve(__dirname, '../dist'),
-        assetsSubDirectory: '/preJufang/static',
+        assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         baseUrl:'/preapi',
 
