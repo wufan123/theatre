@@ -24,7 +24,7 @@
                  v-show="introduceList&&introduceList.length>0">
         <label slot="rightTop" @click="$router.push('IntroduceList')">更多</label>
         <scroll-view slot="main">
-          <div flex="dir:top " v-for="(item,index) in introduceList" class="introduceItem" :key="index">
+          <div flex="dir:top " v-for="(item,index) in introduceList.slice(0,2)" class="introduceItem" :key="index">
             <router-link :to="item.contentUrl">
               <div flex="dir:left" class="introduceContent">
                 <img :src="item.thumbUrl" class="contentImg">
@@ -154,7 +154,7 @@
               case 2:
               case 3:
                   //此处需特殊处理，加#
-                data.contentUrl = `#/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
+                data.contentUrl = `#/IntroduceDetail?contentUrl=${data.contentUrl}&title=${data.title}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
                 break;
               case 4:
                 data.contentUrl = `/ProductDetail?hyGoodsId=${data.redirectId}`;

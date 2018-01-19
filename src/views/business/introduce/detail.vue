@@ -1,5 +1,5 @@
 <template>
-  <page :headerTitle="' '">
+  <page :headerTitle="title">
     <div slot="contain" flex="dir:top" style="height: 100%;" >
       <!-- <div v-html="html" style="max-width: 100%;overflow: hidden">
       </div> -->
@@ -34,7 +34,8 @@
       return {
         html: '',
         url: url,
-        iframeHeight:0
+        iframeHeight:0,
+        title:''
       }
     },
     methods: {
@@ -42,6 +43,7 @@
         console.log('this.bodyHeight.outerHeight()',)
         this.iframeHeight = this.$refs.bodyHeight.offsetHeight
         this.html = this.$route.query.contentUrl
+        this.title =  this.$route.query.title
         // try {
         //   this.html = await  http.instance.get(this.$route.query.contentUrl)
         // }
@@ -72,7 +74,7 @@
     height:100%;
   }
 
-  .goToBuy {
+  .goToBuy {margin-top: 10px;
     width: 80px;
   }
 </style>

@@ -96,6 +96,9 @@
                 item.stock = true
                 this.invalidList.push(item)
               }
+              if (item.voucherType == 0) {
+                item.voucherValue = '兑换券'
+              }
             }
           });
           res.page={
