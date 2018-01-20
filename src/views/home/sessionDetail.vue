@@ -31,7 +31,7 @@
           </div>
             <div class="h10"></div>
         </div>
-        <x-button class="no-radius bottomBtn" type="primary" @click.native="show=true">马上购买</x-button>
+        <!-- <x-button class="no-radius bottomBtn" type="primary" @click.native="show=true">马上购买</x-button> -->
       </div>
     </page>
     <popup v-model="show" position="bottom">
