@@ -26,15 +26,16 @@
             </div>
             <div class="cell-body">
               <div class="flexb f12"><label>总价</label><label>￥{{orderPayInfo.totalPrice}}</label></div>
-              <!--<div class="flexb" v-for="item in orderPayInfo.payInfo"><label>{{item.name}}</label><label>-￥{{item.money}}</label></div>-->
+              <div class="flexb" v-if="getIsPayed(orderInfo.status) == 1" v-for="item in orderPayInfo.payInfo"><label>{{item.name}}</label><label>{{item.money}}</label></div>
               <div class="flexb f16 ">
-                <label class="red" v-if="orderInfo.status==0||orderInfo.status==6||orderInfo.status==26">未支付</label>
-                <!-- <label class="red" v-if="orderInfo.status==6||order.status==26">已取消</label> -->
-                <label class="red" v-else-if="orderInfo.status==9">已退票</label>
+                <label class="red" v-if="getStatus(orderInfo.status) == 0">待付款</label>
+                <label class="red" v-if="getStatus(orderInfo.status) == 3">取消付款</label>
+                <label class="red" v-else-if="getStatus(orderInfo.status) == 2">已退票</label>
                 <label v-else>实付款</label>
-                <label class="red" v-if="orderInfo.status==0||orderInfo.status==6||orderInfo.status==26">￥{{orderPayInfo.totalPrice}}</label>
+                <label class="red" v-if="getIsPayed(orderInfo.status) == 0">￥{{orderPayInfo.totalPrice}}</label>
                 <label class="red" v-else>￥{{orderPayInfo.realPrice}}</label>
-                </div>
+
+              </div>
             </div>
           </div>
           <div class="cell center"><div class="s-button khaki" @click="callphone"> 联系客服</div></div>
@@ -51,7 +52,7 @@
 import { Qrcode } from 'vux'
 import orderApi from "api/orderApi";
 import theatreApi from "api/theatreApi";
-  import {mapState} from "vuex";
+import {mapState} from "vuex";
 export default {
   data(){
       return{
@@ -104,6 +105,24 @@ export default {
         this.getOrderDetail()
         this.getPayInfo()
         this.getmiscConfig()
+      },
+      getStatus (status) {
+        if (status==0) {
+          return 0; // 未支付
+        } else if (status==9) {
+          return 2; // 已退款
+        } else if(status==6||status==26) {
+          return 3; // 已取消
+        } else {
+          return 1; // 已支付
+        }
+      },
+      getIsPayed (status) {
+        if (status==0||status==6||status==26) {
+          return 0;
+        } else {
+          return 1;
+        }
       }
   }
 }
