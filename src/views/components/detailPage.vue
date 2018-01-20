@@ -60,7 +60,7 @@
     position: relative;
     width: 100%;
     .mainBody{
-      position: absolute;
+      // position: absolute;
       z-index: 0;
       background-color: @page_bg2;
       margin: -20px 15px 80px;
