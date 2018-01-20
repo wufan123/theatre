@@ -120,7 +120,7 @@
       background-image: url('../../assets/images/me/login_bg.jpg');
       background-size: 100% 100%;
       height: 100%;
-      min-height:500px;
+      min-height:550px;
       position: absolute;
     }
     .form {

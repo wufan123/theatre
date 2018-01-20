@@ -70,7 +70,7 @@
             acc+=i;
             return acc
         });
-            this.bottomTitle =sum? `下一步（卖品总计 ￥${sum}）`:'不选了，直接下单购票';
+            this.bottomTitle =sum? `下一步（卖品总计 ￥${sum.toFixed(2)}）`:'不选了，直接下单购票';
       },
       async createOrder() {
         var goodsStr = "";

@@ -174,7 +174,7 @@
       // 选择优惠券
       selectCouponClick() {
         this.$router.push({
-          name: 'SelectCoupon', params: {
+          name: 'SelectCoupon', query: {
             orderType: this.orderType
           }
         })

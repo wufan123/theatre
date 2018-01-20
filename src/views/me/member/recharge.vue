@@ -2,13 +2,13 @@
   <page :headerTitle="`充值`">
     <div slot="contain">
       <div class="recharge">
-        <p class="title">{{card.levelName}}：{{card.cardNumber}}</p>
-        <div class="recharge-b" flex="main:justify">
-          <i class="icon subtract" @click="subtract">-</i>
-          <input class="input" type="text" placeholder="请输入100的整倍数" v-model="amount">
-          <i class="icon add" @click="add">+</i>
-        </div>
-        <img :src="require('assets/images/me/comfirm_btn.png')" @click="confirm" class="comfirm-btn">
+          <p class="title">{{card.levelName}}卡：{{card.cardNumber}}</p>
+          <div class="recharge-b" flex="main:justify">
+            <i class="icon subtract" @click="subtract">-</i>
+           <input class="input" type="text" placeholder="请输入100的整倍数" v-model="amount" >
+            <i class="icon add" @click="add">+</i>
+          </div>
+          <img :src="require('assets/images/me/comfirm_btn.png')" @click="confirm" class="comfirm-btn">    
       </div>
     </div>
   </page>

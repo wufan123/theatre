@@ -58,7 +58,7 @@
       },
       listItemClick(item, index) {
         if (!item.stock) {
-          this.$vux.loading.show({text: '已抢完'});
+          this.$vux.toast.show({text: '已抢完'});
           return;
         }
         this.bindingTicket(item, index)
