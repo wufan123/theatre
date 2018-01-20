@@ -147,9 +147,10 @@
       goToMe(){
         console.log('this.userInfo',this.userInfo.userId)
         if(this.userInfo.userId){
-          this.$router.push('Login')
-        }else{
           this.$router.push('Me')
+         
+        }else{
+           this.$router.push('Login')
         }
       },
       async getBanner(){
