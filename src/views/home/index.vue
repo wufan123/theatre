@@ -12,7 +12,7 @@
       <!--广告-->
       <swiper :list="banerList" auto height="251px" dots-class="custom-bottom" dots-position="center"></swiper>
       <!--菜单-->
-      <div flex="dir:left main:justify cross:center" style="border:1px solid red;margin:0 15px;" class="menuCell">
+      <div flex="dir:left main:justify cross:center"  class="menuCell">
         <div flex="dir:top main:center cross:center" v-for="(item,index) in munuList"
              @click="$router.push({ path:item.pathName, query:item.params})">
           <img :src="item.icon" flex="main:center cross:center" class="menuItem"/>
@@ -335,6 +335,7 @@
     .menuCell {
       height: 100px;
       padding: 22px 0 0px;
+      margin:0 30px;
       background: url(../../assets/images/home/menu_bg.png) no-repeat;
       background-size: 100% 100%;
 
