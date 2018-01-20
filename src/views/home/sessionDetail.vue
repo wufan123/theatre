@@ -38,9 +38,9 @@
       <div class="popBottom" flex="dir:top">
         <div flex="dir:top" class="body">
           <label class="title">时间</label>
-          <scroll-view slot="main">
+          <scroll-view slot="main" style="border:1px solid red">
           <checker v-model="timeCheck" default-item-class="check-item"  selected-item-class="check-item-selected"
-                   class="checker" radio-required>
+                   class="checker" radio-required style="border:1px solid blue">
             <checker-item :value="filmTime" v-for="(filmTime, index) in filmTimeList" :key="index"
                           @on-item-click="changeTime">{{timeFormat(filmTime)}}
             </checker-item>
