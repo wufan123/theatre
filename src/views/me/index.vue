@@ -54,6 +54,7 @@ export default {
       window.location.href ='tel:'+this.userInfo.servicePhone+'';
     },
     fetchData(){
+      console.log('走不走')
       AuthApi.getUserInfo().then(success => {
         this.$store.commit('common/setUserInfo', success.data)
         this.$set(this.userInfo,success.data);

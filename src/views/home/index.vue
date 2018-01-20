@@ -3,7 +3,7 @@
     <div class="index-header" flex="main:justify cross:center">
       <img :src="require('assets/images/logo.png')" class="logo">
       <div class="header-r" flex="cross:center">
-        <img :src="require('assets/images/me.png')" class="header-r-icon" @click="$router.push('Me')">
+        <img :src="require('assets/images/me.png')" class="header-r-icon" @click="goToMe">
         <!-- <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('FindList')"> -->
       </div>
     </div>
@@ -144,6 +144,14 @@
       ...mapState('common', ['userInfo'])
     },
     methods: {
+      goToMe(){
+        console.log('this.userInfo',this.userInfo.userId)
+        if(this.userInfo.userId){
+          this.$router.push('Login')
+        }else{
+          this.$router.push('Me')
+        }
+      },
       async getBanner(){
         let res = await TheatreApi.getInformationList(10);
         if (res) {
