@@ -6,7 +6,7 @@
         <div class="contain">
           <div v-for="(item,index) in dataList" class="card-item">
             <div flex="dir:top" class="info">
-              <label class="title text-ellipsis-line">{{item.levelName}}：{{item.cardNumber}}</label>
+              <label class="title text-ellipsis-line">{{item.levelName}}卡：{{item.cardNumber}}</label>
               <div class="sum" flex="dir:left">
                 <label>余额：</label>
                 <label class="text-ellipsis-line">￥{{item.money}}</label>
