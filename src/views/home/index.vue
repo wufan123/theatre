@@ -63,8 +63,8 @@
       <!-- 探索-->
       <list-cell :topImg="require('assets/images/home/title_stamps.png')" v-show="findList&&findList.length>0">
         <label slot="rightTop" @click="$router.push('FindList')">更多</label>
-        <div slot="main" style="display: flex;flex-wrap: wrap;padding-left: 15px">
-          <div flex="dir:top " v-for="(item,index) in findList.slice(0,2)" style="margin-top: 20px" class="findItem"
+        <div slot="main" style="padding-left: 15px" flex="main:justify" >
+          <div flex="dir:top " v-for="(item,index) in findList.slice(0,2)" class="findItem"
           >
             <!-- @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})" -->
             <router-link :to="item.contentUrl">
