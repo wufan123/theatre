@@ -12,7 +12,7 @@
   export default {
     name: 'app',
     mounted() {
-      this.initWx();
+      //this.initWx();
     },
     computed: {
       ...mapState('common', ['openId'])

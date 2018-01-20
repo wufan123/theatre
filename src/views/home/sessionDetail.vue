@@ -30,6 +30,9 @@
             </div>
           </div>
             <div class="h10"></div>
+            <div class="h10"></div>
+            <div class="h10"></div>
+            <div class="h10" style="border:1px solid red"></div>
         </div>
         <x-button class="no-radius bottomBtn" type="primary" @click.native="show=true">马上购买</x-button>
       </div>
