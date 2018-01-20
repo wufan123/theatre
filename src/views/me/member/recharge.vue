@@ -8,7 +8,7 @@
            <input class="input" type="text" placeholder="请输入100的整倍数" v-model="amount" >
             <i class="icon add" @click="add">+</i>
           </div>
-          <img :src="require('assets/images/me/comfirm_btn.png')" @click="confirm" class="comfirm-btn">    
+          <img :src="require('assets/images/me/comfirm_btn.png')" @click="confirm" class="comfirm-btn">
       </div>
     </div>
   </page>
@@ -44,6 +44,7 @@
           this.$vux.toast.text("请输入整百金额", 'middle');
           return
         }
+        this.$vux.loading.show()
         let res;
         try {
           res = await  CardApi.recharge(this.amount, this.card.id, 'weixinpay', this.openId);
@@ -51,6 +52,9 @@
           this.$util.showRequestErro(e);
         }
         if (res && res.data && res.data.weixinpay) {
+            this.$vux.loading.show({
+              text:'正在支付'
+            });
           let wxpay = res.data.weixinpay;
           let ctx = this;
           if (WeixinJSBridge) {
@@ -89,6 +93,7 @@
 
           }
         }
+        this.$vux.loading.hide();
       },
       fetchData(){
         this.card = this.$route.query
