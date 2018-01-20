@@ -38,9 +38,9 @@
       <div class="popBottom" flex="dir:top">
         <div flex="dir:top" class="body">
           <label class="title">时间</label>
-          <scroll-view slot="main" style="border:1px solid red">
+          <scroll-view slot="main">
           <checker v-model="timeCheck" default-item-class="check-item"  selected-item-class="check-item-selected"
-                   class="checker" radio-required style="border:1px solid blue">
+                   class="checker" radio-required style="display: flex;flex-wrap: nowrap;border:1px solid red;" >
             <checker-item :value="filmTime" v-for="(filmTime, index) in filmTimeList" :key="index"
                           @on-item-click="changeTime">{{timeFormat(filmTime)}}
             </checker-item>
@@ -351,6 +351,8 @@ export default {
   .btn {
     font-size: 16px;
     text-align: center;
+    background:@color-sub;
+    color:white;
     line-height: 45px;
   }
   .numItem {
