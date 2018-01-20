@@ -28,7 +28,10 @@
             <div class="content">
               {{filmDetail ? filmDetail.introduction : ''}}
             </div>
+            <div class="h10"></div>
           </div>
+          <div class="h10"></div>
+            <div class="h10"></div>
         </div>
         <x-button class="no-radius bottomBtn" type="primary" @click.native="show=true">马上购买</x-button>
       </div>
@@ -383,7 +386,7 @@ export default {
   width: 100%;
   .mainBody {
     background-color: @page_bg2;
-    margin: -20px 15px 80px;
+    margin: -20px 15px 50px;
     padding: 20px;
     border-radius: 5px;
 
