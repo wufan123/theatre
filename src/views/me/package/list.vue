@@ -9,7 +9,7 @@
                          :contentTitle="itemc.name" extra="">
                 <div slot="contentBrief">
                   <!-- <p>12 月 3 日 10：00</p> -->
-                  <p flex="main:justify"><label>数量</label> <label>{{itemc.number}}份</label></p>
+                  <p flex="main:justify"><label>数量</label> <label v-if="itemc.type==1">{{itemc.number}}张</label><label v-else>{{itemc.number}}份</label></p>
                   <!-- <p>{{itemc.exstatus==1?'已兑换':`兑换期限至: ${new Date(itemc.endTime*1000).format('yyyy-MM-dd hh:mm:ss')}`}}</p> -->
                 </div>
               </list-item>

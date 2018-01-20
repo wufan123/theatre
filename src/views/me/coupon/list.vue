@@ -16,7 +16,7 @@
             <coupon-item v-for="(item,index) in canUseList" :key="index" @click.native="gotoCouponDetail(item)">
               <label class="leftTitle" slot="right">{{item.voucherName}}</label>
               <label class="leftInfo" slot="right">有效期:{{new Date(item.startTime * 1000).format("yyyy-MM-dd")}}至{{new Date(item.validData * 1000).format("yyyy-MM-dd")}}</label>
-              <label class="rightTitle" slot="left">￥{{item.voucherValue}}</label>
+              <label class="rightTitle" slot="left">{{item._voucherValue}}</label>
             </coupon-item>
 
             <div flex="flex:left main:center" @click="seeExpireCoupon">
@@ -29,7 +29,7 @@
               <label class="leftTitle" slot="right">{{item.voucherName}}</label>
               <label slot="right" v-if="item.status==3" class="is-tip">已使用</label>
               <label class="leftInfo" slot="right">有效期 {{new Date(item.validData * 1000).format("yyyy-MM-dd")}}</label>
-              <label class="rightTitle" slot="left">￥{{item.voucherValue}}</label>
+              <label class="rightTitle" slot="left">{{item._voucherValue}}</label>
             </coupon-item>
 
           </page-scroller>
@@ -96,9 +96,7 @@
                 item.stock = true
                 this.invalidList.push(item)
               }
-              if (item.voucherType == 0) {
-                item.voucherValue = '兑换券'
-              }
+              item._voucherValue = item.voucherType == 0?'兑换券':`￥${item.voucherValue}`;
             }
           });
           res.page={

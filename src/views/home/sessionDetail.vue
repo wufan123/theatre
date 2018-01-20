@@ -40,7 +40,7 @@
           <label class="title">时间</label>
           <scroll-view slot="main">
           <checker v-model="timeCheck" default-item-class="check-item"  selected-item-class="check-item-selected"
-                   class="checker" radio-required style="display: flex;flex-wrap: nowrap;border:1px solid red;" >
+                   class="checker" radio-required >
             <checker-item :value="filmTime" v-for="(filmTime, index) in filmTimeList" :key="index"
                           @on-item-click="changeTime">{{timeFormat(filmTime)}}
             </checker-item>

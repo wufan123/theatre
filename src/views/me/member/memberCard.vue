@@ -11,7 +11,7 @@
                 <label>余额：</label>
                 <label class="text-ellipsis-line">￥{{item.money}}</label>
               </div>
-              <label class="validity">有效期：{{new Date(item.expireDate*1000).format('yyyy年MM月dd日')}}</label>
+              <label class="validity" v-if="item.expireDate">有效期：{{new Date(item.expireDate*1000).format('yyyy年MM月dd日')}}</label>
             </div>
             <div class="s-button khaki reCharge"
                  @click="$router.push({name:'Recharge',query:{id:item.id,levelName:item.levelName,cardNumber:item.cardNumber}})">

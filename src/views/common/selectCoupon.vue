@@ -10,7 +10,7 @@
                  slot="right">有效期 {{new Date(item.validData * 1000).format("yyyy-MM-dd")}}</label>
         </div>
       </div>
-      <label class="rightTitle" slot="left">￥{{item.voucherValue}}</label>
+      <label class="rightTitle" slot="left">{{item._voucherValue}}</label>
     </coupon-item>
   </page>
 </template>
@@ -31,10 +31,12 @@
       fetchData() {
         if (this.orderType == 'goods') {
           this.$store.state.coupon.goodsCouponList.forEach(item => {
+            item._voucherValue = item.voucherType == 0?'兑换券':`￥${item.voucherValue}`;
             this.couponList.push(item)
           })
         } else {
           this.$store.state.coupon.ticketCouponList.forEach(item => {
+            item._voucherValue = item.voucherType == 0?'兑换券':`￥${item.voucherValue}`;
             this.couponList.push(item)
           })
         }
