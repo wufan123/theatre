@@ -6,10 +6,9 @@
           <list twoLine>
             <div v-if="orderInfo&&orderInfo.film" class="good-content">
               <list-item :img="orderInfo.film.image" extra="">
-                <div slot="contentTitle" flex="main:justify" style="border:1px solid red;">
-                  <label class="text-ellipsis-line">{{orderInfo.film.filmName}}</label>
+                <div slot="contentTitle" flex="main:justify" style="border:1px solid red">
+                  <label>{{orderInfo.film.filmName}}</label>
                   <label class="o-price">￥{{orderInfo.film.price}}</label>
-                  <label >￥{{orderInfo.film.price}}</label>
                 </div>
                 <div slot="contentBrief" flex="main:justify">
                   <label class="f12">{{new Date(orderInfo.film.startTime * 1000).format('MM-dd hh:mm')}} 场</label>
