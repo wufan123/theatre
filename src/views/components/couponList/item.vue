@@ -28,9 +28,11 @@
     .shadow{
       position: absolute;
       height: 90px;
+      top:0;
+      left:0;
       display: inline-flex;
       width: 100%;
-      background: rgba(0,0,0,.25);
+      background: rgba(0,0,0,.5);
     }
     .right {
       height: 100%;
