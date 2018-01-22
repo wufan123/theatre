@@ -31,7 +31,7 @@
             </div>
           </list>
         </div>
-        <div class="c-info" v-if="goodsCouponList.length">
+        <div class="c-info" v-if="goodsCouponLists.length">
           <list>
             <list-item content="卖品优惠券" :extra="goodsCoupinLineStr" isLink   @click.native="selectSaleCouponClick"></list-item>
           </list>
