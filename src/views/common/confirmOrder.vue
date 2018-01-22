@@ -162,13 +162,13 @@
             }
             this.orderPayWay._orderPrice = wayRes.data.orderPrice.toFixed(2)
             //影票优惠券判断
-            console.log('!this.ticketCouponList',!this.ticketCouponList.length&&res.couponList && res.couponList.length > 0)
+            console.log('!this.ticketCouponList',!this.goodsCouponList.length)
             if(!this.ticketCouponList.length&&res.couponList && res.couponList.length > 0){
               this.filmCouponList = this.orderPayWay.couponList
               this.$store.commit('coupon/setTicketCouponList', this.orderPayWay.couponList);
             }
             //卖品优惠券判断
-            if (!this.ticketCouponList&&res.saleCouponList && res.saleCouponList.length > 0){
+            if (!this.goodsCouponList.length&&res.saleCouponList && res.saleCouponList.length > 0){
                 this.goodsCouponLists = this.orderPayWay.saleCouponList
                 this.$store.commit('coupon/setGoodsCouponList', this.orderPayWay.saleCouponList)
             }
