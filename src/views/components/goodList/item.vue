@@ -39,13 +39,13 @@
       height: 68px;
       margin-left: 15px;
     }
-    .content{margin-left: 10px;overflow: hidden;margin-right: 10px;border:1px solid red;  flex: 1;
+    .content{margin-left: 10px;overflow: hidden;margin-right: 10px; flex: 1;
       .title{
         margin-left: 5px;
         font-size: 15px;
       }
       .info{
-        width: 105px;
+        width: 130px;
         margin-top: 10px;
         .price{
           font-size: 20px;
