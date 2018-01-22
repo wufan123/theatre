@@ -264,27 +264,11 @@
               this.$util.showRequestErro(e);
             }
             if (payRes && payRes.status == 0) {
-              this.$vux.loading.show({
-                text:'正在出票'
-              });
-              let statusRes;
-              try {
-                statusRes = await  StoreApi.getOrderStatus(this.orderId);
-              }catch (e){
-                  this.$util.showRequestErro(e)
-              }
-              if (statusRes && statusRes.data && statusRes.data.orderInfo && statusRes.data.orderInfo && statusRes.data.orderInfo.orderStatus == '3'){
-                this.$router.push({
-                  name: 'PaySuccess'
-                })
-              }else{
-                  this.$util.showRequestErro({text:'出票失败'})
-                this.$router.push({name:'TicketList'})
-              }
-
+              this.$vux.loading.show({ text:'正在出票' });
+              this.checkOrderStatus()
             }
-          }
-          else {
+            
+          }else {
             if (cardId)
               this.$vux.toast.text("会员卡余额不足", 'bottom');
             this.$store.commit("business/setPayLockInfo",
@@ -299,6 +283,34 @@
           }
         }
         this.$vux.loading.hide();
+      },
+      async checkOrderStatus(){
+              let statusRes;
+              try {
+                statusRes = await  StoreApi.getOrderStatus(this.orderId);
+              }catch (e){
+                  this.checkOrderStatus();
+                  // this.$util.showRequestErro(e)
+              }
+              if (!statusRes.data||!statusRes.data.orderInfo||statusRes.data.orderInfo.orderStatus == 0) {
+                  setTimeout(() => {
+                      this.checkOrderStatus();
+                  }, 1000);
+              } else if (statusRes.orderInfo.orderStatus == 3) {
+                  this.$router.push({ name: 'PaySuccess' })
+              }else{
+                this.$util.showRequestErro({text:'出票失败'})
+                this.$router.push({name:'TicketList'})
+              }
+
+
+              
+              // if (statusRes && statusRes.data && statusRes.data.orderInfo && statusRes.data.orderInfo && statusRes.data.orderInfo.orderStatus == '3'){
+              //   this.$router.push({ name: 'PaySuccess' })
+              // }else{
+              //     this.$util.showRequestErro({text:'出票失败'})
+              //   this.$router.push({name:'TicketList'})
+              // }
       },
       // 选择优惠券
       selectCouponClick() {

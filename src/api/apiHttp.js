@@ -6,6 +6,7 @@ let APP_ACCOUNT = 'zhongruijufang';
 let APP_PASSWORD = 'zrjf1123';
 let API_VERSION = '1.0.0';
 let DEVICE_TYPE = 'WAP';
+let recommendId = store.state.common.recommendId
 let token = store.state.common.token?store.state.common.token:'0552a7361f6fdfb829f5fc442d92d736a';
 let CINEMA_CODE = 'JC170001';
 const instance = axios.create({
@@ -138,4 +139,5 @@ export default {
   post,
   getTheatre,
   CINEMA_CODE,
+  recommendId
 }

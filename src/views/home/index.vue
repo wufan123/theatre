@@ -222,6 +222,9 @@
       fetchData(){
 
         console.log(this.$route.query)
+        let recommendId = this.$route.query.recommendId?this.$route.query.recommendId:''
+        this.$store.commit('common/setRecommendId',recommendId)
+        console.log('recommendId',recommendId,this)
         this.storePromotion();
         // banner
         this.getBanner();

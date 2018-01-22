@@ -66,6 +66,7 @@
 
   .rightTitle {
     font-size: 20px;
+    white-space: nowrap;
     font-weight: bold;
     text-align: center;
     line-height: 40px;

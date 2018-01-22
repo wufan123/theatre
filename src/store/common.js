@@ -4,11 +4,16 @@ export default {
     userInfo: {},
     toKen: '',
     promotion:{},
+    recommendId:'',
     openId:''
   },
   mutations: {
     setUserInfo(state, info) {
       state.userInfo = info
+    },
+    setRecommendId(state, id){
+      console.log('id',id)
+      state.recommendId = id
     },
     setToken(state, t){
       state.token = t;

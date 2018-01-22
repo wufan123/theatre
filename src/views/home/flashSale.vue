@@ -117,6 +117,7 @@
   }
 
   .rightTitle {
+    white-space: nowrap;
     font-size: 15px;
     font-weight: bold;
     text-align: center;

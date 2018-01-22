@@ -92,11 +92,14 @@ function getValidateCode(codeType, userMobile) {
  * 非会员登录  user/smsLogin
  */
 function smsLogin(userMobile, validateCode, cinemaCode) {
-    return apiHttp.post('/user/smsLogin', {
-        userMobile: userMobile,
-        validateCode: validateCode,
-        cinemaCode: apiHttp.CINEMA_CODE
-    })
+    var vQuery={}
+    vQuery.userMobile = userMobile
+    vQuery.validateCode = validateCode
+    vQuery.cinemaCode = apiHttp.CINEMA_CODE
+    if(apiHttp.recommendId){
+        vQuery.recommendId = apiHttp.recommendId
+    }
+    return apiHttp.post('/user/smsLogin', vQuery)
 }
 
 function getOpenId(code) {

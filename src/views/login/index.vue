@@ -2,6 +2,7 @@
   <page :headerTitle="`登录`">
     <div slot="contain" class="contain login">
       <div class="form">
+        
         <group class="form-item">
           <x-input name="mobile" type="number" placeholder="请输入手机号码" v-model="form.phone" keyboard="number" is-type="china-mobile">
             <img slot="label" style="padding-right:10px;display:block;"
@@ -40,7 +41,7 @@
     },
     components: {XInput, Group},
     computed: {
-      ...mapState("common", ['promotion'])
+      ...mapState("common", ['promotion','recommendId'])
     },
     methods: {
       async getAuthCode(){
