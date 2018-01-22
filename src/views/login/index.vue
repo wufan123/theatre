@@ -94,7 +94,7 @@
         });
         let res;
         try {
-          res = await Auth.smsLogin(this.form.phone, this.form.pw); //smsLogin
+          res = await Auth.login(this.form.phone, this.form.pw); //smsLogin
         }
         catch (e) {
           this.$util.showRequestErro(e);
