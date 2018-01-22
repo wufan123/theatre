@@ -39,7 +39,7 @@
       height: 68px;
       margin-left: 15px;
     }
-    .content{margin-left: 10px;overflow: hidden;margin-right: 10px;
+    .content{margin-left: 10px;overflow: hidden;margin-right: 10px;  flex: 1;
       .title{
         margin-left: 5px;
         font-size: 15px;
