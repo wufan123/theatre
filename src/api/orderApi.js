@@ -95,8 +95,9 @@ function getFilmOrderInfo(orderID) {
 /**
  * 修改订单手机
  */
-function updateOrderMobile(mobile='') {
+function updateOrderMobile(mobile='',orderCode) {
     return apiHttp.post('/user/updateOrderFilmMobile', {
+        orderCode:orderCode,
         mobile: mobile
     })
 }

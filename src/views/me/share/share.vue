@@ -87,6 +87,9 @@
         });
       },
       fetchData(){
+
+        this.$util.wxShare('我是标题','我是内容' , 'https://upload-images.jianshu.io/upload_images/5928779-e2548546e1a73321.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/700')
+
         theatreApi.getMiscConfig('invite_reg_title').then(res => {
           if (res.data && res.data.length > 0) {
             this.titleConfig = res.data[0].miscVal

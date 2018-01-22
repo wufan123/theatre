@@ -56,7 +56,31 @@ export function showLoginConfirm() {
     }
   })
 }
-
+export function wxShare(title,desc,imgUrl,link=location.href) {
+  wx.onMenuShareAppMessage({
+    title: title,
+    desc: desc,
+    link: link,
+    imgUrl: imgUrl
+  })
+  wx.onMenuShareTimeline({
+    title: title,
+    link: link,
+    imgUrl: imgUrl
+  })
+  wx.onMenuShareQQ({
+    title: title,
+    desc: desc,
+    link: link,
+    imgUrl: imgUrl
+  })
+  wx.onMenuShareQZone({
+    title: title,
+    desc: desc,
+    link: link,
+    imgUrl: imgUrl
+  })
+}
 export function isString(val) {
   return typeof val === 'string';
 }

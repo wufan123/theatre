@@ -115,7 +115,7 @@
           return
         }
         if (this.oldPhone !== this.phone) {
-          OrderApi.updateOrderMobile(this.phone)
+          OrderApi.updateOrderMobile(this.phone,this.orderId)
         }
         // 优惠券信息
         var couponStr = ''

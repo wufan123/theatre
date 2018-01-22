@@ -1,5 +1,5 @@
 <template>
-  <page :headerTitle="`确认订单`" :footerText="`支付`" :footerFunc="lockAndPayOrder">
+  <page :headerTitle="`确认订单`" :backFunc="goBack" :footerText="`支付`" :footerFunc="lockAndPayOrder">
     <div slot="contain">
       <div class="c-order">
         <div class="c-info">
@@ -364,7 +364,7 @@
           return
         }
         if (this.oldPhone !== this.phone) {
-          OrderApi.updateOrderMobile(this.phone)
+          OrderApi.updateOrderMobile(this.phone,this.orderDetail.orderId)
         }
         this.$vux.loading.show();
         // 优惠券信息
@@ -494,8 +494,35 @@
         } else {
           return `${this.orderPayWay.saleCouponList ? this.orderPayWay.saleCouponList.length : 0}张可用`
         }
-      }
+      },
+      goBack(){
+        var _this = this
+        this.$vux.confirm.show({
+              title: "温馨提示",
+              content: "当前订单将被取消，确定要返回吗？",
+              confirmText: "继续支付",
+              cancelText: "确认返回",
+              onCancel() {
+                // 关闭订单
+                OrderApi.cancelOrder(_this.orderDetail.orderId).then(
+                  success => {
+                    _this.$router.back(-1)
+                  },
+                  error => {
+                    _this.$vux.toast.show({
+                      type: "cancel",
+                      text: "订单取消失败"
+                    });
+                  }
+                );
+              },
+              onConfirm() {
+                return;
+              }
+            });
+      },
     },
+    
     components: {List, ListItem, XInput, Group}
   }
 </script>
