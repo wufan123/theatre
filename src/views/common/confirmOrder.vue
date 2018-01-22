@@ -31,12 +31,12 @@
             </div>
           </list>
         </div>
-        <div class="c-info" v-if="goodsCoupinLineStr">
+        <div class="c-info" v-if="goodsCouponList.length">
           <list>
             <list-item content="卖品优惠券" :extra="goodsCoupinLineStr" isLink   @click.native="selectSaleCouponClick"></list-item>
           </list>
         </div>
-        <div class="c-info" v-if="filmCoupinLineStr">
+        <div class="c-info" v-if="ticketCouponList.length">
           <list>
             <list-item content="影票优惠券" :extra="filmCoupinLineStr" isLink  @click.native="selectCouponClick"></list-item>
           </list>
@@ -104,26 +104,7 @@
         memberCardList: [],   //会员卡列表
         couponListStr: [],
         selectType: null, // 选择类型
-        checkOutTicket: false,
-
-        // phone: '',
-        // orderId: this.$route.query.orderId,
-        // orderType: 'goodsAndFilm',
-        // orderInfo: {}, // 订单信息
-        // orderPayWay: {}, // 优惠券信息
-
-        // selectCard: null, // 选择的会员卡
-
-        // amount:0, //最后总价
-
-        // couponListStr: [],
-        // filmCouponList: [],
-        // filmCoupinLineStr: '',
-
-        // oldPhone: null, // 保存旧手机号，判断是否有修改
-        // couponInfo: [],
-        // isUseCard: false,
-        // saleCouponInfo: []
+        checkOutTicket: false
       }
     },
     computed: {
@@ -131,9 +112,9 @@
       ...mapState('coupon', ['ticketCouponList', 'goodsCouponList']),
       ...mapState('common', ['promotion', 'userInfo'])
     },
+    
     methods: {
       async fetchData(){
-        
         this.goodsCouponLists = this.goodsCouponList
         this.filmCouponList = this.ticketCouponList
         this.memberCardList = []
@@ -181,18 +162,19 @@
             }
             this.orderPayWay._orderPrice = wayRes.data.orderPrice.toFixed(2)
             //影票优惠券判断
-            if (res.couponList && res.couponList.length > 0)
-              this.$store.commit('coupon/setTicketCouponList', this.orderPayWay.couponList);
+            if(!this.ticketCouponList&&res.couponList && res.couponList.length > 0){
+              this.filmCouponList = this.orderPayWay.couponList
+            }
             //卖品优惠券判断
-            if (res.saleCouponList && res.saleCouponList.length > 0)
-              this.$store.commit('coupon/setGoodsCouponList', this.orderPayWay.saleCouponList)
+            if (!this.ticketCouponList&&res.saleCouponList && res.saleCouponList.length > 0){
+                this.goodsCouponLists = this.orderPayWay.saleCouponList
+            }
             // 会员卡
             if (res.memberCard && res.memberCard.length > 0){
               res.memberCard.forEach(element => {
                     this.memberCardList.push(element)
                 })
             }
-            console.log('goodsCouponLists',this.goodsCouponList)
             this.caculateCount()
         }
         // 获取订单信息
@@ -249,17 +231,14 @@
             //初始化显示订单价格
             this.orderInfo.film.price = this.orderInfo.film.price?this.orderInfo.film.price:0
             this.orderInfo.film._price = parseFloat(this.orderInfo.film.price)
-            console.log('this.orderInfo.film._price',this.orderInfo.film._price)
             //如果有使用会员卡
             if (this.isUseCard) {
 
                 if (this.useCard.totalSettlementPrice) {
                     this.orderInfo.film._price = parseFloat(this.useCard.totalSettlementPrice)
                 } else {//旧版接口兼容
-                  console.log('this.orderInfo.film._price',parseFloat(this.useCard.settlementPrice))
                     this.orderInfo.film._price = parseFloat(this.useCard.settlementPrice) * parseInt(this.orderInfo.film.seatCount)
                 }
-                console.log('this.orderInfo.film._price',this.orderInfo.film._price,this.useCard.totalSettlementPrice)
             }
             this.orderInfo._price = this.orderInfo.film._price + (this.orderInfo.goods ? parseFloat(this.orderInfo.goods.price) : 0)
             goodsPrice = parseFloat(this.orderInfo.goods ? this.orderInfo.goods.price : 0)
@@ -267,7 +246,6 @@
         }
 
         this.couponListStr = []
-        console.log('goodsCouponLists',this.goodsCouponLists)
         if (this.goodsCouponLists.length > 0) {
             let goodsCouponPrice = 0
             this.goodsCoupinLineStr = ''
@@ -284,7 +262,6 @@
                     this.goodsCoupinLineStr += item.voucherName
                 }
             })
-            console.log('!this.goodsCoupinLineStr',!this.goodsCoupinLineStr)
             if (!this.goodsCoupinLineStr) {
                 let canUseCount = 0;
                 this.goodsCouponLists.forEach(item => {
@@ -342,7 +319,6 @@
                 })
                 this.filmCoupinLineStr = '共'+canUseCount+'张可用'
             }
-            console.log('this.filmCoupinLineStr---------',this.filmCoupinLineStr)
         }
 
         this.amount = (goodsPrice + filmPrice - couponPrice).toFixed(2)
@@ -350,85 +326,6 @@
             this.orderInfo.film._price = parseFloat(this.orderInfo.film._price).toFixed(2)
             this.orderInfo._price = parseFloat(this.orderInfo._price).toFixed(2)
         }
-
-
-
-        // //初始化显示订单价格
-        // this.orderInfo.film._price = parseFloat(this.orderInfo.film.price);
-        // // 如果有使用会员卡
-        // if (this.isUseCard) {
-        //   if (this.selectCard.totalSettlementPrice) {
-        //     this.orderInfo.film._price = parseFloat(this.selectCard.totalSettlementPrice)
-        //   } else {//旧版接口兼容
-        //     this.orderInfo.film._price = parseFloat(this.selectCard.settlementPrice) * parseInt(this.orderInfo.film.seatCount)
-        //   }
-        // }
-        // // 原始总价
-        // this.orderInfo._price = this.orderInfo.film._price + (parseFloat(this.orderInfo.goods ? this.orderInfo.goods.price : 0))
-        // this.orderInfo.price = this.orderInfo._price;
-        // console.log('this',this.filmCouponList)
-        // // 计算优惠券
-        // let selectedList = this.filmCouponList.filter(item => {
-        //   if (item.checked) {
-        //     return item;
-        //   }
-        // });
-        // let exChange = false;
-        // let filmCouponPrice = 0;
-        // this.filmCouponList = selectedList
-        // this.filmCouponList.forEach(item => {
-        //   switch (item.ticketType) {
-        //     case 'reduce'://立减券
-        //       this.orderInfo.price -= parseFloat(item.ticketValue);
-        //       this.couponInfo.push({
-        //         name: item.voucherName,
-        //         num: item.voucherNum,
-        //         des: `-￥${item.ticketValue}`
-        //       });
-        //       break;
-        //     case 'exchange'://兑换券
-        //       if (!exChange) {
-        //         this.orderInfo.price -= this.orderInfo.film.price;
-        //         exChange = true;//使用兑换券需要全部兑换，只减一次
-        //       }
-        //       this.orderInfo.price += parseFloat(item.ticketValue);
-        //       filmCouponPrice++;
-        //       this.couponListStr.push({
-        //             name: '已兑换',
-        //             value: filmCouponPrice+'张票'
-        //         })
-        //         this.filmCoupinLineStr = '已选兑换券'+filmCouponPrice+'张'
-        //         console.log('2222',!this.filmCoupinLineStr)
-        //       break;
-        //   }
-        // });
-        // if (!this.filmCoupinLineStr) {
-        //           let canUseCount = 0;
-        //           this.filmCouponList.forEach(item => {
-        //               if (item.status==1) {
-        //                   canUseCount++;
-        //               }
-        //           })
-        //           this.filmCoupinLineStr = '共'+canUseCount+'张可用'
-        //       }
-        // let selectedSaleList = this.goodsCouponList.filter(item => {
-        //   if (item.checked) {
-        //     return item;
-        //   }
-        // });
-        // selectedSaleList.forEach(item => {
-        //   switch (item.ticketType) {
-        //     case 'sale':
-        //       this.orderInfo.price -= item.ticketValue;
-        //       this.saleCouponInfo.push({
-        //         name: item.voucherName,
-        //         num: item.voucherNum,
-        //         des: `-￥${item.ticketValue}`
-        //       });
-        //       break;
-        //   }
-        // });
-
       },
       getSelectCouponStr(){
         var couponStr = ""
@@ -565,7 +462,6 @@
       //显示已选择的优惠券
       getCouponExtra(){
         if (this.couponInfo && this.couponInfo.length) {
-          console.log('this.couponInfo',this.ticketCouponList,this.couponInfo)
           return this.couponInfo.map(item => {
             return item.name
           }).reduce((pre, item) => {
