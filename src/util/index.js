@@ -58,8 +58,7 @@ export function showLoginConfirm() {
 }
 
 export function wxShare(title,desc,imgUrl,link=location.href) {
-  console.log('this.$store',window._vue)
-  console.log('location.href',location.href+`?recommendId=${this.$store.state.common.userInfo.recommendId}`)
+  link = location.href+`?recommendId=${window._vue.$store.state.common.userInfo.recommendId}`
   wx.onMenuShareAppMessage({
     title: title,
     desc: desc,
