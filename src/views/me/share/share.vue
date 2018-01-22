@@ -61,7 +61,7 @@
       fetchData(){
 
         this.$util.wxShare('中瑞剧坊','推广福州“三坊七巷”坊巷历史，是目前全国唯一在重点历史文化街区设立的文化剧坊。' , 
-        'http://images.zmaxfilm.com//zmaxyun/film/Cache/2017-12-25/151418982488.jpeg',`https://jufang.zmaxfilm.com/#/Home?recommendId=${userInfo.userId}`)
+        'http://images.zmaxfilm.com//zmaxyun/film/Cache/2017-12-25/151418982488.jpeg')
 
         theatreApi.getMiscConfig('invite_reg_title').then(res => {
           if (res.data && res.data.length > 0) {
