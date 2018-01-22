@@ -62,7 +62,7 @@ export function wxShare(title,desc,imgUrl,link=location.href) {
   wx.onMenuShareAppMessage({
     title: title,
     desc: desc,
-    link: 'https://jufang.zmaxfilm.com/#/Home?recommendId=1234566',
+    link: `https://jufang.zmaxfilm.com/#/Home?recommendId=${window._vue.$store.state.common.userInfo.recommendId}`,
     imgUrl: imgUrl
   })
   wx.onMenuShareTimeline({
