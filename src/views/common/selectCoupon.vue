@@ -138,6 +138,9 @@
       width: 11px;
       height: 11px;
       background: @color-sub;
+      position:absolute;
+      top:2px;
+      left:2px;
       border-radius: 50%;
     }
   }
