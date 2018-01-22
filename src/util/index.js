@@ -57,8 +57,11 @@ export function showLoginConfirm() {
   })
 }
 
-export function wxShare(title,desc,imgUrl) {
-  link = `https://jufang.zmaxfilm.com/#/Home?recommendId=${window._vue.$store.state.common.userInfo.userId}`
+export function wxShare(title,desc,imgUrl,link) {
+  if(!link){
+    link = `https://jufang.zmaxfilm.com/#/Home?recommendId=${window._vue.$store.state.common.userInfo.userId}`
+  }
+  
   wx.onMenuShareAppMessage({
     title: title,
     desc: desc,
