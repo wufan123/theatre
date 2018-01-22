@@ -36,7 +36,7 @@
             <list-item content="卖品优惠券" :extra="goodsCoupinLineStr" isLink   @click.native="selectSaleCouponClick"></list-item>
           </list>
         </div>
-        <div class="c-info" v-if="ticketCouponList.length">
+        <div class="c-info" v-if="filmCouponList.length">
           <list>
             <list-item content="影票优惠券" :extra="filmCoupinLineStr" isLink  @click.native="selectCouponClick"></list-item>
           </list>
@@ -162,12 +162,15 @@
             }
             this.orderPayWay._orderPrice = wayRes.data.orderPrice.toFixed(2)
             //影票优惠券判断
-            if(!this.ticketCouponList&&res.couponList && res.couponList.length > 0){
+            console.log('!this.ticketCouponList',!this.ticketCouponList.length&&res.couponList && res.couponList.length > 0)
+            if(!this.ticketCouponList.length&&res.couponList && res.couponList.length > 0){
               this.filmCouponList = this.orderPayWay.couponList
+              this.$store.commit('coupon/setTicketCouponList', this.orderPayWay.couponList);
             }
             //卖品优惠券判断
             if (!this.ticketCouponList&&res.saleCouponList && res.saleCouponList.length > 0){
                 this.goodsCouponLists = this.orderPayWay.saleCouponList
+                this.$store.commit('coupon/setGoodsCouponList', this.orderPayWay.saleCouponList)
             }
             // 会员卡
             if (res.memberCard && res.memberCard.length > 0){
