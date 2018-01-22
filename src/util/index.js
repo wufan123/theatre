@@ -56,7 +56,7 @@ export function showLoginConfirm() {
     }
   })
 }
-export function wxShare(title,desc,imgUrl,link=location.href) {
+export function wxShare(title,desc,imgUrl,link) {
   wx.onMenuShareAppMessage({
     title: title,
     desc: desc,
