@@ -6,7 +6,7 @@
           <list twoLine>
             <div v-if="orderInfo&&orderInfo.film" class="good-content">
               <list-item :img="orderInfo.film.image" extra="">
-                <div slot="contentTitle" flex="main:justify" style="border:1px solid red">
+                <div slot="contentTitle" flex="main:justify">
                   <div flex-box="1" class="text-ellipsis-line">{{orderInfo.film.filmName}}</div>
                   <label flex-box="0" class="o-price">￥{{orderInfo.film.price}}</label>
                 </div>
