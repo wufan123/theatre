@@ -119,7 +119,7 @@
   @import "~style/base-variables";
 
   .snackItem {
-    position: relative;
+    position: relative;border:1px solid red;    overflow: hidden;
     .vux-number-selector {display:flex;padding:0!important;
       border: solid @color-active 1px !important;
       width:20px;height:20px;justify-content: center;
