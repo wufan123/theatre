@@ -293,17 +293,13 @@
                   // this.$util.showRequestErro(e)
               }
               if (!statusRes.data||!statusRes.data.orderInfo||statusRes.data.orderInfo.orderStatus == 0) {
-                  setTimeout(() => {
-                      this.checkOrderStatus();
-                  }, 1000);
-              } else if (statusRes.orderInfo.orderStatus == 3) {
+                  this.checkOrderStatus();
+              } else if (statusRes.data.orderInfo.orderStatus == 3) {
                   this.$router.push({ name: 'PaySuccess' })
               }else{
-                this.$util.showRequestErro({text:'出票失败'})
-                this.$router.push({name:'TicketList'})
+                  this.$util.showRequestErro({text:'出票失败----'})
+                  this.$router.push({name:'TicketList'})
               }
-
-
               
               // if (statusRes && statusRes.data && statusRes.data.orderInfo && statusRes.data.orderInfo && statusRes.data.orderInfo.orderStatus == '3'){
               //   this.$router.push({ name: 'PaySuccess' })
