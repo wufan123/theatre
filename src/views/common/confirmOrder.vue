@@ -424,7 +424,7 @@
       async checkOrderStatus(){
               let statusRes;
               try {
-                statusRes = await  StoreApi.getOrderStatus(this.orderId);
+                statusRes = await  StoreApi.getOrderStatus(this.orderDetail.orderId);
               }catch (e){
                   this.checkOrderStatus();
                   // this.$util.showRequestErro(e)

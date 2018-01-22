@@ -119,7 +119,7 @@
   @import "~style/base-variables";
 
   .snackItem {
-    position: relative;border:1px solid red;    overflow: hidden;
+    position: relative;  overflow: hidden;
     .vux-number-selector {display:flex;padding:0!important;
       border: solid @color-active 1px !important;
       width:20px;height:20px;justify-content: center;
@@ -135,6 +135,7 @@
       .weui-cell {
         padding: 0 !important;
       }
+      z-index:99;
       position: absolute;
       bottom: 22px;
       right: 10px;
