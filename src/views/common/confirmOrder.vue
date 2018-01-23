@@ -43,7 +43,7 @@
         </div>
         <div class="c-info" v-if="memberCardList.length>0">
           <list>
-            <list-item :content="`会员卡`" :extra="useCard?useCard.cardId:'未选择'" isLink 
+            <list-item :content="`会员卡`" :extra="useCard?useCard.cardId:'未选择'" isLink
               @click.native="$router.push({name:'SelectMember',params:{ list:orderPayWay.memberCard }})"></list-item>
           </list>
         </div>
@@ -98,7 +98,7 @@
         destoryCancelOrder: true,
 
         goodsCouponLists: [],   //卖品优惠券列表
-        goodsCoupinLineStr: '',   
+        goodsCoupinLineStr: '',
         filmCouponList: [],   //票券优惠券列表
         filmCoupinLineStr: '',
         memberCardList: [],   //会员卡列表
@@ -112,15 +112,15 @@
       ...mapState('coupon', ['ticketCouponList', 'goodsCouponList']),
       ...mapState('common', ['promotion', 'userInfo'])
     },
-    
+
     methods: {
       async fetchData(){
         this.goodsCouponLists = this.goodsCouponList
         this.filmCouponList = this.ticketCouponList
         this.memberCardList = []
         this.couponListStr = []
-        
-        
+
+
         this.orderDetail.orderId = this.$route.query.orderId
         this.isUseCard = this.$util.isEmptyObject(this.selectedMember) ? false : true;
         this.useCard = this.selectedMember
@@ -219,7 +219,7 @@
           this.orderInfo.phone = this.$store.state.common.userInfo.bindmobile
           this.oldPhone = this.orderInfo.phone
           this.caculateCount()
-          
+
           // this.caculateCount();
         }
         this.$vux.loading.hide();
@@ -404,7 +404,7 @@
               this.$vux.loading.show({ text:'正在出票' });
               this.checkOrderStatus()
             }
-            
+
           }else {
             if (cardId)
               // this.$vux.toast.text("会员卡余额不足", 'bottom');
@@ -438,7 +438,7 @@
                   this.$util.showRequestErro({text:'出票失败----'})
                   this.$router.push({name:'TicketList'})
               }
-              
+
               // if (statusRes && statusRes.data && statusRes.data.orderInfo && statusRes.data.orderInfo && statusRes.data.orderInfo.orderStatus == '3'){
               //   this.$router.push({ name: 'PaySuccess' })
               // }else{
@@ -523,7 +523,7 @@
             });
       },
     },
-    
+
     components: {List, ListItem, XInput, Group}
   }
 </script>

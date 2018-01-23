@@ -12,7 +12,7 @@
       <!--广告-->
       <swiper :list="banerList" auto height="251px" dots-class="custom-bottom" dots-position="center"></swiper>
       <!--菜单-->
-      <div flex="dir:left main:justify cross:center"  class="menuCell">
+      <div flex="dir:left main:justify cross:center" class="menuCell">
         <div flex="dir:top main:center cross:center" v-for="(item,index) in munuList"
              @click="$router.push({ path:item.pathName, query:item.params})">
           <img :src="item.icon" flex="main:center cross:center" class="menuItem"/>
@@ -63,7 +63,7 @@
       <!-- 探索-->
       <list-cell :topImg="require('assets/images/home/title_stamps.png')" v-show="findList&&findList.length>0">
         <label slot="rightTop" @click="$router.push('FindList')">更多</label>
-        <div slot="main" style="padding:0 15px" flex="main:justify" >
+        <div slot="main" style="padding-left: 15px" flex="main:justify">
           <div flex="dir:top " v-for="(item,index) in findList.slice(0,2)" class="findItem"
           >
             <!-- @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})" -->
@@ -84,7 +84,7 @@
       </list-cell>
     </div>
     <!--</scroller>-->
-    
+
   </div>
 </template>
 <script>
@@ -151,12 +151,12 @@
     },
     methods: {
       goToMe(){
-        console.log('this.userInfo',this.userInfo.userId)
-        if(this.userInfo.userId){
+        console.log('this.userInfo', this.userInfo.userId)
+        if (this.userInfo.userId) {
           this.$router.push('Me')
-         
-        }else{
-           this.$router.push('Login')
+
+        } else {
+          this.$router.push('Login')
         }
       },
       async getBanner(){
@@ -168,7 +168,7 @@
               case 1:
               case 2:
               case 3:
-                  //此处需特殊处理，加#
+                //此处需特殊处理，加#
                 data.contentUrl = `#/IntroduceDetail?contentUrl=${data.contentUrl}&title=${data.title}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
                 break;
               case 4:
@@ -181,7 +181,7 @@
                 data.contentUrl = `/HomePackageDetail?packageId=${data.redirectId}`;
                 break;
             }
-            if(!data.redirectType){
+            if (!data.redirectType) {
               data.contentUrl = 'www.baidu.com'
             }
             return {
@@ -214,10 +214,11 @@
         }
       },
       storePromotion(){
-        if (this.$route.query.promoter) {
+        let promoter = this.$util.getQueryString('promoter');
+        if (promoter) {
           let promotion = {
-            promoter: this.$route.query.promoter,
-            type: this.$route.query.type
+            promoter: promoter,
+            type: this.$util.getQueryString('type')
           }
           this.$store.commit('common/setPromotion', promotion);
           if (!this.$util.isEmptyObject(this.userInfo)) {
@@ -228,9 +229,9 @@
       fetchData(){
 
         console.log(this.$route.query)
-        let recommendId = this.$route.query.recommendId?this.$route.query.recommendId:''
-        this.$store.commit('common/setRecommendId',recommendId)
-        console.log('recommendId',recommendId,this)
+        let recommendId = this.$route.query.recommendId ? this.$route.query.recommendId : ''
+        this.$store.commit('common/setRecommendId', recommendId)
+        console.log('recommendId', recommendId, this)
         this.storePromotion();
         // banner
         this.getBanner();
@@ -344,7 +345,7 @@
     .menuCell {
       height: 100px;
       padding: 22px 0 0px;
-      margin:0 30px;
+      margin: 0 30px;
       background: url(../../assets/images/home/menu_bg.png) no-repeat;
       background-size: 100% 100%;
 
