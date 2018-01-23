@@ -3,7 +3,7 @@
     <div slot="contain" flex="dir:top" style="height: 100%;" >
       <!-- <div v-html="html" style="max-width: 100%;overflow: hidden">
       </div> -->
-      <div flex-box="1" ref="bodyHeight" :style="{height:iframeHeight+'px'}">
+      <div flex-box="1" ref="bodyHeight" :style="{height:'1000px'}">
         <iframe :src="html" class="content" frameborder="0" style="border:1px solid red;"></iframe>
       </div>
       <div flex-box="0" class="center">
