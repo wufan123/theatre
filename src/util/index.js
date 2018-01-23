@@ -3,7 +3,14 @@ var debug = false,
 
 export const isArray = Array.isArray;
 
-export  function mapIntroduceData(data){
+export function getQueryString(name) {
+  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+  var r = window.location.search.substr(1).match(reg);
+  if (r != null)return unescape(r[2]);
+  return null;
+}
+
+export function mapIntroduceData(data) {
   data.contentUrl = `/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
   return data;
 }
@@ -22,7 +29,7 @@ export function showRequestErro(err) {
         info = "网络错误";
     }
   }
-  switch (err.status){
+  switch (err.status) {
     case '20001':
       return;
   }
@@ -32,13 +39,13 @@ export function showRequestErro(err) {
   })
 }
 
-export function getAsUriParameters(data){
-  return Object.keys(data).map(function(k) {
+export function getAsUriParameters(data) {
+  return Object.keys(data).map(function (k) {
     return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
   }).join('&')
 }
 
-export function mGetDate(year, month){
+export function mGetDate(year, month) {
   var d = new Date(year, month, 0);
   return d.getDate();
 }
@@ -57,11 +64,11 @@ export function showLoginConfirm() {
   })
 }
 
-export function wxShare(title,desc,imgUrl,link) {
-  if(!link){
+export function wxShare(title, desc, imgUrl, link) {
+  if (!link) {
     link = `https://jufang.zmaxfilm.com/#/Home?recommendId=${window._vue.$store.state.common.userInfo.userId}`
   }
-  
+
   wx.onMenuShareAppMessage({
     title: title,
     desc: desc,
