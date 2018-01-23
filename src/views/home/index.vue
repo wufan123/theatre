@@ -1,6 +1,6 @@
 <template>
-  <div class="homeOut" :style="{backgroundImage:`url(${require('assets/images/page_bg.png')})`}">
-    <div class="index-header" flex="main:justify cross:center">
+  <div class="homeOut" :style="{backgroundImage:`url(${require('assets/images/page_bg.png')})`}" flex="dir:top">
+    <div class="index-header" flex="main:justify cross:center"  flex-box="0">
       <img :src="require('assets/images/logo.png')" class="logo">
       <div class="header-r" flex="cross:center">
         <img :src="require('assets/images/me.png')" class="header-r-icon" @click="goToMe">
@@ -8,7 +8,7 @@
       </div>
     </div>
     <!--<scroller height="-40" lock-x scrollbar-y :pulldown-config='pullDownConfig' :usePulldown='true' @on-pulldown-loading='refresh' ref="scroller">-->
-    <div style="overflow-y: auto">
+    <div flex-box="1">
       <!--广告-->
       <swiper :list="banerList" auto height="251px" dots-class="custom-bottom" dots-position="center"></swiper>
       <!--菜单-->
@@ -253,7 +253,7 @@
   .homeOut {
     background: repeat;
     background-size: 68px 68px;
-    overflow:auto;border:1px solid red;
+    border:1px solid red;
     label {
       .text-ellipsis-line();
     }
