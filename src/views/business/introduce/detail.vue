@@ -5,7 +5,7 @@
       </div> -->
         <div flex-box="1" ref="bodyHeight">
             <div class="conB" :style="{height:iframeHeight+'px'}">
-              <iframe :src="html" class="content" frameborder="0" height="500" ></iframe>
+              <iframe :src="html" class="content" frameborder="0" ></iframe>
             </div>
         </div>
         <div flex-box="0" class="center">
@@ -75,8 +75,8 @@
   .conB{min-height:500px;border:1px solid red;}
 
   .content {
-    width:100%;
-    height:100%;
+    width:100%;border:1px solidbluered;
+    height:1000px;
   }
 
   .goToBuy {margin-top: 10px;
