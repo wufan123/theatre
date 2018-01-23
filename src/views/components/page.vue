@@ -78,7 +78,7 @@
   .header {
     background: @color-sub !important;
   }
-  .contain {
+  .contain {border:1px solid purple;
     position: relative;
     flex: 1;
     overflow-y: auto;

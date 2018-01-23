@@ -1,19 +1,18 @@
 <template>
   <page :headerTitle="title">
-    <div slot="contain" flex="dir:top" style="height: 100%;border:1px solid blue;" >
+    <div slot="contain" flex="dir:top" style="height: 100%;" >
       <!-- <div v-html="html" style="max-width: 100%;overflow: hidden">
       </div> -->
-        <div flex-box="1" ref="bodyHeight" style="border:1px solid blue;height:100%">
+        <div flex-box="1" ref="bodyHeight">
             <div class="conB" :style="{height:iframeHeight+'px'}">
               <iframe :src="html" class="content" frameborder="0" :style="{height:'1000px'}" ></iframe>
             </div>
         </div>
-        <div flex-box="0" class="center" style="border:1px solid red;">
+        <div flex-box="0" class="center">
             <router-link :to="url">
               <img v-if="$route.query.redirectType>3"  class="goToBuy" :src='require("assets/images/go_to_buy.png")'>
             </router-link>
         </div>
-      
     </div>
   </page>
 </template>
@@ -69,10 +68,10 @@
   img {
     width: 100%;
   }
-  .conB{min-height:500px;border:1px solid red;-webkit-overflow-scrolling: touch;  
+  .conB{min-height:500px;-webkit-overflow-scrolling: touch;  
     overflow-y: scroll; }
 
-  .content {border:1px solid red;
+  .content {
     width:100%;
     height:100%;
   }
