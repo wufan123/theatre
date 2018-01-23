@@ -382,7 +382,7 @@
         }
         if (res && !this.$util.isEmptyObject(res.data)) {
           var params = {}
-          params.type = this.promotion.type ? this.promotion.type : 2; 
+          params.type = this.promotion.type ? this.promotion.type : 2;
           params.sn = this.orderDetail.orderId;
           params.toer = this.userInfo.bindmobile;
           params.price = res.data.price;
@@ -407,7 +407,7 @@
 
           }else {
             if (cardId)
-              this.$vux.toast.text("会员卡余额不足", 'bottom');
+              // this.$vux.toast.text("会员卡余额不足", 'bottom');
             this.$store.commit("business/setPayLockInfo",
               {
                 orderId: this.orderDetail.orderId,
@@ -422,9 +422,10 @@
         this.$vux.loading.hide();
       },
       async checkOrderStatus(){
+             console.log('11111')
               let statusRes;
               try {
-                statusRes = await  StoreApi.getOrderStatus(this.orderDetail.orderId);
+                statusRes = await  OrderApi.getOrderStatus(this.orderDetail.orderId);
               }catch (e){
                   this.checkOrderStatus();
                   // this.$util.showRequestErro(e)
@@ -506,7 +507,7 @@
                 // 关闭订单
                 OrderApi.cancelOrder(_this.orderDetail.orderId).then(
                   success => {
-                    _this.$router.back(-1)
+                    _this.$router.push('SessionDetail')
                   },
                   error => {
                     _this.$vux.toast.show({

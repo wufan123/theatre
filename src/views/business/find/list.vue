@@ -1,14 +1,14 @@
 <template>
   <page :headerTitle="`精选 ● 攻略`" white>
-    <div slot="contain">
-      <div class="tabHeader">
+    <div slot="contain" flex="dir:top" style="height: 100%;">
+      <div class="tabHeader" flex-box="0">
         <tab custom-bar-width="38px">
           <tab-item selected @on-item-click="onItemClick">精选攻略</tab-item>
           <tab-item @on-item-click="onItemClick">精选视频</tab-item>
           <tab-item @on-item-click="onItemClick">精选关注</tab-item>
         </tab>
       </div>
-      <div style="margin-top:46px;">
+      <div class="find-body" flex-box="1">
         <find-item v-for="(item,index) in strategyList" :key="index" v-if="currentIndex===0" :title="item.title"
                    :content="item.content" :img="item.thumbUrl" :link="item.contentUrl" :type="item.redirectType">
         </find-item>
@@ -75,8 +75,6 @@
 </script>
 <style lang="less" scoped>
   .tabHeader {
-    position: fixed;
-    top: 46px;
     width: 375px;
     font-weight: bold;
     background: url(../../../assets/images/page_bg.png) repeat;
