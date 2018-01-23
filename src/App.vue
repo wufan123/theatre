@@ -9,13 +9,15 @@
   import HttpApi from 'api/apiHttp'
   import {mapState} from "vuex";
   import authApi from "./api/authApi";
+  import TheatreApi from "./api/theatreApi";
   export default {
     name: 'app',
     mounted() {
+      this.storePromotion();//必须在initWx前保存推广人信息
       this.initWx();
     },
     computed: {
-      ...mapState('common', ['openId'])
+      ...mapState('common', ['openId', 'userInfo'])
     },
     methods: {
       async initWx(){
@@ -37,7 +39,7 @@
               try {
                 res = await authApi.getOpenId(code);
               } catch (e) {
-
+                  this.$util.showRequestErro(e)
               }
               if (res && res.data) {
                 this.$store.commit("common/setOpenId", res.data.openId);
@@ -62,6 +64,16 @@
               ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             }
           )
+        }
+      },
+      storePromotion(){
+        let promoter = this.$util.getQueryString('promoter');
+        if (promoter) {
+          let promotion = {
+            promoter: promoter,
+            type: this.$util.getQueryString('type')
+          }
+          this.$store.commit('common/setPromotion', promotion);
         }
       }
     }
