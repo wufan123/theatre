@@ -39,7 +39,7 @@
               try {
                 res = await authApi.getOpenId(code);
               } catch (e) {
-
+                  this.$util.showRequestErro(e)
               }
               if (res && res.data) {
                 this.$store.commit("common/setOpenId", res.data.openId);
