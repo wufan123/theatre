@@ -3,8 +3,11 @@
     <div slot="contain" flex="dir:top" style="height: 100%;" >
       <!-- <div v-html="html" style="max-width: 100%;overflow: hidden">
       </div> -->
-        <div flex-box="1" ref="bodyHeight" :style="{height:iframeHeight+'px'}">
+        <div flex-box="1">
+          <div class="con-body" ref="bodyHeight" :style="{height:iframeHeight+'px'}" >
             <iframe :src="html" class="content" frameborder="0" height="100%"></iframe>
+          </div>
+            
         </div>
         <div flex-box="0" class="center">
             <router-link :to="url">
@@ -38,13 +41,13 @@
         title:''
       }
     },
-    updated(){
-      this.iframeHeight = this.$refs.bodyHeight.offsetHeight
-    },
     methods: {
       async fetchData(){
         // console.log('this.bodyHeight.outerHeight()',)
-        this.iframeHeight = this.$refs.bodyHeight.offsetHeight
+        var _this = this
+        setTimeout(function() {
+          _this.iframeHeight = _this.$refs.bodyHeight.offsetHeight
+        }, 2000);
         this.html = this.$route.query.contentUrl
         this.title =  this.$route.query.title
         // try {
@@ -70,7 +73,7 @@
   img {
     width: 100%;
   }
-
+  .con-body{height:100%;border:1px solid red;}
 
   .content {
     width:100%;
