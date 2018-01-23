@@ -511,16 +511,13 @@
                 _this.$router.push('SessionDetail')
               },
               error => {
-                _this.$vux.toast.show({
-                  type: "cancel",
-                  text: "订单取消失败"
-                });
+                // _this.$vux.toast.show({
+                //   type: "cancel",
+                //   text: "订单取消失败"
+                // });
                 _this.$router.push('SessionDetail')
               }
             );
-          },
-          onConfirm() {
-            return;
           }
         });
       },
