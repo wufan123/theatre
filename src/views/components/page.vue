@@ -84,7 +84,7 @@
     overflow-y: auto;
   }
 
-  .footer {
+  .footer {border:1px solid yellow;
     .btn{
       width: 100%;height: 42px;
     }
