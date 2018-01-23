@@ -63,7 +63,7 @@
       <!-- 探索-->
       <list-cell :topImg="require('assets/images/home/title_stamps.png')" v-show="findList&&findList.length>0">
         <label slot="rightTop" @click="$router.push('FindList')">更多</label>
-        <div slot="main" style="padding-left: 15px" flex="main:justify" >
+        <div slot="main" style="padding:0 15px" flex="main:justify" >
           <div flex="dir:top " v-for="(item,index) in findList.slice(0,2)" class="findItem"
           >
             <!-- @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})" -->
@@ -253,6 +253,7 @@
   .homeOut {
     background: repeat;
     background-size: 68px 68px;
+    overflow:auto;border:1px solid red;
     label {
       .text-ellipsis-line();
     }
@@ -275,7 +276,6 @@
     }
     .findItem {
       width: 165px;
-      margin-right: 15px;
       text-align: center;
       .contentImgSquare {
         width: 160px;
