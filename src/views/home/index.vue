@@ -42,32 +42,6 @@
             </div>
           </scroller>
         </div>
-
-          <!-- <div flex="dir:top " v-for="(item,index) in introduceList.slice(0,2)" class="introduceItem" :key="index">
-            <router-link :to="item.contentUrl">
-              <div flex="dir:left" class="introduceContent">
-                <img :src="item.thumbUrl" class="contentImg">
-                <div class="rightBorder"></div>
-                <div class="introducePlayIcon" flex="dir:top main:center cross:center" v-if="item.redirectType==3">
-                  <img :src='require("assets/images/home/video_play.png")'/>
-                </div>
-              </div>
-              <div class="bottomBorder"></div>
-              <label class='contentTxt text-ellipsis-line'>{{item.title}}</label>
-            </router-link>
-          </div> -->
-
-
-
-
-
-
-        <!-- <scroll-view slot="main">
-          <div flex="dir:top " v-for="(item,index) in introduceList.slice(0,2)" class="introduceItem" :key="index">
-            
-          </div>
-
-        </scroll-view> -->
       </list-cell>
       <!--场次票-->
       <list-cell :topImg="require('assets/images/home/title_session.png')">
@@ -284,6 +258,7 @@
   @import "~style/common.less";
   .box1 {
   height:  205px;
+  padding-left:15px;
   position: relative;
   width: 550px;display:flex;
 }
