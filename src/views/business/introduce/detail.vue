@@ -4,9 +4,10 @@
       <!-- <div v-html="html" style="max-width: 100%;overflow: hidden">
       </div> -->
         <div flex-box="1" ref="bodyHeight">
-            <div class="conB" :style="{height:iframeHeight+'px'}">
+          <div v-html="html" style="max-width: 100%;overflow: hidden"> </div>
+            <!-- <div class="conB" :style="{height:iframeHeight+'px'}">
               <iframe :src="html" class="content" frameborder="0" ></iframe>
-            </div>
+            </div> -->
         </div>
         <div flex-box="0" class="center">
             <router-link :to="url">
@@ -49,20 +50,20 @@
         this.iframeHeight = this.$refs.bodyHeight.offsetHeight
         this.html = this.$route.query.contentUrl
         this.title =  this.$route.query.title
-        // try {
-        //   this.html = await  http.instance.get(this.$route.query.contentUrl)
-        // }
-        // catch (e) {
+        try {
+          this.html = await  http.instance.get(this.$route.query.contentUrl)
+        }
+        catch (e) {
+          console.log('e',e)
+          if (e.toString().indexOf('<html') == 0){
+            this.html = e
+          }else{
+            this.$util.showRequestErro({
+              text:'资源错误'
+            })
+          }
 
-        //   if (e.toString().indexOf('<html') == 0){
-        //     this.html = e
-        //   }else{
-        //     this.$util.showRequestErro({
-        //       text:'资源错误'
-        //     })
-        //   }
-
-        // }
+        }
 
       },
     }
