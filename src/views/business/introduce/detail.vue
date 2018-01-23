@@ -4,12 +4,11 @@
       <!-- <div v-html="html" style="max-width: 100%;overflow: hidden">
       </div> -->
         <div flex-box="1" ref="bodyHeight">
-          {{iframeHeight}}
             <div class="conB" :style="{height:iframeHeight+'px'}">
-              <iframe :src="html" class="content" frameborder="0" :style="{height:iframeHeight+'px'}" ></iframe>
+              <iframe :src="html" class="content" frameborder="0" :style="{height:'1000px'}" ></iframe>
             </div>
         </div>
-        <div flex-box="0" class="center">
+        <div flex-box="0" class="center" style="border:1px solid red;">
             <router-link :to="url">
               <img v-if="$route.query.redirectType>3"  class="goToBuy" :src='require("assets/images/go_to_buy.png")'>
             </router-link>
@@ -70,9 +69,10 @@
   img {
     width: 100%;
   }
-  .conB{min-height:500px;}
+  .conB{min-height:500px;border:1px solid red;-webkit-overflow-scrolling: touch;  
+    overflow-y: scroll; }
 
-  .content {
+  .content {border:1px solid red;
     width:100%;
     height:100%;
   }
