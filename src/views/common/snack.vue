@@ -140,6 +140,8 @@
       }
       position: absolute;
       bottom: 22px;
+      min-width:27px;
+      min-height:22px;
       right: 10px;
     }
   }
