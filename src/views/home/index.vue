@@ -9,7 +9,6 @@
     </div>
     <!--<scroller height="-40" lock-x scrollbar-y :pulldown-config='pullDownConfig' :usePulldown='true' @on-pulldown-loading='refresh' ref="scroller">-->
     <div flex-box="1">
-      <scroll-view>
       <!--广告-->
       <swiper :list="banerList" auto height="251px" dots-class="custom-bottom" dots-position="center"></swiper>
       <!--菜单-->
@@ -83,7 +82,6 @@
 
         </div>
       </list-cell>
-      </scroll-view>
     </div>
     <!--</scroller>-->
     
@@ -145,6 +143,11 @@
     },
     computed: {
       ...mapState('common', ['userInfo'])
+    },
+    created(){
+      document.querySelector('body').addEventListener('touchstart', function (ev) {
+          event.preventDefault();
+      });
     },
     methods: {
       goToMe(){
