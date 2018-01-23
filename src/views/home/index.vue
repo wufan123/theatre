@@ -20,10 +20,10 @@
         </div>
       </div>
       <!--介绍-->
-      <!-- <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')"
+      <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')"
                  v-show="introduceList&&introduceList.length>0">
         <label slot="rightTop" @click="$router.push('IntroduceList')">更多</label>
-        <div slot="main" class="scrolle-introduce">
+        <scroll-view slot="main">
           <div flex="dir:top " v-for="(item,index) in introduceList.slice(0,2)" class="introduceItem" :key="index">
             <router-link :to="item.contentUrl">
               <div flex="dir:left" class="introduceContent">
@@ -38,8 +38,8 @@
             </router-link>
           </div>
 
-        </div>
-      </list-cell> -->
+        </scroll-view>
+      </list-cell>
       <!--场次票-->
       <list-cell :topImg="require('assets/images/home/title_session.png')">
         <div slot="main" class="center">
@@ -145,7 +145,9 @@
       ...mapState('common', ['userInfo'])
     },
     created(){
-      
+      document.querySelector('body').addEventListener('touchstart', function (ev) {
+        ev.preventDefault();
+      });
     },
     methods: {
       goToMe(){
@@ -296,7 +298,6 @@
       width: 5px;
       margin-top: 7px;
     }
-    .scrolle-introduce{display:flex;    overflow-x: auto;padding: 0 15px;}
     .introduceItem {
       overflow: visible;
       margin-right: 15px;
