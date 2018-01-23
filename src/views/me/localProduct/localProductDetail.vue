@@ -17,7 +17,7 @@
           <div class="cell mb10">
             <div class="cell-body">下单时间：{{new Date(orderDetail.downTime*1000).format('yyyy年MM月dd日 hh:mm:ss')}}</div>
             <div v-if="orderDetail.details" class="cell-item">
-                <div  class="flexb" v-for="item in orderDetail.details">
+                <div flex="main:justify"   v-for="item in orderDetail.details">
                   <label>{{item.goodsName}}</label><label>x {{item.number}}</label>
                 </div>
             </div>

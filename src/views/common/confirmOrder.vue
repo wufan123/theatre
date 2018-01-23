@@ -357,11 +357,9 @@
           try {
             res = await TheatreApi.scanCode({...this.promotion, toer: this.userInfo.bindmobile});
           } catch (e) {
-
+            return;
           }
-          if (res.status && res.status == 0) {
-            TheatreApi.finishPromotion(params);
-          }
+          TheatreApi.finishPromotion(params);
         }
       },
       async lockAndPayOrder() {
@@ -419,7 +417,8 @@
               this.$vux.loading.show({text: '正在出票'});
               this.checkOrderStatus()
             }
-          } else {
+          }
+          else {
             // if (cardId)
             // this.$vux.toast.text("会员卡余额不足", 'bottom');
             this.$store.commit("business/setPayLockInfo",
@@ -541,7 +540,8 @@
         )
         ;
       },
-    },
+    }
+    ,
 
     components: {
       List, ListItem, XInput, Group
