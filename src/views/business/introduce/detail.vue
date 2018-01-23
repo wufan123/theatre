@@ -3,7 +3,7 @@
     <div slot="contain" flex="dir:top" style="height: 100%;" >
       <!-- <div v-html="html" style="max-width: 100%;overflow: hidden">
       </div> -->
-        <div class="detail-html" flex-box="1" ref="bodyHeight" :style="{height:iframeHeight+'px'}">
+        <div flex-box="1" ref="bodyHeight" :style="{height:iframeHeight+'px'}">
             <iframe :src="html" class="content" frameborder="0" height="100%"></iframe>
         </div>
         <div flex-box="0" class="center">
@@ -70,7 +70,7 @@
   img {
     width: 100%;
   }
-.detail-html{border:1px solid red;}
+
 
   .content {
     width:100%;
