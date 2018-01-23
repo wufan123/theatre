@@ -30,7 +30,7 @@
         if (configRes && configRes.data) {
           //获取openid
           if (!this.openId) {
-            let code = this.$util.getQueryString('code');//vue-router的query获取会有问题
+            let code = this.$util.getQueryString('code')||this.route.query.code;//vue-router的query获取会有问题 
             let reUrl = 'https://jufang.zmaxfilm.com/';
             if (!code) {
               window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${configRes.data.appId}&redirect_uri=${reUrl}&response_type=code&scope=snsapi_base#wechat_redirect`
@@ -67,7 +67,7 @@
         }
       },
       storePromotion(){
-        let promoter = this.$util.getQueryString('promoter');
+        let promoter = this.$util.getQueryString('promoter')||this.$route.query.promoter;
         if (promoter) {
           let promotion = {
             promoter: promoter,
