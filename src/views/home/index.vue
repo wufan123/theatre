@@ -145,7 +145,7 @@
       }
     },
     computed: {
-      ...mapState('common', ['userInfo','promotion'])
+      ...mapState('common', ['userInfo'])
     },
     methods: {
       goToMe(){
@@ -211,17 +211,11 @@
           this.stampsList = res.data;
         }
       },
-      async updatePromotion(){
-        if (!this.$util.isEmptyObject(this.userInfo)) {
-          TheatreApi.scanCode({...this.promotion, toer: this.userInfo.bindmobile});
-        }
-      },
       fetchData(){
 
         console.log(this.$route.query)
         let recommendId = this.$route.query.recommendId ? this.$route.query.recommendId : ''
         this.$store.commit('common/setRecommendId', recommendId)
-        this.updatePromotion();
         // banner
         this.getBanner();
         // 介绍

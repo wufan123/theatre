@@ -2,7 +2,7 @@
   <page :headerTitle="`登录`">
     <div slot="contain" class="contain login">
       <div class="form">
-        
+
         <group class="form-item">
           <x-input name="mobile" type="number" placeholder="请输入手机号码" v-model="form.phone" keyboard="number" is-type="china-mobile">
             <img slot="label" style="padding-right:10px;display:block;"
@@ -41,7 +41,7 @@
     },
     components: {XInput, Group},
     computed: {
-      ...mapState("common", ['promotion','recommendId'])
+      ...mapState("common", ['recommendId'])
     },
     methods: {
       async getAuthCode(){
@@ -101,8 +101,6 @@
         }
         if (res && res.data) {
           //更新推广信息
-          if (!this.$util.isEmptyObject(this.promotion))
-            TheatreApi.scanCode({...this.promotion, toer: res.data.bindmobile});
           this.$vux.toast.text("登录成功", 'bottom');
           this.$store.commit('common/setUserInfo', res.data);
           this.$router.go(-1);

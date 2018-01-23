@@ -349,6 +349,21 @@
         return couponStr
       },
       // 锁定，跳转到支付页面
+
+      async updatePromotion(params){
+        //推广完成
+        if (!this.$util.isEmptyObject(this.userInfo)) {
+          let res;
+          try {
+            res = await TheatreApi.scanCode({...this.promotion, toer: this.userInfo.bindmobile});
+          } catch (e) {
+
+          }
+          if (res.status && res.status == 0) {
+            TheatreApi.finishPromotion(params);
+          }
+        }
+      },
       async lockAndPayOrder() {
         if (!this.$refs.phone.valid) {
           this.$vux.toast.show({
@@ -388,8 +403,7 @@
           params.toer = this.userInfo.bindmobile;
           params.price = res.data.price;
           params.ticketsCnt = this.orderInfo.film.seatCount;
-          //推广完成
-          TheatreApi.finishPromotion(params);
+          this.updatePromotion(params);
           //价格为0时直接支付
           if (res.data.price == 0) {
             this.$vux.loading.show({
@@ -505,7 +519,7 @@
             onCancel()
             {
               // 关闭订单
-              OrderApi.cancelOrder(_this.orderDetail.orderId).then(  
+              OrderApi.cancelOrder(_this.orderDetail.orderId).then(
                 success => {
                   _this.$router.push('SessionDetail')
                 },
