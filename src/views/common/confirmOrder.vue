@@ -406,7 +406,7 @@
             }
 
           }else {
-            if (cardId)
+            // if (cardId)
               // this.$vux.toast.text("会员卡余额不足", 'bottom');
             this.$store.commit("business/setPayLockInfo",
               {
