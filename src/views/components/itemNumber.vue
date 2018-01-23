@@ -1,6 +1,6 @@
 <template>
   <div flex="dir:left" class="num">
-    
+    {{numberItem.num}}
     <x-number v-show="numberItem.num>0" :value="numberItem.num" :min="0" @on-change="change" :max="parseInt(numberItem.stock)"></x-number>
     <a v-show="!numberItem.num" @click="numberItem.num++"
        class="vux-number-selector vux-number-selector-plus">
