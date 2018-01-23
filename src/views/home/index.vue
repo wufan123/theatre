@@ -8,7 +8,7 @@
       </div>
     </div>
     <!--<scroller height="-40" lock-x scrollbar-y :pulldown-config='pullDownConfig' :usePulldown='true' @on-pulldown-loading='refresh' ref="scroller">-->
-    <div flex-box="1">
+    <div flex-box="1" class="scroll">
       <!--广告-->
       <swiper :list="banerList" auto height="251px" dots-class="custom-bottom" dots-position="center"></swiper>
       <!--菜单-->
@@ -145,9 +145,35 @@
       ...mapState('common', ['userInfo'])
     },
     created(){
-      document.querySelector('body').addEventListener('touchstart', function (ev) {
-        ev.preventDefault();
-      });
+      var overscroll = function (els) {
+        for (var i = 0; i < els.length; ++i) {
+            var el = els[i];
+            el.addEventListener('touchstart', function () {
+                var top = this.scrollTop
+                    , totalScroll = this.scrollHeight
+                    , currentScroll = top + this.offsetHeight;
+                if (top === 0) {
+                    this.scrollTop = 1;
+                } else if (currentScroll === totalScroll) {
+                    this.scrollTop = top - 1;
+                }
+            });
+            el.addEventListener('touchmove', function (evt) {
+                if (this.offsetHeight < this.scrollHeight)
+                    evt._isScroller = true;
+            });
+        }
+    };
+    
+    //禁止body的滚动事件
+    document.body.addEventListener('touchmove', function (evt) {
+        if (!evt._isScroller) {
+            evt.preventDefault();
+        }
+    });
+    
+    //给class为.scroll的元素加上自定义的滚动事件
+    overscroll(document.querySelectorAll('.scroll'));
     },
     methods: {
       goToMe(){
