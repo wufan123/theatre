@@ -17,14 +17,14 @@
           <div class="cell mb10">
             <div class="cell-body">下单时间：{{new Date(orderDetail.downTime*1000).format('yyyy年MM月dd日 hh:mm:ss')}}</div>
             <div v-if="orderDetail.details" class="cell-item">
-                <div  class="flexb" v-for="item in orderDetail.details">
+                <div flex="main:justify"   v-for="item in orderDetail.details">
                   <label>{{item.goodsName}}</label><label>x {{item.number}}</label>
                 </div>
             </div>
             <div class="cell-body">
-              <div class="flexb f12"><label>总价</label><label>￥{{orderPayInfo.totalPrice}}</label></div>
-              <div class="flexb" v-for="item in orderPayInfo.payInfo"><label>{{item.name}}</label><label>-￥{{item.money}}</label></div>
-              <div class="flexb f16"><label>实付款</label><label>￥{{orderPayInfo.realPrice}}</label></div>
+              <div class="flexb f12" flex="main:justify"><label>总价</label><label>￥{{orderPayInfo.totalPrice}}</label></div>
+              <div class="flexb" flex="main:justify" v-for="item in orderPayInfo.payInfo"><label>{{item.name}}</label><label>-￥{{item.money}}</label></div>
+              <div class="flexb f16" flex="main:justify"><label>实付款</label><label>￥{{orderPayInfo.realPrice}}</label></div>
             </div>
           </div>
          <div class="cell center"><div class="s-button khaki" @click="callphone"> 联系客服</div></div>
