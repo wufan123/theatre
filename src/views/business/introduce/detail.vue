@@ -3,14 +3,14 @@
     <div slot="contain" flex="dir:top" style="height: 100%;" >
       <!-- <div v-html="html" style="max-width: 100%;overflow: hidden">
       </div> -->
-      <div flex-box="1" ref="bodyHeight" :style="{height:'1000px'}">
-        <iframe :src="html" class="content" frameborder="0" style="border:1px solid red;"></iframe>
-      </div>
-      <div flex-box="0" class="center">
-          <router-link :to="url">
-        <img v-if="$route.query.redirectType>3"  class="goToBuy" :src='require("assets/images/go_to_buy.png")'>
-      </router-link>
-      </div>
+        <div class="detail-html" flex-box="1" ref="bodyHeight" :style="{height:iframeHeight+'px'}">
+            <iframe :src="html" class="content" frameborder="0" height="100%"></iframe>
+        </div>
+        <div flex-box="0" class="center">
+            <router-link :to="url">
+              <img v-if="$route.query.redirectType>3"  class="goToBuy" :src='require("assets/images/go_to_buy.png")'>
+            </router-link>
+        </div>
       
     </div>
   </page>
@@ -38,9 +38,12 @@
         title:''
       }
     },
+    updated(){
+      this.iframeHeight = this.$refs.bodyHeight.offsetHeight
+    },
     methods: {
       async fetchData(){
-        console.log('this.bodyHeight.outerHeight()',)
+        // console.log('this.bodyHeight.outerHeight()',)
         this.iframeHeight = this.$refs.bodyHeight.offsetHeight
         this.html = this.$route.query.contentUrl
         this.title =  this.$route.query.title
@@ -67,7 +70,7 @@
   img {
     width: 100%;
   }
-
+.detail-html{border:1px solid red;}
 
   .content {
     width:100%;
