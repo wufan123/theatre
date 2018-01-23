@@ -23,7 +23,7 @@
       <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')"
                  v-show="introduceList&&introduceList.length>0">
         <label slot="rightTop" @click="$router.push('IntroduceList')">更多</label>
-        <scroll-view slot="main">
+        <div slot="main" class="scrolle-introduce">
           <div flex="dir:top " v-for="(item,index) in introduceList.slice(0,2)" class="introduceItem" :key="index">
             <router-link :to="item.contentUrl">
               <div flex="dir:left" class="introduceContent">
@@ -38,7 +38,7 @@
             </router-link>
           </div>
 
-        </scroll-view>
+        </div>
       </list-cell>
       <!--场次票-->
       <list-cell :topImg="require('assets/images/home/title_session.png')">
@@ -296,6 +296,7 @@
       width: 5px;
       margin-top: 7px;
     }
+    .scrolle-introduce{display:flex;    overflow-x: auto;padding: 0 15px;}
     .introduceItem {
       overflow: visible;
       margin-right: 15px;
