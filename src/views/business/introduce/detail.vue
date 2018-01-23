@@ -5,7 +5,7 @@
       </div> -->
         <div flex-box="1" ref="bodyHeight">
             <div class="conB" :style="{height:iframeHeight+'px'}">
-              <iframe :src="html" class="content" frameborder="0" height="100%" ></iframe>
+              <iframe :src="html" class="content" frameborder="0" height="500" ></iframe>
             </div>
         </div>
         <div flex-box="0" class="center">
