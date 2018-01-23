@@ -10,7 +10,7 @@
     <!--<scroller height="-40" lock-x scrollbar-y :pulldown-config='pullDownConfig' :usePulldown='true' @on-pulldown-loading='refresh' ref="scroller">-->
     <div flex-box="1">
       <!--广告-->
-      <swiper :list="banerList" auto height="251px" dots-class="custom-bottom" dots-position="center"></swiper>
+      <!-- <swiper :list="banerList" auto height="251px" dots-class="custom-bottom" dots-position="center"></swiper> -->
       <!--菜单-->
       <div flex="dir:left main:justify cross:center" class="menuCell">
         <div flex="dir:top main:center cross:center" v-for="(item,index) in munuList"
