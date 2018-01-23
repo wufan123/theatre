@@ -18,14 +18,14 @@
             <div class="cell-body" v-if="orderInfo.convcode" >取票码：{{orderInfo.convcode}}</div>
             <div class="cell-body" >下单时间：{{ new Date(orderInfo.downTime*1000).format('yyyy年MM月dd日 hh:mm:ss') }}</div>
             <div  class="cell-item" v-for="item in film.detail">
-                <div class="flexb" >
+                <div class="flexb" flex="main:justify" >
                   <label>{{item.name}}</label><label>x {{item.number}}</label>
                 </div>
             </div>
             <div class="cell-body">
               <!-- <div class="flexb f12"><label>总价</label><label>￥228.00</label></div> -->
               <!-- <div class="flexb"><label>立减券</label><label>-￥30.00</label></div> -->
-              <div class="flexb f16"><label>实付款</label><label>￥{{orderInfo.price}}</label></div>
+              <div class="flexb f16" flex="main:justify"><label>实付款</label><label>￥{{orderInfo.price}}</label></div>
             </div>
           </div>
           <div class="cell center"><div class="s-button khaki" @click="callphone"> 联系客服</div></div>

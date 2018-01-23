@@ -17,17 +17,17 @@
           <div class="cell">
              <div class="cell-body">订单号： {{orderInfo.orderCode}}</div>
             <div class="cell-body">下单时间： {{new Date(order.orderTime*1000).format('yyyy年MM月dd日 hh:mm:ss')}}</div>
-            <div class="cell-item flexb"><label>{{orderDetail.film.filmName}}</label><label>x {{orderDetail.film.seatCount}}</label></div>
+            <div class="cell-item flexb" flex="main:justify"><label>{{orderDetail.film.filmName}}</label><label>x {{orderDetail.film.seatCount}}</label></div>
 
             <div v-if="orderDetail.goods" class="cell-item">
-                <div  class="flexb" v-for="item in orderDetail.goods.list">
+                <div  class="flexb" flex="main:justify" v-for="item in orderDetail.goods.list">
                   <label>{{item.name}}</label><label>x {{item.number}}</label>
                 </div>
             </div>
             <div class="cell-body">
-              <div class="flexb f12"><label>总价</label><label>￥{{orderPayInfo.totalPrice}}</label></div>
-              <div class="flexb" v-if="getIsPayed(orderInfo.status) == 1" v-for="item in orderPayInfo.payInfo"><label>{{item.name}}</label><label>{{item.money}}</label></div>
-              <div class="flexb f16 ">
+              <div class="flexb f12" flex="main:justify"><label>总价</label><label>￥{{orderPayInfo.totalPrice}}</label></div>
+              <div class="flexb" flex="main:justify" v-if="getIsPayed(orderInfo.status) == 1" v-for="item in orderPayInfo.payInfo"><label>{{item.name}}</label><label>{{item.money}}</label></div>
+              <div class="flexb f16 " flex="main:justify">
                 <label class="red" v-if="getStatus(orderInfo.status) == 0">待付款</label>
                 <label class="red" v-if="getStatus(orderInfo.status) == 3">取消付款</label>
                 <label class="red" v-else-if="getStatus(orderInfo.status) == 2">已退票</label>

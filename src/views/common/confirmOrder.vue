@@ -48,10 +48,10 @@
           </list>
         </div>
         <div class="price">
-          <div  flex="main:justify"><label>总价 <label class="tip" v-if="isUseCard">会员卡优惠</label>
+          <div class="flexb" flex="main:justify"><label>总价 <label class="tip" v-if="isUseCard">会员卡优惠</label>
             </label><label>￥{{orderInfo._price}}</label></div>
 
-          <div flex="main:justify" v-for="(item,index) in couponListStr" :key="index">
+          <div class="flexb" flex="main:justify" v-for="(item,index) in couponListStr" :key="index">
             <label>{{item.name}}</label><label>{{item.value}}</label></div>
 
           <!-- <div class="flexb" v-for="(item,index) in saleCouponInfo" :key="'sale'+index">
@@ -406,7 +406,7 @@
             }
 
           }else {
-            if (cardId)
+            // if (cardId)
               // this.$vux.toast.text("会员卡余额不足", 'bottom');
             this.$store.commit("business/setPayLockInfo",
               {
@@ -514,6 +514,7 @@
                       type: "cancel",
                       text: "订单取消失败"
                     });
+                    _this.$router.push('SessionDetail')
                   }
                 );
               },

@@ -38,6 +38,7 @@
     },
     methods: {
       async getDataList(page){
+        this.dataList = []
         let res;
         try {
           res = await CardApi.getCardInfo();

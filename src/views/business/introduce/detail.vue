@@ -3,8 +3,10 @@
     <div slot="contain" flex="dir:top" style="height: 100%;" >
       <!-- <div v-html="html" style="max-width: 100%;overflow: hidden">
       </div> -->
-        <div flex-box="1" ref="bodyHeight" :style="{height:iframeHeight+'px'}">
-            <iframe :src="html" class="content" frameborder="0" height="100%"></iframe>
+        <div flex-box="1" ref="bodyHeight">
+            <div class="conB" :style="{height:iframeHeight+'px'}">
+              <iframe :src="html" class="content" frameborder="0" ></iframe>
+            </div>
         </div>
         <div flex-box="0" class="center">
             <router-link :to="url">
@@ -70,11 +72,11 @@
   img {
     width: 100%;
   }
-
+  .conB{min-height:500px;border:1px solid red;}
 
   .content {
-    width:100%;
-    height:100%;
+    width:100%;border:1px solidbluered;
+    height:1000px;
   }
 
   .goToBuy {margin-top: 10px;
