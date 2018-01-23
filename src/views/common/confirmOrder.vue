@@ -410,8 +410,8 @@
               this.$vux.toast.text("会员卡余额不足", 'bottom');
             this.$store.commit("business/setPayLockInfo",
               {
-                orderId: this.orderId,
-                orderType: this.orderType,
+                orderId: this.orderDetail.orderId,
+                orderType: this.orderDetail.orderType,
                 ...res.data
               });
             this.$router.push({
