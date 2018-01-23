@@ -514,6 +514,7 @@
                       type: "cancel",
                       text: "订单取消失败"
                     });
+                    _this.$router.push('SessionDetail')
                   }
                 );
               },
