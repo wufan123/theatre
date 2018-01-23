@@ -78,13 +78,13 @@
   .header {
     background: @color-sub !important;
   }
-  .contain {border:1px solid purple;
+  .contain {
     position: relative;
     flex: 1;
     overflow-y: auto;
   }
 
-  .footer {border:1px solid yellow;
+  .footer {
     .btn{
       width: 100%;height: 42px;
     }

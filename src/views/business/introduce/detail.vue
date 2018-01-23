@@ -1,6 +1,6 @@
 <template>
   <page :headerTitle="title">
-    <div slot="contain" flex="dir:top" style="height: 100%;" >
+    <div slot="contain" flex="dir:top" style="background:red;">
       <!-- <div v-html="html" style="max-width: 100%;overflow: hidden">
       </div> -->
         <div flex-box="1" ref="bodyHeight">
