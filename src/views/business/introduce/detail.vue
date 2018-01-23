@@ -4,10 +4,10 @@
       <!-- <div v-html="html" style="max-width: 100%;overflow: hidden">
       </div> -->
         <div flex-box="1" ref="bodyHeight">
-          <div v-html="html" style="max-width: 100%;overflow: hidden"> </div>
-            <!-- <div class="conB" :style="{height:iframeHeight+'px'}">
+          {{iframeHeight}}
+            <div class="conB" :style="{height:iframeHeight+'px'}">
               <iframe :src="html" class="content" frameborder="0" ></iframe>
-            </div> -->
+            </div>
         </div>
         <div flex-box="0" class="center">
             <router-link :to="url">
@@ -50,20 +50,20 @@
         this.iframeHeight = this.$refs.bodyHeight.offsetHeight
         this.html = this.$route.query.contentUrl
         this.title =  this.$route.query.title
-        try {
-          this.html = await  http.instance.get(this.$route.query.contentUrl)
-        }
-        catch (e) {
-          console.log('e',e)
-          if (e.toString().indexOf('<html') == 0){
-            this.html = e
-          }else{
-            this.$util.showRequestErro({
-              text:'资源错误'
-            })
-          }
+        // try {
+        //   this.html = await  http.instance.get(this.$route.query.contentUrl)
+        // }
+        // catch (e) {
 
-        }
+        //   if (e.toString().indexOf('<html') == 0){
+        //     this.html = e
+        //   }else{
+        //     this.$util.showRequestErro({
+        //       text:'资源错误'
+        //     })
+        //   }
+
+        // }
 
       },
     }
@@ -73,10 +73,10 @@
   img {
     width: 100%;
   }
-  .conB{min-height:500px;border:1px solid red;}
+  .conB{min-height:500px;}
 
   .content {
-    width:100%;border:1px solidbluered;
+    width:100%;
     height:1000px;
   }
 
