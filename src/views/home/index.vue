@@ -145,9 +145,7 @@
       ...mapState('common', ['userInfo'])
     },
     created(){
-      document.querySelector('body').addEventListener('touchstart', function (ev) {
-          event.preventDefault();
-      });
+      
     },
     methods: {
       goToMe(){
@@ -260,7 +258,6 @@
   .homeOut {
     background: repeat;
     background-size: 68px 68px;
-    border:1px solid red;
     label {
       .text-ellipsis-line();
     }
