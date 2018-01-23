@@ -12,7 +12,7 @@
               </div>
             </list-item>
           </list>
-          <div class="flexb">
+          <div class="flexb" flex="main:justify">
             <label>总价：{{itemp.price}}元</label>
             <label v-if="itemp.status==0">未支付</label>
             <label v-else-if="itemp.status==1">已支付</label>

@@ -48,15 +48,15 @@
           </list>
         </div>
         <div class="price">
-          <div class="flexb"><label>总价 <label class="tip" v-if="isUseCard">会员卡优惠</label>
+          <div class="flexb" flex="main:justify"><label>总价 <label class="tip" v-if="isUseCard">会员卡优惠</label>
             </label><label>￥{{orderInfo._price}}</label></div>
 
-          <div class="flexb" v-for="(item,index) in couponListStr" :key="index">
+          <div class="flexb" flex="main:justify" v-for="(item,index) in couponListStr" :key="index">
             <label>{{item.name}}</label><label>{{item.value}}</label></div>
 
           <!-- <div class="flexb" v-for="(item,index) in saleCouponInfo" :key="'sale'+index">
             <label>{{item.name}}</label><label>{{item.des}}</label></div> -->
-          <div class="flexb payment">
+          <div class="flexb payment" flex="main:justify">
             <label>实付款</label><label>￥{{amount}}</label></div>
         </div>
       </div>

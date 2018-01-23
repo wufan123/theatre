@@ -29,10 +29,10 @@
         </list>
         </div>-->
         <div class="price">
-          <div class="flexb"><label>总价</label><label>￥{{orderInfo.price}}</label></div>
-          <div class="flexb" v-for="(item,index) in selectCouponList" :key="index">
+          <div class="flexb" flex="main:justify"><label>总价</label><label>￥{{orderInfo.price}}</label></div>
+          <div class="flexb" flex="main:justify" v-for="(item,index) in selectCouponList" :key="index">
             <label>{{item.name}}</label><label>{{item.value}}</label></div>
-          <div class="flexb payment"><label>实付款</label><label>￥{{orderInfo._price}}</label></div>
+          <div class="flexb payment" flex="main:justify"><label>实付款</label><label>￥{{orderInfo._price}}</label></div>
         </div>
       </div>
       <group>

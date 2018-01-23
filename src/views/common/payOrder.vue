@@ -2,7 +2,7 @@
   <page :headerTitle="`支付订单`" :footerText="`确认支付`" :footerFunc="confirmPay">
     <div slot="contain" class="payInfo">
       <div class="center last-time" v-if="this.payLockInfo.orderType=='goodsAndFilm'">支付剩余时间：{{getPayTime()}}</div>
-      <div class="flexb payment"><label>实付款</label><label>￥{{payLockInfo.price}}</label></div>
+      <div class="flexb payment" flex="main:justify"><label>实付款</label><label>￥{{payLockInfo.price}}</label></div>
       <div class="c-pay">
         <group title="选择支付方式">
           <radio title="title" :options="typeData" v-model="value" disabled></radio>

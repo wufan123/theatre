@@ -12,8 +12,8 @@
           </list>
         </div>
         <div class="price">
-          <div class="flexb"><label>总价</label><label>￥{{packageInfo.price}}</label></div>
-          <div class="flexb payment"><label>实付款</label><label>￥{{packageInfo.price}}</label></div>
+          <div class="flexb" flex="main:justify"><label>总价</label><label>￥{{packageInfo.price}}</label></div>
+          <div class="flexb payment" flex="main:justify"><label>实付款</label><label>￥{{packageInfo.price}}</label></div>
         </div>
       </div>
       <group>
