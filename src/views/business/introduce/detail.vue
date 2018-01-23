@@ -6,7 +6,7 @@
         <div flex-box="1" ref="bodyHeight">
           {{iframeHeight}}
             <div class="conB" :style="{height:iframeHeight+'px'}">
-              <iframe :src="html" class="content" frameborder="0" ></iframe>
+              <iframe :src="html" class="content" frameborder="0" :style="{height:iframeHeight+'px'}" ></iframe>
             </div>
         </div>
         <div flex-box="0" class="center">
@@ -41,9 +41,6 @@
         title:''
       }
     },
-    updated(){
-      this.iframeHeight = this.$refs.bodyHeight.offsetHeight
-    },
     methods: {
       async fetchData(){
         // console.log('this.bodyHeight.outerHeight()',)
@@ -77,7 +74,7 @@
 
   .content {
     width:100%;
-    height:1000px;
+    height:100%;
   }
 
   .goToBuy {margin-top: 10px;
