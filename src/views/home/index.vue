@@ -27,7 +27,7 @@
           <scroller lock-y :scrollbar-x=false>
             <div class="box1">
               <div v-for="(item,index) in introduceList.slice(0,2)" class="introduceItem" :key="index">
-                <router-link :to="item.contentUrl">
+                <router-link :to="item.redirectType? item.contentUrl:''">
                   <div flex="dir:left" class="introduceContent">
                     <img :src="item.thumbUrl" class="contentImg">
                     <div class="rightBorder"></div>
@@ -146,8 +146,6 @@
     },
     computed: {
       ...mapState('common', ['userInfo','promotion'])
-    },
-    created(){
     },
     methods: {
       goToMe(){

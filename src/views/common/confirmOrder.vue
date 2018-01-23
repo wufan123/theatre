@@ -405,9 +405,8 @@
               this.$vux.loading.show({text: '正在出票'});
               this.checkOrderStatus()
             }
-
           } else {
-//            if (cardId)
+            // if (cardId)
             // this.$vux.toast.text("会员卡余额不足", 'bottom');
             this.$store.commit("business/setPayLockInfo",
               {
@@ -423,7 +422,6 @@
         this.$vux.loading.hide();
       },
       async checkOrderStatus(){
-        console.log('11111')
         let statusRes;
         try {
           statusRes = await  OrderApi.getOrderStatus(this.orderDetail.orderId);
@@ -500,32 +498,40 @@
       goBack(){
         var _this = this
         this.$vux.confirm.show({
-          title: "温馨提示",
-          content: "当前订单将被取消，确定要返回吗？",
-          confirmText: "继续支付",
-          cancelText: "确认返回",
-          onCancel() {
-            // 关闭订单
-            OrderApi.cancelOrder(_this.orderDetail.orderId).then(
-              success => {
-                _this.$router.push('SessionDetail')
-              },
-              error => {
-                _this.$vux.toast.show({
-                  type: "cancel",
-                  text: "订单取消失败"
-                });
-              }
-            );
-          },
-          onConfirm() {
-            return;
+            title: "温馨提示",
+            content: "当前订单将被取消，确定要返回吗？",
+            confirmText: "继续支付",
+            cancelText: "确认返回",
+            onCancel()
+            {
+              // 关闭订单
+              OrderApi.cancelOrder(_this.orderDetail.orderId).then(  
+                success => {
+                  _this.$router.push('SessionDetail')
+                },
+                error => {
+                  _this.$vux.toast.show({
+                    type: "cancel",
+                    text: "订单取消失败"
+                  });
+                  _this.$router.push('SessionDetail')
+                }
+              );
+            }
+            ,
+            onConfirm()
+            {
+              return;
+            }
           }
-        });
+        )
+        ;
       },
     },
 
-    components: {List, ListItem, XInput, Group}
+    components: {
+      List, ListItem, XInput, Group
+    }
   }
 </script>
 <style lang="less" scoped>
