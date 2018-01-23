@@ -23,22 +23,19 @@
       <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')"
                  v-show="introduceList&&introduceList.length>0">
         <label slot="rightTop" @click="$router.push('IntroduceList')">更多</label>
-        <scroll-view slot="main">
+        <div slot="main">
+          <scroller lock-y :scrollbar-x=false>
+            <div class="box1">
+              <div class="box1-item" v-for="i in 6"><span>{{' ' + i + ' '}}</span></div>
+            </div>
+          </scroller>
+        </div>
+        <!-- <scroll-view slot="main">
           <div flex="dir:top " v-for="(item,index) in introduceList.slice(0,2)" class="introduceItem" :key="index">
-            <router-link :to="item.contentUrl">
-              <div flex="dir:left" class="introduceContent">
-                <img :src="item.thumbUrl" class="contentImg">
-                <div class="rightBorder"></div>
-                <div class="introducePlayIcon" flex="dir:top main:center cross:center" v-if="item.redirectType==3">
-                  <img :src='require("assets/images/home/video_play.png")'/>
-                </div>
-              </div>
-              <div class="bottomBorder"></div>
-              <label class='contentTxt text-ellipsis-line'>{{item.title}}</label>
-            </router-link>
+            
           </div>
 
-        </scroll-view>
+        </scroll-view> -->
       </list-cell>
       <!--场次票-->
       <list-cell :topImg="require('assets/images/home/title_session.png')">
@@ -253,7 +250,21 @@
   @import "~style/base-variables.less";
   @import "~style/style.less";
   @import "~style/common.less";
-
+  .box1 {
+  height: 100px;
+  position: relative;
+  width: 1490px;
+}
+.box1-item {
+  width: 200px;
+  height: 100px;
+  background-color: #ccc;
+  display:inline-block;
+  margin-left: 15px;
+  float: left;
+  text-align: center;
+  line-height: 100px;
+}
   .homeOut {
     background: repeat;
     background-size: 68px 68px;
