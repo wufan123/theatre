@@ -90,7 +90,7 @@ export default {
     }
   }
   .me-order{padding:10px 0;
-    .title{margin: 20px 0;width: 375px;height: 42px;background-image: url('../../../../assets/images/me/me_order_title_bg.png');background-size: 100% 100%;background-repeat: no-repeat;}
+    .title{margin: 20px 0;width: 375px;height: 42px;background-image: url('../../assets/images/me/me_order_title_bg.png');background-size: 100% 100%;background-repeat: no-repeat;}
     ul{text-align: center;
       i.icon{width: 31px;height: 55px;display: block;background-size:100%;background-repeat: no-repeat;margin: 0 auto 5px auto;
         &.order{ background-image:url('../../assets/images/me/me_menu_01.png')}
