@@ -4,7 +4,8 @@
       <!-- <div v-html="html" style="max-width: 100%;overflow: hidden">
       </div> -->
       <div flex-box="1" ref="bodyHeight" :style="{height:iframeHeight+''}">
-        <iframe :src="html" class="content" frameborder="0"></iframe>
+        {{html}}
+        <iframe :src="html" class="content" frameborder="0" style="border:1px solid red;"></iframe>
       </div>
       <div flex-box="0" class="center">
           <router-link :to="url">
