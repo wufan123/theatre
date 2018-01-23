@@ -383,7 +383,7 @@
         if (res && !this.$util.isEmptyObject(res.data)) {
           var params = {}
           params.type = this.promotion.type ? this.promotion.type : 2;
-          params.sn = this.orderId;
+          params.sn = this.orderDetail.orderId;
           params.toer = this.userInfo.bindmobile;
           params.price = res.data.price;
           params.ticketsCnt = this.orderInfo.film.seatCount;
