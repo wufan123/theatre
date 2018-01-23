@@ -8,7 +8,9 @@
                      :channelFee="item.price" :goodsCoverImage="item.goodsImg" class="snackItem">
 
             <!--<x-number v-show="item.num>0" :value="item.num" :min="0"   ></x-number>-->
-            <item-number :item="{num:item.num,index:index,stock:item.channelStock}" @onChange="change"></item-number>
+            <div class="test">----
+              <item-number :item="{num:item.num,index:index,stock:item.channelStock}" @onChange="change"></item-number>
+            </div>
           </good-item>
         </page-scroller>
       </div>
