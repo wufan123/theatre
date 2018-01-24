@@ -129,15 +129,16 @@
             res = await orderApi.getCinemaOrderStatus(this.payLockInfo.orderId);
           } catch (e) {
             this.$util.showRequestErro(e);
+            return;
           }
           //3 为订单完成
           if (res && res.data && res.data.orderInfo && res.data.orderInfo && res.data.orderInfo.orderStatus == '3') {
             this.$router.push({
               name: 'PaySuccess'
             })//场次票为默认订单类型，套票支付不走此页面，在确认套票订单
-          }else{
-              this.$util.showRequestErro({text:'出票失败'})
-              this.$router.push({name:'TicketList'});
+          } else {
+            this.$util.showRequestErro({text: '出票失败'})
+            this.$router.push({name: 'TicketList'});
           }
           this.$vux.loading.hide();
         }
@@ -206,8 +207,8 @@
 
     },
     destroyed(){
-        console.log('11111111');
-        if(this.timer)
+      console.log('11111111');
+      if (this.timer)
         clearInterval(this.timer);
     }
   }

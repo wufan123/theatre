@@ -113,7 +113,6 @@
       ...mapState('coupon', ['ticketCouponList', 'goodsCouponList']),
       ...mapState('common', ['promotion', 'userInfo'])
     },
-
     methods: {
       async fetchData(){
         this.goodsCouponLists = this.goodsCouponList
@@ -349,10 +348,9 @@
         return couponStr
       },
       // 锁定，跳转到支付页面
-
       async updatePromotion(params){
         //推广完成
-        if (!this.$util.isEmptyObject(this.userInfo)) {
+        if (!this.$util.isEmptyObject(this.promotion)) {
           let res;
           try {
             res = await TheatreApi.scanCode({...this.promotion, toer: this.userInfo.bindmobile});
@@ -414,8 +412,8 @@
               this.$util.showRequestErro(e);
             }
             if (payRes && payRes.status == 0) {
-              this.$vux.loading.show({text: '正在出票'});
               this.checkOrderStatus()
+              return;
             }
           }
           else {
@@ -435,6 +433,7 @@
         this.$vux.loading.hide();
       },
       async checkOrderStatus(){
+        this.$vux.loading.show({text: '正在出票'});
         let statusRes;
         try {
           statusRes = await  OrderApi.getOrderStatus(this.orderDetail.orderId);
@@ -450,7 +449,7 @@
           this.$util.showRequestErro({text: '出票失败----'})
           this.$router.push({name: 'TicketList'})
         }
-
+        this.$vux.loading.hide();
         // if (statusRes && statusRes.data && statusRes.data.orderInfo && statusRes.data.orderInfo && statusRes.data.orderInfo.orderStatus == '3'){
         //   this.$router.push({ name: 'PaySuccess' })
         // }else{
@@ -527,19 +526,18 @@
                     type: "cancel",
                     text: "订单取消失败"
                   });
-                   _this.$router.go(-2)
+                  _this.$router.go(-2)
                 }
               );
             }
             ,
-            onConfirm(){}
+            onConfirm(){
+            }
           }
         )
         ;
       },
-    }
-    ,
-
+    },
     components: {
       List, ListItem, XInput, Group
     }
