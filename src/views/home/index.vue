@@ -9,6 +9,7 @@
     </div>
     <!--<scroller height="-40" lock-x scrollbar-y :pulldown-config='pullDownConfig' :usePulldown='true' @on-pulldown-loading='refresh' ref="scroller">-->
     <div flex-box="1" class="scroll">
+     
       <!--广告-->
       <swiper :list="banerList" auto height="251px" dots-class="custom-bottom" dots-position="center"></swiper>
       <!--菜单-->
@@ -19,6 +20,7 @@
           <label>{{item.name}}</label>
         </div>
       </div>
+     --------  {{$store.state.common.recommendId}}----
       <!--介绍-->
       <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')"
                  v-show="introduceList&&introduceList.length>0">
