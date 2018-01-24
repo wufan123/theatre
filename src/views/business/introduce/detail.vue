@@ -4,6 +4,7 @@
       <!-- <div v-html="html" style="max-width: 100%;overflow: hidden">
       </div> -->
         <div flex-box="1" ref="bodyHeight">
+          {{iframeHeight}}
             <div class="conB" :style="{height:iframeHeight+'px'}">
               <iframe :src="html" class="content" frameborder="0" :style="{height:'1000px'}" ></iframe>
             </div>
