@@ -36,11 +36,7 @@
         </div>
       </div>
       <group>
-<<<<<<< HEAD
         <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile"  ref="phone"
-=======
-        <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile" ref="phone"
->>>>>>> b60a71e804888618e4f90e5489dcc496d772960d
                  v-model="phone"></x-input>
       </group>
       <div class="info">

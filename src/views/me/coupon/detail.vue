@@ -5,7 +5,7 @@
         <coupon-item>
           <label class="leftTitle" slot="right">{{coupon.voucherName}}</label>
           <label class="leftInfo" slot="right">有效期 {{new Date(coupon.validData * 1000).format("yyyy-MM-dd")}}</label>
-          <label class="rightTitle" slot="left">￥{{coupon.voucherValue}}</label>
+          <label class="rightTitle" slot="left">{{coupon.voucherType == 0?'兑换券':`￥${coupon.voucherValue}`}}</label>
         </coupon-item>
         <div class="info">
             <p class="title">优惠券编码：{{coupon.voucherNum}}</p>
@@ -65,7 +65,7 @@
   }
 
   .rightTitle {
-    font-size:18px;
+    font-size:16px;
     white-space: nowrap;
     font-weight: bold;
     text-align: center;
