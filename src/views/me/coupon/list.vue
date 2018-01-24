@@ -28,6 +28,7 @@
                          @click.native="gotoCouponDetail(item)">
               <label class="leftTitle" slot="right">{{item.voucherName}}</label>
               <label slot="right" v-if="item.status==3" class="is-tip">已使用</label>
+              <label slot="right" v-else class="is-tip">已过期</label>
               <label class="leftInfo" slot="right">有效期 {{new Date(item.validData * 1000).format("yyyy-MM-dd")}}</label>
               <label class="rightTitle" slot="left">{{item._voucherValue}}</label>
             </coupon-item>
@@ -156,7 +157,7 @@
 </script>
 <style lang="less" scoped>
   @import "~style/base-variables";
-
+  .is-tip{position: absolute;right: 15px;padding: 2px 8px;top: 35px; font-size: 12px; background: #a40000;border-radius: 10px;text-align: center;color: #ffffff;}
   .topBar {
     padding: 15px 15px 10px;
     justify-content: space-between;
