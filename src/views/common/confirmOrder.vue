@@ -520,14 +520,14 @@
               // 关闭订单
               OrderApi.cancelOrder(_this.orderDetail.orderId).then(
                 success => {
-                  _this.$router.push('Home')
+                  _this.$router.go(-2)
                 },
                 error => {
                   _this.$vux.toast.show({
                     type: "cancel",
                     text: "订单取消失败"
                   });
-                   _this.$router.push('Home')
+                   _this.$router.go(-2)
                 }
               );
             }
