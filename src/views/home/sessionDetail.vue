@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page headerTitle="场次票" flex-box="1" :footerText="`马上购买`" :footerFunc="goToBuy" >
+    <page headerTitle="场次票" flex-box="1" :footerText="`马上购买`" :footerFunc="goToBuy"  :backFunc="backHome">
       <div slot="contain">
         <div class="imgOut">
           <img :src="filmDetail&&filmDetail.image"/>
@@ -103,6 +103,9 @@ export default {
     ...mapState("common",['userInfo'])
   },
   methods: {
+    backHome(){
+      this.$router.push('home')
+    },
     goToBuy(){
       this.show=true
     },

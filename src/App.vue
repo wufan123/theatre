@@ -71,7 +71,7 @@
         if (promoter) {
           let promotion = {
             promoter: promoter,
-            type: this.$util.getQueryString('type')||this.$route.query.type 
+            type: this.$util.getQueryString('type')||this.$route.query.type
           }
           this.$store.commit('common/setPromotion', promotion);
         }
