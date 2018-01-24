@@ -364,13 +364,7 @@
         }
       },
       async lockAndPayOrder() {
-        if (!this.$refs.phone.valid) {
-          this.$vux.toast.show({
-            type: 'cancel',
-            text: '请输入正确的手机号'
-          })
-          return
-        }
+        
         if (this.orderInfo.phone == '') {
           this.$vux.toast.show({
             type: 'cancel',
@@ -378,8 +372,15 @@
           })
           return
         }
-        if (this.oldPhone !== this.phone) {
-          OrderApi.updateOrderMobile(this.phone, this.orderDetail.orderId)
+        if (!this.$refs.phone.valid) {
+          this.$vux.toast.show({
+            type: 'cancel',
+            text: '请输入正确的手机号'
+          })
+          return
+        }
+        if (this.oldPhone !== this.orderInfo.phone) {
+          OrderApi.updateOrderMobile(this.orderInfo.phone, this.orderDetail.orderId)
         }
         this.$vux.loading.show();
         // 优惠券信息

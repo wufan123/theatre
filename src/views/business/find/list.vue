@@ -18,6 +18,10 @@
         <find-item v-for="(item,index) in attentionList" :key="index" v-if="currentIndex===2" :title="item.title"
                    :content="item.content" :img="item.thumbUrl" :link="item.contentUrl" :type="item.redirectType">
         </find-item>
+        <div v-if="(currentIndex===0&&strategyList.length==0)||(currentIndex===1&&videoList.length==0)||(currentIndex===2&&attentionList.length==0)" flex="dir:top main:center cross:center" style="height:480px">
+          <img :src="require('assets/images/no_data.png')" class="no-data mb10" >
+          <p>暂无数据</p>
+        </div>
       </div>
     </div>
   </page>
@@ -80,6 +84,8 @@
     background: url(../../../assets/images/page_bg.png) repeat;
     background-size: 68px 68px;
   }
+
+  .no-data{width:88px;height:105px;}
 
   .find {
     margin-bottom: 20px;

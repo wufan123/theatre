@@ -36,7 +36,7 @@
         </div>
       </div>
       <group>
-        <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile"
+        <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile"  ref="phone"
                  v-model="phone"></x-input>
       </group>
       <div class="info">
@@ -114,7 +114,14 @@
           })
           return
         }
-        if (this.oldPhone !== this.phone) {
+        if (!this.$refs.phone.valid) {
+          this.$vux.toast.show({
+            type: 'cancel',
+            text: '请输入正确的手机号'
+          })
+          return
+        }
+        if (this.userInfo.bindmobile !== this.phone) {
           OrderApi.updateOrderMobile(this.phone,this.orderId)
         }
         // 优惠券信息
