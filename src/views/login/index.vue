@@ -2,7 +2,7 @@
   <page :headerTitle="`登录`">
     <div slot="contain" class="contain login">
       <div class="form">
- --------  {{$store.state.common.recommendId}}----
+ --------  {{$store.state.common.recommendId}}--{{recommendId}}--
         <group class="form-item">
           <x-input name="mobile" type="number" placeholder="请输入手机号码" v-model="form.phone" keyboard="number" is-type="china-mobile">
             <img slot="label" style="padding-right:10px;display:block;"
@@ -94,7 +94,7 @@
         });
         let res;
         try {
-          res = await Auth.smsLogin(this.form.phone, this.form.pw); //smsLogin
+          res = await Auth.smsLogin(this.form.phone, this.form.pw,this.recommendId); //smsLogin
         }
         catch (e) {
           this.$util.showRequestErro(e);

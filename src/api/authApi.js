@@ -91,13 +91,13 @@ function getValidateCode(codeType, userMobile) {
 /**
  * 非会员登录  user/smsLogin
  */
-function smsLogin(userMobile, validateCode, cinemaCode) {
+function smsLogin(userMobile, validateCode,recommendId) {
     var vQuery={}
     vQuery.userMobile = userMobile
     vQuery.validateCode = validateCode
     vQuery.cinemaCode = apiHttp.CINEMA_CODE
-    if(apiHttp.recommendId){
-        vQuery.recommendId = apiHttp.recommendId
+    if(recommendId){
+        vQuery.recommendId = recommendId
     }
     return apiHttp.post('/user/smsLogin', vQuery)
 }
