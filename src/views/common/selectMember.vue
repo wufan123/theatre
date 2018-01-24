@@ -7,7 +7,7 @@
           <label>余额：</label>
           <label class="text-ellipsis-line">￥{{item.accBalance}}</label>
         </div>
-        <label class="validity">有效期：{{new Date(item.expirationTime*1000).format('yyyy年MM月dd日')}}</label>
+        <label class="validity" v-if="item.expirationTime>0">有效期：{{new Date(item.expirationTime*1000).format('yyyy年MM月dd日')}}</label>
       </div>
       <div v-if="!$util.isEmptyObject(selectedMember)" class="s-button khaki reCharge" @click="calncalSelect(item)">取消</div>
       <div class="s-button khaki reCharge" @click="selectMember(item)" v-else>选择</div>
