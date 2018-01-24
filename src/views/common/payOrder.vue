@@ -202,7 +202,13 @@
       },
       change(val){
 
-      }
+      },
+
+    },
+    destroyed(){
+        console.log('11111111');
+        if(this.timer)
+        clearInterval(this.timer);
     }
   }
 </script>
