@@ -6,7 +6,7 @@
         <div class="contain">
           <div v-for="(item,index) in dataList" class="card-item">
             <div flex="dir:top" class="info">
-              <label class="title text-ellipsis-line">{{item.levelName}}卡：{{item.cardNumber}}</label>
+              <label class="title text-ellipsis-line">{{item.levelName}}：{{item.cardNumber}}</label>
               <div class="sum" flex="dir:left">
                 <label>余额：</label>
                 <label class="text-ellipsis-line">￥{{item.money}}</label>
@@ -14,7 +14,7 @@
               <label class="validity" v-if="item.expireDate>0">有效期：{{new Date(item.expireDate*1000).format('yyyy年MM月dd日')}}</label>
             </div>
             <div class="s-button khaki reCharge"
-                 @click="$router.push({name:'Recharge',query:{id:item.id,levelName:item.levelName,cardNumber:item.cardNumber}})">
+                 @click="goToRecharge(item)">
               充值
             </div>
             <label class="delete" @click="isdeleteCard(item)">—</label>
@@ -37,6 +37,14 @@
       }
     },
     methods: {
+      goToRecharge(item){
+        if(item.expireDate-(parseInt(new Date().getTime()/1000))>0){
+          this.$router.push({name:'Recharge',query:{id:item.id,levelName:item.levelName,cardNumber:item.cardNumber}})
+        }else{
+          this.$vux.toast.show({ type: 'cancel',  text: '会员卡已过期' })
+        }
+        
+      },
       async getDataList(page){
         this.dataList = []
         let res;
