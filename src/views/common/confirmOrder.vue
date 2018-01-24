@@ -532,10 +532,7 @@
               );
             }
             ,
-            onConfirm()
-            {
-              return;
-            }
+            onConfirm(){}
           }
         )
         ;
