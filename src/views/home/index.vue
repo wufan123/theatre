@@ -64,11 +64,15 @@
         </router-link>
       </div>
       <!-- 探索-->
+
+      
       <list-cell :topImg="require('assets/images/home/title_stamps.png')" v-show="findList&&findList.length>0">
         <label slot="rightTop" @click="$router.push('FindList')">更多</label>
+         
         <div slot="main" style="padding-left: 15px" flex="main:justify">
           <div flex="dir:top " v-for="(item,index) in findList.slice(0,2)" class="findItem"
           >
+                <router-link :to="`http://vt1.doubanio.com/201801201504/4e4dc50ed3f5fd1d40b4ca85a4257229/view/movie/M/302260011.mp4`">视频</router-link >
             <!-- @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})" -->
             <router-link :to="item.contentUrl">
               <div flex="dir:left" class="findContent">
