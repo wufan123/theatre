@@ -68,7 +68,7 @@
   img {
     width: 100%;
   }
-  .conB{min-height:500px;-webkit-overflow-scrolling: touch;  
+  .conB{min-height:557px;-webkit-overflow-scrolling: touch;  
     overflow-y: scroll; }
 
   .content {
