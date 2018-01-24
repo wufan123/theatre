@@ -7,7 +7,7 @@
                <em v-if="userInfo.memberCardBalance" >会员卡余额：￥{{userInfo.memberCardBalance.accBalance}}</em>
               丨  <em>积分：{{userInfo.integral}}</em></p> -->
 
-            <i class="member f12" v-if="userInfo.memberCardBalance">剧坊会员</i>
+            <i class="member f12">剧坊会员</i>
           </div>
           <div class="me-order">
             <div class="title"></div>
