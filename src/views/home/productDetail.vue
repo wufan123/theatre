@@ -29,7 +29,9 @@
           res = await StoreApi.createGoodsOrder(this.userInfo.bindmobile, `${goodsId}:1`);
         }
         catch (e) {
-          this.$util.showRequestErro(e);
+          this.$util.showRequestErro({
+            text:'卖品已下架'
+          });
         }
         if (res && res.data) {
           let orderId = res.data;
