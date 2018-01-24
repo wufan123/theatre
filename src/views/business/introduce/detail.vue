@@ -1,6 +1,6 @@
 <template>
   <page :headerTitle="title">
-    <div slot="contain" flex="dir:top">
+    <div slot="contain" flex="dir:top" style="    height: 100%;" >
       <!-- <div v-html="html" style="max-width: 100%;overflow: hidden">
       </div> -->
         <div flex-box="1" ref="bodyHeight">
@@ -68,7 +68,7 @@
   img {
     width: 100%;
   }
-  .conB{min-height:500px;-webkit-overflow-scrolling: touch;  
+  .conB{min-height:600px;-webkit-overflow-scrolling: touch;  
     overflow-y: scroll; }
 
   .content {
