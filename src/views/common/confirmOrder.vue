@@ -140,6 +140,7 @@
         if (wayRes && wayRes.data) {
           this.orderPayWay = wayRes.data;
           let res = wayRes.data
+          
 
           if (this.orderPayWay.payTime) {
             let _this = this;
@@ -175,7 +176,9 @@
           // 会员卡
           if (res.memberCard && res.memberCard.length > 0) {
             res.memberCard.forEach(element => {
-              this.memberCardList.push(element)
+              if (element.expirationTime != 1) {
+                  this.memberCardList.push(element)
+              }
             })
           }
           this.caculateCount()
@@ -368,7 +371,7 @@
           })
           return
         }
-        if (this.phone === '') {
+        if (this.orderInfo.phone == '') {
           this.$vux.toast.show({
             type: 'cancel',
             text: '手机号不能为空'
