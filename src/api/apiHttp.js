@@ -111,6 +111,7 @@ instance.interceptors.response.use(response => {
     if(data&&data.status=="20001"){
       window._vue.$router.push('Login')
       // window._vue.$util.showLoginConfirm();
+      return;
     }
     return Promise.reject(data);
   }
