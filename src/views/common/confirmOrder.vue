@@ -442,10 +442,12 @@
           statusRes = await  OrderApi.getOrderStatus(this.orderDetail.orderId);
         } catch (e) {
           this.checkOrderStatus();
+          return;
           // this.$util.showRequestErro(e)
         }
         if (!statusRes.data || !statusRes.data.orderInfo || statusRes.data.orderInfo.orderStatus == 0) {
           this.checkOrderStatus();
+          return;
         } else if (statusRes.data.orderInfo.orderStatus == 3) {
           this.$router.push({name: 'PaySuccess'})
         } else {
