@@ -17,7 +17,7 @@
         </div>
       </div>
       <group>
-        <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile"
+        <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile" ref="phone"
                  v-model="phone"></x-input>
       </group>
       <div class="info">
@@ -60,16 +60,18 @@
       },
       // 锁定，跳转到支付页面
       async lockAndPayOrder() {
+        if (!this.$refs.phone.valid) {
+          this.$vux.toast.show({  type: 'cancel',   text: '请输入正确的手机号' })
+          return
+        }
+        if (this.phone == '') {
+          this.$vux.toast.show({ type: 'cancel', text: '手机号不能为空' })
+          return
+        }
+
         this.$vux.loading.show({
           text: '正在支付'
         });
-        if (this.phone === "") {
-          this.$vux.toast.show({
-            type: "cancel",
-            text: "手机号不能为空"
-          });
-          return;
-        }
         let res;
         try {
           res = await StoreApi.payPackage("weixinpay", this.orderId,this.openId);

@@ -5,6 +5,15 @@
       </div> -->
         <div flex-box="1" ref="bodyHeight">
             <div class="conB" :style="{height:iframeHeight+'px'}">
+              
+              <video width="320" height="240" controls="controls">
+                <source :src="html" type="video/mp4" />
+                <source :src="html" type="video/ogg" />
+                <source :src="html" type="video/webm" />
+                <object :data="html" width="320" height="240">
+                  <embed :src="html" width="320" height="240" />
+                </object>
+              </video>
               <iframe :src="html" class="content" frameborder="0" :style="{height:'1000px'}" ></iframe>
             </div>
         </div>

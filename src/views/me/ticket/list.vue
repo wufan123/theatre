@@ -8,7 +8,7 @@
                        :contentTitle="item.filmName" extra="">
               <div slot="contentBrief">
                 <!-- <p>12 月 3 日 10：00</p> -->
-                <p flex="main:justify"><label>数量</label><label>{{item.seatCount}}份</label></p>
+                <p flex="main:justify"><label>数量</label><label>{{item.seatCount}}张</label></p>
               </div>
             </list-item>
           </list>

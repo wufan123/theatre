@@ -11,7 +11,7 @@ export function getQueryString(name) {
 }
 
 export function mapIntroduceData(data) {
-  data.contentUrl = `/IntroduceDetail?contentUrl=${data.contentUrl}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
+  data.contentUrl = `/IntroduceDetail?contentUrl=${data.contentUrl}&title=${data.title}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
   return data;
 }
 
