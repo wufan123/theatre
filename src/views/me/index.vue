@@ -51,7 +51,7 @@ export default {
   },
   methods:{
     callphone(){
-      window.location.href ='tel:'+this.userInfo.servicePhone+'';
+      window.location.href ='tel:400-850-7010';
     },
     fetchData(){
       console.log('走不走')

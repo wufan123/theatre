@@ -36,7 +36,11 @@
         </div>
       </div>
       <group>
+<<<<<<< HEAD
         <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile"  ref="phone"
+=======
+        <x-input class="phoneInput" title="手机号" keyboard="number" is-type="china-mobile" name="mobile" ref="phone"
+>>>>>>> b60a71e804888618e4f90e5489dcc496d772960d
                  v-model="phone"></x-input>
       </group>
       <div class="info">
@@ -107,11 +111,12 @@
       },
       // 锁定，跳转到支付页面
       async lockAndPayOrder () {
-        if (this.phone === '') {
-          this.$vux.toast.show({
-            type: 'cancel',
-            text: '手机号不能为空'
-          })
+        if (!this.$refs.phone.valid) {
+          this.$vux.toast.show({  type: 'cancel',   text: '请输入正确的手机号' })
+          return
+        }
+        if (this.phone == '') {
+          this.$vux.toast.show({ type: 'cancel', text: '手机号不能为空' })
           return
         }
         if (!this.$refs.phone.valid) {
