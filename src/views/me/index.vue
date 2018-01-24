@@ -55,6 +55,10 @@ export default {
     },
     fetchData(){
       console.log('走不走')
+      if(this.$util.isEmptyObject(this.userInfo)){
+        this.$router.push('Home')
+        return;
+      }
       AuthApi.getUserInfo().then(success => {
         this.$store.commit('common/setUserInfo', success.data)
         this.$set(this.userInfo,success.data);
