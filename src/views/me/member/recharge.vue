@@ -2,7 +2,7 @@
   <page :headerTitle="`充值`">
     <div slot="contain">
       <div class="recharge">
-          <p class="title">{{card.levelName}}卡：{{card.cardNumber}}</p>
+          <p class="title">{{card.levelName}}：{{card.cardNumber}}</p>
           <div class="recharge-b" flex="main:justify">
             <i class="icon subtract" @click="subtract">-</i>
            <input class="input" type="text" placeholder="请输入100的整倍数" v-model="amount" >

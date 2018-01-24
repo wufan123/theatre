@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="link">
+  <router-link :to="type?link:''">
   <div class="find">
     <img class="find-vidio"
          :src="img">
