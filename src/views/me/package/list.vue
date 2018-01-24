@@ -2,7 +2,7 @@
   <page :headerTitle="`组合购`">
     <div slot="contain" class="package">
       <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown height='-46' :usePullup="false">
-        <div v-for="(itemp,index) in dataList" :key="index">
+        <div v-for="(itemp,index) in dataList" :key="index" v-if="itemp.price>0">
           <div v-for="(item,indexp) in itemp.data" :key="indexp" class="ticket-card" @click="Detail(itemp)">
             <list twoLine :title="item.name">
               <list-item v-for="(itemc,indexc) in item.detail" :img="itemc.img" :key="indexc"
