@@ -270,6 +270,7 @@
       }
       .header-r-icon {
         height: 22px;
+        padding: 9px 10px;
         margin-right: 10px;
         margin-left: 20px;
       }
