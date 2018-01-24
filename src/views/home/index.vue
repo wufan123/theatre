@@ -221,7 +221,9 @@
 
         console.log(this.$route.query)
         let recommendId = this.$route.query.recommendId ? this.$route.query.recommendId : ''
-        this.$store.commit('common/setRecommendId', recommendId)
+        if(recommendId){
+          this.$store.commit('common/setRecommendId', recommendId)
+        }
         // banner
         this.getBanner();
         // 介绍
