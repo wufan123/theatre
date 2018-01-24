@@ -128,7 +128,7 @@
           try {
             res = await orderApi.getCinemaOrderStatus(this.payLockInfo.orderId);
           } catch (e) {
-            this.$util.showRequestErro(e);
+            this.confirmOrderStatus();
             return;
           }
           //3 为订单完成
@@ -137,8 +137,8 @@
               name: 'PaySuccess'
             })//场次票为默认订单类型，套票支付不走此页面，在确认套票订单
           } else {
-            this.$util.showRequestErro({text: '出票失败'})
-            this.$router.push({name: 'TicketList'});
+            this.confirmOrderStatus();
+            return;
           }
           this.$vux.loading.hide();
         }
