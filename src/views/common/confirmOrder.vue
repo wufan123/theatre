@@ -19,8 +19,8 @@
             <div v-if="orderInfo.goods&&orderInfo.goods.list">
               <list-item v-for="item in orderInfo.goods.list" :key="item.name" :img="item.goodsImg" extra="">
                 <div slot="contentTitle" flex="main:justify">
-                  <label class="text-ellipsis-line">{{item.name}}</label>
-                  <label class="o-price">￥{{item.price}}</label>
+                  <label flex-box="1" class="text-ellipsis-line">{{item.name}}</label>
+                  <label flex-box="0" class="o-price">￥{{item.price}}</label>
                 </div>
                 <div slot="contentBrief" flex="main:justify">
                   <label></label>
