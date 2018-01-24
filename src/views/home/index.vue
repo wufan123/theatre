@@ -20,7 +20,6 @@
           <label>{{item.name}}</label>
         </div>
       </div>
-     --------  {{$store.state.common.recommendId}}----
       <!--介绍-->
       <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')"
                  v-show="introduceList&&introduceList.length>0">
