@@ -9,7 +9,7 @@
     </div>
     <!--<scroller height="-40" lock-x scrollbar-y :pulldown-config='pullDownConfig' :usePulldown='true' @on-pulldown-loading='refresh' ref="scroller">-->
     <div flex-box="1" class="scroll">
-     
+
       <!--广告-->
       <swiper :list="banerList" auto height="251px" dots-class="custom-bottom" dots-position="center"></swiper>
       <!--菜单-->
@@ -66,14 +66,14 @@
       </div>
       <!-- 探索-->
 
-      
+
       <list-cell :topImg="require('assets/images/home/title_stamps.png')" v-show="findList&&findList.length>0">
         <label slot="rightTop" @click="$router.push('FindList')">更多</label>
-         
+
         <div slot="main" style="padding-left: 15px" flex="main:justify">
           <div flex="dir:top " v-for="(item,index) in findList.slice(0,2)" class="findItem"
           >
-                
+
             <!-- @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})" -->
             <router-link :to="item.contentUrl">
               <div flex="dir:left" class="findContent">
@@ -339,8 +339,7 @@
     }
     .menuCell {
       height: 100px;
-      padding: 22px 0 0px;
-      margin: 0 30px;
+      padding: 22px 30px 0px;
       background: url(../../assets/images/home/menu_bg.png) no-repeat;
       background-size: 100% 100%;
 
