@@ -23,7 +23,6 @@
       <div class="tip">
         <p>温馨提示：</p>
         <p>订单一旦完成购买，不退不换</p>
-        {{erroInfo}}
       </div>
     </div>
   </page>
@@ -207,7 +206,6 @@
 
     },
     destroyed(){
-      console.log('11111111');
       if (this.timer)
         clearInterval(this.timer);
     }
