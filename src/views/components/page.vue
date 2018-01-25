@@ -9,7 +9,7 @@
     <div class="contain" ref="contain">
       <slot name="contain"></slot>
     </div>
-    <div class="footer" :style="{height:footerText?'42px':'0'}">
+    <div class="footer">
       <x-button v-if="footerText"  type="primary no-radius" action-type="button" @click.native="onClick">{{footerText}} </x-button>
       <slot name="footer"></slot>
     </div>
