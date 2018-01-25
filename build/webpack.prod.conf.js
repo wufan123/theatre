@@ -29,7 +29,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
-      _BASE_URL: JSON.stringify(config.dev.baseUrl),
+      _BASE_URL: JSON.stringify(config.build.baseUrl),
       'process.env': env
     }),
     // UglifyJs do not support ES6+, you can also use babel-minify for better treeshaking: https://github.com/babel/minify
