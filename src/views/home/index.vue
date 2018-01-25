@@ -1,6 +1,6 @@
 <template>
   <div class="homeOut" :style="{backgroundImage:`url(${require('assets/images/page_bg.png')})`}" flex="dir:top">
-    <div class="index-header" flex="main:justify cross:center"  flex-box="0">
+    <div class="index-header" flex="main:justify cross:center" flex-box="0">
       <img :src="require('assets/images/logo.png')" class="logo">
       <div class="header-r" flex="cross:center">
         <img :src="require('assets/images/me.png')" class="header-r-icon" @click="goToMe">
@@ -66,7 +66,6 @@
       </div>
       <!-- 探索-->
 
-
       <list-cell :topImg="require('assets/images/home/title_stamps.png')" v-show="findList&&findList.length>0">
         <label slot="rightTop" @click="$router.push('FindList')">更多</label>
 
@@ -75,7 +74,7 @@
           >
 
             <!-- @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})" -->
-            <router-link :to="item.contentUrl">
+            <router-link :to="item.redirectType? item.contentUrl:''">
               <div flex="dir:left" class="findContent">
                 <img :src="item.thumbUrl" class="contentImgSquare">
                 <div class="rightBorder"></div>
@@ -96,61 +95,70 @@
   </div>
 </template>
 <script>
-  import {Swiper, GroupTitle, SwiperItem, XButton, Divider, Scroller} from 'vux'
-  import ScrollView from 'views/components/simpleScrollView.vue'
-  import ListCell from 'views/components/home/listCell.vue'
-  import TheatreApi from 'api/theatreApi'
+  import {
+    Swiper,
+    GroupTitle,
+    SwiperItem,
+    XButton,
+    Divider,
+    Scroller
+  } from "vux";
+  import ScrollView from "views/components/simpleScrollView.vue";
+  import ListCell from "views/components/home/listCell.vue";
+  import TheatreApi from "api/theatreApi";
   import {mapState} from "vuex";
-  const imgList = [
-    require('assets/images/home/banner_default.jpg')
-  ]
+  const imgList = [require("assets/images/home/banner_default.jpg")];
   const banerList = imgList.map((one, index) => ({
-    url: 'javascript:',
+    url: "javascript:",
     img: one
   }));
-  const munuList = [{
-    name: '限时抢券',
-    pathName: 'FlashSale',
-    icon: require('assets/images/home/flash_sale.png')
-  },
+  const munuList = [
     {
-      name: '超级特价',
-      pathName: 'LocalProduct',
-      params: {classType: 102},
-      icon: require('assets/images/home/hemers.png')
+      name: "限时抢券",
+      pathName: "FlashSale",
+      icon: require("assets/images/home/flash_sale.png")
     },
     {
-      name: '福州特产馆',
-      pathName: 'LocalProduct',
+      name: "超级特价",
+      pathName: "LocalProduct",
+      params: {classType: 102},
+      icon: require("assets/images/home/hemers.png")
+    },
+    {
+      name: "福州特产馆",
+      pathName: "LocalProduct",
       params: {classType: 101},
-      icon: require('assets/images/home/local.png')
-    }];
+      icon: require("assets/images/home/local.png")
+    }
+  ];
   export default {
     components: {
       Scroller,
-      Swiper, ScrollView, ListCell
+      Swiper,
+      ScrollView,
+      ListCell
     },
-    data(){
+    data() {
       return {
         banerList: banerList,
         pullDownConfig: {
-          content: '下拉可以刷新',
+          content: "下拉可以刷新",
           pullUpHeight: 60,
           height: 40,
           autoRefresh: false,
-          downContent: '下拉可以刷新',
-          upContent: '松开立即刷新',
-          loadingContent: '加载中...',
-          clsPrefix: 'xxs-plugin-pullup-'
+          downContent: "下拉可以刷新",
+          upContent: "松开立即刷新",
+          loadingContent: "加载中...",
+          clsPrefix: "xxs-plugin-pullup-"
         },
         munuList: munuList,
         introduceList: [],
         stampsList: [],
-        findList: [],
-      }
+        findList: []
+      };
     },
     computed: {
-      ...mapState('common', ['userInfo'])
+      ...mapState("common", ["userInfo"])
     },
     methods: {
       goToMe(){
@@ -218,7 +226,7 @@
       },
       fetchData(){
 
-       
+
         // banner
         this.getBanner();
         // 介绍
@@ -234,6 +242,28 @@
           this.$refs.scroller.donePulldown()
         }, 1000)
 
+      },
+      fetchData() {
+        console.log(this.$route.query);
+        let recommendId = this.$route.query.recommendId
+          ? this.$route.query.recommendId
+          : "";
+        if (recommendId) {
+          this.$store.commit("common/setRecommendId", recommendId);
+        }
+        // banner
+        this.getBanner();
+        // 介绍
+        this.getIntroduce();
+        // 发现列表
+        this.getFind();
+        // 通兑券
+        this.getStamps();
+      },
+      refresh() {
+        setTimeout(() => {
+          this.$refs.scroller.donePulldown();
+        }, 1000);
       }
     }
   }
@@ -242,12 +272,15 @@
   @import "~style/base-variables.less";
   @import "~style/style.less";
   @import "~style/common.less";
+
   .box1 {
-  height:  205px;
-  padding-left:15px;
-  position: relative;
-  width: 550px;display:flex;
-}
+    height: 205px;
+    padding-left: 15px;
+    position: relative;
+    width: 550px;
+    display: flex;
+  }
+
   .homeOut {
     background: repeat;
     background-size: 68px 68px;
@@ -331,11 +364,11 @@
         bottom: 15px;
         right: 20px;
       }
-
     }
     .menuCell {
       height: 100px;
-      padding: 22px 30px 0px;
+      padding: 22px 0 0px;
+      margin: 0 30px;
       background: url(../../assets/images/home/menu_bg.png) no-repeat;
       background-size: 100% 100%;
 
