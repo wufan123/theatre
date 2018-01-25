@@ -66,7 +66,9 @@
         <label slot="rightTop" @click="$router.push('FindList')">更多</label>
 
         <div slot="main" style="padding-left: 15px" flex="main:justify">
-          <div flex="dir:top " v-for="(item,index) in findList.slice(0,2)" class="findItem">
+          <div flex="dir:top " v-for="(item,index) in findList.slice(0,2)" class="findItem"
+          >
+
             <!-- @click="$router.push({name:'IntroduceDetail',query:{name:'你印象最深的出警经历是什么？'}})" -->
             <router-link :to="item.redirectType? item.contentUrl:''">
               <div flex="dir:left" class="findContent">
