@@ -13,6 +13,11 @@
   export default {
     name: 'app',
     mounted() {
+       console.log(this.$route.query)
+        let recommendId = this.$util.getQueryString('recommendId')|| this.$route.query.recommendId
+        if(recommendId){
+          this.$store.commit('common/setRecommendId', recommendId)
+        }
       this.storePromotion();//必须在initWx前保存推广人信息
       this.initWx();
     },
