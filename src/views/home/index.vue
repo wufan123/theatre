@@ -192,9 +192,6 @@
                 data.contentUrl = `/HomePackageDetail?packageId=${data.redirectId}`;
                 break;
             }
-            if (!data.redirectType) {
-              data.contentUrl = 'www.baidu.com'
-            }
             return {
               url: data.contentUrl,
               img: data.thumbUrl
