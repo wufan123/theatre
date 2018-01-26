@@ -27,8 +27,13 @@
                          :disabled="item.stock"
                          @click.native="gotoCouponDetail(item)">
               <label class="leftTitle" slot="right">{{item.voucherName}}</label>
-              <label slot="right" v-if="item.status==3" class="is-tip">已使用</label>
-              <label slot="right" v-else class="is-tip">已过期</label>
+              <div slot="right">
+                <label v-if="item.status==1" class="is-tip">未销售</label>
+                <label v-else-if="item.status==2" class="is-tip">已销售</label>
+                <label v-else-if="item.status==3" class="is-tip">已使用</label>
+                <label v-else-if="item.status==5" class="is-tip">锁定</label>
+                <label v-else class="is-tip">已过期</label>
+              </div>
               <label class="leftInfo" slot="right">有效期 {{new Date(item.validData * 1000).format("yyyy-MM-dd")}}</label>
               <label class="rightTitle" slot="left">{{item._voucherValue}}</label>
             </coupon-item>
