@@ -213,6 +213,7 @@
       async getFind(){
         let res = await  TheatreApi.getInformationList(30);
         if (res) {
+          res.data.unshift({title:'测试',classType:20,thumbUrl:"http://p0bd8izdn.bkt.clouddn.com/ruihua/information/1516929720987"})
           this.findList = res.data.map((data) => {
             return this.$util.mapIntroduceData(data);
           })
