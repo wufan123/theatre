@@ -50,16 +50,18 @@
           this.$util.showRequestErro(e)
         }
         if (res && res.data) {
-          this.dataList = res.data;
-          res = {
-            data: res.data,
-            page: {
-              number: 0,
-              size: res.data.length,
-              totalElements: res.data.length,
-              totalPages: 1
-            }
+          if (page>1) {
+            this.dataList = this.dataList.concat(res.data);
+          } else {
+            this.dataList =res.data;
           }
+          res = {
+            data: this.dataList,
+            page: {
+              number: page,
+              totalElements: this.dataList.length
+            }
+          };
         }
         this.$vux.loading.hide();
         return res;
