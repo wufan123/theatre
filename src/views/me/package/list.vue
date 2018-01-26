@@ -2,7 +2,7 @@
   <page :headerTitle="`组合购`">
     <div slot="contain" class="package">
       <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown height='-46' :usePullup="false">
-        <div v-for="(itemp,index) in dataList" :key="index" v-if="itemp.price>0">
+        <div v-for="(itemp,index) in dataList" :key="index" >
           <div v-for="(item,indexp) in itemp.data" :key="indexp" class="ticket-card" @click="Detail(itemp)">
             <list twoLine :title="item.name">
               <list-item v-for="(itemc,indexc) in item.detail" :img="itemc.img" :key="indexc"
@@ -44,12 +44,16 @@
     methods: {
       async getDataList(page) {
         let res;
+        let arr=[]
         try {
           res = await orderApi.getPackageOrders()
         } catch (e) {
           this.$util.showRequestErro(e)
         }
         if (res && res.data) {
+          res.data=res.data.filter((item,index)=>{
+            return item.price>0
+          })
           if (page>1) {
             this.dataList = this.dataList.concat(res.data);
           } else {
