@@ -43,7 +43,6 @@
   import PageScroller from 'views/components/pageScroller.vue'
   import CouponItem from 'views/components/couponList/item.vue'
   import {XInput, XButton} from 'vux'
-  import {mapState} from "vuex";
   import CouponApi from 'api/couponApi'
   export default {
     components: {XInput, XButton, PageScroller, CouponItem},
@@ -56,9 +55,6 @@
         dataList: []
       }
     },
-  computed:{
-    ...mapState('common',['userInfo'])
-  },
     methods: {
       Scan(){
         var _this = this;
@@ -120,10 +116,7 @@
         this.$router.push({path: 'CouponDetail'});
       },
       fetchData(){
-        if(this.$util.isEmptyObject(this.userInfo)){
-          this.$router.go('FlashSale')
-          return;
-        }
+        
         this.$vux.loading.show();
         let ct =this;
         setTimeout(()=>{//优化体验，查看列表时超过3秒隐藏loading

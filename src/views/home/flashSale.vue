@@ -15,7 +15,7 @@
       </page-scroller>
     </div>
     <div slot="footer">
-      <div class="see-coupon" flex="cross:center main:center" @click="$router.push('CouponList')">
+      <div class="see-coupon" flex="cross:center main:center" @click="gotoCoupon">
         <img :src="require('assets/images/home/see_card.png')" class="see-coupon-img"></div>
     </div>
   </page>
@@ -37,6 +37,13 @@
       ...mapState('common', ['userInfo', 'openId'])
     },
     methods: {
+      gotoCoupon(){
+        if(this.$util.isEmptyObject(this.userInfo)){
+          this.$router.push('Login')
+          return;
+        }
+        this.$router.push('CouponList')
+      },
       getDataList(){
         return TheatreApi.getPackageList(202).then(success => {
             this.dataList = success.data;
