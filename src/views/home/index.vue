@@ -7,7 +7,7 @@
         <!-- <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('FindList')"> -->
       </div>
     </div>
-    <scroller lock-x scrollbar-y >
+    <scroller lock-x scrollbar-y style="border:1px solid red" >
     <div flex-box="1" class="scroll">
 
       <!--广告-->
@@ -38,6 +38,7 @@
                   </div>
                   <div class="bottomBorder"></div>
                   <label class='contentTxt text-ellipsis-line'>{{item.title}}</label>
+                  
                 </router-link>
               </div>
             </div>
@@ -84,12 +85,12 @@
               </div>
               <div class="bottomBorder"></div>
               <label class='contentTxt'>{{item.title}}</label>
+              <div style="height:20px;"></div>
             </router-link>
           </div>
 
         </div>
       </list-cell>
-      <div style="height:30px;"></div>
     </div>
     </scroller>
 
