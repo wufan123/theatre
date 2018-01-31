@@ -7,7 +7,7 @@
         <!-- <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('FindList')"> -->
       </div>
     </div>
-    <scroller height="-10" lock-x scrollbar-y >
+    <scroller lock-x scrollbar-y >
     <div flex-box="1" class="scroll">
 
       <!--广告-->
@@ -89,7 +89,7 @@
 
         </div>
       </list-cell>
-      <div style="height:20px;"></div>
+      <div style="height:30px;"></div>
     </div>
     </scroller>
 
@@ -310,6 +310,7 @@
         width: 160px;
         height: 160px;
       }
+      .contentTxt{margin-top: 10px;}
     }
     .bottomBorder {
       background: @color-primary;
