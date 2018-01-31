@@ -72,6 +72,7 @@
 
 <style lang="less">
   @import "~style/base-variables.less";
+  .bottomBtn {position: relative!important;}
   .page {
     display: flex;overflow: hidden;justify-content:space-between;
     flex-direction: column;background-image: url(../../assets/images/page_bg.png);background-size:68px 68px;background-repeat:repeat;
@@ -86,6 +87,7 @@
   }
 
   .footer {
+    
     .btn{
       width: 100%;height: 42px;
     }

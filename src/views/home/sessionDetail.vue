@@ -35,7 +35,7 @@
       </div>
     </page>
     <popup v-model="show" position="bottom">
-      <div class="popBottom" flex="dir:top">
+      <div class="popBottom" flex="dir:top" :style="$util.isIphoneX()?{'margin-bottom':'14px'}:{}" >
         <div flex="dir:top" class="body">
           <label class="title">时间</label>
           <scroll-view slot="main">
