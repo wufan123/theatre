@@ -89,6 +89,7 @@
 
         </div>
       </list-cell>
+      <div style="height:10px;"></div>
     </div>
     </scroller>
 
