@@ -7,7 +7,7 @@
         <!-- <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('FindList')"> -->
       </div>
     </div>
-    <scroller height="-80" lock-x scrollbar-y >
+    <scroller height="-10" lock-x scrollbar-y >
     <div flex-box="1" class="scroll">
 
       <!--广告-->
