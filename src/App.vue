@@ -19,7 +19,7 @@
           this.$store.commit('common/setRecommendId', recommendId)
         }
       this.storePromotion();//必须在initWx前保存推广人信息
-    //  this.initWx();
+     this.initWx();
     },
     computed: {
       ...mapState('common', ['openId', 'userInfo'])
