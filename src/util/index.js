@@ -10,6 +10,10 @@ export function getQueryString(name) {
   return null;
 }
 
+export function isIphoneX(){
+  return /iphone/gi.test(navigator.userAgent) && (screen.height == 812 && screen.width == 375)
+}
+
 export function mapIntroduceData(data) {
   data.contentUrl = `/IntroduceDetail?contentUrl=${data.contentUrl}&title=${data.title}&redirectType=${data.redirectType}&redirectId=${data.redirectId}`;
   return data;
