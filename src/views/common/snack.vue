@@ -2,8 +2,9 @@
   <div>
     <page :headerTitle="`来点小吃`" flex-box="1" :white="true">
       <div slot="contain">
+
         <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown
-                       height='-48'>
+                       height='-100'>
           <good-item v-for="(item,index) in dataList" :key="item.goodsId" :goodsName="item.goodsName"
                      :channelFee="item.price" :goodsCoverImage="item.goodsImg" class="snackItem">
 
@@ -15,8 +16,12 @@
           </good-item>
         </page-scroller>
       </div>
+         <div slot="footer">
+            <x-button  class="no-radius bottomBtn" type="primary" :style="$util.isIphoneX()?{'margin-bottom':'14px'}:{}"  @click.native="createOrder">{{bottomTitle}}</x-button>
+          </div>
     </page>
-    <x-button class="no-radius bottomBtn" type="primary" @click.native="createOrder">{{bottomTitle}}</x-button>
+ 
+    
   </div>
 </template>
 <script>

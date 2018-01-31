@@ -35,7 +35,7 @@
       </div>
     </page>
     <popup v-model="show" position="bottom">
-      <div class="popBottom" flex="dir:top">
+      <div class="popBottom" flex="dir:top" :style="$util.isIphoneX()?{'margin-bottom':'14px'}:{}" >
         <div flex="dir:top" class="body">
           <label class="title">时间</label>
           <scroll-view slot="main">
@@ -217,7 +217,7 @@ export default {
     // 加载座位信息
     loadSeat: function(featureAppNo) {
       this.$vux.loading.show({
-        text: "加载座位"
+        text: "加载中"
       });
       FilmApi.getSeat(featureAppNo).then(
         success => {
@@ -228,7 +228,7 @@ export default {
           }
         },
         error => {
-          this.toastLoadFilmError("座位加载失败");
+          this.toastLoadFilmError("加载失败");
         }
       );
     },
@@ -267,7 +267,7 @@ export default {
       if (!this.seatList || this.seatList.length == 0) {
         this.$vux.toast.show({
           type: "cancel",
-          text: "座位加载失败"
+          text: "加载失败"
         });
         return;
       }

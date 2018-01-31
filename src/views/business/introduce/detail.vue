@@ -10,7 +10,7 @@
         </div>
         <div flex-box="0" class="center">
             <router-link :to="url">
-              <img v-if="$route.query.redirectType>3"  class="goToBuy" :src='require("assets/images/go_to_buy.png")'>
+              <img v-if="$route.query.redirectType>3"  :style="$util.isIphoneX()?{'margin-bottom':'14px'}:{}"  class="goToBuy" :src='require("assets/images/go_to_buy.png")'>
             </router-link>
         </div>
     </div>

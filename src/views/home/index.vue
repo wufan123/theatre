@@ -7,7 +7,7 @@
         <!-- <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('FindList')"> -->
       </div>
     </div>
-    <!--<scroller height="-40" lock-x scrollbar-y :pulldown-config='pullDownConfig' :usePulldown='true' @on-pulldown-loading='refresh' ref="scroller">-->
+    <scroller lock-x scrollbar-y>
     <div flex-box="1" class="scroll">
 
       <!--广告-->
@@ -21,7 +21,7 @@
         </div>
       </div>
       <!--介绍-->
-      <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')"
+       <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')"
                  v-show="introduceList&&introduceList.length>0">
         <label slot="rightTop" @click="$router.push('IntroduceList')">更多</label>
         <div slot="main">
@@ -38,12 +38,13 @@
                   </div>
                   <div class="bottomBorder"></div>
                   <label class='contentTxt text-ellipsis-line'>{{item.title}}</label>
+                  
                 </router-link>
               </div>
             </div>
           </scroller>
         </div>
-      </list-cell>
+      </list-cell> 
       <!--场次票-->
       <list-cell :topImg="require('assets/images/home/title_session.png')">
         <div slot="main" class="center">
@@ -69,7 +70,7 @@
       <list-cell :topImg="require('assets/images/home/title_stamps.png')" v-show="findList&&findList.length>0">
         <label slot="rightTop" @click="$router.push('FindList')">更多</label>
 
-        <div slot="main" style="padding-left: 15px" flex="main:justify">
+        <div slot="main" style="padding-left: 15px;padding-right: 15px" flex="main:justify">
           <div flex="dir:top " v-for="(item,index) in findList.slice(0,2)" class="findItem"
           >
 
@@ -84,13 +85,14 @@
               </div>
               <div class="bottomBorder"></div>
               <label class='contentTxt'>{{item.title}}</label>
+              <div style="height:20px;"></div>
             </router-link>
           </div>
 
         </div>
       </list-cell>
     </div>
-    <!--</scroller>-->
+    </scroller>
 
   </div>
 </template>
@@ -309,6 +311,7 @@
         width: 160px;
         height: 160px;
       }
+      .contentTxt{margin-top: 10px;}
     }
     .bottomBorder {
       background: @color-primary;
