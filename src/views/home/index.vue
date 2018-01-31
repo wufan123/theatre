@@ -7,7 +7,7 @@
         <!-- <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('FindList')"> -->
       </div>
     </div>
-    <scroller height="-50" lock-x scrollbar-y >
+    <scroller height="-80" lock-x scrollbar-y >
     <div flex-box="1" class="scroll">
 
       <!--广告-->
@@ -89,7 +89,7 @@
 
         </div>
       </list-cell>
-      <div style="height:10px;"></div>
+      <div style="height:20px;"></div>
     </div>
     </scroller>
 
