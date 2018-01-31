@@ -7,7 +7,7 @@
         <!-- <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('FindList')"> -->
       </div>
     </div>
-    <scroller lock-x scrollbar-y style="border:1px solid red" >
+    <scroller lock-x scrollbar-y>
     <div flex-box="1" class="scroll">
 
       <!--广告-->
@@ -70,7 +70,7 @@
       <list-cell :topImg="require('assets/images/home/title_stamps.png')" v-show="findList&&findList.length>0">
         <label slot="rightTop" @click="$router.push('FindList')">更多</label>
 
-        <div slot="main" style="padding-left: 15px" flex="main:justify">
+        <div slot="main" style="padding-left: 15px;padding-right: 15px" flex="main:justify">
           <div flex="dir:top " v-for="(item,index) in findList.slice(0,2)" class="findItem"
           >
 
