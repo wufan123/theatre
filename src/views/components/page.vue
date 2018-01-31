@@ -10,7 +10,8 @@
       <slot name="contain"></slot>
     </div>
     <div class="footer">
-      <x-button v-if="footerText"  type="primary no-radius" action-type="button" @click.native="onClick">{{footerText}} </x-button>
+      <x-button v-if="footerText"  type="primary no-radius" :style="$util.isIphoneX()?{'margin-bottom':'14px'}:{}" 
+      action-type="button" @click.native="onClick">{{footerText}} </x-button>
       <slot name="footer"></slot>
     </div>
   </div>

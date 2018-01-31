@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    {{`是不是iphoneX：${$util.isIphoneX()}`}}
     <router-view></router-view>
   </div>
 </template>
