@@ -7,7 +7,7 @@
         <!-- <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('FindList')"> -->
       </div>
     </div>
-    <!--<scroller height="-40" lock-x scrollbar-y :pulldown-config='pullDownConfig' :usePulldown='true' @on-pulldown-loading='refresh' ref="scroller">-->
+    <scroller height="-50" lock-x scrollbar-y >
     <div flex-box="1" class="scroll">
 
       <!--广告-->
@@ -21,7 +21,7 @@
         </div>
       </div>
       <!--介绍-->
-      <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')"
+       <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')"
                  v-show="introduceList&&introduceList.length>0">
         <label slot="rightTop" @click="$router.push('IntroduceList')">更多</label>
         <div slot="main">
@@ -43,7 +43,7 @@
             </div>
           </scroller>
         </div>
-      </list-cell>
+      </list-cell> 
       <!--场次票-->
       <list-cell :topImg="require('assets/images/home/title_session.png')">
         <div slot="main" class="center">
@@ -90,7 +90,7 @@
         </div>
       </list-cell>
     </div>
-    <!--</scroller>-->
+    </scroller>
 
   </div>
 </template>
