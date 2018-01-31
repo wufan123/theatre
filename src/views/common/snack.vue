@@ -16,7 +16,7 @@
         </page-scroller>
       </div>
     </page>
-    <x-button class="no-radius bottomBtn" type="primary" @click.native="createOrder">{{bottomTitle}}</x-button>
+    <x-button class="no-radius bottomBtn" type="primary" :style="$util.isIphoneX()?{'margin-bottom':'14px'}:{}"  @click.native="createOrder">{{bottomTitle}}</x-button>
   </div>
 </template>
 <script>

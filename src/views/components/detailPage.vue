@@ -23,7 +23,7 @@
           </div>
         </div>
       </div>
-      <x-button class="no-radius bottomBtn" type="primary"  @click.native="click">马上购买</x-button>
+      <x-button class="no-radius bottomBtn" type="primary"  :style="$util.isIphoneX()?{'margin-bottom':'14px'}:{}"   @click.native="click">马上购买</x-button>
     </div>
   </page>
 </template>
