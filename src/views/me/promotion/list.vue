@@ -19,7 +19,7 @@
           <i class="icon next" @click="nextDate">></i> -->
         </div>
       </div>
-      <page-scroller :api='getDataList' ref='scroller' :initQuery="false" noRecordText='当前无数据' noRecordImage usePulldown height='-220'>
+      <page-scroller :api='getDataList' ref='scroller' :initQuery="false" noRecordText='当前无数据' noRecordImage usePulldown height='-128'>
         <div  class="promotion-list">
           <list title="" v-for="(item,index) in dataList"  :key="index">
             <list-item  extra=" "  @click="orderDetail(item)">
@@ -137,6 +137,7 @@
 <style lang="less">
 @import "~style/base-variables";
   .promotion{
+    .no-record{height: 350px!important;}
     .me-top{display: flex;flex-direction: column;align-items: center; font-size: 13px;text-align: center;padding:20px 0;line-height: 30px;background-image:url('../../../assets/images/me/top_bg.jpg');background-size: 100% 100%;background-repeat: no-repeat;
       .advert{position: relative;border-radius: 50%;width: 70px;height: 70px;
         i.level{position: absolute;right:0px;top: 0px;border-radius: 50%;width: 20px;height:20px;font-size: 10px;background: #ccc;}
@@ -145,17 +146,19 @@
     }
     .time{padding: 10px 10px ;justify-content: flex-end;
       .select-data{display: flex;align-items: center;justify-content: center;
+      .vux-datetime{    padding: 0 10px; font-size: 16px;line-height: 25px;}
+      .vux-cell-value{color: black;position: relative;top: 0;}
       i.icon{
       display: block;
       padding:0 10px;
       width: 12px;
-      height: 12px;
+      height: 18px;
       overflow: hidden;
       &:before{
         content: "";
         display: block;
-        width: 6px;
-        height: 6px;
+        width: 12px;
+        height: 12px;
         margin-left: 0;
         border: 2px solid #c6ac88;
         border-top: 0 none;

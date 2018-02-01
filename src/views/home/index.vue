@@ -20,8 +20,29 @@
           <label>{{item.name}}</label>
         </div>
       </div>
+
+      <div class="go-buy yyx">
+        <div class="detail">
+          <span class="title-img"></span>
+          <p class="f13">《三坊七巷》</p>
+          <p class="f11">中瑞剧坊-方向文化影音秀</p>
+          <img class="btn" @click="$router.push('sessionDetail')" >
+        </div>
+      </div>
+
+      <div class="go-buy zhq">
+        <div class="detail">
+          <span class="title-img"></span>
+          <p class="f13 red">票券一张+鱼丸礼品券</p>
+          <p class="f11">中瑞剧坊-三坊七巷组合券</p>
+          <img class="btn" @click="$router.push({path:'HomePackageList'})" >
+        </div>
+      </div>
+
+
+
       <!--介绍-->
-       <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')"
+       <!-- <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')"
                  v-show="introduceList&&introduceList.length>0">
         <label slot="rightTop" @click="$router.push('IntroduceList')">更多</label>
         <div slot="main">
@@ -44,21 +65,21 @@
             </div>
           </scroller>
         </div>
-      </list-cell> 
+      </list-cell>  -->
       <!--场次票-->
-      <list-cell :topImg="require('assets/images/home/title_session.png')">
+      <!-- <list-cell :topImg="require('assets/images/home/title_session.png')">
         <div slot="main" class="center">
           <img :src="require('assets/images/home/home_ccp.jpg')" @click="$router.push('sessionDetail')"
                class="home-cell-img">
         </div>
-      </list-cell>
+      </list-cell> -->
       <!--组合券-->
-      <list-cell :topImg="require('assets/images/home/title_zhq.png')">
+      <!-- <list-cell :topImg="require('assets/images/home/title_zhq.png')">
         <div slot="main" class="center">
           <img :src="require('assets/images/home/home_zhg.jpg')" @click="$router.push({path:'HomePackageList'})"
                class="home-cell-img">
         </div>
-      </list-cell>
+      </list-cell> -->
       <!--兑换票券-->
       <div flex="dir:left main:center">
         <router-link to="/SessionDetail">
@@ -115,23 +136,22 @@
     img: one
   }));
   const munuList = [
-    {
-      name: "限时抢券",
-      pathName: "FlashSale",
-      icon: require("assets/images/home/flash_sale.png")
-    },
-    {
-      name: "超级特价",
-      pathName: "LocalProduct",
-      params: {classType: 102},
-      icon: require("assets/images/home/hemers.png")
-    },
+    
     {
       name: "福州特产馆",
       pathName: "LocalProduct",
       params: {classType: 101},
       icon: require("assets/images/home/local.png")
-    }
+    },{
+      name: "智咖入口",
+      pathName: "LocalProduct",
+      params: {classType: 102},
+      icon: require("assets/images/home/zkrk.png")
+    },{
+      name: "限时抢券",
+      pathName: "FlashSale",
+      icon: require("assets/images/home/flash_sale.png")
+    },
   ];
   export default {
     components: {
@@ -302,6 +322,21 @@
         padding: 9px 10px;
         margin-right: 10px;
         margin-left: 20px;
+      }
+    }
+    .go-buy{height: 225px; background-position: left;  display: flex; 
+      .detail{width: 140px; display: flex; flex-direction: column;justify-content: center;
+        span{margin-bottom: 10px;height: 41px;}
+        img{width: 114px;height:25px;margin-top: 10px;cursor: pointer;}
+        .btn{width: 114px;height: 25px;}
+      }
+      &.yyx{margin: 10px 25px 10px 0px;justify-content: flex-end;background:url('../../assets/images/home/yyx_img.png') no-repeat;background-size:345px 225px;
+        .detail span{background:url('../../assets/images/home/yyx_title.png') no-repeat;background-size:101px 41px;}
+        .detail .btn{background: url('../../assets/images/home/go_buy_btn.png') no-repeat;background-size:114px 25px;}
+      }
+      &.zhq{margin: 10px 0px 10px 25px;justify-content: flex-start;background:url('../../assets/images/home/zhq_img.png') no-repeat;background-size:345px 225px;
+        .detail span{background:url('../../assets/images/home/zhq_title.png') no-repeat;background-size:101px 41px;}
+        .detail .btn{background: url('../../assets/images/home/thzh_btn.png') no-repeat;background-size:114px 25px;}
       }
     }
     .findItem {
