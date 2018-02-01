@@ -9,11 +9,15 @@
     </div>
     <scroller lock-x scrollbar-y>
     <div flex-box="1" class="scroll">
-
+      <div class="tip" v-if="tip.title">
+        <marquee direction="left" behavior="scroll" scrollamount="6" scrolldelay="0" loop="-1" hspace="10" vspace="10">{{tip.title}}</marquee>
+      </div>
+      
       <!--广告-->
       <swiper :list="banerList" auto height="251px" dots-class="custom-bottom" dots-position="center"></swiper>
       <!--菜单-->
       <div flex="dir:left main:justify cross:center" class="menuCell">
+        <p class="top-bg"></p>
         <div flex="dir:top main:center cross:center" v-for="(item,index) in munuList"
              @click="$router.push({ path:item.pathName, query:item.params})">
           <img :src="item.icon" flex="main:center cross:center" class="menuItem"/>
@@ -33,8 +37,8 @@
       <div class="go-buy zhq">
         <div class="detail">
           <span class="title-img"></span>
-          <p class="f13 red">票券一张+鱼丸礼品券</p>
-          <p class="f11">中瑞剧坊-三坊七巷组合券</p>
+          <!-- <p class="f13 red">票券一张+鱼丸礼品券</p>
+          <p class="f11">中瑞剧坊-三坊七巷组合券</p> -->
           <img class="btn" @click="$router.push({path:'HomePackageList'})" >
         </div>
       </div>
@@ -163,16 +167,7 @@
     data() {
       return {
         banerList: banerList,
-        pullDownConfig: {
-          content: "下拉可以刷新",
-          pullUpHeight: 60,
-          height: 40,
-          autoRefresh: false,
-          downContent: "下拉可以刷新",
-          upContent: "松开立即刷新",
-          loadingContent: "加载中...",
-          clsPrefix: "xxs-plugin-pullup-"
-        },
+        tip:{},
         munuList: munuList,
         introduceList: [],
         stampsList: [],
@@ -192,11 +187,8 @@
           this.$router.push('Login')
         }
       },
-      async getBanner(){
-        let res = await TheatreApi.getInformationList(10);
-        if (res) {
-
-          this.banerList = res.data.map((data) => {
+      contentUrl(arr){
+        return arr.map((data) => {
             switch (parseInt(data.redirectType)) {
               case 1:
               case 2:
@@ -215,10 +207,24 @@
                 break;
             }
             return {
+              title:data.title,
               url: data.contentUrl,
               img: data.thumbUrl
             }
           })
+      },
+      async geTip(){
+        let res = await TheatreApi.getInformationList(40);
+        if (res) {
+           console.log('tip0',res.data)
+          this.tip = this.contentUrl(res.data)[0]
+          console.log('tip',this.tip)
+        }
+      },
+      async getBanner(){
+        let res = await TheatreApi.getInformationList(10);
+        if (res) {
+          this.banerList = this.contentUrl(res.data)
         }
       },
       async getIntroduce(){
@@ -243,19 +249,6 @@
           this.stampsList = res.data;
         }
       },
-      fetchData(){
-
-
-        // banner
-        this.getBanner();
-        // 介绍
-        this.getIntroduce();
-        // 发现列表
-        this.getFind();
-        // 通兑券
-        this.getStamps();
-
-      },
       refresh(){
         setTimeout(() => {
           this.$refs.scroller.donePulldown()
@@ -270,6 +263,7 @@
         if (recommendId) {
           this.$store.commit("common/setRecommendId", recommendId);
         }
+        this.geTip()
         // banner
         this.getBanner();
         // 介绍
@@ -339,6 +333,8 @@
         .detail .btn{background: url('../../assets/images/home/thzh_btn.png') no-repeat;background-size:114px 25px;}
       }
     }
+    .tip{height: 30px;background: url('../../assets/images/home/tip_bg.jpg') no-repeat;background-size:100% 30px;display: flex;justify-content: center;align-items: center;color: #ffffff;
+      padding: 0 0 0 40px;}
     .findItem {
       width: 165px;
       text-align: center;
@@ -402,11 +398,14 @@
     }
     .menuCell {
       height: 100px;
-      padding: 22px 0 0px;
-      margin: 0 30px;
+      padding:30px 0px 0px;
+      margin: 0 0px;
+      position: relative;justify-content: space-around;
       background: url(../../assets/images/home/menu_bg.png) no-repeat;
       background-size: 100% 100%;
-
+      .top-bg{background: url(../../assets/images/home/home_wy_bg.png) repeat-x;width: 100%;
+        background-size: 15px 18px;height: 18px;position: absolute;top: 0;z-index: 1;
+      }
       label {
         text-align: center;
         width: 70px;
