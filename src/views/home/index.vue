@@ -10,7 +10,9 @@
     <scroller lock-x scrollbar-y>
     <div flex-box="1" class="scroll">
       <div class="tip" v-if="tip.title">
-        <marquee direction="left" behavior="scroll" scrollamount="6" scrolldelay="0" loop="-1" hspace="10" vspace="10">{{tip.title}}</marquee>
+        <marquee direction="left" behavior="scroll" scrollamount="6" scrolldelay="0" loop="-1" hspace="10" vspace="10">
+          <router-link :to="tip.url">{{tip.title}}</router-link>
+        </marquee>
       </div>
       
       <!--广告-->
@@ -25,6 +27,14 @@
         </div>
       </div>
 
+       <div class="go-buy yyx">
+        <div class="detail">
+          <span class="title-img"></span>
+          <p class="f13">《三坊七巷》</p>
+          <p class="f11">中瑞剧坊-方向文化影音秀</p>
+          <img class="btn" @click="$router.push('sessionDetail')" >
+        </div>
+      </div>
 
       <div class="go-buy zhq">
         <div class="detail">
@@ -34,20 +44,7 @@
           <img class="btn" @click="$router.push({path:'HomePackageList'})" >
         </div>
       </div>
-
-      <div class="go-buy yyx">
-        <div class="detail">
-          <span class="title-img"></span>
-          <p class="f13">《三坊七巷》</p>
-          <p class="f11">中瑞剧坊-方向文化影音秀</p>
-          <img class="btn" @click="$router.push('sessionDetail')" >
-        </div>
-      </div>
-
       
-
-
-
       <!--介绍-->
        <!-- <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')"
                  v-show="introduceList&&introduceList.length>0">
@@ -145,11 +142,11 @@
   const munuList = [
     {
       name: "马上购票",
-      pathName: "FlashSale",
-      icon: require("assets/images/home/flash_sale.png")
+      pathName: "sessionDetail",
+      icon: require("assets/images/home/flash_buy.png")
     },
     {
-      name: "3D科技",
+      name: "3D咖啡",
       pathName: "LocalProduct",
       params: {classType: 102},
       icon: require("assets/images/home/zkrk.png")
@@ -220,9 +217,8 @@
       async geTip(){
         let res = await TheatreApi.getInformationList(40);
         if (res) {
-           console.log('tip0',res.data)
           this.tip = this.contentUrl(res.data)[0]
-          console.log('tip',this.tip)
+          console.log('this.tip',this.tip)
         }
       },
       async getBanner(){
@@ -337,8 +333,9 @@
         .detail .btn{background: url('../../assets/images/home/thzh_btn.png') no-repeat;background-size:114px 25px;}
       }
     }
-    .tip{height: 30px;background: url('../../assets/images/home/tip_bg.jpg') no-repeat;background-size:100% 30px;display: flex;justify-content: center;align-items: center;color: #ffffff;
-      padding: 0 0 0 40px;}
+    .tip{height: 30px;background: url('../../assets/images/home/tip_bg.jpg') no-repeat;background-size:100% 30px;display: flex;justify-content: center;align-items: center;
+      padding: 0 0 0 40px;
+      a{color: #ffffff;}}
     .findItem {
       width: 165px;
       text-align: center;
