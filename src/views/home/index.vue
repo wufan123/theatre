@@ -14,7 +14,7 @@
       </div>
       
       <!--广告-->
-      <swiper :list="banerList" auto height="251px" dots-class="custom-bottom" dots-position="center"></swiper>
+      <swiper :list="banerList" auto height="175px" dots-class="custom-bottom" dots-position="center"></swiper>
       <!--菜单-->
       <div flex="dir:left main:justify cross:center" class="menuCell">
         <p class="top-bg"></p>
@@ -22,6 +22,16 @@
              @click="$router.push({ path:item.pathName, query:item.params})">
           <img :src="item.icon" flex="main:center cross:center" class="menuItem"/>
           <label>{{item.name}}</label>
+        </div>
+      </div>
+
+
+      <div class="go-buy zhq">
+        <div class="detail">
+          <span class="title-img"></span>
+          <!-- <p class="f13 red">票券一张+鱼丸礼品券</p>
+          <p class="f11">中瑞剧坊-三坊七巷组合券</p> -->
+          <img class="btn" @click="$router.push({path:'HomePackageList'})" >
         </div>
       </div>
 
@@ -34,14 +44,7 @@
         </div>
       </div>
 
-      <div class="go-buy zhq">
-        <div class="detail">
-          <span class="title-img"></span>
-          <!-- <p class="f13 red">票券一张+鱼丸礼品券</p>
-          <p class="f11">中瑞剧坊-三坊七巷组合券</p> -->
-          <img class="btn" @click="$router.push({path:'HomePackageList'})" >
-        </div>
-      </div>
+      
 
 
 
@@ -140,22 +143,23 @@
     img: one
   }));
   const munuList = [
-    
     {
-      name: "福州特产馆",
-      pathName: "LocalProduct",
-      params: {classType: 101},
-      icon: require("assets/images/home/local.png")
-    },{
-      name: "智咖入口",
-      pathName: "LocalProduct",
-      params: {classType: 102},
-      icon: require("assets/images/home/zkrk.png")
-    },{
-      name: "限时抢券",
+      name: "马上购票",
       pathName: "FlashSale",
       icon: require("assets/images/home/flash_sale.png")
     },
+    {
+      name: "3D科技",
+      pathName: "LocalProduct",
+      params: {classType: 102},
+      icon: require("assets/images/home/zkrk.png")
+    },
+    {
+      name: "福州特产",
+      pathName: "LocalProduct",
+      params: {classType: 101},
+      icon: require("assets/images/home/local.png")
+    }
   ];
   export default {
     components: {

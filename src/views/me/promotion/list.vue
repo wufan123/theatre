@@ -6,7 +6,7 @@
           <i class="level" flex="main:center cross:center">V1</i>
           <img :src="require('assets/images/me/advert.png')">
         </div>
-        <span class="bold f16">{{userInfo.userNickname}}</span>
+        <span class="bold f16">{{merchantInfo.name}}({{merchantInfo.phone}})</span>
       </div>
       <div class="time" flex="main:justify cross:center">
         <!-- <label>本月</label> -->
@@ -49,6 +49,7 @@
         dataList: [],
         value1:'2018-01',
         curDateTime:'2018-01',
+        merchantInfo:{}
       };
     },
     computed:{
@@ -86,10 +87,18 @@
       confirmDate(){
         this.getDataList(1)
       },
+      getMerchantDetail(phone){
+        phone = '15880096691'
+        return theatreApi.merchantDetail(phone).then(res=>{
+          console.log('res',res)
+          if(res.status==0)  this.merchantInfo = res.data
+        })
+      },
       getUserInfo(){
         return AuthApi.getUserInfo().then(success => {
           this.$store.commit('common/setUserInfo', success.data)
           this.$set(this.userInfo,success.data);
+          
           this.getDataList(1)
         }, error => {})
       },
@@ -122,6 +131,7 @@
         this.$router.push({name: 'TicketDetail', query: {id: order.orderCode, status: order.status}})
       },
       fetchData() {
+        this.getMerchantDetail(this.userInfo.bindmobile)
         this.curDateTime = new Date().format('yyyy-MM')
         this.getUserInfo()
         this.$vux.loading.show();

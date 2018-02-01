@@ -72,6 +72,12 @@ function getPromotionList(promoter,startSuccessTime,endSuccessTime) {
     })
 }
 
+function merchantDetail(phone){
+    return apiHttp.getTheatre('/merchant/detail',{
+        phone:phone
+    })
+}
+
 export default {
     getClassList: getClassList,
     getGoodsList: getGoodsList,
@@ -80,5 +86,6 @@ export default {
     getMiscConfig: getMiscConfig,
     scanCode,
     finishPromotion,
-    getPromotionList
+    getPromotionList,
+    merchantDetail:merchantDetail
 }
