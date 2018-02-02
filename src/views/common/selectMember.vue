@@ -1,6 +1,6 @@
 <template>
   <page headerTitle="选择会员卡">
-    <div slot="contain" v-for="(item,index) in list" class="card-item">
+    <div slot="contain" v-for="(item,index) in memberList" class="card-item">
       <div flex="dir:top" class="info">
         <label class="title text-ellipsis-line">{{item.accLevelName + item.cardId}}</label>
         <div class="sum" flex="dir:left">
@@ -28,7 +28,7 @@
       }
     },
     computed: {
-      ...mapState('business', ['selectedMember'])
+      ...mapState('business', ['selectedMember','memberList'])
     },
     methods: {
       selectMember(item){

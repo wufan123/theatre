@@ -342,8 +342,8 @@
       }
     }
     .tip{height: 30px;background: url('../../assets/images/home/tip_bg.jpg') no-repeat;background-size:100% 30px;display: flex;justify-content: center;align-items: center;
-      padding: 0 0PX 0 10px;
-      .marquee{display: block;border: 1px solid blue;width: 100%;flex: 1;}
+      padding: 0 10PX 0 40px;
+      .marquee{display: block;width: 100%;flex: 1;}
       a{color: #ffffff;}}
     .findItem {
       width: 165px;

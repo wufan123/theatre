@@ -44,8 +44,8 @@
         </div>
         <div class="c-info" v-if="memberCardList.length>0">
           <list>
-            <list-item :content="`会员卡`" :extra="useCard?useCard.cardId:'未选择'" isLink
-                       @click.native="$router.push({name:'SelectMember',params:{ list:orderPayWay.memberCard }})"></list-item>
+            <list-item :content="`会员卡`" :extra="isUseCard?useCard.cardId:'未选择'" isLink
+                       @click.native="selectMember"></list-item>
           </list>
         </div>
         <div class="price">
@@ -114,6 +114,10 @@
       ...mapState('common', ['promotion', 'userInfo'])
     },
     methods: {
+      selectMember(){
+        this.$router.push('SelectMember')
+        this.$store.commit('business/setMemberList',this.orderPayWay.memberCard)
+      },
       async fetchData(){
         this.goodsCouponLists = this.goodsCouponList
         this.filmCouponList = this.ticketCouponList

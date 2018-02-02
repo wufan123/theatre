@@ -2,6 +2,7 @@ export default {
     namespaced: true,
     state: {
         payLockInfo:{},
+        memberList:[],
         selectedMember:{},
         selectPackageOrder:{},
         selectTicketOrder:{}
@@ -9,6 +10,9 @@ export default {
     mutations: {
         setPayLockInfo(state,info){
           state.payLockInfo =info ;
+        },
+        setMemberList(state,list){
+          state.memberList = list
         },
         setSelectedMember(state,member){
           state.selectedMember =member ;
