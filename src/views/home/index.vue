@@ -11,7 +11,7 @@
     <div flex-box="1" class="scroll">
       <div class="tip" v-if="tip.title">
         <marquee direction="left" behavior="scroll" scrollamount="6" scrolldelay="0" loop="-1" hspace="10" vspace="10">
-          <router-link :to="tip.url">{{tip.title}}</router-link>
+          <router-link :to="tip.click? tip.url:''">{{tip.title}}</router-link>
         </marquee>
       </div>
       
@@ -26,13 +26,13 @@
           <label>{{item.name}}</label>
         </div>
       </div>
-
+      
        <div class="go-buy yyx">
         <div class="detail">
           <span class="title-img"></span>
           <p class="f13">《三坊七巷》</p>
           <p class="f11">中瑞剧坊-方向文化影音秀</p>
-          <img class="btn" @click="$router.push('sessionDetail')" >
+          <img class="btn" @click="$router.push('SessionDetail')" >
         </div>
       </div>
 
@@ -86,7 +86,7 @@
       </list-cell> -->
       <!--兑换票券-->
       <div flex="dir:left main:center">
-        <router-link to="/SessionDetail">
+        <router-link to="SessionDetail">
           <img :src="require('assets/images/home/convert.png')" class="convert">
         </router-link>
       </div>
@@ -142,7 +142,7 @@
   const munuList = [
     {
       name: "马上购票",
-      pathName: "sessionDetail",
+      pathName: "SessionDetail",
       icon: require("assets/images/home/flash_buy.png")
     },
     {
@@ -183,7 +183,6 @@
         console.log('this.userInfo', this.userInfo.userId)
         if (this.userInfo.userId) {
           this.$router.push('Me')
-
         } else {
           this.$router.push('Login')
         }
@@ -210,7 +209,8 @@
             return {
               title:data.title,
               url: data.contentUrl,
-              img: data.thumbUrl
+              img: data.thumbUrl,
+              click:data.click
             }
           })
       },
