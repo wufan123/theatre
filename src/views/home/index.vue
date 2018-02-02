@@ -10,7 +10,7 @@
     <scroller lock-x scrollbar-y usePulldown @on-pulldown-loading="refresh" ref="scroller" :pulldown-config='pullDownConfig'>
     <div flex-box="1" class="scroll"> 
       <div class="tip" v-if="tip.titleName">
-        <marquee direction="left" behavior="scroll" scrollamount="3" scrolldelay="0" loop="-1" hspace="10" vspace="10">
+        <marquee direction="left" behavior="scroll" scrollamount="1" scrolldelay="0" loop="-1" hspace="10" vspace="10">
           <router-link :to="tip.click? tip.url:''">{{tip.titleName}}</router-link>
         </marquee>
       </div>
@@ -413,7 +413,7 @@
       background: url(../../assets/images/home/menu_bg.png) no-repeat;
       background-size: 100% 100%;
       .top-bg{background: url(../../assets/images/home/home_wy_bg.png) repeat-x;width: 100%;
-        background-size: 15px 18px;height: 18px;position: absolute;top: 0;z-index: 1;
+        background-size: 15px 18px;height: 18px;position: absolute;top: 0;z-index: 1;left: 0;
       }
       label {
         text-align: center;
