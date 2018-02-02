@@ -4,14 +4,14 @@ import App from './App'
 import router from './router'
 import {XHeader, XButton} from 'vux'
 import Page from '@/views/components/page.vue'
-import Navigation from 'vue-navigation'
+// import Navigation from 'vue-navigation'
 import store from './store'
 import * as util from './util'
 import baseMixin from "./util/baseMixin";
 import 'flex.css'
 import  {ToastPlugin, ConfirmPlugin, LoadingPlugin} from 'vux'
 
-Vue.use(Navigation, {router})
+// Vue.use(Navigation, {router})
 
 FastClick.attach(document.body)
 Vue.config.productionTip = false
