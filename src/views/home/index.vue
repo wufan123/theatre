@@ -7,7 +7,7 @@
         <!-- <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('FindList')"> -->
       </div>
     </div>
-    <scroller lock-x scrollbar-y usePulldown @on-pulldown-loading="refresh" ref="scroller" :pulldown-config='pullDownConfig'>
+    <scroller lock-x scrollbar-y>
     <div flex-box="1" class="scroll"> 
       <div class="tip" v-if="tip.titleName">
         <marquee direction="left" behavior="scroll" scrollamount="2" scrolldelay="0" loop="-1" hspace="10" vspace="10" class="marquee">
@@ -165,14 +165,6 @@
     },
     data() {
       return {
-        status: {
-          pullupStatus: 'default'
-        },
-        pullDownConfig:{
-          downContent: '上拉可以刷新',
-          upContent: '松开立即刷新',
-          loadingContent: '加载中...',
-        },
         banerList: banerList,
         tip:{},
         munuList: munuList,
@@ -254,12 +246,6 @@
         if (res) {
           this.stampsList = res.data;
         }
-      },
-      refresh(){
-        setTimeout(() => {
-          this.$refs.scroller.donePulldown()
-        }, 1000)
-
       },
       fetchData() {
         console.log(this.$route.query);
