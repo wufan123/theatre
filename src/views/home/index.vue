@@ -44,9 +44,30 @@
           <img class="btn" @click="$router.push({path:'HomePackageList'})" >
         </div>
       </div>
-      
+
+      <!--场次票-->
+      <!-- <list-cell :topImg="require('assets/images/home/title_session.png')">
+        <div slot="main" class="center">
+          <img :src="require('assets/images/home/home_ccp.jpg')" @click="$router.push('sessionDetail')"
+               class="home-cell-img">
+        </div>
+      </list-cell> -->
+      <!--组合券-->
+      <!-- <list-cell :topImg="require('assets/images/home/title_zhq.png')">
+        <div slot="main" class="center">
+          <img :src="require('assets/images/home/home_zhg.jpg')" @click="$router.push({path:'HomePackageList'})"
+               class="home-cell-img">
+        </div>
+      </list-cell> -->
+      <!--兑换票券-->
+      <div flex="dir:left main:center">
+        <router-link to="SessionDetail">
+          <img :src="require('assets/images/home/convert.png')" class="convert">
+        </router-link>
+      </div>
+            
       <!--介绍-->
-       <!-- <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')"
+       <list-cell style="margin-top: 5px;" :topImg="require('assets/images/home/title_introduce.png')"
                  v-show="introduceList&&introduceList.length>0">
         <label slot="rightTop" @click="$router.push('IntroduceList')">更多</label>
         <div slot="main">
@@ -69,27 +90,7 @@
             </div>
           </scroller>
         </div>
-      </list-cell>  -->
-      <!--场次票-->
-      <!-- <list-cell :topImg="require('assets/images/home/title_session.png')">
-        <div slot="main" class="center">
-          <img :src="require('assets/images/home/home_ccp.jpg')" @click="$router.push('sessionDetail')"
-               class="home-cell-img">
-        </div>
-      </list-cell> -->
-      <!--组合券-->
-      <!-- <list-cell :topImg="require('assets/images/home/title_zhq.png')">
-        <div slot="main" class="center">
-          <img :src="require('assets/images/home/home_zhg.jpg')" @click="$router.push({path:'HomePackageList'})"
-               class="home-cell-img">
-        </div>
-      </list-cell> -->
-      <!--兑换票券-->
-      <div flex="dir:left main:center">
-        <router-link to="SessionDetail">
-          <img :src="require('assets/images/home/convert.png')" class="convert">
-        </router-link>
-      </div>
+      </list-cell> 
       <!-- 探索-->
 
       <list-cell :topImg="require('assets/images/home/title_stamps.png')" v-show="findList&&findList.length>0">

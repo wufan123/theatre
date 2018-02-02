@@ -395,7 +395,7 @@ export default {
     margin: -20px 15px 20px;
     padding: 20px;
     border-radius: 5px;
-
+overflow: hidden;
     .content {
       margin-top: 10px;
       text-indent: 2em;
