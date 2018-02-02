@@ -1,5 +1,5 @@
 <template>
-  <page :headerTitle="classType==101?'福州特产馆':'超级特价'" flex-box="1" >
+  <page :headerTitle="classType==101?'福州特产':'3D Café'" flex-box="1" >
     <div slot="contain" >
       <page-scroller :api='getDataList' ref='scroller'  noRecordText='当前无数据' noRecordImage usePulldown height='-48'  :usePullup="false">
         <good-item v-for="(item,index) in dataList" :key="index" :goodsCoverImage="item.goodsCoverImage"  :goodsName="item.goodsName" :channelFee="item.channelFee+item.accessFee"

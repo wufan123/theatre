@@ -4,7 +4,7 @@
       <div slot="contain">
 
         <page-scroller :api='getDataList' ref='scroller' noRecordText='当前无数据' noRecordImage usePulldown
-                       height='-100'>
+                       height='-90'>
           <good-item v-for="(item,index) in dataList" :key="item.goodsId" :goodsName="item.goodsName"
                      :channelFee="item.price" :goodsCoverImage="item.goodsImg" class="snackItem">
 

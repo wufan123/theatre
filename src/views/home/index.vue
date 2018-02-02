@@ -145,7 +145,7 @@
       icon: require("assets/images/home/flash_buy.png")
     },
     {
-      name: "3D咖啡",
+      name: "3D Café",
       pathName: "LocalProduct",
       params: {classType: 102},
       icon: require("assets/images/home/zkrk.png")

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page headerTitle="场次票" flex-box="1" :footerText="`马上购买`" :footerFunc="goToBuy"  :backFunc="backHome">
+    <page headerTitle="票务·场次票" flex-box="1" :footerText="`马上购买`" :footerFunc="goToBuy"  :backFunc="backHome">
       <div slot="contain">
         <div class="imgOut">
           <img :src="filmDetail&&filmDetail.image"/>
