@@ -10,7 +10,7 @@
     <scroller lock-x scrollbar-y usePulldown @on-pulldown-loading="refresh" ref="scroller" :pulldown-config='pullDownConfig'>
     <div flex-box="1" class="scroll"> 
       <div class="tip" v-if="tip.titleName">
-        <marquee direction="left" behavior="scroll" scrollamount="1" scrolldelay="0" loop="-1" hspace="10" vspace="10">
+        <marquee direction="left" behavior="scroll" scrollamount="2" scrolldelay="0" loop="-1" hspace="10" vspace="10" class="marquee">
           <router-link :to="tip.click? tip.url:''">{{tip.titleName}}</router-link>
         </marquee>
       </div>
@@ -343,6 +343,7 @@
     }
     .tip{height: 30px;background: url('../../assets/images/home/tip_bg.jpg') no-repeat;background-size:100% 30px;display: flex;justify-content: center;align-items: center;
       padding: 0 10PX 0 40px;
+      .marquee{display: block;border: 1px solid blue;}
       a{color: #ffffff;}}
     .findItem {
       width: 165px;
