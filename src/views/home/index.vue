@@ -8,10 +8,10 @@
       </div>
     </div>
     <scroller lock-x scrollbar-y>
-    <div flex-box="1" class="scroll">
-      <div class="tip" v-if="tip.title">
+    <div flex-box="1" class="scroll"> 
+      <div class="tip" v-if="tip.titleName">
         <marquee direction="left" behavior="scroll" scrollamount="6" scrolldelay="0" loop="-1" hspace="10" vspace="10">
-          <router-link :to="tip.click? tip.url:''">{{tip.title}}</router-link>
+          <router-link :to="tip.click? tip.url:''">{{tip.titleName}}</router-link>
         </marquee>
       </div>
       
@@ -31,7 +31,7 @@
         <div class="detail">
           <span class="title-img"></span>
           <p class="f13">《三坊七巷》</p>
-          <p class="f11">中瑞剧坊-方向文化影音秀</p>
+          <p class="f11">中瑞剧坊·坊巷文化影音秀</p>
           <img class="btn" @click="$router.push('SessionDetail')" >
         </div>
       </div>
@@ -207,7 +207,7 @@
                 break;
             }
             return {
-              title:data.title,
+              titleName:data.title,
               url: data.contentUrl,
               img: data.thumbUrl,
               click:data.click
@@ -310,14 +310,15 @@
       padding: 5px 10px;
       .logo {
         height: 40px;
+        padding-left: 10px;
       }
       .header-r-icon {
         height: 22px;
         padding: 9px 10px;
-        margin-right: 10px;
         margin-left: 20px;
       }
     }
+    .scroll{background-image: url(../../assets/images/page_bg.png);background-size:68px 68px;background-repeat:repeat;}
     .go-buy{height: 225px; background-position: left;  display: flex; 
       .detail{width: 140px; display: flex; flex-direction: column;justify-content: center;
         span{margin-bottom: 10px;height: 41px;}
@@ -334,7 +335,7 @@
       }
     }
     .tip{height: 30px;background: url('../../assets/images/home/tip_bg.jpg') no-repeat;background-size:100% 30px;display: flex;justify-content: center;align-items: center;
-      padding: 0 0 0 40px;
+      padding: 0 10PX 0 40px;
       a{color: #ffffff;}}
     .findItem {
       width: 165px;
