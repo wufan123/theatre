@@ -28,12 +28,14 @@
   import PageScroller from 'views/components/pageScroller.vue'
   import GoodItem from 'views/components/goodList/item.vue'
   import StoreApi from 'api/storeApi'
+  import TheatreApi from "api/theatreApi";
   import ItemNumber from 'views/components/itemNumber.vue'
   import {mapState} from "vuex";
   export default {
     components: {PageScroller, GoodItem, ItemNumber},
     data(){
       return {
+        classType: 103,
         value: 0,
         dataList: [],
         numList: [],
@@ -45,25 +47,41 @@
       ...mapState('common',['userInfo'])
     },
     methods: {
-      getDataList(page){
-        return StoreApi.getGoodsList().then(success => {
-          this.dataList = success.data
-          if(this.dataList.length<=0){
+      async getDataList(page){
+        try {
+          let hyRes = await StoreApi.getGoodsList();
+          if (!hyRes||!hyRes.data||hyRes.data.length<=0) {
             this.createOrder()
+            return;
           }
-          this.dataList.forEach(data => {
-            data.num = 0;
+          let theatreRes = await TheatreApi.getGoodsList(this.classType);
+          if (!theatreRes||!theatreRes.data||theatreRes.data.length<=0) {
+            this.createOrder()
+            return;
+          }
+          this.dataList = [];
+          theatreRes.data.forEach(goods => {
+            hyRes.data.forEach(hyGoods => {
+              if (hyGoods.goodsId == goods.hyGoodsId) {
+                hyGoods.num = 0;
+                this.dataList.push(hyGoods)
+              }
+            })
           })
+          if (this.dataList.length <= 0) {
+            this.createOrder()
+            return;
+          }
           let res = {
-            data: success.data,
+            data: this.dataList,
             page: {
-              number: 0, size: success.data.length, totalElements: success.data.length, totalPages: 1
+              number: 0, size: this.dataList.length, totalElements: this.dataList.length, totalPages: 1
             }
           }
           return res
-        }, error => {
-
-        })
+        } catch(e) {
+          this.createOrder()
+        }
       },
       fetchData(){
         return this.$refs.scroller.reset()
