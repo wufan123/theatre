@@ -7,10 +7,10 @@
         <!-- <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('FindList')"> -->
       </div>
     </div>
-    <scroller lock-x scrollbar-y>
+    <scroller lock-x scrollbar-y usePulldown @on-pulldown-loading="refresh" ref="scroller" :pulldown-config='pullDownConfig'>
     <div flex-box="1" class="scroll"> 
       <div class="tip" v-if="tip.titleName">
-        <marquee direction="left" behavior="scroll" scrollamount="6" scrolldelay="0" loop="-1" hspace="10" vspace="10">
+        <marquee direction="left" behavior="scroll" scrollamount="3" scrolldelay="0" loop="-1" hspace="10" vspace="10">
           <router-link :to="tip.click? tip.url:''">{{tip.titleName}}</router-link>
         </marquee>
       </div>
@@ -130,7 +130,6 @@
     Divider,
     Scroller
   } from "vux";
-  import ScrollView from "views/components/simpleScrollView.vue";
   import ListCell from "views/components/home/listCell.vue";
   import TheatreApi from "api/theatreApi";
   import {mapState} from "vuex";
@@ -162,11 +161,18 @@
     components: {
       Scroller,
       Swiper,
-      ScrollView,
       ListCell
     },
     data() {
       return {
+        status: {
+          pullupStatus: 'default'
+        },
+        pullDownConfig:{
+          downContent: '上拉可以刷新',
+          upContent: '松开立即刷新',
+          loadingContent: '加载中...',
+        },
         banerList: banerList,
         tip:{},
         munuList: munuList,
@@ -218,7 +224,7 @@
         let res = await TheatreApi.getInformationList(40);
         if (res) {
           this.tip = this.contentUrl(res.data)[0]
-          console.log('this.tip',this.tip)
+          // console.log('this.tip',this.tip)
         }
       },
       async getBanner(){
@@ -275,6 +281,7 @@
       },
       refresh() {
         setTimeout(() => {
+          this.fetchData()
           this.$refs.scroller.donePulldown();
         }, 1000);
       }

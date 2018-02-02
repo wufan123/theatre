@@ -19,7 +19,7 @@ export default {
         api: Function,
         initQuery: {
             type: Boolean,
-            default: false
+            default: true
         },
         height: String,
         pageSize: {
@@ -116,7 +116,7 @@ export default {
             this.$refs.scroller && this.$refs.scroller._xscroll && this.$refs.scroller.reset({
                 top: 0
             })
-            return this.getDataByPage(this.page.number)
+            return this.initQuery && this.getDataByPage(this.page.number)
         },
         getMore() {
             this.getDataByPage(++this.page.number)
