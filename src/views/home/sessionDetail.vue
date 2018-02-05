@@ -2,8 +2,8 @@
   <div>
     <page headerTitle="票务·场次票" flex-box="1" :footerText="`马上购买`" :footerFunc="goToBuy"  :backFunc="backHome">
       <div slot="contain">
-        <div class="imgOut">
-          <img :src="filmDetail&&filmDetail.image"/>
+        <div class="imgOut" :style="{backgroundImage: 'url(' + (filmDetail&&filmDetail.image) + ')',backgroundPosition:'center center'}" >
+        <!--  <img :src="filmDetail&&filmDetail.image"/>-->
         </div>
         <div class="mainOut">
           <div class="mainBody" flex="dir:top cross:center">
