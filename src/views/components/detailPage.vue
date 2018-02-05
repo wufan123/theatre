@@ -69,9 +69,8 @@ export default {
     // position: absolute;
     z-index: 0;
     background-color: @page_bg2;
-    margin: -20px 15px 80px;
+    margin: -20px auto 80px;
     padding: 20px;
-    border-radius: 5px;
     width: 295px;
     .content {
       margin-top: 20px;

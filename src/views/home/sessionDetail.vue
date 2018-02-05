@@ -1,13 +1,13 @@
 <template>
   <div>
-    <page headerTitle="票务·场次票" flex-box="1" :footerText="`马上购买`" :footerFunc="goToBuy"  :backFunc="backHome">
+    <page headerTitle="票务·场次票" flex-box="1" :footerText="`马上购买`" :footerFunc="goToBuy" :backFunc="backHome">
       <div slot="contain">
-        <div class="imgOut" :style="{backgroundImage: 'url(' + (filmDetail&&filmDetail.image) + ')',backgroundPosition:'center center'}" >
-        <!--  <img :src="filmDetail&&filmDetail.image"/>-->
+        <div class="imgOut" :style="{backgroundImage: 'url(' + (filmDetail&&filmDetail.image) + ')',backgroundPosition:'center center'}">
+          <!--  <img :src="filmDetail&&filmDetail.image"/>-->
         </div>
         <div class="mainOut">
           <div class="mainBody" flex="dir:top cross:center">
-            <div  class="titleBar">
+            <div class="titleBar">
               <div flex="dir:top" flex-box="1">
                 <label class="title text-ellipsis-line">
                   {{filmDetail == null ? '坊巷文化影音秀' : filmDetail.filmName}}</label>
@@ -29,31 +29,27 @@
               {{filmDetail ? filmDetail.introduction : ''}}
             </div>
           </div>
-            <div class="h10"></div>
+          <div class="h10"></div>
         </div>
         <!-- <x-button class="no-radius bottomBtn" type="primary" @click.native="show=true">马上购买</x-button> -->
       </div>
     </page>
     <popup v-model="show" position="bottom">
-      <div class="popBottom" flex="dir:top" :style="$util.isIphoneX()?{'margin-bottom':'14px'}:{}" >
+      <div class="popBottom" flex="dir:top" :style="$util.isIphoneX()?{'margin-bottom':'14px'}:{}">
         <div flex="dir:top" class="body">
           <label class="title">时间</label>
           <scroll-view slot="main">
-          <checker v-model="timeCheck" default-item-class="check-item"  selected-item-class="check-item-selected"
-                   class="checker" radio-required >
-            <checker-item :value="filmTime" v-for="(filmTime, index) in filmTimeList" :key="index"
-                          @on-item-click="changeTime">{{timeFormat(filmTime)}}
-            </checker-item>
-          </checker>
+            <checker v-model="timeCheck" default-item-class="check-item" selected-item-class="check-item-selected" class="checker" radio-required>
+              <checker-item :value="filmTime" v-for="(filmTime, index) in filmTimeList" :key="index" @on-item-click="changeTime">{{timeFormat(filmTime)}}
+              </checker-item>
+            </checker>
           </scroll-view>
           <label class="title">场次</label>
           <scroll-view slot="main">
-          <checker v-model="planCheck" default-item-class="check-item" selected-item-class="check-item-selected"
-                   class="checker" radio-required>
-            <checker-item :value="filmPlan" v-for="(filmPlan, index) in filmPlanList" :key="index"
-                          @on-item-click="changePlan">{{filmPlan.startTime}}
-            </checker-item>
-          </checker>
+            <checker v-model="planCheck" default-item-class="check-item" selected-item-class="check-item-selected" class="checker" radio-required>
+              <checker-item :value="filmPlan" v-for="(filmPlan, index) in filmPlanList" :key="index" @on-item-click="changePlan">{{filmPlan.startTime}}
+              </checker-item>
+            </checker>
           </scroll-view>
           <div class="numItem">
             <x-number title="购买数量" :min="1" :max="maxPurchase" v-model="ticketCount"></x-number>
@@ -74,7 +70,7 @@ import FilmApi from "api/filmApi";
 import PlanApi from "api/planApi";
 import OrderApi from "api/orderApi";
 import theatreApi from "api/theatreApi";
-import {mapState} from "vuex";
+import { mapState } from "vuex";
 export default {
   props: ["isHermes"],
   components: {
@@ -96,26 +92,31 @@ export default {
       filmTimeList: [],
       filmPlanList: [],
       seatList: [], // 选中排期座位详情
-      maxPurchase: 4, // 最大购票数量
+      maxPurchase: 4 // 最大购票数量
     };
   },
-  computed:{
-    ...mapState("common",['userInfo'])
+  computed: {
+    ...mapState("common", ["userInfo"])
   },
   methods: {
-    backHome(){
-      this.$router.push('home')
+    backHome() {
+      this.$router.push("home");
     },
-    goToBuy(){
-      this.show=true
+    goToBuy() {
+      this.show = true;
     },
     async fetchData() {
       this.loadFilmTime();
-      theatreApi.getMiscConfig('ticket_max_purchase').then(res=>{
-        if (res.data && res.data.length > 0) {
-          this.maxPurchase = Number(res.data[0].miscVal)
+      theatreApi.getMiscConfig("ticket_max_purchase").then(
+        res => {
+          if (res.data && res.data.length > 0) {
+            this.maxPurchase = Number(res.data[0].miscVal);
+          }
+        },
+        error => {
+          console.log(error);
         }
-      },error => { console.log(error); })
+      );
     },
     // 选择日期
     changeTime: function(itemValue, itemDisabled) {
@@ -130,7 +131,7 @@ export default {
       }
     },
     timeFormat(time) {
-      return time.instr + " " + new Date(time.startTime * 1000).format("MM.dd")
+      return time.instr + " " + new Date(time.startTime * 1000).format("MM.dd");
     },
     // 加载失败提示
     toastLoadFilmError(msg) {
@@ -142,9 +143,7 @@ export default {
     },
     // 加载营业日期
     loadFilmTime: function() {
-      this.$vux.loading.show({
-        text: "加载中"
-      });
+      this.$vux.loading.show({  text: "加载中" });
       let params = {};
       PlanApi.getTimes(params).then(
         success => {
@@ -163,9 +162,7 @@ export default {
     },
     // 加载营业日排期
     loadFilmPlan: function(time) {
-      this.$vux.loading.show({
-        text: "加载中"
-      });
+      this.$vux.loading.show({  text: "加载中" });
       let params = {
         time: time
       };
@@ -192,9 +189,7 @@ export default {
     },
     // 加载影片详情
     loadFilmDetail: function(filmId) {
-      this.$vux.loading.show({
-        text: "加载影片"
-      });
+      this.$vux.loading.show({  text: "加载影片" });
       FilmApi.getFilmDetail(filmId).then(
         success => {
           let filmDetail = success.data;
@@ -216,9 +211,7 @@ export default {
     },
     // 加载座位信息
     loadSeat: function(featureAppNo) {
-      this.$vux.loading.show({
-        text: "加载中"
-      });
+      // this.$vux.loading.show({ text: "加载中" });
       FilmApi.getSeat(featureAppNo).then(
         success => {
           this.$vux.loading.hide();
@@ -255,7 +248,6 @@ export default {
             );
           },
           onConfirm() {
-
             context.$router.push({
               path: "/ConfirmOrder?orderId=" + data.hasOrder
             });
@@ -305,26 +297,24 @@ export default {
         text: "锁座中"
       });
       let res;
-      try{
-          res = await OrderApi.setPlanAndGoodsOrder(
-            this.planCheck.featureAppNo,
-            seatIntroduce.join(","),
-            this.userInfo.bindmobile,
-            JSON.stringify(seatInfo)
-          )
+      try {
+        res = await OrderApi.setPlanAndGoodsOrder(
+          this.planCheck.featureAppNo,
+          seatIntroduce.join(","),
+          this.userInfo.bindmobile,
+          JSON.stringify(seatInfo)
+        );
+      } catch (e) {
+        this.$util.showRequestErro(e);
       }
-      catch (e)
-      {
-          this.$util.showRequestErro(e);
-      }
-      if(res&&res.data){
+      if (res && res.data) {
         this.$router.push({
           path: "Snack",
           query: { orderId: res.data.planOrderId }
         });
         this.$store.commit("coupon/setTicketCouponList", []);
         this.$store.commit("coupon/setGoodsCouponList", []);
-        this.$store.commit('business/setSelectedMember',{});
+        this.$store.commit("business/setSelectedMember", {});
       }
       this.$vux.loading.hide();
     }
@@ -354,12 +344,12 @@ export default {
   .btn {
     font-size: 16px;
     text-align: center;
-    background:@color-sub;
-    color:white;
+    background: @color-sub;
+    color: white;
     line-height: 45px;
   }
   .numItem {
-    margin-top:10px;
+    margin-top: 10px;
     border-top: solid @border-color 1px;
     padding-top: 10px;
     font-size: 16px;
@@ -371,10 +361,10 @@ export default {
   bottom: 0;
 }
 
-.imgOut{
+.imgOut {
   width: 100%;
   height: 200px;
-  img{
+  img {
     height: 211px;
     width: 100%;
   }
@@ -387,15 +377,14 @@ export default {
   margin-top: 10px;
 }
 
-.mainOut{
+.mainOut {
   position: relative;
   width: 100%;
   .mainBody {
     background-color: @page_bg2;
-    margin: -20px 15px 20px;
+    margin: -20px auto 80px;
     padding: 20px;
-    border-radius: 5px;
-overflow: hidden;
+    overflow: hidden;
     .content {
       margin-top: 10px;
       text-indent: 2em;
@@ -407,12 +396,13 @@ overflow: hidden;
       position: relative;
       width: 100%;
       margin-top: 10px;
-      background: @page_bg2 url(../../assets/images/home/divider_line.png) center repeat-x;
+      background: @page_bg2 url(../../assets/images/home/divider_line.png)
+        center repeat-x;
       background-size: 18px 34px;
     }
     .dividerTitle {
       background: @page_bg2 url(../../assets/images/home/title_bg.png) center
-      no-repeat;
+        no-repeat;
       background-size: 100%100%;
       position: relative;
       z-index: 3;
@@ -434,8 +424,8 @@ overflow: hidden;
       }
       .des {
         font-size: 11px;
-        margin-top:5px;
-        color:@font-color2
+        margin-top: 5px;
+        color: @font-color2;
       }
       .price {
         line-height: 25px;
@@ -445,5 +435,4 @@ overflow: hidden;
     }
   }
 }
-
 </style>
