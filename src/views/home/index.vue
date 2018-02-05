@@ -286,7 +286,7 @@ export default {
   height: 205px;
   padding-left: 15px;
   position: relative;
-  width: 550px;
+  // width: 550px;
   display: flex;
 }
 
