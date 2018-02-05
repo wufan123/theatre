@@ -80,4 +80,8 @@
     width: 80px;
   }
 </style>
+<style lang="less" >
+iframe img{width: 100%!important;}
+</style>
+
 
