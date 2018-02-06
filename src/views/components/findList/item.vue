@@ -43,7 +43,7 @@
     .find-vidio {
       width: 345px;
       height: 194px;
-      margin: 23px 15px
+      margin: 23px 15px 10px 15px;
     }
     .find-body {
       padding: 0 15px;
