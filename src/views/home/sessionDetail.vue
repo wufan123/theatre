@@ -363,9 +363,9 @@ export default {
 
 .imgOut {
   width: 100%;
-  height: 200px;
+  height: 250px;
   img {
-    height: 211px;
+    height: 250px;
     width: 100%;
   }
 }
@@ -382,7 +382,7 @@ export default {
   width: 100%;
   .mainBody {
     background-color: @page_bg2;
-    margin: -20px auto 20px;
+    margin: -40px auto 20px;
     padding: 20px;
     overflow: hidden;
     .content {

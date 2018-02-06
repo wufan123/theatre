@@ -67,9 +67,9 @@ export default {
 
 .ImgOut {
   width: 100%;
-  height: 200px;
+  height: 250px;
   img {
-    height: 211px;
+    height: 250px;
     width: 100%;
   }
 }
@@ -81,7 +81,7 @@ export default {
     position: absolute;
     z-index: 100;
     background-color: @page_bg2;
-    margin: -20px auto 20px;
+    margin: -40px auto 20px;
     padding: 20px;
     width: 295px;
     .content {
