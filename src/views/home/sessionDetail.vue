@@ -382,7 +382,7 @@ export default {
   width: 100%;
   .mainBody {
     background-color: @page_bg2;
-    margin: -20px auto 80px;
+    margin: -20px auto 20px;
     padding: 20px;
     overflow: hidden;
     .content {
