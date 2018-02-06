@@ -49,11 +49,14 @@
       padding: 0 15px;
       .title {
         font-size: 16px;
-        border-left: solid @color-sub 5px;
+        position: relative;
         font-weight: bold;
-        padding-left: 7px;
-        line-height: 15px;
+        padding-left: 12px;
         width: 100%;
+        &:before{
+          content: "";height: 15px;position: absolute;top: 4px;left: 0;background: @color-sub;
+          width:5px;
+        }
       }
       .content {
         margin-top: 12px;
