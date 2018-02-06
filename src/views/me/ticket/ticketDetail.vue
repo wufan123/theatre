@@ -29,7 +29,7 @@
               <div class="flexb" flex="main:justify" v-if="getIsPayed(orderInfo.status) == 1" v-for="item in orderPayInfo.payInfo"><label>{{item.name}}</label><label>{{item.money}}</label></div>
               <div class="flexb f16 " flex="main:justify">
                 <label class="red" v-if="getStatus(orderInfo.status) == 0">待付款</label>
-                <label class="red" v-if="getStatus(orderInfo.status) == 3">取消付款</label>
+                <label class="red" v-else-if="getStatus(orderInfo.status) == 3">取消付款</label>
                 <label class="red" v-else-if="getStatus(orderInfo.status) == 2">已退票</label>
                 <label v-else>实付款</label>
                 <label class="red" v-if="getIsPayed(orderInfo.status) == 0">￥{{orderPayInfo.totalPrice}}</label>
