@@ -7,7 +7,7 @@
         <!-- <img :src="require('assets/images/all.png')" class="header-r-icon" @click="$router.push('FindList')"> -->
       </div>
     </div>
-    <scroller lock-x scrollbar-x>
+    <scroller lock-x scrollbar-y>
       <div flex-box="1" class="scroll">
         <div class="tip" v-if="tip.titleName">
           <marquee direction="left" behavior="scroll" scrollamount="2" scrolldelay="0" loop="-1" hspace="10" vspace="10" class="marquee">
